@@ -1,0 +1,26 @@
+#!/bin/zsh
+# GitHubリポジトリ初期化スクリプト
+
+cd "/Users/ryuyakinjo/Desktop/portfolio-site"
+
+echo "=== ポートフォリオサイト GitHub連携 ==="
+echo ""
+echo "以下の手順で実行してください:"
+echo ""
+echo "1. GitHubでリポジトリ 'portfolio-site' を作成"
+echo "   URL: https://github.com/new"
+echo ""
+echo "2. 作成後、以下のコマンドを実行:"
+echo ""
+echo "   git init"
+echo "   git add ."
+echo "   git commit -m 'Initial commit: Portfolio site'"
+echo "   git branch -M main"
+echo "   git remote add origin https://github.com/あなたのユーザー名/portfolio-site.git"
+echo "   git push -u origin main"
+echo ""
+echo "3. Vercelデプロイ:"
+echo "   - https://vercel.com にアクセス"
+echo "   - 'Add New Project' → GitHubリポジトリを選択"
+echo "   - Deployをクリック"
+echo ""
