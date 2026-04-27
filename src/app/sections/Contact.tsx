@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, ArrowUpRight, Send, CheckCircle } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
 
 interface Contacts {
   email?: string;
@@ -35,143 +35,118 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
         setSubmitted(true);
         setFormData({ name: "", email: "", message: "" });
       } else {
-        alert("送信に失敗しました。");
+        alert("送信に失敗しました。時間をおいて再度お試しください。");
       }
     } catch {
-      alert("送信に失敗しました。");
+      alert("送信に失敗しました。時間をおいて再度お試しください。");
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="relative py-32 md:py-48 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img src="/images/hero-medical.jpg" alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-[#0A0A0F]/90" />
-      </div>
+    <section id="contact" className="py-20 md:py-28 bg-[#F8FAFC]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <p className="text-sm font-bold text-[#2563EB] mb-3">お問い合わせ</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
+            まずは無料相談から
+          </h2>
+          <p className="text-base text-[#475569] max-w-2xl mx-auto">
+            AI導入の検討、業務効率化のご相談など、お気軽にお問い合わせください。初回相談は無料です。
+          </p>
+        </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="grid lg:grid-cols-2 gap-20">
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <p className="text-xs font-medium tracking-[0.3em] uppercase text-[#FF4D00] mb-6">
-              Get in Touch
-            </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
-              一緒に<br />未来を創る
-            </h2>
-            <p className="text-base text-white/50 leading-relaxed mb-12">
-              医療・AI・地方創生に関するご相談、業務提携のお話など、お気軽にお問い合わせください。
-            </p>
-
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 border border-white/10 flex items-center justify-center">
-                  <Mail size={18} strokeWidth={1} className="text-white/60" />
+        <div className="grid lg:grid-cols-2 gap-12">
+          <div>
+            <div className="space-y-6 mb-8">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-[#2563EB]/10 flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5 text-[#2563EB]" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/40 tracking-wide uppercase">Email</p>
-                  <a href={`mailto:${email}`} className="text-white hover:text-[#FF4D00] transition-colors">
-                    {email}
-                  </a>
+                  <p className="text-sm font-medium text-[#0F172A]">メールアドレス</p>
+                  <a href={`mailto:${email}`} className="text-sm text-[#2563EB] hover:underline">{email}</a>
                 </div>
               </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 border border-white/10 flex items-center justify-center">
-                  <MapPin size={18} strokeWidth={1} className="text-white/60" />
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-[#2563EB]/10 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-[#2563EB]" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/40 tracking-wide uppercase">Location</p>
-                  <p className="text-white">{location}</p>
+                  <p className="text-sm font-medium text-[#0F172A]">所在地</p>
+                  <p className="text-sm text-[#475569]">{location}</p>
                 </div>
               </div>
             </div>
-          </motion.div>
 
-          {/* Right - Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+            <div className="bg-[#0F172A] rounded-xl p-6 text-white">
+              <p className="text-sm font-bold mb-2">初回相談は無料です</p>
+              <p className="text-xs text-white/60 leading-relaxed">
+                AI導入の悩み、業務効率化の課題など、まずはお気軽にご相談ください。現場を知る看護師の視点から、具体的な解決策をご提案します。
+              </p>
+            </div>
+          </div>
+
+          <div>
             {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-20">
-                <CheckCircle size={48} strokeWidth={1} className="text-[#FF4D00] mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-3">送信完了</h3>
-                <p className="text-white/50">お問い合わせありがとうございます。</p>
+              <div className="text-center py-16">
+                <CheckCircle className="w-12 h-12 text-[#2563EB] mx-auto mb-4" />
+                <h3 className="text-lg font-bold text-[#0F172A] mb-2">送信完了</h3>
+                <p className="text-sm text-[#475569]">お問い合わせありがとうございます。2営業日以内にご返信します。</p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="mt-8 text-sm text-white/40 hover:text-white transition-colors tracking-wide"
+                  className="mt-6 text-sm text-[#2563EB] hover:underline"
                 >
-                  新規送信
+                  新しく送信する
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="block text-xs text-white/40 tracking-[0.2em] uppercase mb-3">
-                    Name
-                  </label>
+                  <label className="block text-sm font-medium text-[#0F172A] mb-1">お名前</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[#FF4D00] outline-none transition-colors placeholder:text-white/20"
-                    placeholder="Your name"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 outline-none transition-all text-sm"
+                    placeholder="山田 太郎"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-xs text-white/40 tracking-[0.2em] uppercase mb-3">
-                    Email
-                  </label>
+                  <label className="block text-sm font-medium text-[#0F172A] mb-1">メールアドレス</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[#FF4D00] outline-none transition-colors placeholder:text-white/20"
-                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 outline-none transition-all text-sm"
+                    placeholder="example@email.com"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-xs text-white/40 tracking-[0.2em] uppercase mb-3">
-                    Message
-                  </label>
+                  <label className="block text-sm font-medium text-[#0F172A] mb-1">ご相談内容</label>
                   <textarea
                     required
-                    rows={4}
+                    rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[#FF4D00] outline-none transition-colors resize-none placeholder:text-white/20"
-                    placeholder="Tell me about your project..."
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 outline-none transition-all resize-none text-sm"
+                    placeholder="ご相談内容を具体的にご記入ください"
                   />
                 </div>
-
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="group flex items-center gap-3 text-white hover:text-[#FF4D00] transition-colors disabled:opacity-50"
+                  className="w-full px-6 py-4 bg-[#2563EB] text-white font-bold rounded-lg hover:bg-[#1d4ed8] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                  <span className="text-sm font-bold tracking-[0.2em] uppercase">
-                    {submitting ? "Sending..." : "Send Message"}
-                  </span>
-                  <ArrowUpRight size={18} strokeWidth={1.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <Send size={16} />
+                  {submitting ? "送信中..." : "送信する"}
                 </button>
               </form>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

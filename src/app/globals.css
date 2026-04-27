@@ -2,12 +2,12 @@
 
 @theme inline {
   --color-background: #FAFAFA;
-  --color-foreground: #0A0A0F;
-  --color-primary: #FF4D00;
-  --color-secondary: #1A1A2E;
-  --color-accent: #F4F4F5;
-  --color-muted: #A1A1AA;
-  --font-sans: "Inter", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --color-foreground: #0F172A;
+  --color-primary: #1E3A5F;
+  --color-accent: #2563EB;
+  --color-accent-light: #DBEAFE;
+  --color-muted: #64748B;
+  --font-sans: "Noto Sans JP", "Inter", "Hiragino Sans", sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -20,11 +20,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
+::selection {
+  background: #2563EB;
+  color: white;
 }
 
-::selection {
-  background: #FF4D00;
-  color: white;
+/* Fallback: ensure content visible without JS */
+[data-initial="hidden"] {
+  opacity: 1 !important;
 }

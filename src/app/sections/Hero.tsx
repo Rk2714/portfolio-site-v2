@@ -12,89 +12,79 @@ interface Profile {
 }
 
 export default function Hero({ profile }: { profile?: Profile | null }) {
-  const tagline1 = profile?.heroTagline1 || "Nurse";
-  const tagline2 = profile?.heroTagline2 || "AI Consultant";
-  const tagline3 = profile?.title || "Career Consultant";
-
-  const handleScroll = () => {
-    const element = document.querySelector("#about");
-    if (element) element.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
       <div className="absolute inset-0">
-        <img
-          src="/images/hero-tech.jpg"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+        <img src="/images/stethoscope.jpg" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[#0F172A]/75" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xs sm:text-sm font-medium tracking-[0.3em] uppercase text-white/60 mb-8"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-white/60 text-sm mb-6"
         >
-          Okinawa, Japan
+          看護師13年の経験 × AI導入コンサルタント
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white leading-[0.9] tracking-tight mb-8"
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6"
         >
-          <span className="block">{tagline1}</span>
-          <span className="block mt-2 text-[#FF4D00]">{tagline2}</span>
-          <span className="block mt-2 text-white/40">{tagline3}</span>
+          医療現場の業務を<br />
+          <span className="text-[#2563EB]">AIで効率化</span>します
         </motion.h1>
 
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-base sm:text-lg text-white/70 mb-10 max-w-2xl mx-auto"
+        >
+          13年の看護師経験を活かし、現場の課題を理解した上でAI導入を支援。
+          議事録自動化、業務フロー改善、オンライン診療の構築まで、医療特化のコンサルティングを提供します。
+        </motion.p>
+
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="#works"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector("#works")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="px-10 py-4 bg-[#FF4D00] text-white text-xs font-bold tracking-[0.2em] uppercase rounded-none hover:bg-[#E04400] transition-all duration-300"
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="px-8 py-4 bg-[#2563EB] text-white font-bold rounded-lg hover:bg-[#1d4ed8] transition-colors"
           >
-            View Works
+            無料相談はこちら
           </a>
           <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="px-10 py-4 border border-white/30 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-[#0A0A0F] transition-all duration-300"
+            href="#works"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#works")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="px-8 py-4 border border-white/30 text-white font-bold rounded-lg hover:bg-white/10 transition-colors"
           >
-            Contact
+            実績を見る
           </a>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.button
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
-        onClick={handleScroll}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/40 hover:text-white transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <ArrowDown size={20} strokeWidth={1} className="animate-bounce" />
-      </motion.button>
+        <button
+          onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}
+          className="text-white/40 hover:text-white transition-colors"
+        >
+          <ArrowDown size={20} className="animate-bounce" />
+        </button>
+      </motion.div>
     </section>
   );
 }
