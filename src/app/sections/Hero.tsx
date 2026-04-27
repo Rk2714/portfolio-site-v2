@@ -1,124 +1,100 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown, Stethoscope, Brain, Users } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 interface Profile {
   name?: string;
   title?: string;
-  subtitle?: string;
   heroTagline1?: string;
   heroTagline2?: string;
   heroDescription?: string;
 }
 
 export default function Hero({ profile }: { profile?: Profile | null }) {
-  const handleScroll = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const tagline1 = profile?.heroTagline1 || "Nurse";
+  const tagline2 = profile?.heroTagline2 || "AI Consultant";
+  const tagline3 = profile?.title || "Career Consultant";
+
+  const handleScroll = () => {
+    const element = document.querySelector("#about");
+    if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
-  const tagline1 = profile?.heroTagline1 || "看護師 × AIコンサルタント";
-  const tagline2 = profile?.heroTagline2 || "× キャリアコンサルタント";
-  const description =
-    profile?.heroDescription ||
-    "医療とテクノロジーの架け橋に。\n地方創生からグローバル医療まで、多面的に活動しています。";
-
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0066CC] via-[#0052a3] to-[#1A1A2E]"
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#FF6B35] rounded-full blur-3xl" />
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src="/images/hero-tech.jpg"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-xs sm:text-sm font-medium tracking-[0.3em] uppercase text-white/60 mb-8"
         >
-          <div className="flex justify-center gap-6 mb-8">
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                <Stethoscope className="w-7 h-7 text-white" />
-              </div>
-              <span className="text-xs text-white/70 font-medium">看護師</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                <Brain className="w-7 h-7 text-white" />
-              </div>
-              <span className="text-xs text-white/70 font-medium">AIコンサル</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                <Users className="w-7 h-7 text-white" />
-              </div>
-              <span className="text-xs text-white/70 font-medium">キャリア支援</span>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
-        >
-          {tagline1}
-          <br />
-          <span className="text-[#FF6B35]">{tagline2}</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed whitespace-pre-line"
-        >
-          {description}
+          Okinawa, Japan
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          transition={{ duration: 1, delay: 0.4 }}
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white leading-[0.9] tracking-tight mb-8"
         >
-          <button
-            onClick={() => handleScroll("#works")}
-            className="px-8 py-4 bg-[#FF6B35] text-white font-semibold rounded-xl hover:bg-[#e55a2b] transition-all hover:-translate-y-0.5 shadow-lg shadow-[#FF6B35]/25"
-          >
-            実績を見る
-          </button>
-          <button
-            onClick={() => handleScroll("#contact")}
-            className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-0.5"
-          >
-            お問い合わせ
-          </button>
-        </motion.div>
+          <span className="block">{tagline1}</span>
+          <span className="block mt-2 text-[#FF4D00]">{tagline2}</span>
+          <span className="block mt-2 text-white/40">{tagline3}</span>
+        </motion.h1>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          transition={{ duration: 1, delay: 0.8 }}
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12"
         >
-          <button
-            onClick={() => handleScroll("#about")}
-            className="text-white/50 hover:text-white transition-colors animate-bounce"
+          <a
+            href="#works"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#works")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="px-10 py-4 bg-[#FF4D00] text-white text-xs font-bold tracking-[0.2em] uppercase rounded-none hover:bg-[#E04400] transition-all duration-300"
           >
-            <ChevronDown size={32} />
-          </button>
+            View Works
+          </a>
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="px-10 py-4 border border-white/30 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-[#0A0A0F] transition-all duration-300"
+          >
+            Contact
+          </a>
         </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.2 }}
+        onClick={handleScroll}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/40 hover:text-white transition-colors"
+      >
+        <ArrowDown size={20} strokeWidth={1} className="animate-bounce" />
+      </motion.button>
     </section>
   );
 }

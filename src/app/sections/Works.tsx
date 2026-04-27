@@ -1,25 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Stethoscope, Globe, Brain, Gamepad2, FileText, Briefcase } from "lucide-react";
-import SectionWrapper from "../components/SectionWrapper";
+import { ArrowUpRight } from "lucide-react";
 
-const iconMap: Record<string, React.ElementType> = {
-  "医療MaaS事業": Stethoscope,
-  "関西圏医療支援": Globe,
-  "テクノロジー": Brain,
-  "Webアプリケーション": Brain,
-  "Webゲーム": Gamepad2,
-  "業務効率化": FileText,
-};
-
-const colorMap: Record<string, string> = {
-  "医療MaaS事業": "#0066CC",
-  "関西圏医療支援": "#FF6B35",
-  "テクノロジー": "#0066CC",
-  "Webアプリケーション": "#1A1A2E",
-  "Webゲーム": "#FF6B35",
-  "業務効率化": "#0066CC",
+const workImages: Record<string, string> = {
+  "ヌチマース号": "/images/hero-medical.jpg",
+  "コトマース": "/images/stethoscope.jpg",
+  "AI導入支援": "/images/circuit.jpg",
+  "PersonaSight": "/images/hero-tech.jpg",
+  "キッズゲームコレクション": "/images/business.jpg",
+  "契約書管理システム": "/images/hero-medical.jpg",
 };
 
 interface WorkItem {
@@ -31,50 +21,62 @@ interface WorkItem {
 
 export default function Works({ works }: { works: WorkItem[] }) {
   return (
-    <SectionWrapper id="works" className="bg-[#FAFBFC]">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">Works</h2>
-        <p className="text-[#6B7280] max-w-2xl mx-auto">
-          医療現場からテクノロジーまで、多様な分野での実績をご紹介します。
-        </p>
-      </div>
+    <section id="works" className="bg-[#0A0A0F] py-32 md:py-48">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <p className="text-xs font-medium tracking-[0.3em] uppercase text-[#FF4D00] mb-6">
+            Selected Works
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            医療とテクノロジーの<br className="hidden md:block" />交差点で生まれる価値
+          </h2>
+        </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {works.map((work, index) => {
-          const Icon = iconMap[work.category] || Briefcase;
-          const color = colorMap[work.category] || "#0066CC";
-          return (
-            <motion.div
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {works.map((work, index) => (
+            <motion.article
               key={work.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-xl hover:border-[#0066CC]/10 transition-all duration-300"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group relative aspect-[4/5] overflow-hidden cursor-pointer"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: `${color}10` }}
-                >
-                  <Icon className="w-6 h-6" style={{ color }} />
-                </div>
-                <span className="text-xs font-medium text-[#6B7280] bg-[#FAFBFC] px-3 py-1 rounded-full">
+              {/* Background Image */}
+              <img
+                src={workImages[work.title] || "/images/hero-tech.jpg"}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              {/* Content */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <p className="text-xs font-medium tracking-[0.2em] uppercase text-white/50 mb-3">
                   {work.category}
-                </span>
+                </p>
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF4D00] transition-colors duration-300">
+                  {work.title}
+                </h3>
+                <p className="text-sm text-white/60 leading-relaxed line-clamp-3">
+                  {work.description}
+                </p>
+
+                <div className="mt-6 flex items-center gap-2 text-white/0 group-hover:text-white/80 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                  <span className="text-xs font-medium tracking-[0.15em] uppercase">View Project</span>
+                  <ArrowUpRight size={14} strokeWidth={1.5} />
+                </div>
               </div>
-
-              <h3 className="text-lg font-bold text-[#1A1A2E] mb-2 group-hover:text-[#0066CC] transition-colors">
-                {work.title}
-              </h3>
-
-              <p className="text-sm text-[#6B7280] leading-relaxed mb-4">
-                {work.description}
-              </p>
-            </motion.div>
-          );
-        })}
+            </motion.article>
+          ))}
+        </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

@@ -1,82 +1,99 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "ホーム", href: "#hero" },
+  { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
-  { label: "実績", href: "#works" },
-  { label: "スキル", href: "#skills" },
-  { label: "お問い合わせ", href: "#contact" },
+  { label: "Works", href: "#works" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    if (element) element.scrollIntoView({ behavior: "smooth" });
     setIsOpen(false);
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-white/90 backdrop-blur-xl shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+        <div className="flex items-center justify-between h-20">
           <a
             href="#hero"
             onClick={(e) => handleClick(e, "#hero")}
-            className="text-lg font-bold text-[#1A1A2E] hover:text-[#0066CC] transition-colors"
+            className={`text-sm font-bold tracking-[0.2em] uppercase transition-colors duration-300 ${
+              scrolled ? "text-[#0A0A0F]" : "text-white"
+            }`}
           >
-            KINJO RYUYA
+            Kinjo Ryuya
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className="text-sm font-medium text-[#6B7280] hover:text-[#0066CC] transition-colors"
+                className={`text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300 hover:opacity-70 ${
+                  scrolled ? "text-[#0A0A0F]" : "text-white/80"
+                }`}
               >
                 {item.label}
               </a>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-[#1A1A2E]"
+            className={`md:hidden p-2 transition-colors ${
+              scrolled ? "text-[#0A0A0F]" : "text-white"
+            }`}
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="メニュー"
+            aria-label="Menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={24} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-gray-100 overflow-hidden"
+            className="md:hidden bg-white/95 backdrop-blur-xl overflow-hidden"
           >
-            <div className="px-4 py-4 space-y-3">
+            <div className="px-6 py-8 space-y-6">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleClick(e, item.href)}
-                  className="block text-base font-medium text-[#6B7280] hover:text-[#0066CC] transition-colors py-2"
+                  className="block text-sm font-medium tracking-[0.15em] uppercase text-[#0A0A0F] hover:text-[#FF4D00] transition-colors"
                 >
                   {item.label}
                 </a>
@@ -85,6 +102,6 @@ export default function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

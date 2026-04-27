@@ -1,85 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Stethoscope,
-  Brain,
-  Users,
-  Globe,
-  Code,
-  FileText,
-  MessageCircle,
-  HeartPulse,
-  Truck,
-  GraduationCap,
-  Briefcase,
-  type LucideIcon,
-} from "lucide-react";
-import SectionWrapper from "../components/SectionWrapper";
-
-const iconMap: Record<string, LucideIcon> = {
-  Stethoscope,
-  Brain,
-  Users,
-  Globe,
-  Code,
-  FileText,
-  MessageCircle,
-  HeartPulse,
-  Truck,
-  GraduationCap,
-  Briefcase,
-};
-
-const defaultSkillCategories = [
-  {
-    title: "医療・ヘルスケア",
-    color: "#0066CC",
-    skills: [
-      { iconName: "Stethoscope", name: "看護師業務", level: 13, unit: "年" },
-      { iconName: "HeartPulse", name: "オンライン診療支援", level: 3, unit: "年" },
-      { iconName: "Truck", name: "訪問看護・薬配送", level: 3, unit: "年" },
-      { iconName: "Globe", name: "医療通訳（英語）", level: 5, unit: "年" },
-    ],
-  },
-  {
-    title: "テクノロジー",
-    color: "#FF6B35",
-    skills: [
-      { iconName: "Brain", name: "AI導入コンサル", level: 2, unit: "年" },
-      { iconName: "Code", name: "Next.js / TypeScript", level: 1, unit: "年" },
-      { iconName: "Code", name: "HTML / CSS / JS", level: 2, unit: "年" },
-      { iconName: "Brain", name: "システム構築支援", level: 2, unit: "年" },
-    ],
-  },
-  {
-    title: "ビジネス・マネジメント",
-    color: "#1A1A2E",
-    skills: [
-      { iconName: "Users", name: "キャリアコンサル", level: 3, unit: "年" },
-      { iconName: "GraduationCap", name: "スタッフ育成", level: 5, unit: "年" },
-      { iconName: "FileText", name: "マニュアル整備", level: 5, unit: "年" },
-      { iconName: "MessageCircle", name: "PR・広報", level: 3, unit: "年" },
-    ],
-  },
-];
-
-const defaultLanguages = [
-  { name: "日本語", level: "母語" },
-  { name: "英語", level: "医療レベル（通訳可能）" },
-];
 
 interface SkillItem {
-  iconName?: string;
   name: string;
   level: number;
   unit: string;
-}
-
-interface SkillCategory {
-  title: string;
-  color: string;
-  skills: SkillItem[];
 }
 
 interface SkillData {
@@ -89,106 +15,114 @@ interface SkillData {
 }
 
 export default function Skills({ skills }: { skills?: SkillData[] }) {
-  const categories: SkillCategory[] =
-    skills && skills.length > 0
-      ? skills.map((s) => ({
-          title: s.category || "",
-          color: s.categoryColor || "#0066CC",
-          skills: s.skills || [],
-        }))
-      : defaultSkillCategories;
+  const categories = skills && skills.length > 0 ? skills : [];
+
+  // Group by category
+  const grouped: Record<string, SkillData[]> = {};
+  categories.forEach((s) => {
+    const cat = s.category || "Other";
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(s);
+  });
+
+  const categoryKeys = Object.keys(grouped);
 
   return (
-    <SectionWrapper id="skills" className="bg-white">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">Skills</h2>
-        <p className="text-[#6B7280] max-w-2xl mx-auto">
-          医療・テクノロジー・ビジネスの3領域を横断するスキルセットです。
-        </p>
-      </div>
+    <section id="skills" className="bg-[#FAFAFA] py-32 md:py-48">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <p className="text-xs font-medium tracking-[0.3em] uppercase text-[#FF4D00] mb-6">
+            Expertise
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0A0A0F] leading-tight">
+            医療・テクノロジー・<br className="hidden md:block" />ビジネスの3領域を横断
+          </h2>
+        </motion.div>
 
-      <div className="grid lg:grid-cols-3 gap-8 mb-12">
-        {categories.map((category, categoryIndex) => (
-          <motion.div
-            key={category.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: categoryIndex * 0.15 }}
-            className="bg-[#FAFBFC] rounded-2xl p-6 border border-gray-100"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center"
-                style={{ backgroundColor: `${category.color}15` }}
+        <div className="grid lg:grid-cols-3 gap-16">
+          {categoryKeys.map((category, catIndex) => {
+            const items = grouped[category];
+            const color = items[0]?.categoryColor || "#0A0A0F";
+            return (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: catIndex * 0.15 }}
               >
-                <div
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: category.color }}
-                />
-              </div>
-              <h3 className="text-lg font-bold text-[#1A1A2E]">{category.title}</h3>
-            </div>
+                <div className="flex items-center gap-4 mb-10">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: color }}
+                  />
+                  <h3 className="text-lg font-bold text-[#0A0A0F] tracking-wide">
+                    {category}
+                  </h3>
+                </div>
 
-            <div className="space-y-4">
-              {category.skills.map((skill) => {
-                const Icon = iconMap[skill.iconName || "Briefcase"] || Briefcase;
-                return (
-                  <div key={skill.name} className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                      <Icon className="w-4 h-4 text-[#6B7280]" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-sm font-medium text-[#1A1A2E]">
-                          {skill.name}
+                <div className="space-y-8">
+                  {items.map((item, idx) => (
+                    <div key={idx}>
+                      <div className="flex justify-between items-baseline mb-3">
+                        <span className="text-base font-medium text-[#0A0A0F]">
+                          {item.skills?.[0]?.name || ""}
                         </span>
-                        <span className="text-xs text-[#6B7280]">
-                          {skill.level}
-                          {skill.unit}
+                        <span className="text-sm text-[#A1A1AA]">
+                          {item.skills?.[0]?.level}{item.skills?.[0]?.unit}
                         </span>
                       </div>
-                      <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-[2px] bg-[#E4E4E7] overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
-                          whileInView={{ width: `${Math.min((skill.level / 15) * 100, 100)}%` }}
+                          whileInView={{
+                            width: `${Math.min(
+                              ((item.skills?.[0]?.level || 0) / 15) * 100,
+                              100
+                            )}%`,
+                          }}
                           viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.3 }}
-                          className="h-full rounded-full"
-                          style={{ backgroundColor: category.color }}
+                          transition={{ duration: 1.2, delay: 0.3 + idx * 0.1 }}
+                          className="h-full"
+                          style={{ backgroundColor: color }}
                         />
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="bg-gradient-to-r from-[#0066CC] to-[#1A1A2E] rounded-2xl p-8 text-white"
-      >
-        <h3 className="text-xl font-bold mb-6">Language Skills</h3>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {defaultLanguages.map((lang) => (
-            <div
-              key={lang.name}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-semibold">{lang.name}</span>
-                <span className="text-sm text-white/70">{lang.level}</span>
-              </div>
-            </div>
-          ))}
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
-      </motion.div>
-    </SectionWrapper>
+
+        {/* Language */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-24 pt-16 border-t border-[#E4E4E7]"
+        >
+          <div className="grid sm:grid-cols-2 gap-8">
+            <div>
+              <p className="text-xs text-[#A1A1AA] tracking-[0.2em] uppercase mb-2">Language</p>
+              <p className="text-xl font-bold text-[#0A0A0F]">日本語</p>
+              <p className="text-sm text-[#52525B] mt-1">母語</p>
+            </div>
+            <div>
+              <p className="text-xs text-[#A1A1AA] tracking-[0.2em] uppercase mb-2">Language</p>
+              <p className="text-xl font-bold text-[#0A0A0F]">English</p>
+              <p className="text-sm text-[#52525B] mt-1">医療レベル（通訳可能）</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }
