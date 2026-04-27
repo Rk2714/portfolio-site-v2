@@ -3,13 +3,28 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Stethoscope, Brain, Users } from "lucide-react";
 
-export default function Hero() {
+interface Profile {
+  name?: string;
+  title?: string;
+  subtitle?: string;
+  heroTagline1?: string;
+  heroTagline2?: string;
+  heroDescription?: string;
+}
+
+export default function Hero({ profile }: { profile?: Profile | null }) {
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const tagline1 = profile?.heroTagline1 || "看護師 × AIコンサルタント";
+  const tagline2 = profile?.heroTagline2 || "× キャリアコンサルタント";
+  const description =
+    profile?.heroDescription ||
+    "医療とテクノロジーの架け橋に。\n地方創生からグローバル医療まで、多面的に活動しています。";
 
   return (
     <section
@@ -56,20 +71,18 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
         >
-          看護師 × AIコンサルタント
+          {tagline1}
           <br />
-          <span className="text-[#FF6B35]">× キャリアコンサルタント</span>
+          <span className="text-[#FF6B35]">{tagline2}</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed whitespace-pre-line"
         >
-          医療とテクノロジーの架け橋に。
-          <br className="hidden sm:block" />
-          地方創生からグローバル医療まで、多面的に活動しています。
+          {description}
         </motion.p>
 
         <motion.div
