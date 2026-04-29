@@ -58,7 +58,17 @@ export default function About({ profile }: { profile?: Profile | null }) {
               <br />
               最適な解決策を提案できる
             </h2>
-            <p className="text-sm text-[#475569] leading-[1.9] mb-8">{bio}</p>
+            <p className="text-sm text-[#475569] leading-[1.9] mb-6">{bio}</p>
+
+            <div className="mb-8">
+              <a 
+                href="/media" 
+                className="inline-flex items-center gap-2 text-sm text-[#2563EB] font-medium hover:gap-3 transition-all link-underline"
+              >
+                ラジオパーソナリティとしてのメディア活動を見る
+                <span className="text-xs">→</span>
+              </a>
+            </div>
 
             <div className="flex items-center gap-2 text-[#475569] mb-10">
               <MapPin size={14} />
