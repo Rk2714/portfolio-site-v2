@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle, ExternalLink } from "lucide-react";
 
 interface Contacts {
   email?: string;
@@ -99,22 +99,33 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
 
             <div className="border-t border-gray-200 pt-8">
               <h3 className="text-sm font-bold text-[#0F172A] mb-4">
-                事前に相談内容を送る
+                お問い合わせフォーム
               </h3>
 
               {submitted ? (
                 <div className="text-center py-10 border border-gray-200 bg-white">
                   <CheckCircle className="w-8 h-8 text-[#0F172A] mx-auto mb-3" />
                   <p className="text-sm font-bold text-[#0F172A] mb-1">送信完了</p>
-                  <p className="text-xs text-[#475569]">
-                    お問い合わせありがとうございます。
+                  <p className="text-xs text-[#475569] mb-4">
+                    お問い合わせありがとうございます。3営業日以内にご返信いたします。
                   </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-4 text-xs text-[#2563EB] hover:underline"
+                  <a
+                    href={calendarSrc}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-[#2563EB] font-medium hover:underline mb-4"
                   >
-                    新しく送信する
-                  </button>
+                    <ExternalLink size={12} />
+                    Googleカレンダーで30分無料相談を予約する
+                  </a>
+                  <div>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors"
+                    >
+                      新しく送信する
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -165,6 +176,21 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
                     <Send size={13} />
                     {submitting ? "送信中..." : "送信する"}
                   </button>
+
+                  <div className="pt-4 border-t border-gray-100 text-center">
+                    <p className="text-xs text-[#94A3B8] mb-2">
+                      まずは予約からでもOK
+                    </p>
+                    <a
+                      href={calendarSrc}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-[#2563EB] font-medium hover:underline"
+                    >
+                      <ExternalLink size={12} />
+                      Googleカレンダーで30分無料相談を予約する
+                    </a>
+                  </div>
                 </form>
               )}
             </div>

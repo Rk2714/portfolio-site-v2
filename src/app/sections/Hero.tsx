@@ -50,11 +50,20 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-3"
             >
+              <a
+                href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dL0u8qskhfEDpacS_oUA7sQzLuLcNJf35Jm55-LP0WqMhoRB38reuFFqrjqU2sAQG9rkzjlrI?gv=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-8 py-3.5 bg-[#0F172A] text-white text-sm font-bold hover:bg-[#1E293B] transition-colors text-center"
+              >
+                30分無料相談を予約する
+              </a>
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-                className="inline-block px-8 py-3.5 bg-[#0F172A] text-white text-sm font-bold hover:bg-[#1E293B] transition-colors"
+                className="inline-block px-8 py-3.5 border border-gray-200 text-[#0F172A] text-sm font-bold hover:bg-[#F8FAFC] transition-colors text-center"
               >
                 まずはあなたの現場を聞かせてください
               </a>

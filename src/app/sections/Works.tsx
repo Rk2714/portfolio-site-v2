@@ -9,7 +9,6 @@ const workData: Record<string, { metric: string; metricLabel: string; link?: str
   "案件管理システム": { metric: "2社", metricLabel: "運用中" },
   "Google環境セットアップ": { metric: "5社+", metricLabel: "導入支援" },
   "AI人材育成プログラム": { metric: "50名", metricLabel: "育成実績" },
-  "コトマース・ヌチマース": { metric: "4エリア", metricLabel: "沖縄・京都・大阪・北海道" },
 };
 
 interface WorkItem {

@@ -136,7 +136,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
                 {category.skills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] text-xs text-[#334555]"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] text-xs text-[#334155]"
                   >
                     {skill.name}
                     <span className="text-[#0F172A] font-bold">
@@ -156,7 +156,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
             <span className="px-3 py-1.5 bg-[#0F172A] text-white text-xs">
               日本語（母語）
             </span>
-            <span className="px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#334555]">
+            <span className="px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#334155]">
               英語（医療プロジェクト対応）
             </span>
           </div>
