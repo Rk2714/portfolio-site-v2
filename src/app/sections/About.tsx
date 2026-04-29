@@ -14,14 +14,13 @@ interface Profile {
 export default function About({ profile }: { profile?: Profile | null }) {
   const bio =
     profile?.bio ||
-    "看護師として13年の臨床経験を持ち、その後AIコンサルタントとして医療現場への技術導入を支援しています。オール日本リノベーション地域政策部での経験を活かし、議事録自動化ツールの導入から契約書管理システムの構築まで、現場の課題を技術で解決します。";
+    "看護師として15年の臨床経験を持ち、その後DX・業務改善パートナーとして、医療現場・企業・個人事業主の技術導入を支援しています。出退勤・在庫・案件管理システムの構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場の課題を技術で解決します。沖縄・京都・大阪・北海道の医療プロジェクトにも参画し、現場育成と環境構築を行っています。";
   const location = profile?.location || "沖縄県中城村";
 
   return (
     <section id="about" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
-          {/* Left image */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +43,6 @@ export default function About({ profile }: { profile?: Profile | null }) {
             </div>
           </motion.div>
 
-          {/* Right text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -69,16 +67,16 @@ export default function About({ profile }: { profile?: Profile | null }) {
 
             <div className="grid grid-cols-3 gap-4">
               <div className="border-t-2 border-[#0F172A] pt-4">
-                <p className="text-xl font-bold text-[#0F172A]">13年</p>
-                <p className="text-xs text-[#64748B] mt-1">看護師経験</p>
-              </div>
-              <div className="border-t-2 border-[#0F172A] pt-4">
-                <p className="text-xl font-bold text-[#0F172A]">3施設</p>
-                <p className="text-xs text-[#64748B] mt-1">AI導入実績</p>
+                <p className="text-xl font-bold text-[#0F172A]">15年</p>
+                <p className="text-xs text-[#64748B] mt-1">看護師・現場経験</p>
               </div>
               <div className="border-t-2 border-[#0F172A] pt-4">
                 <p className="text-xl font-bold text-[#0F172A]">50名+</p>
-                <p className="text-xs text-[#64748B] mt-1">育成支援</p>
+                <p className="text-xs text-[#64748B] mt-1">AI人材育成</p>
+              </div>
+              <div className="border-t-2 border-[#0F172A] pt-4">
+                <p className="text-xl font-bold text-[#0F172A]">4エリア</p>
+                <p className="text-xs text-[#64748B] mt-1">医療プロジェクト</p>
               </div>
             </div>
           </motion.div>

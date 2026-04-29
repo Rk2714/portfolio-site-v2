@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const trustItems = [
-  { value: "13年", label: "看護師としての臨床経験" },
-  { value: "3施設", label: "AI導入支援実績" },
-  { value: "50名+", label: "スタッフ育成支援" },
+  { value: "15年", label: "看護師・現場経験" },
+  { value: "50名+", label: "AI人材育成実績" },
+  { value: "4エリア", label: "医療プロジェクト（沖縄・京都・大阪・北海道）" },
 ];
 
 export default function Trust() {

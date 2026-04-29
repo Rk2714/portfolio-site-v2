@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle, Calendar } from "lucide-react";
 
 interface Contacts {
   email?: string;
   linkedin?: string;
   twitter?: string;
   location?: string;
+  calendly?: string;
 }
 
 export default function Contact({ contacts }: { contacts?: Contacts | null }) {
   const email = contacts?.email || "ryuyakinjo@gmail.com";
   const location = contacts?.location || "沖縄県中城村";
+  const calendlyUrl = contacts?.calendly || "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3K1Z7qfXJHmL0wZPlg6z7Z4Z4Z4Z4Z4Z4Z4Z4Z4Z4Z4Z4Z4Z4Z4Z";
 
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -54,13 +56,13 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
             まずは無料相談から
           </h2>
           <p className="text-sm text-[#475569] leading-[1.8]">
-            AI導入の検討、業務効率化のご相談など、お気軽にお問い合わせください。
+            DX環境構築、AI人材育成、業務効率化のご相談など、お気軽にお問い合わせください。
             <br />
             初回相談は無料です。
           </p>
         </div>
 
-        <div className="flex items-center justify-center gap-8 mb-12 text-sm">
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-10 text-sm">
           <div className="flex items-center gap-2">
             <Mail size={14} className="text-[#64748B]" />
             <a href={`mailto:${email}`} className="text-[#2563EB] hover:underline">
@@ -71,6 +73,18 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
             <MapPin size={14} className="text-[#64748B]" />
             <span className="text-[#475569]">{location}</span>
           </div>
+        </div>
+
+        <div className="mb-10">
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full py-4 bg-[#0F172A] text-white text-sm font-bold hover:bg-[#1E293B] transition-colors"
+          >
+            <Calendar size={16} />
+            カレンダーから予約する（Google Calendar）
+          </a>
         </div>
 
         {submitted ? (
@@ -125,7 +139,7 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-200 focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] outline-none transition-all resize-none text-sm"
-                placeholder="ご相談内容を具体的にご記入ください"
+                placeholder="DX導入、AI人材育成、業務効率化など、ご相談内容を具体的にご記入ください"
               />
             </div>
             <button

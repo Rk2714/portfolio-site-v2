@@ -32,8 +32,8 @@ async function fetchMicroCMS(endpoint: string, fallback: any) {
 }
 
 export const metadata = {
-  title: "金城竜弥｜看護師13年の経験で医療現場にAIを導入する",
-  description: "看護師13年の臨床経験を持つAI導入コンサルタント金城竜弥。医療現場の業務効率化、AI議事録導入支援、キャリアコンサルティングを提供します。",
+  title: "金城竜弥｜看護師15年の現場目線でDX・人材育成を支援",
+  description: "看護師15年の臨床経験を持つDX・業務改善パートナー。AI人材育成（50名規模）、システム構築（出退勤/在庫/案件管理）、医療プロジェクト支援（沖縄・京都・大阪・北海道）を提供します。",
 };
 
 export default async function Home() {

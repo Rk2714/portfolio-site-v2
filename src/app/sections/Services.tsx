@@ -1,29 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, FileCheck, MessageCircle } from "lucide-react";
+import { Monitor, GraduationCap, Settings, HeartPulse } from "lucide-react";
 
 const services = [
   {
-    icon: Brain,
-    title: "AI導入コンサルティング",
-    description:
-      "現場の業務フローを分析し、最適なAIツール（議事録自動化、チャットボット等）の選定から定着支援まで一貫して対応します。導入後も定着状況を追跡し、使われ続ける体制を作ります。",
-    features: ["業務フロー分析", "ツール選定・比較", "導入支援・定着化"],
+    icon: Monitor,
+    title: "DX環境構築",
+    description: "出退勤管理、在庫管理、案件管理システムの選定・導入、ツール連携、Google Workspaceセットアップまで。現場の業務フローを分析し、無駄を削減する環境を作ります。個人事業主から中小チームまで対応します。",
+    features: ["出退勤・在庫・案件管理システム", "ツール連携・自動化", "Google環境セットアップ", "カレンダー予約管理構築"],
   },
   {
-    icon: FileCheck,
-    title: "業務効率化支援",
-    description:
-      "看護師13年の経験に基づき、現場の視点で業務プロセスを見直し、契約書管理やマニュアル整備など具体的な改善を実施します。数値で効果を測定し、改善サイクルを回します。",
-    features: ["業務プロセス改善", "契約書テンプレート化", "マニュアル整備"],
+    icon: GraduationCap,
+    title: "AI人材育成・講師",
+    description: "AIツールの使い方講座の設計・実施。現場で使えるレベルまで育成し、教育担当の負担を減らします。50名規模の育成実績があり、医療従事者から企業スタッフまで幅広く対応します。",
+    features: ["AI使い方講座設計・実施", "現場定着型育成プログラム", "50名規模の育成実績", "医療・非医療両対応"],
   },
   {
-    icon: MessageCircle,
-    title: "医療通訳・人材育成",
-    description:
-      "英語での医療通訳サービスと、スタッフ育成プログラムの構築を支援。インバウンド医療対応の人材基盤を強化し、現場が自走できる仕組みを作ります。",
-    features: ["医療通訳（英語）", "スタッフ育成プログラム", "多言語対応支援"],
+    icon: Settings,
+    title: "業務効率化コンサル",
+    description: "15年の現場経験を活かし、医療機関・企業・個人事業主の業務フローを見直します。エクセルでの補完作業をシステム化し、本業に集中できる環境を作ります。",
+    features: ["業務フロー分析", "システム選定・導入支援", "契約書テンプレート化", "マニュアル整備"],
+  },
+  {
+    icon: HeartPulse,
+    title: "医療プロジェクト支援",
+    description: "沖縄・京都・大阪・北海道の医療プロジェクトに参画。現場の育成・環境構築・業務改善を行います。コトマース、ヌチマースなどの医療事業において、現場目線での環境整備を担当しています。",
+    features: ["沖縄・京都・大阪・北海道", "現場育成・環境構築", "業務改善・マニュアル化", "オンライン診療支援"],
   },
 ];
 
@@ -35,7 +38,7 @@ export default function Services() {
           Services
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-16">
-          提供する3つのサービス
+          4つのサービス
         </h2>
 
         <div className="space-y-20">
@@ -48,9 +51,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className={`grid lg:grid-cols-2 gap-10 items-center ${
-                  isEven ? "" : "lg:direction-rtl"
-                }`}
+                className="grid lg:grid-cols-2 gap-10 items-center"
               >
                 <div className={isEven ? "" : "lg:order-2"}>
                   <div className="w-12 h-12 bg-[#0F172A] flex items-center justify-center mb-6">
@@ -79,7 +80,6 @@ export default function Services() {
                     isEven ? "" : "lg:order-1"
                   }`}
                 >
-                  {/* Placeholder for service image */}
                   <div className="w-full h-full flex items-center justify-center text-[#94A3B8] text-xs">
                     [サービスイメージ]
                   </div>

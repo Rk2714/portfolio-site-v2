@@ -15,7 +15,6 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
     <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24 bg-[#0F172A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-12 gap-8 items-end">
-          {/* Left text block */}
           <div className="lg:col-span-7">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -23,7 +22,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.5 }}
               className="text-xs text-white/50 mb-6 tracking-wider"
             >
-              看護師13年 / AI導入コンサルタント / 沖縄県中城村
+              看護師15年 / DX・業務改善 / AI人材育成 / 沖縄県中城村
             </motion.p>
 
             <motion.h1
@@ -32,9 +31,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-[28px] sm:text-[36px] md:text-[44px] font-bold text-white leading-[1.25] mb-8"
             >
-              医療現場にAIを導入する。
+              現場を知る人が、
               <br />
-              <span className="text-white/60">現場の看護師が、実務の課題と向き合う。</span>
+              <span className="text-white/60">DXと人材育成を支援する。</span>
             </motion.h1>
 
             <motion.p
@@ -43,7 +42,8 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm sm:text-base text-white/60 leading-[1.8] mb-10 max-w-xl"
             >
-              13年の臨床経験を活かし、現場の業務フローを分析。議事録自動化、契約書管理、オンライン診療構築など、医療機関の実務効率化を支援します。
+              15年の臨床経験を活かし、医療現場・企業・個人事業主の業務を改善。
+              出退勤・在庫・案件管理のシステム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場目線で支援します。
             </motion.p>
 
             <motion.div
@@ -69,7 +69,6 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             </motion.div>
           </div>
 
-          {/* Right visual block */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -89,7 +88,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                   </div>
                   <div>
                     <p className="text-white text-sm font-bold">金城 竜弥</p>
-                    <p className="text-white/50 text-xs">看護師 / AIコンサルタント</p>
+                    <p className="text-white/50 text-xs">看護師 / DX・業務改善パートナー</p>
                   </div>
                 </div>
               </div>

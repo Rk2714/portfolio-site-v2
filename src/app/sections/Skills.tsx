@@ -4,30 +4,33 @@ import { motion } from "framer-motion";
 
 const defaultSkillCategories = [
   {
-    title: "医療・ヘルスケア",
+    title: "DX・システム構築",
     skills: [
-      { name: "看護師業務", level: 13, unit: "年" },
-      { name: "オンライン診療支援", level: 3, unit: "年" },
-      { name: "訪問看護・薬配送", level: 3, unit: "年" },
-      { name: "医療通訳（英語）", level: 5, unit: "年" },
+      { name: "出退勤管理システム", level: 3, unit: "社" },
+      { name: "在庫管理システム", level: 2, unit: "社" },
+      { name: "案件管理システム", level: 2, unit: "社" },
+      { name: "ツール連携・自動化", level: 4, unit: "社" },
+      { name: "Google環境構築", level: 5, unit: "社" },
+      { name: "カレンダー予約管理", level: 3, unit: "社" },
     ],
   },
   {
-    title: "テクノロジー",
+    title: "AI・人材育成",
     skills: [
-      { name: "AI導入コンサル", level: 2, unit: "年" },
-      { name: "Next.js / TypeScript", level: 1, unit: "年" },
-      { name: "HTML / CSS / JS", level: 2, unit: "年" },
-      { name: "システム構築支援", level: 2, unit: "年" },
-    ],
-  },
-  {
-    title: "ビジネス・マネジメント",
-    skills: [
-      { name: "キャリアコンサル", level: 3, unit: "年" },
-      { name: "スタッフ育成", level: 5, unit: "年" },
+      { name: "AI講師・講座設計", level: 50, unit: "名" },
+      { name: "AIツール導入支援", level: 3, unit: "年" },
+      { name: "現場定着型育成", level: 5, unit: "年" },
       { name: "マニュアル整備", level: 5, unit: "年" },
-      { name: "PR・広報", level: 3, unit: "年" },
+    ],
+  },
+  {
+    title: "医療・現場支援",
+    skills: [
+      { name: "看護師業務", level: 15, unit: "年" },
+      { name: "医療プロジェクト", level: 4, unit: "エリア" },
+      { name: "現場育成・環境構築", level: 5, unit: "年" },
+      { name: "オンライン診療支援", level: 3, unit: "年" },
+      { name: "業務プロセス改善", level: 5, unit: "年" },
     ],
   },
 ];
@@ -75,7 +78,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
           3領域を横断する専門性
         </h2>
         <p className="text-sm text-[#475569] mb-14 max-w-xl leading-[1.8]">
-          医療現場の課題を理解し、テクノロジーとビジネスの視点から解決策を提案します。
+          DX環境構築、AI人材育成、医療現場支援の3領域で、現場の課題を解決します。
         </p>
 
         <div className="grid md:grid-cols-3 gap-10">
@@ -94,7 +97,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
                 {category.skills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 text-xs text-[#334155]"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 text-xs text-[#334555]"
                   >
                     {skill.name}
                     <span className="text-[#94A3B8]">
@@ -114,8 +117,8 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
             <span className="px-3 py-1.5 bg-[#0F172A] text-white text-xs">
               日本語（母語）
             </span>
-            <span className="px-3 py-1.5 bg-white border border-gray-200 text-xs text-[#334155]">
-              英語（医療通訳レベル）
+            <span className="px-3 py-1.5 bg-white border border-gray-200 text-xs text-[#334555]">
+              英語（医療プロジェクト対応）
             </span>
           </div>
         </div>
