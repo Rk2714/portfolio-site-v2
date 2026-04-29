@@ -66,8 +66,12 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
         })()
       : defaultSkillCategories;
 
+  // 医療・現場支援を最優先に抽出
+  const primaryCategory = categories.find((c) => c.title.includes("医療")) || categories[0];
+  const otherCategories = categories.filter((c) => c.title !== primaryCategory.title);
+
   return (
-    <section id="skills" className="py-20 md:py-28 bg-[#F8FAFC]">
+    <section id="skills" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
           Skills
@@ -79,29 +83,66 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
           DX環境構築、AI人材育成、医療現場支援の3領域で、現場の課題を解決します。
         </p>
 
-        <div className="grid md:grid-cols-3 gap-10">
-          {categories.map((category, ci) => (
+        {/* 最重要カテゴリー：横長カード */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8 p-8 bg-[#F8FAFC] border border-gray-100"
+        >
+          <div className="grid md:grid-cols-12 gap-8 items-start">
+            <div className="md:col-span-4">
+              <h3 className="text-lg font-bold text-[#0F172A] mb-2">
+                {primaryCategory.title}
+              </h3>
+              <p className="text-sm text-[#64748B]">
+                15年の臨床経験を活かした、現場目線の支援
+              </p>
+            </div>
+            <div className="md:col-span-8">
+              <div className="flex flex-wrap gap-3">
+                {primaryCategory.skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200"
+                  >
+                    <span className="text-sm text-[#334155]">{skill.name}</span>
+                    <span className="text-lg font-bold text-[#0F172A]">
+                      {skill.level}
+                    </span>
+                    <span className="text-xs text-[#94A3B8]">{skill.unit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* 残り2カテゴリー：2カラム */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {otherCategories.map((category, ci) => (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: ci * 0.1 }}
+              className="p-6 bg-white border border-gray-100"
             >
-              <h3 className="text-sm font-bold text-[#0F172A] mb-4 pb-2 border-b border-[#0F172A]">
+              <h3 className="text-sm font-bold text-[#0F172A] mb-4 pb-2 border-b border-gray-100">
                 {category.title}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 text-xs text-[#334555]"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] text-xs text-[#334555]"
                   >
                     {skill.name}
-                    <span className="text-[#94A3B8]">
+                    <span className="text-[#0F172A] font-bold">
                       {skill.level}
-                      {skill.unit}
                     </span>
+                    <span className="text-[#94A3B8]">{skill.unit}</span>
                   </span>
                 ))}
               </div>
@@ -109,13 +150,13 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
           ))}
         </div>
 
-        <div className="mt-12 pt-10 border-t border-gray-200">
+        <div className="mt-12 pt-10 border-t border-gray-100">
           <h3 className="text-sm font-bold text-[#0F172A] mb-4">言語</h3>
           <div className="flex flex-wrap gap-2">
             <span className="px-3 py-1.5 bg-[#0F172A] text-white text-xs">
               日本語（母語）
             </span>
-            <span className="px-3 py-1.5 bg-white border border-gray-200 text-xs text-[#334555]">
+            <span className="px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#334555]">
               英語（医療プロジェクト対応）
             </span>
           </div>
