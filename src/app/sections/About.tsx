@@ -14,7 +14,7 @@ interface Profile {
 export default function About({ profile }: { profile?: Profile | null }) {
   const bio =
     profile?.bio ||
-    "看護師15年の臨床経験を活かし、医療現場・企業・個人事業主のDX・業務改善を支援しています。システム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場の課題を技術で解決します。沖縄・京都・大阪・北海道の医療プロジェクトにも参画しています。";
+    "看護師15年の臨床経験を活かし、医療現場・企業・個人事業主のDX・業務改善を支援しています。システム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場の課題を技術で解決します。";
   const location = profile?.location || "沖縄県中城村";
 
   return (
@@ -78,7 +78,7 @@ export default function About({ profile }: { profile?: Profile | null }) {
               <span className="text-sm">{location}在住</span>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div className="border-t-2 border-[#0F172A] pt-4">
                 <p className="text-xl font-bold text-[#0F172A]">15年</p>
                 <p className="text-xs text-[#64748B] mt-1">看護師・現場経験</p>
@@ -86,10 +86,6 @@ export default function About({ profile }: { profile?: Profile | null }) {
               <div className="border-t-2 border-[#0F172A] pt-4">
                 <p className="text-xl font-bold text-[#0F172A]">50名+</p>
                 <p className="text-xs text-[#64748B] mt-1">AI人材育成</p>
-              </div>
-              <div className="border-t-2 border-[#0F172A] pt-4">
-                <p className="text-xl font-bold text-[#0F172A]">4エリア</p>
-                <p className="text-xs text-[#64748B] mt-1">医療プロジェクト</p>
               </div>
             </div>
           </motion.div>

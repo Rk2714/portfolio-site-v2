@@ -5,14 +5,13 @@ import { motion } from "framer-motion";
 const trustItems = [
   { value: "15年", label: "看護師・現場経験" },
   { value: "50名+", label: "AI人材育成実績" },
-  { value: "4エリア", label: "医療プロジェクト（沖縄・京都・大阪・北海道）" },
 ];
 
 export default function Trust() {
   return (
     <section className="py-12 md:py-16 bg-[#0F172A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 gap-4 md:gap-8">
           {trustItems.map((item, index) => (
             <motion.div
               key={item.label}

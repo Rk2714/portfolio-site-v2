@@ -4,31 +4,37 @@ import { motion } from "framer-motion";
 
 const defaultSkillCategories = [
   {
+    title: "医療・ヘルスケア",
+    skills: [
+      { name: "救急・ICU" },
+      { name: "手術室" },
+      { name: "小児科" },
+      { name: "内科" },
+      { name: "消化器" },
+      { name: "泌尿器" },
+      { name: "訪問看護" },
+      { name: "オンライン診療" },
+      { name: "看護師業務 15年" },
+    ],
+  },
+  {
     title: "DX・システム構築",
     skills: [
-      { name: "出退勤管理", level: 3, unit: "社" },
-      { name: "在庫管理", level: 2, unit: "社" },
-      { name: "案件管理", level: 2, unit: "社" },
-      { name: "Google環境構築", level: 5, unit: "社" },
-      { name: "ツール連携", level: 4, unit: "社" },
+      { name: "出退勤管理" },
+      { name: "在庫管理" },
+      { name: "案件管理" },
+      { name: "Google環境構築" },
+      { name: "ツール連携" },
     ],
   },
   {
     title: "AI・人材育成",
     skills: [
-      { name: "AI講師", level: 50, unit: "名" },
-      { name: "講座設計", level: 5, unit: "年" },
-      { name: "現場定着型育成", level: 3, unit: "年" },
-      { name: "マニュアル整備", level: 5, unit: "年" },
-    ],
-  },
-  {
-    title: "医療・現場支援",
-    skills: [
-      { name: "看護師業務", level: 15, unit: "年" },
-      { name: "医療プロジェクト", level: 4, unit: "エリア" },
-      { name: "現場育成", level: 5, unit: "年" },
-      { name: "業務改善", level: 5, unit: "年" },
+      { name: "AI講師" },
+      { name: "講座設計" },
+      { name: "現場定着型育成" },
+      { name: "マニュアル整備" },
+      { name: "50名+ 育成実績" },
     ],
   },
 ];
@@ -47,7 +53,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
       ? (() => {
           const grouped: Record<
             string,
-            { title: string; skills: { name: string; level: number; unit: string }[] }
+            { title: string; skills: { name: string }[] }
           > = {};
           skills.forEach((s) => {
             const cat = s.category || "その他";
@@ -57,8 +63,6 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
             if (s.name) {
               grouped[cat].skills.push({
                 name: s.name,
-                level: s.level || 0,
-                unit: s.unit || "年",
               });
             }
           });
@@ -66,7 +70,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
         })()
       : defaultSkillCategories;
 
-  // 医療・現場支援を最優先に抽出
+  // 医療・ヘルスケアを最優先に抽出
   const primaryCategory = categories.find((c) => c.title.includes("医療")) || categories[0];
   const otherCategories = categories.filter((c) => c.title !== primaryCategory.title);
 
@@ -80,7 +84,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
           専門性
         </h2>
         <p className="text-sm text-[#475569] mb-14 max-w-xl leading-[1.8]">
-          DX環境構築、AI人材育成、医療現場支援の3領域で、現場の課題を解決します。
+          15年の臨床経験とDX・AIの知見を組み合わせ、現場の課題を解決します。
         </p>
 
         {/* 最重要カテゴリー：横長カード */}
@@ -102,16 +106,12 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
             <div className="md:col-span-8">
               <div className="flex flex-wrap gap-3">
                 {primaryCategory.skills.map((skill) => (
-                  <div
+                  <span
                     key={skill.name}
-                    className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200"
+                    className="px-4 py-2 bg-white border border-gray-200 text-sm text-[#334155]"
                   >
-                    <span className="text-sm text-[#334155]">{skill.name}</span>
-                    <span className="text-lg font-bold text-[#0F172A]">
-                      {skill.level}
-                    </span>
-                    <span className="text-xs text-[#94A3B8]">{skill.unit}</span>
-                  </div>
+                    {skill.name}
+                  </span>
                 ))}
               </div>
             </div>
@@ -136,13 +136,9 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
                 {category.skills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] text-xs text-[#334155]"
+                    className="px-3 py-1.5 bg-[#F8FAFC] text-xs text-[#334155]"
                   >
                     {skill.name}
-                    <span className="text-[#0F172A] font-bold">
-                      {skill.level}
-                    </span>
-                    <span className="text-[#94A3B8]">{skill.unit}</span>
                   </span>
                 ))}
               </div>

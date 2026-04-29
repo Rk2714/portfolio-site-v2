@@ -33,7 +33,7 @@ async function fetchMicroCMS(endpoint: string, fallback: any) {
 
 export const metadata = {
   title: "金城竜弥｜看護師15年の現場目線でDX・人材育成を支援",
-  description: "看護師15年の臨床経験を持つDX・業務改善パートナー。AI人材育成（50名規模）、システム構築（出退勤/在庫/案件管理）、医療プロジェクト支援（沖縄・京都・大阪・北海道）を提供します。",
+  description: "看護師15年の臨床経験を持つDX・業務改善パートナー。AI人材育成（50名規模）、システム構築（出退勤/在庫/案件管理）、業務効率化コンサルを提供します。",
 };
 
 export default async function Home() {
@@ -44,9 +44,10 @@ export default async function Home() {
   const contactsData = await fetchMicroCMS("contacts", { contents: [] });
   const contacts = contactsData.contents[0] || null;
 
-  const worksFiltered = (worksData.contents || []).filter(
-    (w: any) => w.title !== "キッズゲームコレクション"
-  );
+  const excludeWorks = ["キッズゲームコレクション", "コトマース", "ヌチマース号", "インターナショナルクリニック京都・大阪"];
+  const worksFiltered = (worksData.contents || [])
+    .filter((w: any) => !excludeWorks.some((ew) => w.title?.includes(ew)))
+    .slice(0, 4);
 
   return (
     <>

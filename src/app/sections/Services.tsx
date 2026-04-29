@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Monitor, GraduationCap, Settings, HeartPulse } from "lucide-react";
+import { Monitor, GraduationCap, Settings } from "lucide-react";
 
 const services = [
   {
@@ -22,12 +22,6 @@ const services = [
     description: "15年の現場経験を活かし、業務フローを見直します。エクセルでの補完作業をシステム化し、本業に集中できる環境を作ります。",
     features: ["業務フロー分析・改善", "契約書テンプレート化・マニュアル整備"],
   },
-  {
-    icon: HeartPulse,
-    title: "医療プロジェクト支援",
-    description: "沖縄・京都・大阪・北海道の医療プロジェクトに参画。現場育成・環境構築・業務改善を行います。",
-    features: ["4エリアの現場育成・環境構築", "業務改善・オンライン診療支援"],
-  },
 ];
 
 export default function Services() {
@@ -38,10 +32,10 @@ export default function Services() {
           Services
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-16">
-          4つのサービス
+          3つのサービス
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
