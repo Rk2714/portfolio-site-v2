@@ -1,15 +1,35 @@
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import { Mic, Radio, Calendar, ExternalLink } from "lucide-react";
+import { Mic, Radio, Calendar, ExternalLink, Phone } from "lucide-react";
 
-const mediaAppearances = [
+const API_KEY = "ydaf5pN5b4BqHJrtD67NXUa19qPUybJ9GWcX";
+const SERVICE_ID = "yqj3ujq81j";
+
+async function fetchMicroCMS(endpoint: string, fallback: any) {
+  try {
+    const res = await fetch(
+      `https://${SERVICE_ID}.microcms.io/api/v1/${endpoint}?limit=100`,
+      {
+        headers: { "X-MICROCMS-API-KEY": API_KEY },
+        next: { revalidate: 60 },
+      }
+    );
+    if (!res.ok) return fallback;
+    return await res.json();
+  } catch {
+    return fallback;
+  }
+}
+
+const defaultMedia = [
   {
     type: "レギュラー",
     title: "いえろーかっしーの沖縄DXラジオ",
     station: "FM那覇",
     frequency: "87.6MHz",
     schedule: "毎週水曜日 21:00-22:00",
-    description: "沖縄の医療・DX・地域活性化をテーマに、ゲストを招いて対談するレギュラー番組。看護師目線からの社会課題の掘り下げと、現場で使えるDXノウハウの発信が好評。",
+    description:
+      "沖縄の医療・DX・地域活性化をテーマに、ゲストを招いて対談するレギュラー番組。看護師目線からの社会課題の掘り下げと、現場で使えるDXノウハウの発信が好評。",
     link: "https://open.spotify.com/show/sample",
   },
   {
@@ -18,8 +38,9 @@ const mediaAppearances = [
     station: "TOKYO FM",
     frequency: "80.0MHz",
     schedule: "2026年3月15日",
-    description: "全国の医療機関におけるDX導入事例を特集。現場の看護師として15年間培った経験を活かし、AIツール定着のポイントや業務改善のリアルを語った。",
-    link: "#",
+    description:
+      "全国の医療機関におけるDX導入事例を特集。現場の看護師として15年間培った経験を活かし、AIツール定着のポイントや業務改善のリアルを語った。",
+    link: "",
   },
   {
     type: "ゲスト出演",
@@ -27,8 +48,9 @@ const mediaAppearances = [
     station: "J-WAVE",
     frequency: "81.3MHz",
     schedule: "2026年1月20日",
-    description: "ヌチマース号やコトマースなど、沖縄発の医療プロジェクトを通じた地方創生活動についてインタビュー。医療アクセス課題とテクノロジーによる解決策を解説。",
-    link: "#",
+    description:
+      "ヌチマース号やコトマースなど、沖縄発の医療プロジェクトを通じた地方創生活動についてインタビュー。医療アクセス課題とテクノロジーによる解決策を解説。",
+    link: "",
   },
   {
     type: "パーソナリティ",
@@ -36,38 +58,56 @@ const mediaAppearances = [
     station: "Podcast / Spotify",
     frequency: "配信",
     schedule: "隔週金曜日更新",
-    description: "医療従事者・企業向けに、業務効率化やAI人材育成について発信するポッドキャスト。累計ダウンロード数5,000回突破。",
+    description:
+      "医療従事者・企業向けに、業務効率化やAI人材育成について発信するポッドキャスト。累計ダウンロード数5,000回突破。",
     link: "https://open.spotify.com/show/sample",
   },
 ];
 
-const guests = [
+const defaultGuests = [
   {
     name: "金城 竜弥",
     title: "看護師 / DXコンサルタント / ラジオパーソナリティ",
     topic: "ご自身の番組への出演や、各メディアでの発信活動",
     date: "2024年〜現在",
+    link: "",
+    linkType: "url" as const,
   },
   {
     name: "（サンプル）医療DX企業 代表",
     title: "医療機関向けAIツール開発企業 CEO",
     topic: "AI導入の現場での活用法と定着のポイント",
     date: "2026年4月",
+    link: "https://example.com",
+    linkType: "url" as const,
   },
   {
     name: "（サンプル）沖縄県 地域政策部",
     title: "沖縄県 地域医療推進課 課長補佐",
     topic: "離島医療のアクセス課題とデジタル技術による解決策",
     date: "2026年3月",
+    link: "tel:098-000-0000",
+    linkType: "tel" as const,
   },
 ];
 
 export const metadata = {
   title: "メディア活動｜金城竜弥",
-  description: "ラジオパーソナリティとしての出演番組、ゲスト対談、Podcast配信の記録。",
+  description:
+    "ラジオパーソナリティとしての出演番組、ゲスト対談、Podcast配信の記録。",
 };
 
-export default function MediaPage() {
+export default async function MediaPage() {
+  const mediaData = await fetchMicroCMS("media", { contents: [] });
+  const mediaItems = (mediaData.contents || []).length > 0
+    ? mediaData.contents
+    : defaultMedia;
+
+  const guestData = await fetchMicroCMS("guests", { contents: [] });
+  const guestItems = (guestData.contents || []).length > 0
+    ? guestData.contents
+    : defaultGuests;
+
   return (
     <>
       <Navigation />
@@ -99,7 +139,7 @@ export default function MediaPage() {
             </h2>
 
             <div className="space-y-0">
-              {mediaAppearances.map((item, i) => (
+              {mediaItems.map((item: any, i: number) => (
                 <div
                   key={i}
                   className="border-t border-gray-200 py-8 grid md:grid-cols-12 gap-6"
@@ -116,7 +156,7 @@ export default function MediaPage() {
                     <p className="text-sm text-[#475569] leading-[1.8] mb-3">
                       {item.description}
                     </p>
-                    {item.link !== "#" && (
+                    {item.link && (
                       <a
                         href={item.link}
                         target="_blank"
@@ -160,11 +200,8 @@ export default function MediaPage() {
             </h2>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {guests.map((guest, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-6 border border-gray-100"
-                >
+              {guestItems.map((guest: any, i: number) => (
+                <div key={i} className="bg-white p-6 border border-gray-100">
                   <p className="text-xs text-[#94A3B8] mb-3">{guest.date}</p>
                   <h3 className="text-base font-bold text-[#0F172A] mb-1">
                     {guest.name}
@@ -172,7 +209,27 @@ export default function MediaPage() {
                   <p className="text-sm text-[#64748B] mb-4">{guest.title}</p>
                   <div className="border-t border-gray-100 pt-4">
                     <p className="text-xs text-[#64748B] mb-1">テーマ</p>
-                    <p className="text-sm text-[#334155]">{guest.topic}</p>
+                    <p className="text-sm text-[#334155] mb-3">{guest.topic}</p>
+                    {guest.link && (
+                      <a
+                        href={guest.link}
+                        target={guest.linkType === "url" ? "_blank" : undefined}
+                        rel={guest.linkType === "url" ? "noopener noreferrer" : undefined}
+                        className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:gap-2 transition-all"
+                      >
+                        {guest.linkType === "tel" ? (
+                          <>
+                            <Phone size={12} />
+                            電話する
+                          </>
+                        ) : (
+                          <>
+                            <ExternalLink size={12} />
+                            詳しく見る
+                          </>
+                        )}
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
@@ -181,7 +238,10 @@ export default function MediaPage() {
             <div className="mt-12 text-center">
               <p className="text-sm text-[#64748B]">
                 ゲスト出演・取材依頼は
-                <a href="mailto:ryuyakinjo@gmail.com" className="text-[#2563EB] hover:underline">
+                <a
+                  href="mailto:ryuyakinjo@gmail.com"
+                  className="text-[#2563EB] hover:underline"
+                >
                   こちら
                 </a>
                 まで
