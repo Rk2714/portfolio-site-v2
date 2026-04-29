@@ -6,20 +6,19 @@ const defaultSkillCategories = [
   {
     title: "DX・システム構築",
     skills: [
-      { name: "出退勤管理システム", level: 3, unit: "社" },
-      { name: "在庫管理システム", level: 2, unit: "社" },
-      { name: "案件管理システム", level: 2, unit: "社" },
-      { name: "ツール連携・自動化", level: 4, unit: "社" },
+      { name: "出退勤管理", level: 3, unit: "社" },
+      { name: "在庫管理", level: 2, unit: "社" },
+      { name: "案件管理", level: 2, unit: "社" },
       { name: "Google環境構築", level: 5, unit: "社" },
-      { name: "カレンダー予約管理", level: 3, unit: "社" },
+      { name: "ツール連携", level: 4, unit: "社" },
     ],
   },
   {
     title: "AI・人材育成",
     skills: [
-      { name: "AI講師・講座設計", level: 50, unit: "名" },
-      { name: "AIツール導入支援", level: 3, unit: "年" },
-      { name: "現場定着型育成", level: 5, unit: "年" },
+      { name: "AI講師", level: 50, unit: "名" },
+      { name: "講座設計", level: 5, unit: "年" },
+      { name: "現場定着型育成", level: 3, unit: "年" },
       { name: "マニュアル整備", level: 5, unit: "年" },
     ],
   },
@@ -28,9 +27,8 @@ const defaultSkillCategories = [
     skills: [
       { name: "看護師業務", level: 15, unit: "年" },
       { name: "医療プロジェクト", level: 4, unit: "エリア" },
-      { name: "現場育成・環境構築", level: 5, unit: "年" },
-      { name: "オンライン診療支援", level: 3, unit: "年" },
-      { name: "業務プロセス改善", level: 5, unit: "年" },
+      { name: "現場育成", level: 5, unit: "年" },
+      { name: "業務改善", level: 5, unit: "年" },
     ],
   },
 ];
@@ -75,7 +73,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
           Skills
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
-          3領域を横断する専門性
+          専門性
         </h2>
         <p className="text-sm text-[#475569] mb-14 max-w-xl leading-[1.8]">
           DX環境構築、AI人材育成、医療現場支援の3領域で、現場の課題を解決します。
