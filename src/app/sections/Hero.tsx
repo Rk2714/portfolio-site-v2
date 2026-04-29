@@ -31,9 +31,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-[28px] sm:text-[36px] md:text-[44px] font-bold text-white leading-[1.25] mb-8"
             >
-              現場を知る人が、
+              医療現場の課題を、
               <br />
-              <span className="text-white/60">DXと人材育成を支援する。</span>
+              <span className="text-white/60">DXと人材育成で解決する。</span>
             </motion.h1>
 
             <motion.p
@@ -42,8 +42,8 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm sm:text-base text-white/60 leading-[1.8] mb-10 max-w-xl"
             >
-              15年の臨床経験を活かし、医療現場・企業・個人事業主の業務を改善。
-              出退勤・在庫・案件管理のシステム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場目線で支援します。
+              15年の臨床経験を活かし、医療機関を中心に企業・個人事業主・チームの業務改善も支援。
+              出退勤・在庫・案件管理のシステム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場目線で対応します。
             </motion.p>
 
             <motion.div
@@ -77,9 +77,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
           >
             <div className="aspect-[4/3] bg-[#1E293B] relative overflow-hidden">
               <img
-                src="/images/stethoscope.jpg"
-                alt="医療現場"
-                className="w-full h-full object-cover opacity-60"
+                src="/images/okinawa-sea.jpg"
+                alt="沖縄"
+                className="w-full h-full object-cover opacity-70"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0F172A] to-transparent">
                 <div className="flex items-center gap-3">
@@ -88,7 +88,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                   </div>
                   <div>
                     <p className="text-white text-sm font-bold">金城 竜弥</p>
-                    <p className="text-white/50 text-xs">看護師 / DX・業務改善パートナー</p>
+                    <p className="text-white/50 text-xs">看護師 / DX・業務改善パートナー / ラジオパーソナリティ</p>
                   </div>
                 </div>
               </div>

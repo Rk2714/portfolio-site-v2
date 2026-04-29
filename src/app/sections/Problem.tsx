@@ -48,7 +48,9 @@ export default function Problem() {
             Problem
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] leading-snug">
-            こんな課題が出ていれば改善余地あり
+            医療現場はもちろん、企業・個人事業主も
+            <br className="hidden md:block" />
+            こんな課題に直面していませんか
           </h2>
         </div>
 

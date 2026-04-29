@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "サービス", href: "#services" },
@@ -15,6 +17,8 @@ const navItems = [
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -23,64 +27,88 @@ export default function Navigation() {
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-    setIsOpen(false);
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      if (!isHome) {
+        window.location.href = "/" + href;
+        return;
+      }
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
   };
 
+  const navBaseClass = scrolled
+    ? "bg-white/95 backdrop-blur border-b border-gray-100"
+    : "bg-transparent";
+
+  const textClass = scrolled
+    ? "text-[#475569] hover:text-[#0F172A]"
+    : isHome
+    ? "text-white/70 hover:text-white"
+    : "text-[#475569] hover:text-[#0F172A]";
+
+  const logoClass = scrolled
+    ? "text-[#0F172A]"
+    : isHome
+    ? "text-white"
+    : "text-[#0F172A]";
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur border-b border-gray-100"
-          : "bg-transparent"
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBaseClass}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
-          <a
-            href="#hero"
-            onClick={(e) => handleClick(e, "#hero")}
-            className={`text-sm font-bold tracking-wider transition-colors ${
-              scrolled ? "text-[#0F172A]" : "text-white"
-            }`}
+          <Link
+            href="/"
+            className={`text-sm font-bold tracking-wider transition-colors ${logoClass}`}
           >
             金城竜弥
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-6">
-            {navItems.map((item) => (
+            {isHome && navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`text-sm transition-colors ${
-                  scrolled
-                    ? "text-[#475569] hover:text-[#0F172A]"
-                    : "text-white/70 hover:text-white"
-                }`}
+                className={`text-sm transition-colors ${textClass}`}
               >
                 {item.label}
               </a>
             ))}
+            <Link
+              href="/media"
+              className={`text-sm transition-colors ${textClass}`}
+            >
+              メディア
+            </Link>
           </div>
 
           <div className="hidden md:block">
-            <a
-              href="#contact"
-              onClick={(e) => handleClick(e, "#contact")}
-              className={`px-4 py-2 text-sm font-bold transition-colors ${
-                scrolled
-                  ? "bg-[#0F172A] text-white hover:bg-[#1E293B]"
-                  : "bg-white text-[#0F172A] hover:bg-white/90"
-              }`}
-            >
-              無料相談
-            </a>
+            {isHome ? (
+              <a
+                href="#contact"
+                onClick={(e) => handleClick(e, "#contact")}
+                className={`px-4 py-2 text-sm font-bold transition-colors ${
+                  scrolled
+                    ? "bg-[#0F172A] text-white hover:bg-[#1E293B]"
+                    : "bg-white text-[#0F172A] hover:bg-white/90"
+                }`}
+              >
+                無料相談
+              </a>
+            ) : (
+              <Link
+                href="/#contact"
+                className="px-4 py-2 text-sm font-bold bg-[#0F172A] text-white hover:bg-[#1E293B] transition-colors"
+              >
+                無料相談
+              </Link>
+            )}
           </div>
 
           <button
-            className={`md:hidden p-2 ${scrolled ? "text-[#0F172A]" : "text-white"}`}
+            className={`md:hidden p-2 ${scrolled ? "text-[#0F172A]" : isHome ? "text-white" : "text-[#0F172A]"}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -97,7 +125,7 @@ export default function Navigation() {
             className="md:hidden bg-white border-b border-gray-100"
           >
             <div className="px-4 py-4 space-y-1">
-              {navItems.map((item) => (
+              {isHome && navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -107,13 +135,20 @@ export default function Navigation() {
                   {item.label}
                 </a>
               ))}
-              <a
-                href="#contact"
-                onClick={(e) => handleClick(e, "#contact")}
+              <Link
+                href="/media"
+                className="block text-sm font-medium text-[#334155] hover:text-[#0F172A] py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                メディア
+              </Link>
+              <Link
+                href="/#contact"
                 className="block text-center px-4 py-3 bg-[#0F172A] text-white text-sm font-bold mt-2"
+                onClick={() => setIsOpen(false)}
               >
                 無料相談
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
