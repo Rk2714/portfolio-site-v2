@@ -58,7 +58,10 @@ export default function About({ profile }: { profile?: Profile | null }) {
               <br />
               最適な解決策を提案できる
             </h2>
-            <p className="text-sm text-[#475569] leading-[1.9] mb-6">{bio}</p>
+            <p className="text-sm text-[#475569] leading-[1.9] mb-4">{bio}</p>
+            <p className="text-sm text-[#94A3B8] mb-6">
+              看護師、ラジオパーソナリティ、DXコンサルタント——そんな僕の活動を、ポートフォリオと呼んでいいのか、正直わからない。でも、ここに書いていることは全部本当の話です。
+            </p>
 
             <div className="mb-8">
               <a 

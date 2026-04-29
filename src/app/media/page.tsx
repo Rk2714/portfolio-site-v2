@@ -70,6 +70,7 @@ const defaultGuests = [
     title: "看護師 / DXコンサルタント / ラジオパーソナリティ",
     topic: "ご自身の番組への出演や、各メディアでの発信活動",
     date: "2024年〜現在",
+    program: "いえろーかっしーの沖縄DXラジオ",
     link: "",
     linkType: "url" as const,
   },
@@ -78,6 +79,7 @@ const defaultGuests = [
     title: "医療機関向けAIツール開発企業 CEO",
     topic: "AI導入の現場での活用法と定着のポイント",
     date: "2026年4月",
+    program: "いえろーかっしーの沖縄DXラジオ",
     link: "https://example.com",
     linkType: "url" as const,
   },
@@ -86,6 +88,7 @@ const defaultGuests = [
     title: "沖縄県 地域医療推進課 課長補佐",
     topic: "離島医療のアクセス課題とデジタル技術による解決策",
     date: "2026年3月",
+    program: "医療現場のDX革命（TOKYO FM）",
     link: "tel:098-000-0000",
     linkType: "tel" as const,
   },
@@ -195,20 +198,28 @@ export default async function MediaPage() {
             <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
               Guests
             </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
               これまでにお招きしたゲスト
             </h2>
+            <p className="text-sm text-[#475569] mb-12 max-w-xl">
+              各界の専門家をお招きし、現場のリアルを語り合っています。
+            </p>
 
             <div className="grid md:grid-cols-3 gap-6">
               {guestItems.map((guest: any, i: number) => (
                 <div key={i} className="bg-white p-6 border border-gray-100">
-                  <p className="text-xs text-[#94A3B8] mb-3">{guest.date}</p>
+                  <div className="mb-4">
+                    <p className="text-xs text-[#94A3B8] mb-1">{guest.date}</p>
+                    <p className="text-xs text-[#2563EB] font-medium">
+                      {guest.program}
+                    </p>
+                  </div>
                   <h3 className="text-base font-bold text-[#0F172A] mb-1">
                     {guest.name}
                   </h3>
                   <p className="text-sm text-[#64748B] mb-4">{guest.title}</p>
                   <div className="border-t border-gray-100 pt-4">
-                    <p className="text-xs text-[#64748B] mb-1">テーマ</p>
+                    <p className="text-xs text-[#64748B] mb-1">トークテーマ</p>
                     <p className="text-sm text-[#334155] mb-3">{guest.topic}</p>
                     {guest.link && (
                       <a
