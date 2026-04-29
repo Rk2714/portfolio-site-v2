@@ -1,23 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Clock, Puzzle, TrendingDown, Users, Monitor, GraduationCap } from "lucide-react";
+import { Users, Monitor } from "lucide-react";
 
 const problemsA = [
   {
     num: "01",
     title: "人手不足が深刻化",
-    description: "看護師不足により、記録業務や事務作業に追われ、本来の患者ケアに時間が割けない。残業の常態化がスタッフの離職を加速させている。",
+    description: "看護師不足により、記録業務や事務作業に時間を取られ、本来の患者ケアに集中しにくい。結果として残業が常態化し、離職リスクも上がっている。",
   },
   {
     num: "02",
     title: "DX導入が定着しない",
-    description: "ツールを導入しても現場が使いこなせず、結局従来の業務に逆戻り。IT業者と現場の認識のずれが、投資を無駄にしている。",
+    description: "ツールを導入しても現場が使いこなせず、従来運用へ逆戻りしやすい。IT担当と現場の認識のずれで、投資対効果が見えにくくなる。",
   },
   {
     num: "03",
     title: "効果が見えない",
-    description: "システム導入後のフォローがなく、ツールが形骸化。どの業務が改善されたか分からず、次の投資に繋がらない。",
+    description: "導入後の運用設計と振り返りが不足し、ツールが形骸化しやすい。どの業務が何分削減されたか見えず、次の改善につながらない。",
   },
 ];
 
@@ -25,17 +25,17 @@ const problemsB = [
   {
     num: "04",
     title: "人材育成が追いつかない",
-    description: "AIツールが増えても、使いこなせる人材がいない。教育担当の負担が増え、現場は混乱している。",
+    description: "AIツールが増えても、使いこなせる人材が不足しやすい。教育担当の負担が集中し、現場の運用ルールが揺らぎやすい。",
   },
   {
     num: "05",
     title: "システムがバラバラ",
-    description: "出退勤・在庫・案件管理が別システムで、連携が取れない。エクセルで補完する作業が増え、逆に非効率になっている。",
+    description: "出退勤・在庫・案件管理が分断され、データがつながらない。エクセル補完が増えて入力重複と確認漏れが発生しやすくなる。",
   },
   {
     num: "06",
     title: "Google環境が使えていない",
-    description: "Google Workspaceを導入しても、カレンダー連携や予約管理、権限設定が中途半端。個人事業主や小規模チームほど放置されている。",
+    description: "Google Workspaceを導入しても、カレンダー連携・予約管理・権限設計が不十分なまま止まりやすい。小規模チームほど設計不在で機能を使い切れない。",
   },
 ];
 
@@ -48,7 +48,7 @@ export default function Problem() {
             Problem
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] leading-snug">
-            現場が抱える課題
+            こんな課題が出ていれば改善余地あり
           </h2>
         </div>
 
