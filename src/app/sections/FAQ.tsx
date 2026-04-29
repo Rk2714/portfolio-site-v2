@@ -36,31 +36,37 @@ export default function FAQ() {
   return (
     <section className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-sm font-bold text-[#2563EB] mb-3">FAQ</p>
+        <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+          FAQ
+        </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-12">
           よくある質問
         </h2>
 
-        <div className="max-w-3xl space-y-3">
+        <div className="max-w-3xl space-y-0">
           {faqs.map((faq, index) => (
-            <div key={index} className="border border-gray-100 rounded-lg overflow-hidden">
+            <div key={index} className="border-t border-gray-200 last:border-b">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-5 text-left hover:bg-[#F8FAFC] transition-colors"
+                className="w-full flex items-start justify-between py-5 text-left hover:bg-[#F8FAFC] transition-colors"
               >
-                <span className="text-sm font-medium text-[#0F172A] pr-4">{faq.q}</span>
+                <span className="text-sm font-medium text-[#0F172A] pr-6">
+                  {faq.q}
+                </span>
                 <ChevronDown
-                  size={18}
-                  className={`text-[#64748B] shrink-0 transition-transform duration-200 ${
+                  size={16}
+                  className={`text-[#64748B] shrink-0 mt-0.5 transition-transform duration-200 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 />
               </button>
-              {openIndex === index && (
-                <div className="px-5 pb-5">
-                  <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
-                </div>
-              )}
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  openIndex === index ? "max-h-96 pb-5" : "max-h-0"
+                }`}
+              >
+                <p className="text-sm text-[#475569] leading-[1.8]">{faq.a}</p>
+              </div>
             </div>
           ))}
         </div>

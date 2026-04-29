@@ -2,9 +2,11 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Hero from "./sections/Hero";
 import Problem from "./sections/Problem";
+import Marquee from "./sections/Marquee";
 import Services from "./sections/Services";
 import Works from "./sections/Works";
 import Trust from "./sections/Trust";
+import Testimonials from "./sections/Testimonials";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
 import FAQ from "./sections/FAQ";
@@ -30,7 +32,7 @@ async function fetchMicroCMS(endpoint: string, fallback: any) {
 }
 
 export const metadata = {
-  title: "金城竜弥｜看護師13年の経験で医疗現場にAIを導入する",
+  title: "金城竜弥｜看護師13年の経験で医療現場にAIを導入する",
   description: "看護師13年の臨床経験を持つAI導入コンサルタント金城竜弥。医療現場の業務効率化、AI議事録導入支援、キャリアコンサルティングを提供します。",
 };
 
@@ -52,9 +54,11 @@ export default async function Home() {
       <main>
         <Hero profile={profile} />
         <Problem />
+        <Marquee />
         <Services />
         <Works works={worksFiltered} />
         <Trust />
+        <Testimonials />
         <About profile={profile} />
         <Skills skills={skillsData.contents} />
         <FAQ />

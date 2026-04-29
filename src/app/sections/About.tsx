@@ -20,51 +20,64 @@ export default function About({ profile }: { profile?: Profile | null }) {
   return (
     <section id="about" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Left image */}
           <motion.div
-            initial={{ opacity: 1 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            className="lg:col-span-5"
           >
-            <div className="aspect-[3/4] bg-gradient-to-br from-[#1E3A5F] to-[#0F172A] rounded-xl flex items-center justify-center overflow-hidden">
-              <div className="text-center text-white">
-                <p className="text-7xl font-bold mb-2">RK</p>
-                <p className="text-sm text-white/60">金城竜弥</p>
-              </div>
-            </div>
-            <div className="absolute -bottom-4 -right-4 bg-[#2563EB] text-white px-6 py-3 rounded-lg shadow-lg">
-              <p className="text-xs font-medium">看護師13年 / AIコンサルタント</p>
+            <div className="aspect-[3/4] bg-[#E2E8F0] relative">
+              {profile?.imageUrl ? (
+                <img
+                  src={profile.imageUrl}
+                  alt={profile.name || "金城竜弥"}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center text-[#94A3B8]">
+                  <span className="text-6xl font-bold text-[#CBD5E1]">RK</span>
+                  <span className="text-xs mt-2">金城竜弥</span>
+                </div>
+              )}
             </div>
           </motion.div>
 
+          {/* Right text */}
           <motion.div
-            initial={{ opacity: 1 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-7 lg:pt-8"
           >
-            <p className="text-sm font-bold text-[#2563EB] mb-3">プロフィール</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-2">
-              現場を知るからこそ、<br />最適な解決策を提案できます
+            <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+              About
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-6 leading-snug">
+              現場を知るからこそ、
+              <br />
+              最適な解決策を提案できる
             </h2>
-            <p className="text-base text-[#475569] leading-relaxed mt-6 mb-8">{bio}</p>
+            <p className="text-sm text-[#475569] leading-[1.9] mb-8">{bio}</p>
 
-            <div className="flex items-center gap-2 text-[#475569] mb-8">
-              <MapPin size={16} />
+            <div className="flex items-center gap-2 text-[#475569] mb-10">
+              <MapPin size={14} />
               <span className="text-sm">{location}在住</span>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-[#F8FAFC] rounded-lg">
-                <p className="text-2xl font-bold text-[#0F172A]">13年</p>
+              <div className="border-t-2 border-[#0F172A] pt-4">
+                <p className="text-xl font-bold text-[#0F172A]">13年</p>
                 <p className="text-xs text-[#64748B] mt-1">看護師経験</p>
               </div>
-              <div className="text-center p-4 bg-[#F8FAFC] rounded-lg">
-                <p className="text-2xl font-bold text-[#0F172A]">3施設</p>
+              <div className="border-t-2 border-[#0F172A] pt-4">
+                <p className="text-xl font-bold text-[#0F172A]">3施設</p>
                 <p className="text-xs text-[#64748B] mt-1">AI導入実績</p>
               </div>
-              <div className="text-center p-4 bg-[#F8FAFC] rounded-lg">
-                <p className="text-2xl font-bold text-[#0F172A]">50名+</p>
+              <div className="border-t-2 border-[#0F172A] pt-4">
+                <p className="text-xl font-bold text-[#0F172A]">50名+</p>
                 <p className="text-xs text-[#64748B] mt-1">育成支援</p>
               </div>
             </div>

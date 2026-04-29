@@ -22,57 +22,70 @@ export default function Works({ works }: { works: WorkItem[] }) {
   return (
     <section id="works" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-sm font-bold text-[#2563EB] mb-3">実績</p>
+        <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+          Works
+        </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
-          導入実績とケーススタディ
+          導入実績
         </h2>
-        <p className="text-base text-[#475569] mb-12 max-w-2xl">
-          医療MaaS、AI導入、業務効率化の3領域で実績を積んでいます。
+        <p className="text-sm text-[#475569] mb-14 max-w-xl leading-[1.8]">
+          医療MaaS、AI導入、業務効率化の3領域で、現場と向き合いながら成果を出してきました。
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="space-y-6">
           {works.map((work, index) => {
             const data = workData[work.title];
             return (
-              <motion.div
+              <motion.article
                 key={work.id}
-                initial={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group bg-white rounded-xl border border-gray-100 hover:border-[#2563EB]/20 hover:shadow-lg transition-all p-6"
+                transition={{ delay: index * 0.08 }}
+                className="group grid md:grid-cols-12 gap-6 items-center border-t border-gray-100 pt-6"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium text-[#2563EB] bg-[#2563EB]/5 px-3 py-1 rounded-full">
+                {/* Left info */}
+                <div className="md:col-span-5">
+                  <span className="text-xs text-[#64748B] mb-2 block">
                     {work.category}
                   </span>
+                  <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
+                    {work.title}
+                  </h3>
+                </div>
+
+                {/* Center desc */}
+                <div className="md:col-span-4">
+                  <p className="text-sm text-[#475569] leading-[1.7]">
+                    {work.description}
+                  </p>
+                </div>
+
+                {/* Right metric + link */}
+                <div className="md:col-span-3 flex items-center justify-between gap-4">
                   {data && (
-                    <div className="text-right">
-                      <p className="text-xl font-bold text-[#0F172A]">{data.metric}</p>
+                    <div>
+                      <p className="text-2xl font-bold text-[#0F172A]">
+                        {data.metric}
+                      </p>
                       <p className="text-xs text-[#64748B]">{data.metricLabel}</p>
                     </div>
                   )}
+                  {data?.link ? (
+                    <a
+                      href={data.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:gap-2 transition-all"
+                    >
+                      詳しく見る
+                      <ExternalLink size={12} />
+                    </a>
+                  ) : (
+                    <span className="shrink-0 text-xs text-[#94A3B8]">非公開</span>
+                  )}
                 </div>
-
-                <h3 className="text-lg font-bold text-[#0F172A] mb-2 group-hover:text-[#2563EB] transition-colors">
-                  {work.title}
-                </h3>
-
-                <p className="text-sm text-[#475569] leading-relaxed mb-4">
-                  {work.description}
-                </p>
-
-                {data?.link && (
-                  <a
-                    href={data.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm text-[#2563EB] font-medium hover:gap-2 transition-all"
-                  >
-                    詳しく見る
-                    <ExternalLink size={14} />
-                  </a>
-                )}
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>

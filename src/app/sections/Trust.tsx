@@ -1,24 +1,32 @@
-import { Stethoscope, Brain, Users } from "lucide-react";
+"use client";
+
+import { motion } from "framer-motion";
 
 const trustItems = [
-  { value: "13年", label: "看護師としての臨床経験", icon: Stethoscope },
-  { value: "3施設", label: "AI導入支援実績", icon: Brain },
-  { value: "50名+", label: "スタッフ育成支援", icon: Users },
+  { value: "13年", label: "看護師としての臨床経験" },
+  { value: "3施設", label: "AI導入支援実績" },
+  { value: "50名+", label: "スタッフ育成支援" },
 ];
 
 export default function Trust() {
   return (
-    <section className="py-16 md:py-20 bg-[#0F172A]">
+    <section className="py-12 md:py-16 bg-[#0F172A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-3 gap-8">
-          {trustItems.map((item) => (
-            <div key={item.label} className="text-center">
-              <div className="w-12 h-12 rounded-full bg-[#2563EB]/20 flex items-center justify-center mx-auto mb-4">
-                <item.icon className="w-6 h-6 text-[#60A5FA]" />
-              </div>
-              <p className="text-3xl md:text-4xl font-bold text-white mb-1">{item.value}</p>
-              <p className="text-sm text-white/60">{item.label}</p>
-            </div>
+        <div className="grid grid-cols-3 gap-4 md:gap-8">
+          {trustItems.map((item, index) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="text-left"
+            >
+              <p className="text-2xl md:text-4xl font-bold text-white mb-1">
+                {item.value}
+              </p>
+              <p className="text-xs md:text-sm text-white/50">{item.label}</p>
+            </motion.div>
           ))}
         </div>
       </div>
