@@ -1,0 +1,38 @@
+[
+  {
+    "type": "レギュラー",
+    "title": "いえろーかっしーの沖縄DXラジオ",
+    "station": "FM那覇",
+    "frequency": "87.6MHz",
+    "schedule": "毎週水曜日 21:00-22:00",
+    "description": "沖縄の医療・DX・地域活性化をテーマに、ゲストを招いて対談するレギュラー番組。看護師目線からの社会課題の掘り下げと、現場で使えるDXノウハウの発信が好評。",
+    "link": "https://open.spotify.com/show/sample"
+  },
+  {
+    "type": "ゲスト出演",
+    "title": "医療現場のDX革命",
+    "station": "TOKYO FM",
+    "frequency": "80.0MHz",
+    "schedule": "2026年3月15日",
+    "description": "全国の医療機関におけるDX導入事例を特集。現場の看護師として15年間培った経験を活かし、AIツール定着のポイントや業務改善のリアルを語った。",
+    "link": ""
+  },
+  {
+    "type": "ゲスト出演",
+    "title": "沖縄発・地方創生の最前線",
+    "station": "J-WAVE",
+    "frequency": "81.3MHz",
+    "schedule": "2026年1月20日",
+    "description": "ヌチマース号やコトマースなど、沖縄発の医療プロジェクトを通じた地方創生活動についてインタビュー。医療アクセス課題とテクノロジーによる解決策を解説。",
+    "link": ""
+  },
+  {
+    "type": "パーソナリティ",
+    "title": "いえろーかっしーの医療DXトーク",
+    "station": "Podcast / Spotify",
+    "frequency": "配信",
+    "schedule": "隔週金曜日更新",
+    "description": "医療従事者・企業向けに、業務効率化やAI人材育成について発信するポッドキャスト。累計ダウンロード数5,000回突破。",
+    "link": "https://open.spotify.com/show/sample"
+  }
+]

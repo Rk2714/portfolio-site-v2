@@ -21,95 +21,33 @@ async function fetchMicroCMS(endpoint: string, fallback: any) {
   }
 }
 
-const defaultMedia = [
-  {
-    type: "レギュラー",
-    title: "いえろーかっしーの沖縄DXラジオ",
-    station: "FM那覇",
-    frequency: "87.6MHz",
-    schedule: "毎週水曜日 21:00-22:00",
-    description:
-      "沖縄の医療・DX・地域活性化をテーマに、ゲストを招いて対談するレギュラー番組。看護師目線からの社会課題の掘り下げと、現場で使えるDXノウハウの発信が好評。",
-    link: "https://open.spotify.com/show/sample",
-  },
-  {
-    type: "ゲスト出演",
-    title: "医療現場のDX革命",
-    station: "TOKYO FM",
-    frequency: "80.0MHz",
-    schedule: "2026年3月15日",
-    description:
-      "全国の医療機関におけるDX導入事例を特集。現場の看護師として15年間培った経験を活かし、AIツール定着のポイントや業務改善のリアルを語った。",
-    link: "",
-  },
-  {
-    type: "ゲスト出演",
-    title: "沖縄発・地方創生の最前線",
-    station: "J-WAVE",
-    frequency: "81.3MHz",
-    schedule: "2026年1月20日",
-    description:
-      "ヌチマース号やコトマースなど、沖縄発の医療プロジェクトを通じた地方創生活動についてインタビュー。医療アクセス課題とテクノロジーによる解決策を解説。",
-    link: "",
-  },
-  {
-    type: "パーソナリティ",
-    title: "いえろーかっしーの医療DXトーク",
-    station: "Podcast / Spotify",
-    frequency: "配信",
-    schedule: "隔週金曜日更新",
-    description:
-      "医療従事者・企業向けに、業務効率化やAI人材育成について発信するポッドキャスト。累計ダウンロード数5,000回突破。",
-    link: "https://open.spotify.com/show/sample",
-  },
-];
-
-const defaultGuests = [
-  {
-    name: "金城 竜弥",
-    title: "看護師 / DXコンサルタント / ラジオパーソナリティ",
-    topic: "ご自身の番組への出演や、各メディアでの発信活動",
-    date: "2024年〜現在",
-    program: "いえろーかっしーの沖縄DXラジオ",
-    link: "",
-    linkType: "url" as const,
-  },
-  {
-    name: "（サンプル）医療DX企業 代表",
-    title: "医療機関向けAIツール開発企業 CEO",
-    topic: "AI導入の現場での活用法と定着のポイント",
-    date: "2026年4月",
-    program: "いえろーかっしーの沖縄DXラジオ",
-    link: "https://example.com",
-    linkType: "url" as const,
-  },
-  {
-    name: "（サンプル）沖縄県 地域政策部",
-    title: "沖縄県 地域医療推進課 課長補佐",
-    topic: "離島医療のアクセス課題とデジタル技術による解決策",
-    date: "2026年3月",
-    program: "医療現場のDX革命（TOKYO FM）",
-    link: "tel:098-000-0000",
-    linkType: "tel" as const,
-  },
-];
+async function fetchJSON(path: string, fallback: any) {
+  try {
+    const res = await fetch(`https://portfolio-site-xi-eight-33.vercel.app${path}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return fallback;
+    return await res.json();
+  } catch {
+    return fallback;
+  }
+}
 
 export const metadata = {
   title: "メディア活動｜金城竜弥",
-  description:
-    "ラジオパーソナリティとしての出演番組、ゲスト対談、Podcast配信の記録。",
+  description: "ラジオパーソナリティとしての出演番組、ゲスト対談、Podcast配信の記録。",
 };
 
 export default async function MediaPage() {
   const mediaData = await fetchMicroCMS("media", { contents: [] });
   const mediaItems = (mediaData.contents || []).length > 0
     ? mediaData.contents
-    : defaultMedia;
+    : await fetchJSON("/data/media.json", []);
 
   const guestData = await fetchMicroCMS("guests", { contents: [] });
   const guestItems = (guestData.contents || []).length > 0
     ? guestData.contents
-    : defaultGuests;
+    : await fetchJSON("/data/guests.json", []);
 
   return (
     <>
