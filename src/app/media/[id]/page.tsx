@@ -123,26 +123,29 @@ export default async function MediaPostPage({ params }: Props) {
         </section>
 
         {/* Theme */}
-        <section className="py-12 bg-[#FAFAFA] border-y border-gray-100">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="flex items-start gap-3 mb-4">
-              <div className="w-8 h-8 bg-[#0F172A] flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Radio size={14} className="text-white" />
-              </div>
-              <div>
-                <p className="text-xs text-[#64748B] mb-1 tracking-wider">
-                  この回のテーマ
-                </p>
-                <p className="text-base md:text-lg font-bold text-[#0F172A] leading-relaxed">
-                  {post.theme}
-                </p>
+        {post.theme && (
+          <section className="py-12 bg-[#FAFAFA] border-y border-gray-100">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6">
+              <div className="flex items-start gap-3 mb-4">
+                <div className="w-8 h-8 bg-[#0F172A] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Radio size={14} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-[#64748B] mb-1 tracking-wider">
+                    この回のテーマ
+                  </p>
+                  <p className="text-base md:text-lg font-bold text-[#0F172A] leading-relaxed">
+                    {post.theme}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Summary with Timestamps */}
-        <section className="py-16 md:py-20">
+        {post.summary.length > 0 && (
+          <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <div className="flex items-center gap-2 mb-8">
               <Clock size={16} className="text-[#0F172A]" />
@@ -177,6 +180,7 @@ export default async function MediaPostPage({ params }: Props) {
             </div>
           </div>
         </section>
+        )}
 
         {/* Quotes */}
         {post.quotes.length > 0 && (
@@ -205,33 +209,35 @@ export default async function MediaPostPage({ params }: Props) {
         )}
 
         {/* Full Transcript */}
-        <section className="py-16 md:py-20 bg-[#FAFAFA]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <details className="group">
-              <summary className="flex items-center justify-between cursor-pointer list-none py-4 border-b border-gray-200">
-                <div className="flex items-center gap-2">
-                  <FileText size={16} className="text-[#0F172A]" />
-                  <h2 className="text-lg font-bold text-[#0F172A]">
-                    フル文字起こし
-                  </h2>
+        {post.transcript && (
+          <section className="py-16 md:py-20 bg-[#FAFAFA]">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6">
+              <details className="group">
+                <summary className="flex items-center justify-between cursor-pointer list-none py-4 border-b border-gray-200">
+                  <div className="flex items-center gap-2">
+                    <FileText size={16} className="text-[#0F172A]" />
+                    <h2 className="text-lg font-bold text-[#0F172A]">
+                      フル文字起こし
+                    </h2>
+                  </div>
+                  <span className="text-xs text-[#64748B] group-open:hidden">
+                    開く
+                  </span>
+                  <span className="text-xs text-[#64748B] hidden group-open:block">
+                    閉じる
+                  </span>
+                </summary>
+                <div className="pt-6 pb-2">
+                  <div className="bg-white border border-gray-200 p-6 md:p-8">
+                    <p className="text-sm text-[#475569] leading-[1.9] whitespace-pre-wrap">
+                      {post.transcript}
+                    </p>
+                  </div>
                 </div>
-                <span className="text-xs text-[#64748B] group-open:hidden">
-                  開く
-                </span>
-                <span className="text-xs text-[#64748B] hidden group-open:block">
-                  閉じる
-                </span>
-              </summary>
-              <div className="pt-6 pb-2">
-                <div className="bg-white border border-gray-200 p-6 md:p-8">
-                  <p className="text-sm text-[#475569] leading-[1.9] whitespace-pre-wrap">
-                    {post.transcript}
-                  </p>
-                </div>
-              </div>
-            </details>
-          </div>
-        </section>
+              </details>
+            </div>
+          </section>
+        )}
 
         {/* Guests */}
         {post.guests && post.guests.length > 0 && (

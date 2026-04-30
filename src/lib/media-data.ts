@@ -37,7 +37,7 @@ export interface MediaPost {
 
 export const mediaPosts: MediaPost[] = [
   {
-    id: "1",
+    id: "7b6eui3uy3",
     category: "radio",
     categoryLabel: "ラジオ",
     date: "2026-04-28",
@@ -199,7 +199,7 @@ export const mediaPosts: MediaPost[] = [
     ],
   },
   {
-    id: "2",
+    id: "ruxfxeorji6x",
     category: "guest",
     categoryLabel: "ゲスト",
     date: "2026-04-14",
@@ -353,7 +353,7 @@ export const mediaPosts: MediaPost[] = [
     ],
   },
   {
-    id: "3",
+    id: "rp99ea5fihw",
     category: "guest",
     categoryLabel: "ゲスト",
     date: "2026-03-10",
@@ -483,6 +483,87 @@ export const mediaPosts: MediaPost[] = [
       },
     ],
   },
+  {
+    id: "mtotenuoa_05",
+    category: "appear",
+    categoryLabel: "出演",
+    date: "2025-09-02",
+    title:
+      "MRT presents 沖縄フューチャーイノベーション｜観光医療と働き方改革——看護師の新しいキャリアの形",
+    excerpt:
+      "MRT株式会社提供の番組にゲスト出演。ヌチマース号の看護師として、キャリアコンサルタント兼AIコンサルタントとして——看護師の新しい働き方と、オンライン診療の最前線、そして沖縄の医療の未来について語る。",
+    youtubeUrl: "https://www.youtube.com/embed/z93wDCNIp6Q",
+    thumbnail: "https://i.ytimg.com/vi/z93wDCNIp6Q/hqdefault.jpg",
+    theme:
+      "看護師のキャリア多様化と働き方改革——病院以外の選択肢としてのオンライン診療、キャリアコンサルティング、AI活用",
+    summary: [],
+    quotes: [],
+    transcript: "",
+    tags: [
+      "MRT",
+      "出演",
+      "看護師",
+      "キャリア",
+      "沖縄",
+      "オンライン診療",
+      "働き方改革",
+    ],
+    guests: [],
+  },
+  {
+    id: "fxq_0k5c3hnb",
+    category: "appear",
+    categoryLabel: "出演",
+    date: "2026-02-24",
+    title:
+      "イエローかっし～ FM21｜第二夜：近城龍也を深掘り——看護師から海外、そしてAIコンサルタントへ",
+    excerpt:
+      "2度目の登場となる今回は、AIコンサルタントとしての顔ではなく、一人の人間・近城龍也にフォーカス。看護師になったきっかけ、3カ国ワーキングホリデーで見た世界、キャリアコンサルタントとしての想い——「人と仕組みを整える人」のルーツを深掘り。",
+    youtubeUrl: "https://www.youtube.com/embed/Emy8bTOFxc8",
+    thumbnail: "https://i.ytimg.com/vi/Emy8bTOFxc8/hqdefault.jpg",
+    theme:
+      "看護師からAIコンサルタントへ——キャリア転換の背景と、人と仕組みを整えるという仕事の本質",
+    summary: [],
+    quotes: [],
+    transcript: "",
+    tags: [
+      "FM21",
+      "出演",
+      "看護師",
+      "AIコンサルタント",
+      "キャリア",
+      "ワーキングホリデー",
+      "沖縄",
+    ],
+    guests: [],
+  },
+  {
+    id: "fn9ocqfoygl",
+    category: "appear",
+    categoryLabel: "出演",
+    date: "2026-01-13",
+    title:
+      "イエローかっし～ FM21｜ゲスト出演：AIコンサルタント 近城龍也——人が人を呼ぶ、キャリアの形",
+    excerpt:
+      "イエローかっし～にゲスト初登場。元看護師からAIコンサルタントへ——キャリアコンサルタントの資格を取ったきっかけ、NICUから訪問看護、そして現在の活動につながる「人と仕組みを整える」仕事の本質について語る。",
+    youtubeUrl: "https://www.youtube.com/embed/CqetAhK9zdA",
+    thumbnail: "https://i.ytimg.com/vi/CqetAhK9zdA/hqdefault.jpg",
+    theme:
+      "元看護師がAIコンサルタントになるまで——人との繋がりを軸にしたキャリアの軌跡",
+    summary: [],
+    quotes: [],
+    transcript: "",
+    tags: [
+      "FM21",
+      "出演",
+      "看護師",
+      "AIコンサルタント",
+      "キャリア",
+      "キャリアコンサルタント",
+      "沖縄",
+    ],
+    guests: [],
+  },
 ];
 
 export function getMediaPostById(id: string): MediaPost | undefined {
@@ -515,24 +596,25 @@ export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
   if (!data.contents || data.contents.length === 0) return mediaPosts;
 
   return data.contents.map((item: any) => {
-    const cat = Array.isArray(item.category) ? item.category[0] || "note" : "note";
-    const staticPost = mediaPosts.find((p) => p.title === item.title);
-    const fallback = staticPost || mediaPosts[0];
+    const cat = Array.isArray(item.category)
+      ? item.category[0] || "appear"
+      : "appear";
+    const staticPost = mediaPosts.find((p) => p.id === item.id);
     return {
       id: item.id,
       category: cat as "radio" | "guest" | "appear" | "note",
       categoryLabel: categoryLabelMap[cat] || "雑記",
-      date: item.date ? formatDate(item.date) : fallback.date,
-      title: item.title || fallback.title,
-      excerpt: item.excerpt || fallback.excerpt,
-      youtubeUrl: item.youtubeUrl || fallback.youtubeUrl,
-      thumbnail: fallback.thumbnail,
-      theme: fallback.theme,
-      summary: fallback.summary,
-      quotes: fallback.quotes,
-      transcript: fallback.transcript,
-      tags: fallback.tags,
-      guests: fallback.guests,
+      date: item.date ? formatDate(item.date) : staticPost?.date || "",
+      title: item.title || staticPost?.title || "",
+      excerpt: item.excerpt || staticPost?.excerpt || "",
+      youtubeUrl: item.youtubeUrl || staticPost?.youtubeUrl || null,
+      thumbnail: staticPost?.thumbnail || "",
+      theme: staticPost?.theme || "",
+      summary: staticPost?.summary || [],
+      quotes: staticPost?.quotes || [],
+      transcript: staticPost?.transcript || "",
+      tags: staticPost?.tags || [],
+      guests: staticPost?.guests,
     };
   });
 }
@@ -548,18 +630,20 @@ export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undef
     );
     if (!res.ok) return undefined;
     const item = await res.json();
-    const cat = Array.isArray(item.category) ? item.category[0] || "note" : "note";
-    const staticPost = mediaPosts.find((p) => p.title === item.title);
+    const cat = Array.isArray(item.category)
+      ? item.category[0] || "appear"
+      : "appear";
+    const staticPost = mediaPosts.find((p) => p.id === item.id);
 
     return {
       id: item.id,
       category: cat as "radio" | "guest" | "appear" | "note",
       categoryLabel: categoryLabelMap[cat] || "雑記",
-      date: item.date ? formatDate(item.date) : staticPost?.date || "2026-04-28",
+      date: item.date ? formatDate(item.date) : staticPost?.date || "",
       title: item.title || staticPost?.title || "",
       excerpt: item.excerpt || staticPost?.excerpt || "",
       youtubeUrl: item.youtubeUrl || staticPost?.youtubeUrl || null,
-      thumbnail: staticPost?.thumbnail || "https://i.ytimg.com/vi/xhOa-5NTptk/hqdefault.jpg",
+      thumbnail: staticPost?.thumbnail || "",
       theme: staticPost?.theme || "",
       summary: staticPost?.summary || [],
       quotes: staticPost?.quotes || [],
