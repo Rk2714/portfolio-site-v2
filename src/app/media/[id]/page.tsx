@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getMediaByIdFromCMS, getAllMediaFromCMS, getAllMediaPosts } from "../../../lib/media-data";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
+import ShareButtons from "../../components/ShareButtons";
 import {
   Radio,
   Mic,
@@ -14,6 +15,7 @@ import {
   User,
   Mail,
   Globe,
+  Camera,
 } from "lucide-react";
 
 interface Props {
@@ -101,7 +103,7 @@ export default async function MediaPostPage({ params }: Props) {
 
             {/* Tags */}
             {post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-10">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
@@ -112,6 +114,9 @@ export default async function MediaPostPage({ params }: Props) {
                 ))}
               </div>
             )}
+
+            {/* Share */}
+            <ShareButtons url={`https://portfolio-site-xi-eight-33.vercel.app/media/${post.id}`} title={post.title} />
           </div>
         </section>
 
@@ -270,24 +275,30 @@ export default async function MediaPostPage({ params }: Props) {
                       </p>
                       {guest.links && guest.links.length > 0 && (
                         <div className="flex flex-wrap gap-3">
-                          {guest.links.map((link, i) => (
-                            <a
-                              key={i}
-                              href={link.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-xs text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
-                            >
-                              {link.label.includes("Instagram") ? (
-                                <Globe size={12} />
-                              ) : link.label.includes("Web") || link.label.includes("サイト") ? (
-                                <Globe size={12} />
-                              ) : (
-                                <ExternalLink size={12} />
-                              )}
-                              {link.label}
-                            </a>
-                          ))}
+                          {guest.links.map((link, i) => {
+                            let linkIcon = null;
+                            const l = link.label;
+                            const isInsta = l.includes("Instagram");
+                            const isWeb = l.includes("Web") || l.includes("サイト") || l.includes("研修") || l.includes("検索");
+                            const isSNS = l.includes("X") || l.includes("Twitter");
+
+                            if (isInsta) linkIcon = <Camera size={12} />;
+                            else if (isSNS) linkIcon = <span className="font-bold text-[10px]">𝕏</span>;
+                            else linkIcon = <Globe size={12} />;
+
+                            return (
+                              <a
+                                key={i}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
+                              >
+                                {linkIcon}
+                                {link.label}
+                              </a>
+                            );
+                          })}
                         </div>
                       )}
                     </div>

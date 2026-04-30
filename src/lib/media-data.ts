@@ -343,6 +343,10 @@ export const mediaPosts: MediaPost[] = [
             label: "小児在宅ケアコーディネーター研修（小児在宅ケア研究会）",
             url: "https://hc-cf.jp/coordinator.html",
           },
+          {
+            label: "Instagram（訪問看護ステーション）",
+            url: "https://www.instagram.com/kangolifefree.haebaru/",
+          },
         ],
       },
     ],
