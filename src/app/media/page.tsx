@@ -1,7 +1,7 @@
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { Mic, Radio, ExternalLink, Tag, ChevronRight } from "lucide-react";
-import { getAllMediaPosts } from "../../lib/media-data";
+import { getAllMediaFromCMS } from "../../lib/media-data";
 
 export const metadata = {
   title: "メディア活動・雑記｜金城竜弥",
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function MediaPage() {
-  const posts = getAllMediaPosts();
+  const posts = await getAllMediaFromCMS();
 
   const categories = [
     { key: "all", label: "すべて" },

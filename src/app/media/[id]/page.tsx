@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getMediaPostById, getAllMediaPosts } from "../../../lib/media-data";
+import { getMediaByIdFromCMS, getAllMediaFromCMS, getAllMediaPosts } from "../../../lib/media-data";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import {
@@ -21,13 +21,15 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllMediaPosts();
-  return posts.map((post) => ({ id: post.id }));
+  const cmsPosts = await getAllMediaFromCMS();
+  const staticPosts = getAllMediaPosts();
+  const allPosts = cmsPosts.length > 0 ? cmsPosts : staticPosts;
+  return allPosts.map((post) => ({ id: post.id }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
-  const post = getMediaPostById(id);
+  const post = await getMediaByIdFromCMS(id);
   if (!post) return { title: "Not Found" };
   return {
     title: `${post.title}｜メディア活動・金城竜弥`,
@@ -37,7 +39,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function MediaPostPage({ params }: Props) {
   const { id } = await params;
-  const post = getMediaPostById(id);
+  const post = await getMediaByIdFromCMS(id);
   if (!post) notFound();
 
   const CategoryIcon =

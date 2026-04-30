@@ -1,3 +1,16 @@
+const API_KEY = "ydaf5pN5b4BqHJrtD67NXUa19qPUybJ9GWcX";
+const SERVICE_ID = "yqj3ujq81j";
+
+const categoryLabelMap: Record<string, string> = {
+  radio: "ラジオ",
+  guest: "ゲスト",
+  note: "雑記",
+};
+
+function formatDate(dateStr: string): string {
+  return dateStr.slice(0, 10);
+}
+
 export interface MediaPost {
   id: string;
   category: "radio" | "guest" | "note";
@@ -185,4 +198,83 @@ export function getMediaPostById(id: string): MediaPost | undefined {
 
 export function getAllMediaPosts(): MediaPost[] {
   return mediaPosts;
+}
+
+// microCMS fetch
+async function fetchFromMicroCMS(endpoint: string, fallback: any) {
+  try {
+    const res = await fetch(
+      `https://${SERVICE_ID}.microcms.io/api/v1/${endpoint}?limit=100`,
+      {
+        headers: { "X-MICROCMS-API-KEY": API_KEY },
+        next: { revalidate: 60 },
+      }
+    );
+    if (!res.ok) return fallback;
+    return await res.json();
+  } catch {
+    return fallback;
+  }
+}
+
+export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
+  const data = await fetchFromMicroCMS("media", { contents: [] });
+  if (!data.contents || data.contents.length === 0) return mediaPosts;
+
+  return data.contents.map((item: any) => {
+    const cat = Array.isArray(item.category) ? item.category[0] || "note" : "note";
+    const staticPost = mediaPosts.find((p) => p.title === item.title);
+    const fallback = staticPost || mediaPosts[0];
+    return {
+      id: item.id,
+      category: cat as "radio" | "guest" | "note",
+      categoryLabel: categoryLabelMap[cat] || "雑記",
+      date: item.date ? formatDate(item.date) : fallback.date,
+      title: item.title || fallback.title,
+      excerpt: item.excerpt || fallback.excerpt,
+      youtubeUrl: item.youtubeUrl || fallback.youtubeUrl,
+      thumbnail: fallback.thumbnail,
+      theme: fallback.theme,
+      summary: fallback.summary,
+      quotes: fallback.quotes,
+      transcript: fallback.transcript,
+      tags: fallback.tags,
+      guests: fallback.guests,
+    };
+  });
+}
+
+export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undefined> {
+  try {
+    const res = await fetch(
+      `https://${SERVICE_ID}.microcms.io/api/v1/media/${id}`,
+      {
+        headers: { "X-MICROCMS-API-KEY": API_KEY },
+        next: { revalidate: 60 },
+      }
+    );
+    if (!res.ok) return undefined;
+    const item = await res.json();
+    const cat = Array.isArray(item.category) ? item.category[0] || "note" : "note";
+    const staticPost = mediaPosts.find((p) => p.title === item.title);
+
+    return {
+      id: item.id,
+      category: cat as "radio" | "guest" | "note",
+      categoryLabel: categoryLabelMap[cat] || "雑記",
+      date: item.date ? formatDate(item.date) : staticPost?.date || "2026-04-28",
+      title: item.title || staticPost?.title || "",
+      excerpt: item.excerpt || staticPost?.excerpt || "",
+      youtubeUrl: item.youtubeUrl || staticPost?.youtubeUrl || null,
+      thumbnail: staticPost?.thumbnail || "https://i.ytimg.com/vi/xhOa-5NTptk/hqdefault.jpg",
+      theme: staticPost?.theme || "",
+      summary: staticPost?.summary || [],
+      quotes: staticPost?.quotes || [],
+      transcript: staticPost?.transcript || "",
+      tags: staticPost?.tags || [],
+      guests: staticPost?.guests,
+    };
+  } catch {
+    return undefined;
+  }
 }
