@@ -4,6 +4,7 @@ const SERVICE_ID = "yqj3ujq81j";
 const categoryLabelMap: Record<string, string> = {
   radio: "ラジオ",
   guest: "ゲスト",
+  appear: "出演",
   note: "雑記",
 };
 
@@ -13,7 +14,7 @@ function formatDate(dateStr: string): string {
 
 export interface MediaPost {
   id: string;
-  category: "radio" | "guest" | "note";
+  category: "radio" | "guest" | "appear" | "note";
   categoryLabel: string;
   date: string;
   title: string;
@@ -519,7 +520,7 @@ export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
     const fallback = staticPost || mediaPosts[0];
     return {
       id: item.id,
-      category: cat as "radio" | "guest" | "note",
+      category: cat as "radio" | "guest" | "appear" | "note",
       categoryLabel: categoryLabelMap[cat] || "雑記",
       date: item.date ? formatDate(item.date) : fallback.date,
       title: item.title || fallback.title,
@@ -552,7 +553,7 @@ export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undef
 
     return {
       id: item.id,
-      category: cat as "radio" | "guest" | "note",
+      category: cat as "radio" | "guest" | "appear" | "note",
       categoryLabel: categoryLabelMap[cat] || "雑記",
       date: item.date ? formatDate(item.date) : staticPost?.date || "2026-04-28",
       title: item.title || staticPost?.title || "",

@@ -45,7 +45,7 @@ export default async function MediaPostPage({ params }: Props) {
   if (!post) notFound();
 
   const CategoryIcon =
-    post.category === "radio" ? Radio : post.category === "guest" ? Mic : Tag;
+    post.category === "radio" ? Radio : post.category === "guest" ? Mic : post.category === "appear" ? ExternalLink : Tag;
 
   return (
     <>
@@ -76,6 +76,8 @@ export default async function MediaPostPage({ params }: Props) {
                     ? "text-[#2563EB]"
                     : post.category === "guest"
                     ? "text-[#059669]"
+                    : post.category === "appear"
+                    ? "text-[#D97706]"
                     : "text-[#64748B]"
                 }`}
               >

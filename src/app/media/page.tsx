@@ -15,6 +15,7 @@ export default async function MediaPage() {
     { key: "all", label: "すべて" },
     { key: "radio", label: "ラジオ" },
     { key: "guest", label: "ゲスト" },
+    { key: "appear", label: "出演" },
     { key: "note", label: "雑記" },
   ];
 
@@ -78,11 +79,14 @@ export default async function MediaPage() {
                             ? "text-[#2563EB]"
                             : post.category === "guest"
                             ? "text-[#059669]"
+                            : post.category === "appear"
+                            ? "text-[#D97706]"
                             : "text-[#64748B]"
                         }`}
                       >
                         {post.category === "radio" && <Radio size={12} />}
                         {post.category === "guest" && <Mic size={12} />}
+                        {post.category === "appear" && <ExternalLink size={12} />}
                         {post.category === "note" && <Tag size={12} />}
                         {post.categoryLabel}
                       </span>
