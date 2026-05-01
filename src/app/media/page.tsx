@@ -112,7 +112,7 @@ export default async function MediaPage() {
 
                   {/* Thumbnail */}
                   <div className="md:col-span-3">
-                    <div className="aspect-[4/3] bg-[#F1F5F9] overflow-hidden">
+                    <div className="aspect-video bg-[#F1F5F9] overflow-hidden">
                       {post.thumbnail ? (
                         <img
                           src={post.thumbnail}
