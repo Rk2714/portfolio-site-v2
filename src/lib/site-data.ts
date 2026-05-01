@@ -119,3 +119,28 @@ export const defaultSkills = [
     name: "50名+ 育成実績",
   },
 ];
+
+export interface Host {
+  name: string;
+  role: string;
+  image?: string;
+  links?: { label: string; url: string }[];
+}
+
+export const hosts: Record<string, Host> = {
+  cassy: {
+    name: "カッシー",
+    role: "イエローかっし～ メインパーソナリティ / インソール工房アイマスト",
+    links: [{ label: "Instagram", url: "https://www.instagram.com/imust.insole/" }],
+  },
+  tecchan: {
+    name: "てっちゃん",
+    role: "イエローかっし～ パーソナリティ / イエロークロス骨の委員長",
+    links: [{ label: "Instagram", url: "https://www.instagram.com/yellowcross2023/" }],
+  },
+  kinjo: {
+    name: "金城竜弥",
+    role: "AIコンサルタント / 矢印代表",
+    links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
+  },
+};

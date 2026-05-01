@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getMediaByIdFromCMS, getAllMediaFromCMS, getAllMediaPosts } from "../../../lib/media-data";
+import { hosts } from "../../../lib/site-data";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ShareButtons from "../../components/ShareButtons";
@@ -312,6 +313,64 @@ export default async function MediaPostPage({ params }: Props) {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Hosts / Personalities */}
+        {post.hostIds && post.hostIds.length > 0 && (
+          <section className="py-16 md:py-20 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6">
+              <div className="flex items-center gap-2 mb-10">
+                <Mic size={16} className="text-[#0F172A]" />
+                <h2 className="text-lg font-bold text-[#0F172A]">
+                  パーソナリティ
+                </h2>
+              </div>
+              <div className="space-y-8">
+                {post.hostIds.map((id) => {
+                  const host = hosts[id];
+                  if (!host) return null;
+                  return (
+                    <div
+                      key={id}
+                      className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 bg-[#FAFAFA] border border-gray-100"
+                    >
+                      <div className="w-20 h-20 md:w-24 md:h-24 bg-[#F1F5F9] flex-shrink-0 overflow-hidden">
+                        {host.image ? (
+                          <img src={host.image} alt={host.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
+                            <User size={32} />
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <div className="mb-2">
+                          <h3 className="text-base font-bold text-[#0F172A]">{host.name}</h3>
+                          <p className="text-xs text-[#64748B]">{host.role}</p>
+                        </div>
+                        {host.links && host.links.length > 0 && (
+                          <div className="flex flex-wrap gap-3">
+                            {host.links.map((link, i) => (
+                              <a
+                                key={i}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
+                              >
+                                <Camera size={12} />
+                                {link.label}
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </section>
