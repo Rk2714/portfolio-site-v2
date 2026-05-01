@@ -9,7 +9,9 @@ export const metadata = {
 };
 
 export default async function MediaPage() {
-  const posts = await getAllMediaFromCMS();
+  const posts = (await getAllMediaFromCMS()).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   const categories = [
     { key: "all", label: "すべて" },
