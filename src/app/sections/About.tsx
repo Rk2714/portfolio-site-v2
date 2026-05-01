@@ -14,7 +14,7 @@ interface Profile {
 export default function About({ profile }: { profile?: Profile | null }) {
   const bio =
     profile?.bio ||
-    "看護師15年の臨床経験を活かし、医療現場・企業・個人事業主のDX・業務改善を支援しています。システム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場の課題を技術で解決します。";
+    "看護師15年の現場経験を武器に、DX・AI・人材育成で「現場のよくしたい」を実現するパートナー。システム構築からAI講座、ラジオ発信まで。現場に立つ人の気持ちを忘れずに、改善を続けています。";
   const location = profile?.location || "沖縄県中城村";
 
   return (
@@ -59,9 +59,7 @@ export default function About({ profile }: { profile?: Profile | null }) {
               最適な解決策を提案できる
             </h2>
             <p className="text-sm text-[#475569] leading-[1.9] mb-4">{bio}</p>
-            <p className="text-sm text-[#94A3B8] mb-6">
-              看護師、ラジオパーソナリティ、DXコンサルタント——そんな僕の活動を、ポートフォリオと呼んでいいのか、正直わからない。でも、ここに書いていることは全部本当の話です。
-            </p>
+            
 
             <div className="mb-8">
               <a 

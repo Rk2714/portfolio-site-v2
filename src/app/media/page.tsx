@@ -44,18 +44,29 @@ export default async function MediaPage() {
         </section>
 
         {/* Category Filter */}
-        <section className="py-8 bg-[#FAFAFA] border-b border-gray-100">
+        <section className="py-8 bg-gradient-to-r from-[#FAFAFA] to-white border-b border-gray-100">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-wrap gap-3">
-              {categories.map((cat) => (
-                <a
-                  key={cat.key}
-                  href={`#${cat.key}`}
-                  className="px-4 py-2 bg-white border border-gray-200 text-xs text-[#475569] hover:border-[#0F172A] hover:text-[#0F172A] transition-colors"
-                >
-                  {cat.label}
-                </a>
-              ))}
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => {
+                const colorMap: Record<string, string> = {
+                  all: "bg-[#0F172A] text-white hover:bg-[#1E293B]",
+                  radio: "bg-[#2563EB]/10 text-[#2563EB] hover:bg-[#2563EB]/20 border-[#2563EB]/20",
+                  guest: "bg-[#059669]/10 text-[#059669] hover:bg-[#059669]/20 border-[#059669]/20",
+                  appear: "bg-[#D97706]/10 text-[#D97706] hover:bg-[#D97706]/20 border-[#D97706]/20",
+                  note: "bg-[#64748B]/10 text-[#64748B] hover:bg-[#64748B]/20 border-[#64748B]/20",
+                };
+                return (
+                  <a
+                    key={cat.key}
+                    href={`#${cat.key}`}
+                    className={`px-4 py-2 border text-xs font-medium transition-all ${
+                      cat.key === "all" ? colorMap.all : colorMap[cat.key]
+                    }`}
+                  >
+                    {cat.label}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -63,58 +74,18 @@ export default async function MediaPage() {
         {/* Blog Posts */}
         <section className="py-16 md:py-24 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="space-y-12">
-              {posts.map((post) => (
-                <article
-                  key={post.id}
-                  className="group grid md:grid-cols-12 gap-6 items-start border-b border-gray-100 pb-12 last:border-0"
-                >
-                  {/* Date & Category */}
-                  <div className="md:col-span-2">
-                    <div className="flex flex-col gap-2">
-                      <span className="text-xs text-[#94A3B8]">
-                        {post.date}
-                      </span>
-                      <span
-                        className={`inline-flex items-center gap-1 text-xs font-medium w-fit ${
-                          post.category === "radio"
-                            ? "text-[#2563EB]"
-                            : post.category === "guest"
-                            ? "text-[#059669]"
-                            : post.category === "appear"
-                            ? "text-[#D97706]"
-                            : "text-[#64748B]"
-                        }`}
-                      >
-                        {post.category === "radio" && <Radio size={12} />}
-                        {post.category === "guest" && <Mic size={12} />}
-                        {post.category === "appear" && <ExternalLink size={12} />}
-                        {post.category === "note" && <Tag size={12} />}
-                        {post.categoryLabel}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="md:col-span-7">
-                    <h2 className="text-lg md:text-xl font-bold text-[#0F172A] mb-3 group-hover:text-[#2563EB] transition-colors leading-snug">
-                      {post.title}
-                    </h2>
-                    <p className="text-sm text-[#475569] leading-[1.8] mb-4">
-                      {post.excerpt}
-                    </p>
-                    <a
-                      href={`/media/${post.id}`}
-                      className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:gap-2 transition-all"
-                    >
-                      続きを読む
-                      <ChevronRight size={14} />
-                    </a>
-                  </div>
-
-                  {/* Thumbnail */}
-                  <div className="md:col-span-3">
-                    <div className="aspect-video bg-[#F1F5F9] overflow-hidden">
+            <div className="grid md:grid-cols-2 gap-8">
+              {posts.map((post) => {
+                const catColor = post.category === "radio" ? "#2563EB" : post.category === "guest" ? "#059669" : post.category === "appear" ? "#D97706" : "#64748B";
+                const CatIcon = post.category === "radio" ? Radio : post.category === "guest" ? Mic : post.category === "appear" ? ExternalLink : Tag;
+                return (
+                  <a
+                    key={post.id}
+                    href={`/media/${post.id}`}
+                    className="group block bg-white border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                  >
+                    {/* Thumbnail */}
+                    <div className="aspect-video bg-[#F1F5F9] overflow-hidden relative">
                       {post.thumbnail ? (
                         <img
                           src={post.thumbnail}
@@ -123,13 +94,44 @@ export default async function MediaPage() {
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
-                          <Mic size={24} />
+                          <Mic size={32} />
                         </div>
                       )}
+                      {/* Floating category badge */}
+                      <div
+                        className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 bg-white/90 backdrop-blur text-xs font-bold"
+                        style={{ color: catColor }}
+                      >
+                        <CatIcon size={11} />
+                        {post.categoryLabel}
+                      </div>
+                      {/* Date badge */}
+                      <div className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 backdrop-blur text-xs text-white/80">
+                        {post.date}
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+
+                    {/* Content */}
+                    <div className="p-5">
+                      {/* Color accent bar */}
+                      <div className="w-8 h-1 mb-3 rounded-full" style={{ backgroundColor: catColor }} />
+                      <h2 className="text-base md:text-lg font-bold text-[#0F172A] mb-2 group-hover:opacity-70 transition-opacity leading-snug line-clamp-2">
+                        {post.title}
+                      </h2>
+                      <p className="text-xs text-[#475569] leading-[1.8] mb-3 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      <span
+                        className="inline-flex items-center gap-1 text-xs font-medium transition-all group-hover:gap-2"
+                        style={{ color: catColor }}
+                      >
+                        続きを読む
+                        <ChevronRight size={12} />
+                      </span>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>

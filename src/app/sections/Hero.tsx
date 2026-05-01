@@ -31,9 +31,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-[28px] sm:text-[36px] md:text-[44px] font-bold text-[#0F172A] leading-[1.25] mb-8"
             >
-              医療現場の課題を、
+               「どうするとよくなるか」
               <br />
-              <span className="text-[#64748B]">DXと人材育成で解決する。</span>
+              <span className="text-[#64748B]">で立ち止まったら、相談してほしい。</span>
             </motion.h1>
 
             <motion.p
@@ -42,8 +42,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm sm:text-base text-[#475569] leading-[1.8] mb-10 max-w-xl"
             >
-              15年の臨床経験を活かし、医療機関を中心に企業・個人事業主・チームの業務改善も支援。
-              出退勤・在庫・案件管理のシステム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場目線で対応します。
+               現場をよくしたい、でも人手も時間もない——。
+               15年の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。
+               出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。
             </motion.p>
 
             <motion.div
@@ -65,7 +66,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                 onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
                 className="inline-block px-8 py-3.5 border border-gray-200 text-[#0F172A] text-sm font-bold hover:bg-[#F8FAFC] transition-colors text-center"
               >
-                まずはあなたの現場を聞かせてください
+                現場をよくしたい方、ご相談ください
               </a>
             </motion.div>
           </div>

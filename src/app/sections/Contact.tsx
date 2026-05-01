@@ -1,51 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { Mail, MapPin, Send, CheckCircle, ExternalLink } from "lucide-react";
+import { Mail, MapPin, ExternalLink, Camera } from "lucide-react";
 
 interface Contacts {
   email?: string;
-  linkedin?: string;
-  twitter?: string;
   location?: string;
-  calendly?: string;
 }
 
 export default function Contact({ contacts }: { contacts?: Contacts | null }) {
   const email = contacts?.email || "ryuyakinjo@gmail.com";
   const location = contacts?.location || "沖縄県中城村";
   const calendarSrc =
-    contacts?.calendly ||
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dL0u8qskhfEDpacS_oUA7sQzLuLcNJf35Jm55-LP0WqMhoRB38reuFFqrjqU2sAQG9rkzjlrI?gv=true";
-
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    try {
-      const res = await fetch("https://yqj3ujq81j.microcms.io/api/v1/inquiries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-MICROCMS-API-KEY": "ydaf5pN5b4BqHJrtD67NXUa19qPUybJ9GWcX",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (res.ok) {
-        setSubmitted(true);
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        alert("送信に失敗しました。時間をおいて再度お試しください。");
-      }
-    } catch {
-      alert("送信に失敗しました。時間をおいて再度お試しください。");
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   return (
     <section id="contact" className="py-20 md:py-28 bg-[#F8FAFC]">
@@ -55,12 +21,12 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
             Contact
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
-            まずは無料相談から
+            まずは30分無料相談から
           </h2>
           <p className="text-sm text-[#475569] leading-[1.8] max-w-2xl mx-auto">
-            下のカレンダーから希望の日時を選んで予約してください。
+            カレンダーから希望の日時を選んで予約してください。
             <br />
-            事前に詳細を送りたい場合は、右のフォームもご利用ください。
+            メールやInstagram DMでのお問い合わせも受け付けています。
           </p>
         </div>
 
@@ -82,117 +48,83 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
             </p>
           </div>
 
-          {/* Right: Contact info + form */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="space-y-4 text-sm">
-              <div className="flex items-center gap-3">
-                <Mail size={14} className="text-[#64748B]" />
-                <a href={`mailto:${email}`} className="text-[#2563EB] hover:underline">
-                  {email}
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin size={14} className="text-[#64748B]" />
-                <span className="text-[#475569]">{location}</span>
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200 pt-8">
-              <h3 className="text-sm font-bold text-[#0F172A] mb-4">
-                お問い合わせフォーム
+          {/* Right: Contact channels */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="bg-white border border-gray-200 p-8">
+              <h3 className="text-sm font-bold text-[#0F172A] mb-6">
+                お問い合わせ方法
               </h3>
-
-              {submitted ? (
-                <div className="text-center py-10 border border-gray-200 bg-white">
-                  <CheckCircle className="w-8 h-8 text-[#0F172A] mx-auto mb-3" />
-                  <p className="text-sm font-bold text-[#0F172A] mb-1">送信完了</p>
-                  <p className="text-xs text-[#475569] mb-4">
-                    お問い合わせありがとうございます。3営業日以内にご返信いたします。
-                  </p>
-                  <a
-                    href={calendarSrc}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-[#2563EB] font-medium hover:underline mb-4"
-                  >
-                    <ExternalLink size={12} />
-                    Googleカレンダーで30分無料相談を予約する
-                  </a>
-                  <div>
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors"
-                    >
-                      新しく送信する
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold text-[#0F172A] mb-1.5">
-                      お名前
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3 py-2.5 border border-gray-200 focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] outline-none transition-all text-sm"
-                      placeholder="山田 太郎"
-                    />
+              <div className="space-y-5">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-[#0F172A] flex items-center justify-center flex-shrink-0">
+                    <ExternalLink size={14} className="text-white" />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-[#0F172A] mb-1.5">
-                      メールアドレス
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3 py-2.5 border border-gray-200 focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] outline-none transition-all text-sm"
-                      placeholder="example@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-[#0F172A] mb-1.5">
-                      ご相談内容
-                    </label>
-                    <textarea
-                      required
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3 py-2.5 border border-gray-200 focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] outline-none transition-all resize-none text-sm"
-                      placeholder="DX導入、AI人材育成など、ご相談内容を簡潔に"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full px-4 py-3 bg-[#0F172A] text-white text-sm font-bold hover:bg-[#1E293B] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-                  >
-                    <Send size={13} />
-                    {submitting ? "送信中..." : "送信する"}
-                  </button>
-
-                  <div className="pt-4 border-t border-gray-100 text-center">
-                    <p className="text-xs text-[#94A3B8] mb-2">
-                      まずは予約からでもOK
+                    <p className="text-sm font-bold text-[#0F172A] mb-0.5">30分無料相談</p>
+                    <p className="text-xs text-[#64748B] mb-1">
+                      カレンダーから予約してください
                     </p>
                     <a
                       href={calendarSrc}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-[#2563EB] font-medium hover:underline"
+                      className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:underline"
                     >
-                      <ExternalLink size={12} />
-                      Googleカレンダーで30分無料相談を予約する
+                      カレンダーを開く
+                      <ExternalLink size={10} />
                     </a>
                   </div>
-                </form>
-              )}
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-[#0F172A] flex items-center justify-center flex-shrink-0">
+                    <Mail size={14} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-[#0F172A] mb-0.5">メール</p>
+                    <p className="text-xs text-[#64748B] mb-1">
+                      資料請求・長期案件のご相談
+                    </p>
+                    <a
+                      href={`mailto:${email}`}
+                      className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:underline"
+                    >
+                      {email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-[#0F172A] flex items-center justify-center flex-shrink-0">
+                    <Camera size={14} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-[#0F172A] mb-0.5">Instagram DM</p>
+                    <p className="text-xs text-[#64748B] mb-1">
+                      ラジオ関連・カジュアルなお問い合わせ
+                    </p>
+                    <a
+                      href="https://www.instagram.com/yazirusi_kinjo/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:underline"
+                    >
+                      @yazirusi_kinjo
+                      <ExternalLink size={10} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-200 p-8 text-center">
+              <div className="flex items-center justify-center gap-2 text-[#475569] mb-2">
+                <MapPin size={14} />
+                <span className="text-sm">{location}在住</span>
+              </div>
+              <p className="text-xs text-[#94A3B8]">
+                全国どこでもオンライン対応
+              </p>
             </div>
           </div>
         </div>

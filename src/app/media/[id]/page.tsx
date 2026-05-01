@@ -72,17 +72,17 @@ export default async function MediaPostPage({ params }: Props) {
             <div className="flex items-center gap-3 mb-6">
               <span className="text-xs text-[#94A3B8]">{post.date}</span>
               <span
-                className={`inline-flex items-center gap-1 text-xs font-medium ${
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full ${
                   post.category === "radio"
-                    ? "text-[#2563EB]"
+                    ? "bg-[#2563EB]/10 text-[#2563EB]"
                     : post.category === "guest"
-                    ? "text-[#059669]"
+                    ? "bg-[#059669]/10 text-[#059669]"
                     : post.category === "appear"
-                    ? "text-[#D97706]"
-                    : "text-[#64748B]"
+                    ? "bg-[#D97706]/10 text-[#D97706]"
+                    : "bg-[#64748B]/10 text-[#64748B]"
                 }`}
               >
-                <CategoryIcon size={12} />
+                <CategoryIcon size={11} />
                 {post.categoryLabel}
               </span>
             </div>
@@ -125,10 +125,12 @@ export default async function MediaPostPage({ params }: Props) {
 
         {/* Theme */}
         {post.theme && (
-          <section className="py-12 bg-[#FAFAFA] border-y border-gray-100">
+          <section className="py-12 bg-[#F8FAFC] border-y border-gray-100">
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
               <div className="flex items-start gap-3 mb-4">
-                <div className="w-8 h-8 bg-[#0F172A] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className={`w-8 h-8 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                  post.category === "radio" ? "bg-[#2563EB]" : post.category === "guest" ? "bg-[#059669]" : post.category === "appear" ? "bg-[#D97706]" : "bg-[#0F172A]"
+                }`}>
                   <Radio size={14} className="text-white" />
                 </div>
                 <div>

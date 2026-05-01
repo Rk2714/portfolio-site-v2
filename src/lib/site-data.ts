@@ -1,11 +1,11 @@
 export const siteProfile = {
   name: "金城竜弥",
   title: "看護師 / DX・業務改善パートナー / ラジオパーソナリティ",
-  bio: "看護師15年の臨床経験を活かし、医療現場・企業・個人事業主のDX・業務改善を支援しています。システム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場の課題を技術で解決します。",
+  bio: "看護師15年の現場経験を武器に、DX・AI・人材育成で「現場のよくしたい」を実現するパートナー。システム構築からAI講座、ラジオ発信まで。現場に立つ人の気持ちを忘れずに、改善を続けています。",
   location: "沖縄県中城村",
-  heroTagline1: "医療現場の課題を、",
-  heroTagline2: "DXと人材育成で解決する。",
-  heroDescription: "15年の臨床経験を活かし、医療機関を中心に企業・個人事業主・チームの業務改善も支援。出退勤・在庫・案件管理のシステム構築、Google環境セットアップ、AI人材育成（50名規模）まで、現場目線で対応します。",
+  heroTagline1: "「どうするとよくなるか」",
+  heroTagline2: "で立ち止まったら、相談してほしい。",
+  heroDescription: "現場をよくしたい、でも人手も時間もない——。15年の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。",
 };
 
 export const siteContacts = {
@@ -140,7 +140,7 @@ export const hosts: Record<string, Host> = {
   },
   kinjo: {
     name: "金城竜弥",
-    role: "AIコンサルタント / 矢印代表",
+    role: "AIコンサルタント / Yazirusi 代表",
     links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
   },
 };
