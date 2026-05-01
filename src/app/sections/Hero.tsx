@@ -64,7 +64,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-                className="inline-block px-8 py-3.5 border border-gray-200 text-[#0F172A] text-sm font-bold hover:bg-[#F8FAFC] transition-colors text-center"
+                className="inline-block px-8 py-3.5 border border-gray-200 text-[#0F172A] text-sm font-bold hover:bg-[#FFF8F0] transition-colors text-center"
               >
                 現場をよくしたい方、ご相談ください
               </a>
@@ -77,7 +77,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:col-span-5"
           >
-            <div className="aspect-[4/3] bg-[#F1F5F9] relative overflow-hidden group">
+            <div className="aspect-[4/3] bg-[#FFF5EB] relative overflow-hidden group">
               <img
                 src="/images/okinawa-sea.jpg"
                 alt="沖縄"

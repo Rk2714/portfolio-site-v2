@@ -85,7 +85,7 @@ export default async function MediaPage() {
                     className="group block bg-white border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                   >
                     {/* Thumbnail */}
-                    <div className="aspect-video bg-[#F1F5F9] overflow-hidden relative">
+                    <div className="aspect-video bg-[#FFF5EB] overflow-hidden relative">
                       {post.thumbnail ? (
                         <img
                           src={post.thumbnail}
@@ -137,7 +137,7 @@ export default async function MediaPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-[#FAFAFA]">
+        <section className="py-20 bg-[#FFF8F0]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <p className="text-sm text-[#64748B] mb-4">
               ゲスト出演・取材依頼はこちら

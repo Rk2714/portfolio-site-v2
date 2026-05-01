@@ -93,7 +93,7 @@ export default async function MediaPostPage({ params }: Props) {
 
             {/* YouTube Embed */}
             {post.youtubeUrl && (
-              <div className="aspect-video bg-[#F1F5F9] mb-10 overflow-hidden">
+              <div className="aspect-video bg-[#FFF5EB] mb-10 overflow-hidden">
                 <iframe
                   src={post.youtubeUrl}
                   title={post.title}
@@ -110,7 +110,7 @@ export default async function MediaPostPage({ params }: Props) {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-[#F8FAFC] border border-gray-200 text-xs text-[#475569]"
+                    className="px-3 py-1 bg-[#FFF8F0] border border-gray-200 text-xs text-[#475569]"
                   >
                     #{tag}
                   </span>
@@ -125,7 +125,7 @@ export default async function MediaPostPage({ params }: Props) {
 
         {/* Theme */}
         {post.theme && (
-          <section className="py-12 bg-[#F8FAFC] border-y border-gray-100">
+          <section className="py-12 bg-[#FFF8F0] border-y border-gray-100">
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
               <div className="flex items-start gap-3 mb-4">
                 <div className={`w-8 h-8 flex items-center justify-center flex-shrink-0 mt-0.5 ${
@@ -166,7 +166,7 @@ export default async function MediaPostPage({ params }: Props) {
                   }`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-4 py-5 border-b border-gray-100 hover:bg-[#FAFAFA] transition-colors px-2 -mx-2"
+                  className="group flex items-start gap-4 py-5 border-b border-gray-100 hover:bg-[#FFF8F0] transition-colors px-2 -mx-2"
                 >
                   <span className="flex-shrink-0 w-14 text-xs font-mono text-[#2563EB] bg-[#EFF6FF] px-2 py-1 text-center mt-0.5">
                     {item.time}
@@ -213,7 +213,7 @@ export default async function MediaPostPage({ params }: Props) {
 
         {/* Full Transcript */}
         {post.transcript && (
-          <section className="py-16 md:py-20 bg-[#FAFAFA]">
+          <section className="py-16 md:py-20 bg-[#FFF8F0]">
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
               <details className="group">
                 <summary className="flex items-center justify-between cursor-pointer list-none py-4 border-b border-gray-200">
@@ -256,10 +256,10 @@ export default async function MediaPostPage({ params }: Props) {
                 {post.guests.map((guest, index) => (
                   <div
                     key={index}
-                    className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 bg-[#FAFAFA] border border-gray-100"
+                    className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 bg-[#FFF8F0] border border-gray-100"
                   >
                     {/* Guest Image */}
-                    <div className="w-20 h-20 md:w-24 md:h-24 bg-[#F1F5F9] flex-shrink-0 overflow-hidden">
+                    <div className="w-20 h-20 md:w-24 md:h-24 bg-[#FFF5EB] flex-shrink-0 overflow-hidden">
                       {guest.image ? (
                         <img
                           src={guest.image}
@@ -337,9 +337,9 @@ export default async function MediaPostPage({ params }: Props) {
                   return (
                     <div
                       key={id}
-                      className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 bg-[#FAFAFA] border border-gray-100"
+                      className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 bg-[#FFF8F0] border border-gray-100"
                     >
-                      <div className="w-20 h-20 md:w-24 md:h-24 bg-[#F1F5F9] flex-shrink-0 overflow-hidden">
+                      <div className="w-20 h-20 md:w-24 md:h-24 bg-[#FFF5EB] flex-shrink-0 overflow-hidden">
                         {host.image ? (
                           <img src={host.image} alt={host.name} className="w-full h-full object-cover" />
                         ) : (
@@ -394,7 +394,7 @@ export default async function MediaPostPage({ params }: Props) {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="mailto:ryuyakinjo@gmail.com"
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0F172A] text-sm font-bold hover:bg-[#F1F5F9] transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0F172A] text-sm font-bold hover:bg-[#FFF5EB] transition-colors"
               >
                 <Mail size={14} />
                 メールで連絡する

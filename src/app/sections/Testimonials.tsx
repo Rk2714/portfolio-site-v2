@@ -17,7 +17,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 md:py-28 bg-[#F8FAFC]">
+    <section className="py-20 md:py-28 bg-[#FFF8F0]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
           Voice

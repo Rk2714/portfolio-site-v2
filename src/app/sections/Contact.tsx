@@ -14,7 +14,7 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dL0u8qskhfEDpacS_oUA7sQzLuLcNJf35Jm55-LP0WqMhoRB38reuFFqrjqU2sAQG9rkzjlrI?gv=true";
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-[#F8FAFC]">
+    <section id="contact" className="py-20 md:py-28 bg-[#FFF8F0]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">

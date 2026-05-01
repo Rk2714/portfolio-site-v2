@@ -40,7 +40,7 @@ export default function FAQ() {
             <div key={index} className="border-t border-gray-200 last:border-b">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-start justify-between py-4 text-left hover:bg-[#F8FAFC] transition-colors"
+                className="w-full flex items-start justify-between py-4 text-left hover:bg-[#FFF8F0] transition-colors"
               >
                 <span className="text-sm font-medium text-[#0F172A] pr-6">
                   {faq.q}

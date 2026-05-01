@@ -47,7 +47,7 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
                 transition={{ delay: index * 0.1 }}
                 className="group block bg-white border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
-                <div className="aspect-video bg-[#F1F5F9] overflow-hidden relative">
+                <div className="aspect-video bg-[#FFF5EB] overflow-hidden relative">
                   {post.thumbnail ? (
                     <img
                       src={post.thumbnail}
