@@ -1,3 +1,48 @@
+export interface TimelineItem {
+  year: string;
+  title: string;
+  subtitle: string;
+  icon?: string;
+}
+
+export const careerTimeline: TimelineItem[] = [
+  {
+    year: "約15年",
+    title: "看護師として現場に立つ",
+    subtitle: "救急・ICU・小児科・手術室・訪問看護 — 多様な現場を経験",
+  },
+  {
+    year: "2013",
+    title: "海外ワーキングホリデー",
+    subtitle: "オーストラリア・フィリピン・カナダで医療英語と異文化を学ぶ",
+  },
+  {
+    year: "2016",
+    title: "訪問看護の現場へ",
+    subtitle: "病院の外でのケアに可能性を感じ、キャリアの幅を広げる",
+  },
+  {
+    year: "2019",
+    title: "キャリアコンサルタント資格取得",
+    subtitle: "「人材の定着」と「業務の課題」—— 両方から現場を支える軸ができる",
+  },
+  {
+    year: "2024",
+    title: "Yazirusi 設立",
+    subtitle: "AI×医療×人材育成を軸に、DXコンサルタントとして独立",
+  },
+  {
+    year: "2025",
+    title: "ラジオパーソナリティ開始",
+    subtitle: "FM21「イエローかっし〜」で医療・DX・キャリアを発信",
+  },
+  {
+    year: "2026",
+    title: "オンライン診療「マース号」参画",
+    subtitle: "看護師×エンジニアの立場で、新しい医療の形を現場からつくる",
+  },
+];
+
 export const siteProfile = {
   name: "金城竜弥",
   title: "看護師 / DX・業務改善パートナー / ラジオパーソナリティ",

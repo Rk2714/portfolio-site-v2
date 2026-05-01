@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
+import { careerTimeline } from "../../lib/site-data";
 
 interface Profile {
   name?: string;
@@ -20,7 +21,8 @@ export default function About({ profile }: { profile?: Profile | null }) {
   return (
     <section id="about" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        {/* Top: Photo + Bio */}
+        <div className="grid lg:grid-cols-12 gap-12 items-start mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -59,15 +61,14 @@ export default function About({ profile }: { profile?: Profile | null }) {
               最適な解決策を提案できる
             </h2>
             <p className="text-sm text-[#475569] leading-[1.9] mb-4">{bio}</p>
-            
 
             <div className="mb-8">
-              <a 
-                href="/media" 
-                className="inline-flex items-center gap-2 text-sm text-[#2563EB] font-medium hover:gap-3 transition-all link-underline"
+              <a
+                href="/media"
+                className="inline-flex items-center gap-2 text-sm text-[#2563EB] font-medium hover:gap-3 transition-all"
               >
                 ラジオパーソナリティとしてのメディア活動を見る
-                <span className="text-xs">→</span>
+                <ArrowRight size={13} />
               </a>
             </div>
 
@@ -87,6 +88,56 @@ export default function About({ profile }: { profile?: Profile | null }) {
               </div>
             </div>
           </motion.div>
+        </div>
+
+        {/* Bottom: Career Timeline */}
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+              Career
+            </p>
+            <h3 className="text-xl md:text-2xl font-bold text-[#0F172A]">
+              ここに至るまでの道のり
+            </h3>
+          </motion.div>
+
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-[18px] md:left-6 top-0 bottom-0 w-0.5 bg-[#D97706]/30" />
+
+            <div className="space-y-10">
+              {careerTimeline.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="relative pl-14 md:pl-16"
+                >
+                  {/* Circle marker */}
+                  <div className="absolute left-[10px] md:left-[18px] top-1 w-[18px] h-[18px] rounded-full bg-[#D97706] border-4 border-white shadow z-10" />
+
+                  {/* Year badge */}
+                  <div className="inline-block px-3 py-1 bg-[#D97706]/10 text-[#D97706] text-xs font-bold rounded-full mb-2">
+                    {item.year}
+                  </div>
+
+                  <h4 className="text-base md:text-lg font-bold text-[#0F172A] mb-1">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm text-[#475569] leading-relaxed">
+                    {item.subtitle}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

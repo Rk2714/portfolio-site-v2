@@ -77,11 +77,11 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:col-span-5"
           >
-            <div className="aspect-[4/3] bg-[#F1F5F9] relative overflow-hidden">
+            <div className="aspect-[4/3] bg-[#F1F5F9] relative overflow-hidden group">
               <img
                 src="/images/okinawa-sea.jpg"
                 alt="沖縄"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white/90 to-transparent">
                 <div className="flex items-center gap-3">
@@ -94,6 +94,28 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                   </div>
                 </div>
               </div>
+
+              {/* Decorative arrow */}
+              <div className="absolute top-4 left-4 text-[#D97706]/20 text-6xl font-bold leading-none pointer-events-none select-none">
+                ↗
+              </div>
+
+              {/* Floating stats */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="absolute top-4 right-4 flex flex-col gap-2"
+              >
+                <div className="bg-white/90 backdrop-blur px-3 py-2 shadow-sm">
+                  <p className="text-lg font-bold text-[#D97706]">15年</p>
+                  <p className="text-[10px] text-[#64748B] leading-tight">現場経験</p>
+                </div>
+                <div className="bg-white/90 backdrop-blur px-3 py-2 shadow-sm">
+                  <p className="text-lg font-bold text-[#D97706]">50名+</p>
+                  <p className="text-[10px] text-[#64748B] leading-tight">育成実績</p>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

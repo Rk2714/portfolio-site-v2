@@ -62,8 +62,8 @@ export default function Navigation() {
             href="/"
             className={`text-sm font-bold tracking-wider transition-colors ${logoClass}`}
           >
-            金城竜弥
-          </Link>
+             金城竜弥 <span className="text-[#D97706]">↑</span>
+           </Link>
 
           <div className="hidden md:flex items-center gap-6">
             {isHome && navItems.map((item) => (
