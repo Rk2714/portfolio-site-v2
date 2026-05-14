@@ -38,7 +38,7 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
                 src={calendarSrc}
                 style={{ border: 0 }}
                 width="100%"
-                height="700"
+                height="450"
                 frameBorder="0"
                 title="Google Calendar予約"
               />
