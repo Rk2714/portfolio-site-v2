@@ -178,7 +178,7 @@ export interface Host {
 }
 
 export const hosts: Record<string, Host> = {
-  cassy: {
+  kassy: {
     name: "カッシー",
     role: "イエローかっし～ メインパーソナリティ / インソール工房アイマスト",
     links: [{ label: "Instagram", url: "https://www.instagram.com/imust.insole/" }],
