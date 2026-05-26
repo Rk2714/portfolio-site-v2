@@ -193,4 +193,9 @@ export const hosts: Record<string, Host> = {
     role: "AIコンサルタント / Yazirusi 代表",
     links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
   },
+  kinchan: {
+    name: "きんちゃん (金城竜弥)",
+    role: "イエローかっし～ パーソナリティ / Yazirusi 代表",
+    links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
+  },
 };
