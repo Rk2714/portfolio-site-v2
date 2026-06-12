@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { trackEvent } from "../../lib/analytics";
 
 interface Profile {
   name?: string;
@@ -11,6 +12,14 @@ interface Profile {
 }
 
 export default function Hero({ profile }: { profile?: Profile | null }) {
+  const tagline1 = profile?.heroTagline1 || "「どうするとよくなるか」";
+  const tagline2 = profile?.heroTagline2 || "で立ち止まったら、相談してほしい。";
+  const description =
+    profile?.heroDescription ||
+    "現場をよくしたい、でも人手も時間もない——。15年の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。";
+  const profileName = profile?.name || "金城 竜弥";
+  const profileTitle = profile?.title || "看護師 / DX・業務改善パートナー / ラジオパーソナリティ";
+
   return (
     <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24 bg-white border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -31,9 +40,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-[28px] sm:text-[36px] md:text-[44px] font-bold text-[#0F172A] leading-[1.25] mb-8"
             >
-               「どうするとよくなるか」
+              {tagline1}
               <br />
-              <span className="text-[#64748B]">で立ち止まったら、相談してほしい。</span>
+              <span className="text-[#64748B]">{tagline2}</span>
             </motion.h1>
 
             <motion.p
@@ -42,9 +51,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm sm:text-base text-[#475569] leading-[1.8] mb-10 max-w-xl"
             >
-               現場をよくしたい、でも人手も時間もない——。
-               15年の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。
-               出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。
+              {description}
             </motion.p>
 
             <motion.div
@@ -57,13 +64,28 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                 href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dL0u8qskhfEDpacS_oUA7sQzLuLcNJf35Jm55-LP0WqMhoRB38reuFFqrjqU2sAQG9rkzjlrI?gv=true"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackEvent("contact_cta_click", {
+                    page_type: "home",
+                    position: "hero_primary",
+                    cta_target: "calendar",
+                  });
+                }}
                 className="inline-block px-8 py-3.5 bg-[#0F172A] text-white text-sm font-bold hover:bg-[#1E293B] transition-colors text-center"
               >
                 30分無料相談を予約する
               </a>
               <a
                 href="#contact"
-                onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  trackEvent("contact_cta_click", {
+                    page_type: "home",
+                    position: "hero_secondary",
+                    cta_target: "contact_section",
+                  });
+                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="inline-block px-8 py-3.5 border border-gray-200 text-[#0F172A] text-sm font-bold hover:bg-[#FFF8F0] transition-colors text-center"
               >
                 現場をよくしたい方、ご相談ください
@@ -89,8 +111,8 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                     RK
                   </div>
                   <div>
-                    <p className="text-[#0F172A] text-sm font-bold">金城 竜弥</p>
-                    <p className="text-[#64748B] text-xs">看護師 / DX・業務改善パートナー / ラジオパーソナリティ</p>
+                    <p className="text-[#0F172A] text-sm font-bold">{profileName}</p>
+                    <p className="text-[#64748B] text-xs">{profileTitle}</p>
                   </div>
                 </div>
               </div>

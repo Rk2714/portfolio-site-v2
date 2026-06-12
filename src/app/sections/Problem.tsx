@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Monitor, Users } from "lucide-react";
 
 const problems = [
   {

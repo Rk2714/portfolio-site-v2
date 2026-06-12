@@ -7,7 +7,6 @@ const defaultSkillCategories = [
     title: "医療・ヘルスケア",
     skills: [
       { name: "救急・ICU" },
-      { name: "手術室" },
       { name: "小児科" },
       { name: "内科" },
       { name: "消化器" },

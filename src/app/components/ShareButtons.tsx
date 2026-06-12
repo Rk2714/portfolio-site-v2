@@ -2,8 +2,16 @@
 
 import { useState } from "react";
 import { Check, Copy, ExternalLink } from "lucide-react";
+import { trackEvent } from "../../lib/analytics";
 
-export default function ShareButtons({ url, title }: { url: string; title: string }) {
+interface Props {
+  url: string;
+  title: string;
+  postId?: string;
+  category?: string;
+}
+
+export default function ShareButtons({ url, title, postId, category }: Props) {
   const [copied, setCopied] = useState(false);
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -11,6 +19,14 @@ export default function ShareButtons({ url, title }: { url: string; title: strin
   const copyUrl = async () => {
     try {
       await navigator.clipboard.writeText(url);
+      trackEvent("share_click", {
+        page_type: "media_post",
+        post_id: postId,
+        post_title: title,
+        category,
+        position: "detail_share",
+        share_type: "copy",
+      });
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -21,6 +37,14 @@ export default function ShareButtons({ url, title }: { url: string; title: strin
       input.select();
       document.execCommand("copy");
       document.body.removeChild(input);
+      trackEvent("share_click", {
+        page_type: "media_post",
+        post_id: postId,
+        post_title: title,
+        category,
+        position: "detail_share",
+        share_type: "copy",
+      });
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -44,10 +68,20 @@ export default function ShareButtons({ url, title }: { url: string; title: strin
         href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => {
+          trackEvent("share_click", {
+            page_type: "media_post",
+            post_id: postId,
+            post_title: title,
+            category,
+            position: "detail_share",
+            share_type: "x",
+          });
+        }}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#475569] hover:bg-[#FFF5EB] transition-colors"
       >
         <span className="font-bold text-[#0F172A] text-[10px]">𝕏</span>
-        ポスト
+        Xでシェア
       </a>
 
       {/* LINE */}
@@ -55,6 +89,16 @@ export default function ShareButtons({ url, title }: { url: string; title: strin
         href={`https://line.me/R/msg/text?${encodedTitle}%0A${encodedUrl}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => {
+          trackEvent("share_click", {
+            page_type: "media_post",
+            post_id: postId,
+            post_title: title,
+            category,
+            position: "detail_share",
+            share_type: "line",
+          });
+        }}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#475569] hover:bg-[#FFF5EB] transition-colors"
       >
         <ExternalLink size={12} />

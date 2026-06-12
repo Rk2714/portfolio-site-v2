@@ -39,6 +39,9 @@
     "dist/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "sanity.config.ts",
+    "sanity.cli.ts",
+    "src/app/studio/"
   ]
 }

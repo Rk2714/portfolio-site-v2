@@ -98,10 +98,6 @@ export const defaultSkills = [
   },
   {
     category: "医療・ヘルスケア",
-    name: "手術室",
-  },
-  {
-    category: "医療・ヘルスケア",
     name: "小児科",
   },
   {
@@ -178,7 +174,7 @@ export interface Host {
 }
 
 export const hosts: Record<string, Host> = {
-  kassy: {
+  cassy: {
     name: "カッシー",
     role: "イエローかっし～ メインパーソナリティ / インソール工房アイマスト",
     links: [{ label: "Instagram", url: "https://www.instagram.com/imust.insole/" }],

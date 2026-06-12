@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, MapPin, ExternalLink, Camera } from "lucide-react";
+import { trackEvent } from "../../lib/analytics";
 
 interface Contacts {
   email?: string;
@@ -68,6 +69,13 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
                       href={calendarSrc}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => {
+                        trackEvent("contact_cta_click", {
+                          page_type: "home",
+                          position: "contact_calendar",
+                          cta_target: "calendar",
+                        });
+                      }}
                       className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:underline"
                     >
                       カレンダーを開く
@@ -87,6 +95,13 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
                     </p>
                     <a
                       href={`mailto:${email}`}
+                      onClick={() => {
+                        trackEvent("contact_cta_click", {
+                          page_type: "home",
+                          position: "contact_email",
+                          cta_target: "email",
+                        });
+                      }}
                       className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:underline"
                     >
                       {email}
@@ -107,6 +122,13 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
                       href="https://www.instagram.com/yazirusi_kinjo/"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => {
+                        trackEvent("contact_cta_click", {
+                          page_type: "home",
+                          position: "contact_instagram",
+                          cta_target: "instagram",
+                        });
+                      }}
                       className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:underline"
                     >
                       @yazirusi_kinjo

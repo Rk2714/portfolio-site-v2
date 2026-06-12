@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMediaByIdFromCMS, getAllMediaFromCMS, getAllMediaPosts } from "../../../lib/media-data";
 import { hosts } from "../../../lib/site-data";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ShareButtons from "../../components/ShareButtons";
+import InstagramEmbed from "../../components/InstagramEmbed";
+import ViewCounter from "../../components/ViewCounter";
+import LinkCard from "../../components/LinkCard";
+import TrackedLink from "../../components/TrackedLink";
+import TranscriptSection from "../../components/TranscriptSection";
 import {
   Radio,
   Mic,
@@ -11,7 +18,6 @@ import {
   ChevronLeft,
   Clock,
   Quote,
-  FileText,
   ExternalLink,
   User,
   Mail,
@@ -30,13 +36,38 @@ export async function generateStaticParams() {
   return allPosts.map((post) => ({ id: post.id }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const post = await getMediaByIdFromCMS(id);
   if (!post) return { title: "Not Found" };
+
+  const canonicalUrl = `/media/${post.id}`;
+  const socialImage = post.thumbnail || "/images/okinawa-sea.jpg";
+
   return {
     title: `${post.title}｜メディア活動・金城竜弥`,
     description: post.excerpt,
+    keywords: post.tags,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: canonicalUrl,
+      siteName: "金城竜弥",
+      locale: "ja_JP",
+      type: "article",
+      publishedTime: `${post.date}T00:00:00+09:00`,
+      authors: ["金城竜弥"],
+      images: [{ url: socialImage, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [socialImage],
+    },
   };
 }
 
@@ -55,13 +86,10 @@ export default async function MediaPostPage({ params }: Props) {
         {/* Breadcrumb */}
         <div className="border-b border-gray-100">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
-            <a
-              href="/media"
-              className="inline-flex items-center gap-1 text-xs text-[#64748B] hover:text-[#0F172A] transition-colors"
-            >
+            <Link href="/media" className="inline-flex items-center gap-1 text-xs text-[#64748B] hover:text-[#0F172A] transition-colors">
               <ChevronLeft size={14} />
               メディア一覧に戻る
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -118,8 +146,18 @@ export default async function MediaPostPage({ params }: Props) {
               </div>
             )}
 
+            {/* View Counter */}
+            <div className="mb-6">
+              <ViewCounter postId={post.id} />
+            </div>
+
             {/* Share */}
-            <ShareButtons url={`https://portfolio-site-xi-eight-33.vercel.app/media/${post.id}`} title={post.title} />
+            <ShareButtons
+              url={`https://portfolio-site-xi-eight-33.vercel.app/media/${post.id}`}
+              title={post.title}
+              postId={post.id}
+              category={post.category}
+            />
           </div>
         </section>
 
@@ -213,33 +251,12 @@ export default async function MediaPostPage({ params }: Props) {
 
         {/* Full Transcript */}
         {post.transcript && (
-          <section className="py-16 md:py-20 bg-[#FFF8F0]">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6">
-              <details className="group">
-                <summary className="flex items-center justify-between cursor-pointer list-none py-4 border-b border-gray-200">
-                  <div className="flex items-center gap-2">
-                    <FileText size={16} className="text-[#0F172A]" />
-                    <h2 className="text-lg font-bold text-[#0F172A]">
-                      フル文字起こし
-                    </h2>
-                  </div>
-                  <span className="text-xs text-[#64748B] group-open:hidden">
-                    開く
-                  </span>
-                  <span className="text-xs text-[#64748B] hidden group-open:block">
-                    閉じる
-                  </span>
-                </summary>
-                <div className="pt-6 pb-2">
-                  <div className="bg-white border border-gray-200 p-6 md:p-8">
-                    <p className="text-sm text-[#475569] leading-[1.9] whitespace-pre-wrap">
-                      {post.transcript}
-                    </p>
-                  </div>
-                </div>
-              </details>
-            </div>
-          </section>
+          <TranscriptSection
+            transcript={post.transcript}
+            postId={post.id}
+            postTitle={post.title}
+            category={post.category}
+          />
         )}
 
         {/* Guests */}
@@ -254,65 +271,148 @@ export default async function MediaPostPage({ params }: Props) {
               </div>
               <div className="space-y-8">
                 {post.guests.map((guest, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 bg-[#FFF8F0] border border-gray-100"
-                  >
+                  <div key={index} className="p-6 bg-[#FFF8F0] border border-gray-100">
+                    {(() => {
+                      const guestQuote = guest.quote || post.quotes[0];
+                      const guestTakeaways = guest.takeaways?.length ? guest.takeaways : post.summary.slice(2, 5).map((item) => item.text);
+                      return (
+                        <>
+                          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
                     {/* Guest Image */}
-                    <div className="w-20 h-20 md:w-24 md:h-24 bg-[#FFF5EB] flex-shrink-0 overflow-hidden">
-                      {guest.image ? (
-                        <img
-                          src={guest.image}
-                          alt={guest.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
-                          <User size={32} />
-                        </div>
-                      )}
-                    </div>
+                            <div className="w-20 h-20 md:w-24 md:h-24 bg-[#FFF5EB] flex-shrink-0 overflow-hidden">
+                              {guest.image ? (
+                                <img src={guest.image} alt={guest.name} className="w-full h-full object-cover" />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
+                                  <User size={32} />
+                                </div>
+                              )}
+                            </div>
 
                     {/* Guest Info */}
-                    <div className="flex-1">
-                      <div className="mb-2">
-                        <h3 className="text-base font-bold text-[#0F172A]">
-                          {guest.name}
-                        </h3>
-                        <p className="text-xs text-[#64748B]">{guest.role}</p>
-                      </div>
-                      <p className="text-sm text-[#475569] leading-[1.8] mb-4">
-                        {guest.bio}
-                      </p>
-                      {guest.links && guest.links.length > 0 && (
-                        <div className="flex flex-wrap gap-3">
-                          {guest.links.map((link, i) => {
-                            let linkIcon = null;
-                            const l = link.label;
-                            const isInsta = l.includes("Instagram");
-                            const isWeb = l.includes("Web") || l.includes("サイト") || l.includes("研修") || l.includes("検索");
-                            const isSNS = l.includes("X") || l.includes("Twitter");
+                            <div className="flex-1">
+                              <div className="mb-2">
+                                <h3 className="text-base font-bold text-[#0F172A]">{guest.name}</h3>
+                                <p className="text-xs text-[#64748B]">{guest.role}</p>
+                              </div>
 
-                            if (isInsta) linkIcon = <Camera size={12} />;
-                            else if (isSNS) linkIcon = <span className="font-bold text-[10px]">𝕏</span>;
-                            else linkIcon = <Globe size={12} />;
+                              {guestQuote && (
+                                <div className="mb-5 border-l-2 border-[#D97706] bg-white px-4 py-3">
+                                  <p className="text-xs font-bold tracking-wider text-[#64748B] mb-2">ゲストのひとこと</p>
+                                  <p className="text-sm font-medium leading-[1.8] text-[#0F172A]">{guestQuote}</p>
+                                </div>
+                              )}
 
-                            return (
-                              <a
-                                key={i}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
-                              >
-                                {linkIcon}
-                                {link.label}
-                              </a>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
+                              <div className="grid gap-4 md:grid-cols-2 mb-5">
+                                {guestTakeaways.length > 0 && (
+                                  <div className="border border-[#E2E8F0] bg-white p-4">
+                                    <p className="text-xs font-bold tracking-wider text-[#64748B] mb-3">この回でわかること</p>
+                                    <div className="space-y-2">
+                                      {guestTakeaways.map((item, takeawayIndex) => (
+                                        <div key={takeawayIndex} className="flex items-start gap-2">
+                                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#D97706] flex-shrink-0" />
+                                          <p className="text-sm leading-[1.7] text-[#334155]">{item}</p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {guest.recommendedFor && guest.recommendedFor.length > 0 && (
+                                  <div className="border border-[#E2E8F0] bg-white p-4">
+                                    <p className="text-xs font-bold tracking-wider text-[#64748B] mb-3">こんな方に届く回です</p>
+                                    <div className="space-y-2">
+                                      {guest.recommendedFor.map((item, recommendedIndex) => (
+                                        <div key={recommendedIndex} className="flex items-start gap-2">
+                                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#2563EB] flex-shrink-0" />
+                                          <p className="text-sm leading-[1.7] text-[#334155]">{item}</p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+
+                              <p className="text-sm text-[#475569] leading-[1.8] mb-4">{guest.bio}</p>
+
+                              {guest.links && guest.links.length > 0 && (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                  {guest.links.map((link, i) => {
+                                    const l = link.label;
+                                    const isInsta = l.includes("Instagram");
+
+                                    if (isInsta) {
+                                      const username = link.url.match(/instagram\.com\/([^\/?#]+)/)?.[1] || "";
+                                      return (
+                                        <TrackedLink
+                                          key={i}
+                                          href={link.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          eventName="guest_link_click"
+                                          eventParams={{
+                                            page_type: "media_post",
+                                            post_id: post.id,
+                                            post_title: post.title,
+                                            category: post.category,
+                                            position: "guest_section",
+                                            guest_name: guest.name,
+                                            link_label: link.label,
+                                          }}
+                                          className="inline-flex items-center gap-2 px-4 py-3 bg-[#E1306C] text-white text-sm font-bold hover:bg-[#C62E5F] transition-all shadow-sm"
+                                        >
+                                          <Camera size={16} />
+                                          @{username}
+                                        </TrackedLink>
+                                      );
+                                    }
+
+                                    return (
+                                      <LinkCard
+                                        key={i}
+                                        label={link.label}
+                                        url={link.url}
+                                        eventName="guest_link_click"
+                                        eventParams={{
+                                          page_type: "media_post",
+                                          post_id: post.id,
+                                          post_title: post.title,
+                                          category: post.category,
+                                          position: "guest_section",
+                                          guest_name: guest.name,
+                                        }}
+                                      />
+                                    );
+                                  })}
+                                </div>
+                              )}
+
+                      {/* Instagram post embed */}
+                              {guest.instagramPost && (
+                                <div className="mt-4">
+                                  <InstagramEmbed url={guest.instagramPost} />
+                                </div>
+                              )}
+
+                      {/* Highlights */}
+                              {guest.highlights && guest.highlights.length > 0 && (
+                                <div className="mt-4 p-4 bg-[#FFF8F0] border border-gray-200">
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    {guest.highlights.map((h, i) => (
+                                      <div key={i} className="flex items-start gap-2">
+                                        <span className="text-base flex-shrink-0">{h.emoji}</span>
+                                        <span className="text-xs text-[#475569] leading-relaxed">{h.text}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                 ))}
               </div>
@@ -392,22 +492,40 @@ export default async function MediaPostPage({ params }: Props) {
               お気軽にご連絡ください。
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
+              <TrackedLink
                 href="mailto:ryuyakinjo@gmail.com"
+                eventName="contact_cta_click"
+                eventParams={{
+                  page_type: "media_post",
+                  post_id: post.id,
+                  post_title: post.title,
+                  category: post.category,
+                  position: "media_post_footer",
+                  cta_target: "email",
+                }}
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0F172A] text-sm font-bold hover:bg-[#FFF5EB] transition-colors"
               >
                 <Mail size={14} />
                 メールで連絡する
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href="https://instagram.com/ryuyakinjo"
                 target="_blank"
                 rel="noopener noreferrer"
+                eventName="contact_cta_click"
+                eventParams={{
+                  page_type: "media_post",
+                  post_id: post.id,
+                  post_title: post.title,
+                  category: post.category,
+                  position: "media_post_footer",
+                  cta_target: "instagram",
+                }}
                 className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#334155] text-white text-sm font-bold hover:border-[#475569] transition-colors"
               >
                 <Globe size={14} />
                 Instagram DM
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </section>

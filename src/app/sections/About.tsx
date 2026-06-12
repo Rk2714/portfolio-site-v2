@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { careerTimeline } from "../../lib/site-data";
 
 interface Profile {
@@ -62,15 +63,15 @@ export default function About({ profile }: { profile?: Profile | null }) {
             </h2>
             <p className="text-sm text-[#475569] leading-[1.9] mb-4">{bio}</p>
 
-            <div className="mb-8">
-              <a
-                href="/media"
-                className="inline-flex items-center gap-2 text-sm text-[#2563EB] font-medium hover:gap-3 transition-all"
-              >
-                ラジオパーソナリティとしてのメディア活動を見る
-                <ArrowRight size={13} />
-              </a>
-            </div>
+              <div className="mb-8">
+                <Link
+                  href="/media"
+                  className="inline-flex items-center gap-2 text-sm text-[#2563EB] font-medium hover:gap-3 transition-all"
+                >
+                  ラジオパーソナリティとしてのメディア活動を見る
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
 
             <div className="flex items-center gap-2 text-[#475569] mb-10">
               <MapPin size={14} />

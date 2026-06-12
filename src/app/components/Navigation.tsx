@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { trackEvent } from "../../lib/analytics";
 
 const navItems = [
   { label: "サービス", href: "#services" },
@@ -30,7 +31,7 @@ export default function Navigation() {
     if (href.startsWith("#")) {
       e.preventDefault();
       if (!isHome) {
-        window.location.href = "/" + href;
+        window.location.assign("/" + href);
         return;
       }
       document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
@@ -88,7 +89,14 @@ export default function Navigation() {
             {isHome ? (
               <a
                 href="#contact"
-                onClick={(e) => handleClick(e, "#contact")}
+                onClick={(e) => {
+                  trackEvent("contact_cta_click", {
+                    page_type: isHome ? "home" : "other",
+                    position: "navigation_desktop",
+                    cta_target: "contact_section",
+                  });
+                  handleClick(e, "#contact");
+                }}
                 className={`px-4 py-2 text-sm font-bold transition-colors ${
                   scrolled
                     ? "bg-[#0F172A] text-white hover:bg-[#1E293B]"
@@ -100,6 +108,13 @@ export default function Navigation() {
             ) : (
               <Link
                 href="/#contact"
+                onClick={() => {
+                  trackEvent("contact_cta_click", {
+                    page_type: "other",
+                    position: "navigation_desktop",
+                    cta_target: "contact_section",
+                  });
+                }}
                 className="px-4 py-2 text-sm font-bold bg-[#0F172A] text-white hover:bg-[#1E293B] transition-colors"
               >
                 無料相談
@@ -145,7 +160,14 @@ export default function Navigation() {
               <Link
                 href="/#contact"
                 className="block text-center px-4 py-3 bg-[#0F172A] text-white text-sm font-bold mt-2"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  trackEvent("contact_cta_click", {
+                    page_type: isHome ? "home" : "other",
+                    position: "navigation_mobile",
+                    cta_target: "contact_section",
+                  });
+                  setIsOpen(false);
+                }}
               >
                 無料相談
               </Link>
