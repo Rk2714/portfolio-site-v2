@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Monitor, GraduationCap, Settings } from "lucide-react";
+import { Monitor, GraduationCap, Settings, Sparkles } from "lucide-react";
 
 const services = [
   {
@@ -22,6 +22,12 @@ const services = [
     description: "15年の現場経験を活かし、業務フローを見直します。エクセルでの補完作業をシステム化し、本業に集中できる環境を作ります。",
     features: ["業務フロー分析・改善", "契約書テンプレート化・マニュアル整備"],
   },
+  {
+    icon: Sparkles,
+    title: "あなたのAIの使い方当たってますか",
+    description: "AIを仕事に取り入れているけど「これで合ってる？」と感じている方へ。60分でAI活用の現状を診断し、具体的な改善ステップをお伝えします。",
+    features: ["60分 ¥3,000 / 30分無料お試しあり", "AI活用の現状診断＋改善アドバイス", "次のアクションが明確になる"],
+  },
 ];
 
 export default function Services() {
@@ -32,65 +38,30 @@ export default function Services() {
           Services
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-16">
-          3つのサービス
+          4つのサービス
         </h2>
 
-        <div className="space-y-8">
-          {/* Top row: 2 columns */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {services.slice(0, 2).map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-8 border border-gray-100"
-              >
-                <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center mb-5">
-                  <service.icon className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-[#0F172A] mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-[#475569] leading-[1.7] mb-5">
-                  {service.description}
-                </p>
-                <ul className="space-y-2">
-                  {service.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-center gap-2 text-sm text-[#334155]"
-                    >
-                      <span className="w-1 h-1 bg-[#0F172A]" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Bottom row: 1 column centered */}
-          <div className="max-w-xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8">
+          {services.map((service, index) => (
             <motion.div
+              key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: index * 0.1 }}
               className="bg-white p-8 border border-gray-100"
             >
               <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center mb-5">
-                <Settings className="w-5 h-5 text-white" />
+                <service.icon className="w-5 h-5 text-white" />
               </div>
               <h3 className="text-lg font-bold text-[#0F172A] mb-3">
-                {services[2].title}
+                {service.title}
               </h3>
               <p className="text-sm text-[#475569] leading-[1.7] mb-5">
-                {services[2].description}
+                {service.description}
               </p>
               <ul className="space-y-2">
-                {services[2].features.map((f) => (
+                {service.features.map((f) => (
                   <li
                     key={f}
                     className="flex items-center gap-2 text-sm text-[#334155]"
@@ -101,7 +72,7 @@ export default function Services() {
                 ))}
               </ul>
             </motion.div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

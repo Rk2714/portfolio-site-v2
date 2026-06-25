@@ -61,7 +61,7 @@ export const siteProfile = {
 export const siteContacts = {
   email: "ryuyakinjo@gmail.com",
   location: "沖縄県中城村",
-  calendly: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dL0u8qskhfEDpacS_oUA7sQzLuLcNJf35Jm55-LP0WqMhoRB38reuFFqrjqU2sAQG9rkzjlrI?gv=true",
+  calendly: "https://calendar.google.com/calendar/appointments/AcZssZ1zsY3H7WMckAhw6Ddz4aqb82i9YaIRgmZGUmk=?gv=true",
 };
 
 export const defaultWorks = [

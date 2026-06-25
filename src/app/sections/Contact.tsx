@@ -11,8 +11,8 @@ interface Contacts {
 export default function Contact({ contacts }: { contacts?: Contacts | null }) {
   const email = contacts?.email || "ryuyakinjo@gmail.com";
   const location = contacts?.location || "沖縄県中城村";
-  const calendarSrc =
-    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dL0u8qskhfEDpacS_oUA7sQzLuLcNJf35Jm55-LP0WqMhoRB38reuFFqrjqU2sAQG9rkzjlrI?gv=true";
+  const freeUrl = "https://calendar.app.google/wJsV5mJhXuLQmBnS6";
+  const paidUrl = "https://calendar.app.google/pR1qA4hqeMkX8kSj7";
 
   return (
     <section id="contact" className="py-20 md:py-28 bg-[#FFF8F0]">
@@ -31,20 +31,47 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-10">
-          {/* Left: Google Calendar iframe */}
-          <div className="lg:col-span-3">
-            <div className="bg-white border border-gray-200 overflow-hidden">
-              <iframe
-                src={calendarSrc}
-                style={{ border: 0 }}
-                width="100%"
-                height="450"
-                frameBorder="0"
-                title="Google Calendar予約"
-              />
+          {/* Pricing Info */}
+          <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12">
+            <div className="bg-white border border-gray-200 p-6 text-center">
+              <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-2">Free</p>
+              <p className="text-2xl font-bold text-[#0F172A] mb-1">30分無料</p>
+              <p className="text-sm text-[#475569]">お試し相談</p>
             </div>
-            <p className="text-xs text-[#94A3B8] mt-3">
+            <div className="bg-white border border-[#1E3A5F] p-6 text-center">
+              <p className="text-xs font-bold text-[#1E3A5F] tracking-wider uppercase mb-2">New</p>
+              <p className="text-2xl font-bold text-[#0F172A] mb-1">60分 ¥3,000</p>
+              <p className="text-sm text-[#475569]">あなたのAIの使い方当たってますか</p>
+              <p className="text-xs text-[#64748B] mt-2">AI活用の現状診断＋改善アドバイス</p>
+              <p className="text-xs text-[#1E3A5F] mt-3 font-medium">クレジットカード / PayPay 対応</p>
+              <p className="text-xs text-[#94A3B8] mt-0.5">予約確認後、お支払いリンクをお送りします</p>
+            </div>
+          </div>
+
+        <div className="grid lg:grid-cols-5 gap-10">
+          {/* Left: Booking cards */}
+          <div className="lg:col-span-3 space-y-4">
+            <a
+              href={freeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white border border-gray-200 p-6 hover:border-[#1E3A5F] transition-colors"
+            >
+              <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">Free</p>
+              <p className="text-lg font-bold text-[#0F172A]">30分無料相談を予約する</p>
+              <p className="text-xs text-[#64748B] mt-1">お試し相談。まずは気軽にどうぞ</p>
+            </a>
+            <a
+              href={paidUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white border border-[#1E3A5F] p-6 hover:shadow-md transition-shadow"
+            >
+              <p className="text-xs font-bold text-[#1E3A5F] tracking-wider uppercase mb-1">New / ¥3,000</p>
+              <p className="text-lg font-bold text-[#0F172A]">60分「あなたのAIの使い方当たってますか」を予約する</p>
+              <p className="text-xs text-[#64748B] mt-1">AI活用の現状診断＋改善アドバイス / クレジットカード・PayPay対応</p>
+            </a>
+            <p className="text-xs text-[#94A3B8]">
               Google Calendarの予約システムを利用しています。予約確定後、確認メールが届きます。
             </p>
           </div>
@@ -66,7 +93,7 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
                       カレンダーから予約してください
                     </p>
                     <a
-                      href={calendarSrc}
+                      href={freeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => {
