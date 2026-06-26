@@ -46,6 +46,11 @@ export const careerTimeline: TimelineItem[] = [
     title: "ラジオパーソナリティ開始",
     subtitle: "FM21「イエローかっし〜」で医療・DX・キャリア情報を発信",
   },
+  {
+    year: "2026〜",
+    title: "子ども食堂 運営開始",
+    subtitle: "地域の子どもたちの居場所づくりを目的に、沖縄・中城村で子ども食堂をスタート。無料・低額での食事提供に加え、学習支援も実施。",
+  },
 ];
 
 export const siteProfile = {
@@ -55,7 +60,7 @@ export const siteProfile = {
   location: "沖縄県中城村",
   heroTagline1: "「どうするとよくなるか」",
   heroTagline2: "で立ち止まったら、相談してほしい。",
-  heroDescription: "現場をよくしたい、でも人手も時間もない——。15年の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。",
+  heroDescription: "現場をよくしたい、でも人手も時間もない——。14年（2026年現在）の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。",
 };
 
 export const siteContacts = {
@@ -88,6 +93,12 @@ export const defaultWorks = [
     title: "DX環境構築（複数社）",
     category: "テクノロジー",
     description: "出退勤・在庫・案件管理システムの選定・導入、Google環境セットアップ。現場の業務フローを分析し、無駄を削減。",
+  },
+  {
+    id: "5",
+    title: "子ども食堂運営",
+    category: "地域活動",
+    description: "中城村で子ども食堂を運営。地域の子どもたちに無料または低額で食事を提供し、学習支援も実施。地域コミュニティの拠点として活動中。",
   },
 ];
 

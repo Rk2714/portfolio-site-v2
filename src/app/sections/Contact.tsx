@@ -41,7 +41,7 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
             <div className="bg-white border border-[#1E3A5F] p-6 text-center">
               <p className="text-xs font-bold text-[#1E3A5F] tracking-wider uppercase mb-2">New</p>
               <p className="text-2xl font-bold text-[#0F172A] mb-1">60分 ¥3,000</p>
-              <p className="text-sm text-[#475569]">あなたのAIの使い方当たってますか</p>
+              <p className="text-sm text-[#475569]">AI活用法診断</p>
               <p className="text-xs text-[#64748B] mt-2">AI活用の現状診断＋改善アドバイス</p>
               <p className="text-xs text-[#1E3A5F] mt-3 font-medium">クレジットカード / PayPay 対応</p>
               <p className="text-xs text-[#94A3B8] mt-0.5">予約確認後、お支払いリンクをお送りします</p>
@@ -68,7 +68,7 @@ export default function Contact({ contacts }: { contacts?: Contacts | null }) {
               className="block bg-white border border-[#1E3A5F] p-6 hover:shadow-md transition-shadow"
             >
               <p className="text-xs font-bold text-[#1E3A5F] tracking-wider uppercase mb-1">New / ¥3,000</p>
-              <p className="text-lg font-bold text-[#0F172A]">60分「あなたのAIの使い方当たってますか」を予約する</p>
+              <p className="text-lg font-bold text-[#0F172A]">60分「AI活用法診断」を予約する</p>
               <p className="text-xs text-[#64748B] mt-1">AI活用の現状診断＋改善アドバイス / クレジットカード・PayPay対応</p>
             </a>
             <p className="text-xs text-[#94A3B8]">

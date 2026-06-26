@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { trackEvent } from "../../lib/analytics";
+import { useState } from "react";
 
 interface Profile {
   name?: string;
@@ -11,7 +12,15 @@ interface Profile {
   heroDescription?: string;
 }
 
+const badges = [
+  { emoji: "🩺", label: "医療ケア", sub: "15年" },
+  { emoji: "📡", label: "ラジオ発信", sub: "FM21" },
+  { emoji: "🤖", label: "AI実装支援", sub: "" },
+  { emoji: "🏘️", label: "地域コミュニティ", sub: "" },
+];
+
 export default function Hero({ profile }: { profile?: Profile | null }) {
+  const [imgError, setImgError] = useState(false);
   const tagline1 = profile?.heroTagline1 || "「どうするとよくなるか」";
   const tagline2 = profile?.heroTagline2 || "で立ち止まったら、相談してほしい。";
   const description =
@@ -21,23 +30,48 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
   const profileTitle = profile?.title || "看護師 / DX・業務改善パートナー / ラジオパーソナリティ";
 
   return (
-    <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24 bg-white border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section
+      id="hero"
+      className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-white overflow-hidden"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 items-end">
+          {/* Left Column — Text */}
           <div className="lg:col-span-7">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-xs text-[#64748B] mb-6 tracking-wider"
+              className="text-xs text-[#64748B] mb-4 tracking-wider"
             >
               看護師15年 / DX・業務改善 / AI人材育成 / 沖縄県中城村
             </motion.p>
 
+            {/* 4 Pillar Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex flex-wrap gap-2 mb-6"
+            >
+              {badges.map((badge) => (
+                <span
+                  key={badge.label}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[#0077B6]/5 text-[#0077B6] border border-[#0077B6]/20 rounded-full"
+                >
+                  <span>{badge.emoji}</span>
+                  <span>{badge.label}</span>
+                  {badge.sub && (
+                    <span className="text-[10px] opacity-60">（{badge.sub}）</span>
+                  )}
+                </span>
+              ))}
+            </motion.div>
+
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="text-[28px] sm:text-[36px] md:text-[44px] font-bold text-[#0F172A] leading-[1.25] mb-8"
             >
               {tagline1}
@@ -48,7 +82,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="text-sm sm:text-base text-[#475569] leading-[1.8] mb-10 max-w-xl"
             >
               {description}
@@ -57,7 +91,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-3"
             >
               <a
@@ -93,6 +127,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             </motion.div>
           </div>
 
+          {/* Right Column — Photo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -100,14 +135,23 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             className="lg:col-span-5"
           >
             <div className="aspect-[4/3] bg-[#FFF5EB] relative overflow-hidden group">
-              <img
-                src="/images/okinawa-sea.jpg"
-                alt="沖縄"
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-              />
+              {!imgError ? (
+                <img
+                  src="/images/headshot.png"
+                  alt="金城 竜弥"
+                  onError={() => setImgError(true)}
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-[#0F172A]">
+                  <span className="text-white text-4xl font-bold">RK</span>
+                </div>
+              )}
+
+              {/* Profile overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white/90 to-transparent">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-10 h-10 bg-[#0077B6] flex items-center justify-center text-white text-xs font-bold">
                     RK
                   </div>
                   <div>
@@ -141,6 +185,20 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             </div>
           </motion.div>
         </div>
+      </div>
+
+      {/* Wave Divider */}
+      <div className="wave-divider absolute bottom-0 left-0 right-0 w-full leading-none pointer-events-none select-none">
+        <svg
+          viewBox="0 0 1440 48"
+          preserveAspectRatio="none"
+          className="w-full h-auto"
+        >
+          <path
+            d="M0,24 C240,48 480,0 720,24 C960,48 1200,0 1440,24 L1440,48 L0,48 Z"
+            fill="#FFF8F0"
+          />
+        </svg>
       </div>
     </section>
   );

@@ -123,6 +123,8 @@ export default function Navigation() {
           </div>
 
           <button
+            type="button"
+            aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
             className={`md:hidden p-2 ${scrolled ? "text-[#0F172A]" : isHome ? "text-white" : "text-[#0F172A]"}`}
             onClick={() => setIsOpen(!isOpen)}
           >

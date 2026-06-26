@@ -38,10 +38,11 @@ export default function About({ profile }: { profile?: Profile | null }) {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center text-[#94A3B8]">
-                  <span className="text-6xl font-bold text-[#CBD5E1]">RK</span>
-                  <span className="text-xs mt-2">金城竜弥</span>
-                </div>
+                <img
+                  src="/images/headshot.png"
+                  alt="金城竜弥"
+                  className="w-full h-full object-cover"
+                />
               )}
             </div>
           </motion.div>

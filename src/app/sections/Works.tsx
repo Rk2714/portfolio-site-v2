@@ -9,6 +9,7 @@ const workData: Record<string, { metric: string; metricLabel: string; link?: str
   "案件管理システム": { metric: "2社", metricLabel: "運用中" },
   "Google環境セットアップ": { metric: "5社+", metricLabel: "導入支援" },
   "AI人材育成プログラム": { metric: "50名", metricLabel: "育成実績" },
+  "子ども食堂運営": { metric: "運営中", metricLabel: "2026年〜" },
 };
 
 interface WorkItem {
@@ -79,7 +80,7 @@ export default function Works({ works }: { works: WorkItem[] }) {
                       <ExternalLink size={12} />
                     </a>
                   ) : (
-                    <span className="shrink-0 text-xs text-[#94A3B8]">非公開</span>
+                    <span className="shrink-0 text-xs text-[#94A3B8]">詳細準備中</span>
                   )}
                 </div>
               </motion.article>
