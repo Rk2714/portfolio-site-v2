@@ -9,7 +9,7 @@ const workData: Record<string, { metric: string; metricLabel: string; link?: str
   "案件管理システム": { metric: "2社", metricLabel: "運用中" },
   "Google環境セットアップ": { metric: "5社+", metricLabel: "導入支援" },
   "AI人材育成プログラム": { metric: "50名", metricLabel: "育成実績" },
-  "子ども食堂運営": { metric: "運営中", metricLabel: "2026年〜" },
+  "子ども食堂運営": { metric: "運営中", metricLabel: "2026年〜", link: "https://www.instagram.com/p/DZG7LxMEmAi/" },
 };
 
 interface WorkItem {
