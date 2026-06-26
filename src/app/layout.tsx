@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "金城竜弥｜看護師14年の現場経験でDX・人材育成・地域活動を支援",
-    description: "看護師14年の臨床経験を持つDX・業務改善パートナー。AI人材育成、業務効率化、Google環境構築、子ども食堂運営など、医療×地域×テクノロジーで現場を支援します。",
+    title: "金城竜弥｜看護師15年の現場経験でDX・キャリア迷子を助ける",
+    description: "看護師15年×キャリアコンサルタント。AI導入・業務効率化からキャリア相談まで、現場目線で「よくしたい」を支援します。",
     url: "/",
     siteName: "金城竜弥",
     locale: "ja_JP",
