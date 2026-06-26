@@ -39,7 +39,7 @@ export default function About({ profile }: { profile?: Profile | null }) {
                 />
               ) : (
                 <img
-                  src="/images/headshot.png"
+                  src="/images/business.jpg"
                   alt="金城竜弥"
                   className="w-full h-full object-cover"
                 />

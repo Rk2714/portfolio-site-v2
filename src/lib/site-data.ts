@@ -161,6 +161,14 @@ export const defaultSkills = [
   },
   {
     category: "AI・人材育成",
+    name: "AIマニュアル整備",
+  },
+  {
+    category: "AI・人材育成",
+    name: "フローチャート作成",
+  },
+  {
+    category: "AI・人材育成",
     name: "マニュアル整備",
   },
   {

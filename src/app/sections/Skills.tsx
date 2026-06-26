@@ -31,6 +31,8 @@ const defaultSkillCategories = [
       { name: "AI講師" },
       { name: "講座設計" },
       { name: "現場定着型育成" },
+      { name: "AIマニュアル整備" },
+      { name: "フローチャート作成" },
       { name: "マニュアル整備" },
       { name: "50名+ 育成実績" },
     ],
