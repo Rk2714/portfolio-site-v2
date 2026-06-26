@@ -13,6 +13,16 @@ const testimonials = [
     name: "企業 人事担当",
     detail: "AI人材育成・講座設計",
   },
+  {
+    text: "アナログからデジタルに変わって、作業時間が5分の1になりました。システム化の効果を実感しています。",
+    name: "ノリト様",
+    detail: "業務効率化・DX環境構築",
+  },
+  {
+    text: "金城さんと話すたびにAIの使い方がとても勉強になります。仕事に生かすAIとして、視野が広がりました。AIにもいろんな種類があることがわかったのも大きいです。",
+    name: "相談者様",
+    detail: "AI活用法診断・キャリア相談",
+  },
 ];
 
 export default function Testimonials() {
@@ -22,9 +32,12 @@ export default function Testimonials() {
         <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
           Voice
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
           導入先からの声
         </h2>
+        <p className="text-sm text-[#475569] mb-12 max-w-xl leading-[1.8]">
+          実際に支援させていただいた方々の声を紹介します。
+        </p>
 
         <div className="grid md:grid-cols-2 gap-6">
           {testimonials.map((t, i) => (
@@ -39,9 +52,11 @@ export default function Testimonials() {
               <p className="text-sm text-[#334155] leading-[1.8] mb-8">
                 「{t.text}」
               </p>
-              <div className="border-t border-gray-100 pt-4">
-                <p className="text-sm font-bold text-[#0F172A]">{t.name}</p>
-                <p className="text-xs text-[#64748B] mt-1">{t.detail}</p>
+              <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-bold text-[#0F172A]">{t.name}</p>
+                  <p className="text-xs text-[#64748B] mt-1">{t.detail}</p>
+                </div>
               </div>
             </motion.div>
           ))}

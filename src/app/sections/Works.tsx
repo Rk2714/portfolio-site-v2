@@ -3,20 +3,13 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
-const workData: Record<string, { metric: string; metricLabel: string; link?: string }> = {
-  "DX環境構築（複数社）": { metric: "5社", metricLabel: "導入実績" },
-  "出退勤・在庫管理システム": { metric: "3社", metricLabel: "構築済み" },
-  "案件管理システム": { metric: "2社", metricLabel: "運用中" },
-  "Google環境セットアップ": { metric: "5社+", metricLabel: "導入支援" },
-  "AI人材育成プログラム": { metric: "50名", metricLabel: "育成実績" },
-  "子ども食堂運営": { metric: "運営中", metricLabel: "2026年〜", link: "https://www.instagram.com/p/DZG7LxMEmAi/" },
-};
-
 interface WorkItem {
   id: string;
   title: string;
   category: string;
   description: string;
+  link?: string;
+  instagram?: string;
 }
 
 export default function Works({ works }: { works: WorkItem[] }) {
@@ -34,58 +27,59 @@ export default function Works({ works }: { works: WorkItem[] }) {
         </p>
 
         <div className="space-y-6">
-          {works.map((work, index) => {
-            const data = workData[work.title];
-            return (
-              <motion.article
-                key={work.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                className="group grid md:grid-cols-12 gap-6 items-center border-t border-gray-100 pt-6"
-              >
-                <div className="md:col-span-5">
-                  <span className="text-xs text-[#64748B] mb-2 block">
-                    {work.category}
-                  </span>
-                  <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
-                    {work.title}
-                  </h3>
-                </div>
+          {works.map((work, index) => (
+            <motion.article
+              key={work.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              className="group grid md:grid-cols-12 gap-6 items-center border-t border-gray-100 pt-6"
+            >
+              <div className="md:col-span-5">
+                <span className="text-xs text-[#64748B] mb-2 block">
+                  {work.category}
+                </span>
+                <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
+                  {work.title}
+                </h3>
+              </div>
 
-                <div className="md:col-span-4">
-                  <p className="text-sm text-[#475569] leading-[1.7]">
-                    {work.description}
-                  </p>
-                </div>
+              <div className="md:col-span-4">
+                <p className="text-sm text-[#475569] leading-[1.7]">
+                  {work.description}
+                </p>
+              </div>
 
-                <div className="md:col-span-3 flex items-center justify-between gap-4">
-                  {data && (
-                    <div>
-                      <p className="text-2xl font-bold text-[#0F172A]">
-                        {data.metric}
-                      </p>
-                      <p className="text-xs text-[#64748B]">{data.metricLabel}</p>
-                    </div>
-                  )}
-                  {data?.link ? (
-                    <a
-                      href={data.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:gap-2 transition-all"
-                    >
-                      詳しく見る
-                      <ExternalLink size={12} />
-                    </a>
-                  ) : (
-                    <span className="shrink-0 text-xs text-[#94A3B8]">詳細準備中</span>
-                  )}
-                </div>
-              </motion.article>
-            );
-          })}
+              <div className="md:col-span-3 flex items-center justify-end gap-3">
+                {work.link && (
+                  <a
+                    href={work.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:gap-2 transition-all"
+                  >
+                    詳しく見る
+                    <ExternalLink size={12} />
+                  </a>
+                )}
+                {work.instagram && (
+                  <a
+                    href={work.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-[#D97706] font-medium hover:gap-2 transition-all"
+                  >
+                    Instagramで見る
+                    <ExternalLink size={12} />
+                  </a>
+                )}
+                {!work.link && !work.instagram && (
+                  <span className="text-xs text-[#64748B]">対応実績あり</span>
+                )}
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

@@ -1,58 +1,127 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+/**
+ * Instagram埋め込みコンポーネント
+ * 
+ * Instagramのpublic oEmbed APIを使ってHTMLを取得し表示する。
+ * 従来のblockquote + embed.js方式はInstagramが非推奨化したため、
+ * 公式oEmbed API（https://instaembed.vercel.app 等）を経由して
+ * iframe表示する方式に変更。
+ * 
+ * 参考: https://developers.facebook.com/docs/instagram/oembed
+ */
 
-declare global {
-  interface Window {
-    instgrm?: {
-      Embeds: {
-        process: () => void;
-      };
-    };
-  }
+import { useEffect, useState, useRef } from "react";
+
+interface InstagramEmbedProps {
+  url: string;
+  caption?: boolean;
+  maxWidth?: number;
 }
 
-export default function InstagramEmbed({ url }: { url: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function InstagramEmbed({
+  url,
+  caption = false,
+  maxWidth = 540,
+}: InstagramEmbedProps) {
+  const [embedHtml, setEmbedHtml] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+  const mounted = useRef(true);
 
   useEffect(() => {
-    if (!url || !ref.current) return;
-    // Instagramの埋め込みスクリプトを読み込み
-    const script = document.createElement("script");
-    script.src = "//www.instagram.com/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
+    if (!url) return;
+    mounted.current = true;
 
-    // Instagramの埋め込みを再処理
-    if (window.instgrm) {
-      window.instgrm.Embeds.process();
-    }
+    // oEmbed APIから埋め込みHTMLを取得
+    const apiUrl = `https://api.instagram.com/oembed?url=${encodeURIComponent(
+      url
+    )}&maxwidth=${maxWidth}&hidecaption=${caption ? "false" : "true"}`;
+
+    fetch(apiUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error(`oEmbed API error: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (mounted.current && data.html) {
+          setEmbedHtml(data.html);
+        }
+      })
+      .catch(() => {
+        // oembed.com fallback (CORS回避用プロキシ)
+        const fallbackUrl = `https://oembed.com/providers/instagram?url=${encodeURIComponent(
+          url
+        )}&format=json`;
+        fetch(fallbackUrl)
+          .then((res) => res.json())
+          .then((data) => {
+            if (mounted.current && data.html) {
+              setEmbedHtml(data.html);
+            } else {
+              setError(true);
+            }
+          })
+          .catch(() => {
+            // 最終手段: iframe直接埋め込み
+            if (mounted.current) setError(true);
+          });
+      });
 
     return () => {
-      // クリーンアップ
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
+      mounted.current = false;
     };
-  }, [url]);
+  }, [url, caption, maxWidth]);
 
+  // oEmbed APIが取得できなかった場合のフォールバック
+  if (error) {
+    // URLからIDを抽出してiframeで埋め込み
+    const match = url.match(/\/p\/([^/?]+)/);
+    const postId = match ? match[1] : null;
+    if (postId) {
+      return (
+        <div className="my-4 flex justify-center">
+          <iframe
+            src={`https://www.instagram.com/p/${postId}/embed/${caption ? "captioned/" : ""}`}
+            width="400"
+            height="480"
+            frameBorder="0"
+            scrolling="no"
+            allowTransparency={true}
+            className="max-w-full rounded-lg shadow-sm"
+            style={{ maxWidth: maxWidth }}
+          />
+        </div>
+      );
+    }
+    return (
+      <div className="my-4 p-4 bg-[#FFF8F0] border border-gray-200 text-center">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-[#2563EB] font-medium hover:underline"
+        >
+          Instagramで見る ↗
+        </a>
+      </div>
+    );
+  }
+
+  if (!embedHtml) {
+    return (
+      <div className="my-4 flex justify-center">
+        <div className="w-full max-w-[540px] h-[400px] bg-gray-50 animate-pulse rounded-lg flex items-center justify-center">
+          <span className="text-xs text-[#94A3B8]">読み込み中...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // oEmbedから返ってきたHTMLをdangerouslySetInnerHTMLで挿入
   return (
-    <div ref={ref} className="my-4 flex justify-center">
-      <blockquote
-        className="instagram-media"
-        data-instgrm-permalink={url}
-        data-instgrm-version="14"
-        style={{
-          background: "#FFF",
-          border: "1px solid #e8e8e8",
-          borderRadius: "3px",
-          boxShadow: "none",
-          display: "block",
-          margin: "0 auto",
-          maxWidth: "540px",
-          width: "100%",
-        }}
-      />
-    </div>
+    <div
+      className="my-4 flex justify-center"
+      dangerouslySetInnerHTML={{ __html: embedHtml }}
+    />
   );
 }

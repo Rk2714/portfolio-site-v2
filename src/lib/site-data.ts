@@ -72,33 +72,29 @@ export const siteContacts = {
 export const defaultWorks = [
   {
     id: "1",
-    title: "契約書管理システム",
-    category: "業務効率化",
-    description: "スタッフ7名分の契約書テンプレート化・管理業務。業務委託契約の分類（統括オペレーター/現場ディレクター/運営オペレーター）を設計。",
+    title: "PersonaSight",
+    category: "Webアプリケーション",
+    description: "多角的ペルソナ視点のビジネスアイデア検証アプリ。Next.js + TypeScript + Tailwind CSSで開発。1,000人の仮想ペルソナからフィードバックを収集可能。",
+    link: "https://personasight.vercel.app",
   },
   {
     id: "2",
-    title: "PersonaSight",
-    category: "Webアプリケーション",
-    description: "多角的ペルソナ視点のビジネスアイデア検証アプリ。Next.js + TypeScript + Tailwind CSSで開発。1,000人の仮想ペルソナからフィードバックを収集。",
+    title: "AI導入・業務効率化支援",
+    category: "テクノロジー",
+    description: "医療現場へのAI議事録サービス導入支援、契約書管理のテンプレート化、Google環境セットアップ。アナログ運用をデジタル化し、作業時間を5分の1に短縮した実績あり。",
   },
   {
     id: "3",
-    title: "AI導入支援",
-    category: "テクノロジー",
-    description: "医療現場へのAI議事録サービス（Leexi）導入支援、業務効率化コンサルティング。契約書管理システムの構築なども実施。",
+    title: "AI人材育成講座",
+    category: "AI・人材育成",
+    description: "現場で使えるAI活用の講座設計・実施。50名規模の育成実績。受講者からは「仕事に生かすAIの視野が広がった」との声をいただいている。",
   },
   {
     id: "4",
-    title: "DX環境構築（複数社）",
-    category: "テクノロジー",
-    description: "出退勤・在庫・案件管理システムの選定・導入、Google環境セットアップ。現場の業務フローを分析し、無駄を削減。",
-  },
-  {
-    id: "5",
     title: "子ども食堂運営",
     category: "地域活動",
     description: "中城村で子ども食堂を運営。地域の子どもたちに無料または低額で食事を提供し、学習支援も実施。地域コミュニティの拠点として活動中。",
+    instagram: "https://www.instagram.com/p/DZG7LxMEmAi/",
   },
 ];
 
