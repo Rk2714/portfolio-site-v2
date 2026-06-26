@@ -61,7 +61,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               className="flex flex-col sm:flex-row gap-3"
             >
               <a
-                href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dL0u8qskhfEDpacS_oUA7sQzLuLcNJf35Jm55-LP0WqMhoRB38reuFFqrjqU2sAQG9rkzjlrI?gv=true"
+                href="https://calendar.app.google/wJsV5mJhXuLQmBnS6"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
