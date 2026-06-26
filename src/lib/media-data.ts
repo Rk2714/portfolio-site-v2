@@ -1358,6 +1358,7 @@ export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
   const data = await fetchFromMicroCMS<MicroCMSListResponse>("media", { contents: [] });
   if (!data.contents || data.contents.length === 0) return mediaPosts;
 
+  const cmsIds = new Set(data.contents.map((item) => item.id));
   const posts = data.contents.map((item) => {
     const cat = Array.isArray(item.category)
       ? item.category[0] || "appear"
@@ -1381,7 +1382,9 @@ export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
       hostIds: staticPost?.hostIds,
     };
   });
-  return sortByDateDesc(posts);
+  // Also include static entries not present in CMS
+  const staticOnly = mediaPosts.filter((p) => !cmsIds.has(p.id));
+  return sortByDateDesc([...posts, ...staticOnly]);
 }
 
 export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undefined> {
@@ -1393,7 +1396,7 @@ export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undef
         next: { revalidate: 60 },
       }
     );
-    if (!res.ok) return undefined;
+    if (!res.ok) return mediaPosts.find((p) => p.id === id);
     const item = (await res.json()) as MicroCMSMediaItem;
     const cat = Array.isArray(item.category)
       ? item.category[0] || "appear"
@@ -1418,6 +1421,6 @@ export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undef
       hostIds: staticPost?.hostIds,
     };
   } catch {
-    return undefined;
+    return mediaPosts.find((p) => p.id === id);
   }
 }
