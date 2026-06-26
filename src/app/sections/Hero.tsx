@@ -25,9 +25,9 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
   const tagline2 = profile?.heroTagline2 || "で立ち止まったら、相談してほしい。";
   const description =
     profile?.heroDescription ||
-    "現場をよくしたい、でも人手も時間もない——。15年の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。";
+    "15年看護師やってきて、AIもシステムもキャリア相談も、「現場の不便」をどうにかするためにやってます。難しい話は抜きで、まずはお茶でも飲みながら話しませんか？";
   const profileName = profile?.name || "金城 竜弥";
-  const profileTitle = profile?.title || "看護師 / DX・業務改善パートナー / ラジオパーソナリティ";
+  const profileTitle = profile?.title || "看護師 / AI活用アドバイザー / キャリアの相談所 / ラジオパーソナリティ";
 
   return (
     <section
@@ -44,7 +44,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.5 }}
               className="text-xs text-[#64748B] mb-4 tracking-wider"
             >
-              看護師15年 / DX業務改善 / AI活用 / 沖縄県中城村
+              看護師15年 / AI活用アドバイザー / キャリアの相談所 / 沖縄県中城村
             </motion.p>
 
             {/* 4 Pillar Badges */}

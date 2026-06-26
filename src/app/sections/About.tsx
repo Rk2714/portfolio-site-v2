@@ -16,7 +16,7 @@ interface Profile {
 export default function About({ profile }: { profile?: Profile | null }) {
   const bio =
     profile?.bio ||
-    "看護師15年の現場経験を武器に、DX・AI・人材育成で「現場のよくしたい」を実現するパートナー。システム構築からAI講座、ラジオ発信まで。現場に立つ人の気持ちを忘れずに、改善を続けています。";
+    "看護師15年やってきてわかったのは、現場の「これなんとかならん？」をスルーすると、あとで倍疲れるってこと。AIの使い方教えるのも、システム整えるのも、キャリアの話聞くのも、全部「困ったを減らす」ためにやってます。";
   const location = profile?.location || "沖縄県中城村";
 
   return (

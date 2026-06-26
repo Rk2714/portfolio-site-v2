@@ -23,7 +23,7 @@ export default function Works({ works }: { works: WorkItem[] }) {
           導入実績
         </h2>
         <p className="text-sm text-[#475569] mb-14 max-w-xl leading-[1.8]">
-          DX環境構築、AI人材育成、業務効率化、医療プロジェクトの4領域で、現場と向き合いながら成果を出しています。
+          AI活用、システム構築、業務効率化、医療——現場と向き合いながら成果を出しています。
         </p>
 
         <div className="space-y-6">

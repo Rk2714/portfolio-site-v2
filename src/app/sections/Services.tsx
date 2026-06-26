@@ -6,7 +6,7 @@ import { Monitor, GraduationCap, Settings, Sparkles } from "lucide-react";
 const services = [
   {
     icon: Monitor,
-    title: "DX環境構築",
+    title: "システム環境構築",
     description: "出退勤・在庫・案件管理システムの選定・導入、Google環境セットアップ。現場の業務フローを分析し、無駄を削減します。",
     features: ["出退勤・在庫・案件管理システム", "Google環境セットアップ・予約管理"],
   },

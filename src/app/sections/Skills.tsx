@@ -16,7 +16,7 @@ const defaultSkillCategories = [
     ],
   },
   {
-    title: "DX・システム構築",
+    title: "システム構築",
     skills: [
       { name: "出退勤管理" },
       { name: "在庫管理" },
@@ -82,7 +82,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
           専門性
         </h2>
         <p className="text-sm text-[#475569] mb-14 max-w-xl leading-[1.8]">
-          15年の臨床経験とDX・AIの知見を組み合わせ、現場の課題を解決します。
+          15年の臨床経験と現場の知見を組み合わせ、現場の課題を解決します。
         </p>
 
         {/* 最重要カテゴリー：横長カード */}
