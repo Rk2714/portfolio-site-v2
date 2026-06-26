@@ -60,7 +60,7 @@ export const siteProfile = {
   location: "沖縄県中城村",
   heroTagline1: "「どうするとよくなるか」",
   heroTagline2: "で立ち止まったら、相談してほしい。",
-  heroDescription: "現場をよくしたい、でも人手も時間もない——。14年（2026年現在）の看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。",
+  heroDescription: "現場をよくしたい、でも人手も時間もない——。15年にわたる看護師経験とDX・AIの知見で、あなたの「やりたい」を仕組みでカタチにします。出退勤・在庫・案件管理のシステム構築からAI人材育成まで、現場目線で対応。",
 };
 
 export const siteContacts = {
@@ -103,10 +103,6 @@ export const defaultWorks = [
 ];
 
 export const defaultSkills = [
-  {
-    category: "医療・ヘルスケア",
-    name: "救急・ICU",
-  },
   {
     category: "医療・ヘルスケア",
     name: "小児科",
