@@ -15,7 +15,7 @@ interface Profile {
 const badges = [
   { emoji: "🩺", label: "医療ケア", sub: "15年" },
   { emoji: "📡", label: "ラジオ発信", sub: "FM21" },
-  { emoji: "🧭", label: "キャリア相談", sub: "" },
+  { emoji: "🤖", label: "AI活用", sub: "" },
   { emoji: "🏘️", label: "地域コミュニティ", sub: "" },
 ];
 
@@ -44,7 +44,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
               transition={{ duration: 0.5 }}
               className="text-xs text-[#64748B] mb-4 tracking-wider"
             >
-              看護師15年 / DX・業務改善 / キャリア支援 / 沖縄県中城村
+              看護師15年 / DX業務改善 / AI活用 / 沖縄県中城村
             </motion.p>
 
             {/* 4 Pillar Badges */}
