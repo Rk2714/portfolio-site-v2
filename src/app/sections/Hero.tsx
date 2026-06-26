@@ -134,7 +134,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:col-span-5"
           >
-            <div className="aspect-[4/3] bg-[#FFF5EB] relative overflow-hidden group">
+            <div className="aspect-[3/4] bg-[#FFF5EB] relative overflow-hidden group">
               {!imgError ? (
                 <img
                   src="/images/headshot.png"
