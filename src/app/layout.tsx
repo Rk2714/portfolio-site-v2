@@ -4,8 +4,8 @@ import AnalyticsProvider from "./components/AnalyticsProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-site-xi-eight-33.vercel.app"),
-  title: "金城竜弥｜看護師15年の現場経験でDX・人材育成・地域活動を支援",
-  description: "看護師15年の臨床経験を持つDX・業務改善パートナー金城竜弥。AI人材育成、業務効率化、Google環境構築、子ども食堂運営など、医療×地域×テクノロジーで現場を支援します。",
+  title: "金城竜弥｜看護師15年の現場経験でDX・キャリア迷子を助ける",
+  description: "看護師15年×キャリアコンサルタント。AI導入・業務効率化からキャリア相談まで、現場目線で「よくしたい」を支援します。",
   keywords: ["金城竜弥", "看護師", "AIコンサルタント", "キャリアコンサルタント", "沖縄", "医療", "地方創生"],
   authors: [{ name: "金城竜弥" }],
   alternates: {
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "金城竜弥｜看護師15年の現場経験でDX・人材育成・地域活動を支援",
-    description: "看護師15年の臨床経験を持つDX・業務改善パートナー。AI人材育成、業務効率化、Google環境構築、子ども食堂運営など、医療×地域×テクノロジーで現場を支援します。",
+    title: "金城竜弥｜看護師15年の現場経験でDX・キャリア迷子を助ける",
+    description: "看護師15年×キャリアコンサルタント。AI導入・業務効率化からキャリア相談まで、現場目線で「よくしたい」を支援します。",
     images: ["/images/okinawa-sea.jpg"],
   },
 };

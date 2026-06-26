@@ -16,8 +16,8 @@ import { siteProfile, siteContacts, defaultWorks, defaultSkills } from "../lib/s
 import { getAllMediaPosts } from "../lib/media-data";
 
 export const metadata = {
-  title: "金城竜弥｜看護師15年の現場目線でDX・人材育成・地域活動を支援",
-  description: "看護師15年の臨床経験を持つDX・業務改善パートナー。AI人材育成（50名規模）、システム構築、子ども食堂運営を通じた地域活動まで、現場目線で「よくしたい」を支援します。",
+  title: "金城竜弥｜看護師15年の現場目線でDX・キャリア迷子を助ける",
+  description: "看護師15年×キャリアコンサルタント。AI導入・業務効率化からキャリア相談まで、現場目線で「よくしたい」を支援します。",
 };
 
 export default function Home() {
