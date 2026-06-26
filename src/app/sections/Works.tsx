@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 const workData: Record<string, { metric: string; metricLabel: string; link?: string }> = {
-  "DX環境構築（複数社）": { metric: "10社+", metricLabel: "導入実績" },
+  "DX環境構築（複数社）": { metric: "5社", metricLabel: "導入実績" },
   "出退勤・在庫管理システム": { metric: "3社", metricLabel: "構築済み" },
   "案件管理システム": { metric: "2社", metricLabel: "運用中" },
   "Google環境セットアップ": { metric: "5社+", metricLabel: "導入支援" },
