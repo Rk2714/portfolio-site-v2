@@ -6,7 +6,6 @@ import { hosts } from "../../../lib/site-data";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ShareButtons from "../../components/ShareButtons";
-import InstagramEmbed from "../../components/InstagramEmbed";
 import ViewCounter from "../../components/ViewCounter";
 import LinkCard from "../../components/LinkCard";
 import TrackedLink from "../../components/TrackedLink";
@@ -23,8 +22,6 @@ import {
   Mail,
   Globe,
   Camera,
-  TvMinimalPlay,
-  Link2,
   FileText,
   Target,
   ArrowRight,
@@ -249,91 +246,6 @@ export default async function MediaPostPage({ params }: Props) {
             </div>
           </section>
         )}
-
-        {/* ============================== */}
-        {/* 公開導線 Grid (YouTube + Instagram + SNS) */}
-        {/* ============================== */}
-        <section className="bg-white">
-          <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
-            <div className="mb-6">
-              <p className="pencil-eyebrow mb-2">LINKS</p>
-              <h2 className="text-[32px] font-black leading-[1.12] text-[#0F172A]">
-                公開導線
-              </h2>
-              <p className="text-[15px] leading-[1.65] text-[#475569] mt-2">
-                この回の動画・SNS投稿・関連リンクをまとめています。
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-[18px]">
-              {/* YouTubeサムネ */}
-              {post.youtubeUrl && (
-                <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3">
-                  <TvMinimalPlay size={20} className="text-[#0F172A]" />
-                  <p className="text-[18px] font-black text-[#0F172A]">YouTube</p>
-                  <p className="text-[14px] leading-[1.7] text-[#475569] flex-1">
-                    ラジオ本編はYouTubeで視聴できます。
-                  </p>
-                  <a
-                    href={post.youtubeUrl.replace("/embed/", "/watch?v=")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2.5 text-xs font-bold text-[#0F172A] hover:bg-[#FFF8F0] transition-colors mt-auto"
-                  >
-                    <ExternalLink size={12} />
-                    聴く
-                  </a>
-                </div>
-              )}
-
-              {/* Instagram埋め込み */}
-              {post.guests &&
-                post.guests.length > 0 &&
-                post.guests[0].instagramPost && (
-                  <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3 overflow-hidden">
-                    <Camera size={20} className="text-[#0F172A]" />
-                    <p className="text-[18px] font-black text-[#0F172A]">Instagram</p>
-                    <p className="text-[14px] leading-[1.7] text-[#475569]">
-                      ゲストの投稿をInstagramで見る。
-                    </p>
-                    <div className="w-full">
-                      <InstagramEmbed url={post.guests[0].instagramPost} />
-                    </div>
-                  </div>
-                )}
-
-              {/* SNSリンク */}
-              {post.guests &&
-                post.guests.length > 0 &&
-                post.guests[0].links &&
-                post.guests[0].links.length > 0 && (
-                  <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3">
-                    <Link2 size={20} className="text-[#0F172A]" />
-                    <p className="text-[18px] font-black text-[#0F172A]">
-                      リンク
-                    </p>
-                    <p className="text-[14px] leading-[1.7] text-[#475569]">
-                      ゲストのSNS・関連サイト。
-                    </p>
-                    <div className="flex flex-col gap-2 mt-auto">
-                      {post.guests[0].links.slice(0, 3).map((link, i) => (
-                        <a
-                          key={i}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2.5 text-xs font-bold text-[#0F172A] hover:bg-[#FFF8F0] transition-colors"
-                        >
-                          <ExternalLink size={12} />
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-            </div>
-          </div>
-        </section>
 
         {/* ============================== */}
         {/* 公開メモ Grid (要約 + 対象 + 外部導線) */}
