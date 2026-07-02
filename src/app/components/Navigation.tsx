@@ -8,11 +8,11 @@ import { usePathname } from "next/navigation";
 import { trackEvent } from "../../lib/analytics";
 
 const navItems = [
-  { label: "サービス", href: "#services" },
-  { label: "実績", href: "#works" },
-  { label: "プロフィール", href: "#about" },
-  { label: "スキル", href: "#skills" },
-  { label: "お問い合わせ", href: "#contact" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Works", href: "#works" },
+  { label: "Media", href: "/media" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navigation() {
@@ -39,50 +39,41 @@ export default function Navigation() {
     }
   };
 
-  const navBaseClass = scrolled
-    ? "bg-white/95 backdrop-blur border-b border-gray-100"
-    : "bg-transparent";
-
-  const textClass = scrolled
-    ? "text-[#475569] hover:text-[#0F172A]"
-    : isHome
-    ? "text-white/70 hover:text-white"
-    : "text-[#475569] hover:text-[#0F172A]";
-
-  const logoClass = scrolled
-    ? "text-[#0F172A]"
-    : isHome
-    ? "text-white"
-    : "text-[#0F172A]";
+  const navBaseClass = scrolled ? "bg-white/95 backdrop-blur border-b border-[#E2E8F0]" : "bg-white/90 backdrop-blur";
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBaseClass}`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-14">
+      <div className="max-w-[1312px] mx-auto px-5 md:px-8">
+        <div className="flex items-center justify-between h-[72px]">
           <Link
             href="/"
-            className={`text-sm font-bold tracking-wider transition-colors ${logoClass}`}
+            className="flex flex-col leading-tight transition-opacity hover:opacity-75"
           >
-             金城竜弥 <span className="text-[#D97706]">↑</span>
-           </Link>
+            <span className="text-[18px] font-extrabold text-[#0F172A]">金城 竜弥</span>
+            <span className="hidden text-[12px] text-[#64748B] sm:block">AIの使い方を教える人 / 仕組み構築も対応</span>
+          </Link>
 
-          <div className="hidden md:flex items-center gap-6">
-            {isHome && navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleClick(e, item.href)}
-                className={`text-sm transition-colors ${textClass}`}
-              >
-                {item.label}
-              </a>
-            ))}
-            <Link
-              href="/media"
-              className={`text-sm transition-colors ${textClass}`}
-            >
-              メディア
-            </Link>
+          <div className="hidden md:flex items-center gap-[10px]">
+            {navItems.map((item) =>
+              item.href.startsWith("#") && isHome ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleClick(e, item.href)}
+                  className="rounded-[4px] border border-[#E2E8F0] bg-[#FFF8F0] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-[#0F172A] transition-colors hover:bg-white"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href.startsWith("#") ? `/${item.href}` : item.href}
+                  className="rounded-[4px] border border-[#E2E8F0] bg-[#FFF8F0] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-[#0F172A] transition-colors hover:bg-white"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </div>
 
           <div className="hidden md:block">
@@ -97,11 +88,7 @@ export default function Navigation() {
                   });
                   handleClick(e, "#contact");
                 }}
-                className={`px-4 py-2 text-sm font-bold transition-colors ${
-                  scrolled
-                    ? "bg-[#0F172A] text-white hover:bg-[#1E293B]"
-                    : "bg-white text-[#0F172A] hover:bg-white/90"
-                }`}
+                className="rounded-[4px] border border-[#0F172A] bg-[#0F172A] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white transition-colors hover:bg-[#1E293B]"
               >
                 無料相談
               </a>
@@ -115,7 +102,7 @@ export default function Navigation() {
                     cta_target: "contact_section",
                   });
                 }}
-                className="px-4 py-2 text-sm font-bold bg-[#0F172A] text-white hover:bg-[#1E293B] transition-colors"
+                className="rounded-[4px] border border-[#0F172A] bg-[#0F172A] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white transition-colors hover:bg-[#1E293B]"
               >
                 無料相談
               </Link>
@@ -125,7 +112,7 @@ export default function Navigation() {
           <button
             type="button"
             aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
-            className={`md:hidden p-2 ${scrolled ? "text-[#0F172A]" : isHome ? "text-white" : "text-[#0F172A]"}`}
+            className="md:hidden rounded-[4px] border border-[#E2E8F0] bg-[#FFF8F0] p-2 text-[#0F172A]"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -139,29 +126,33 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-gray-100"
+            className="md:hidden bg-white border-b border-[#E2E8F0]"
           >
             <div className="px-4 py-4 space-y-1">
-              {isHome && navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleClick(e, item.href)}
-                  className="block text-sm font-medium text-[#334155] hover:text-[#0F172A] py-2"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <Link
-                href="/media"
-                className="block text-sm font-medium text-[#334155] hover:text-[#0F172A] py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                メディア
-              </Link>
+              {navItems.map((item) =>
+                item.href.startsWith("#") && isHome ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => handleClick(e, item.href)}
+                    className="block rounded-[4px] px-3 py-2 text-sm font-bold text-[#334155] hover:bg-[#FFF8F0] hover:text-[#0F172A]"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href.startsWith("#") ? `/${item.href}` : item.href}
+                    className="block rounded-[4px] px-3 py-2 text-sm font-bold text-[#334155] hover:bg-[#FFF8F0] hover:text-[#0F172A]"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
               <Link
                 href="/#contact"
-                className="block text-center px-4 py-3 bg-[#0F172A] text-white text-sm font-bold mt-2"
+                className="mt-2 block rounded-[4px] bg-[#0F172A] px-4 py-3 text-center text-sm font-bold text-white"
                 onClick={() => {
                   trackEvent("contact_cta_click", {
                     page_type: isHome ? "home" : "other",

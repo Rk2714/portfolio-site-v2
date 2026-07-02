@@ -13,86 +13,85 @@ interface Profile {
 }
 
 const badges = [
-  { emoji: "🩺", label: "医療ケア", sub: "15年" },
-  { emoji: "📡", label: "ラジオ発信", sub: "FM21" },
-  { emoji: "🤖", label: "AI活用", sub: "" },
-  { emoji: "🏘️", label: "地域コミュニティ", sub: "" },
+  { label: "AIの使い方", meta: "まずここ" },
+  { label: "仕組み構築", meta: "必要なら" },
+  { label: "働き方相談", meta: "余白から" },
+];
+
+const stats = [
+  { value: "30分", label: "無料相談" },
+  { value: "60分", label: "AI活用セッション" },
+  { value: "¥3,000", label: "キャンペーン価格" },
 ];
 
 export default function Hero({ profile }: { profile?: Profile | null }) {
   const [imgError, setImgError] = useState(false);
-  const tagline1 = profile?.heroTagline1 || "「どうするとよくなるか」";
-  const tagline2 = profile?.heroTagline2 || "で立ち止まったら、相談してほしい。";
+  const tagline1 = profile?.heroTagline1 || "AIの使い方を、";
+  const tagline2 = profile?.heroTagline2 || "仕事に合わせて教えます。";
   const description =
     profile?.heroDescription ||
-    "15年看護師やってきて、AIもシステムもキャリア相談も、「現場の不便」をどうにかするためにやってます。難しい話は抜きで、まずはお茶でも飲みながら話しませんか？";
+    "相談だけでも、仕組みづくりでも。看護の現場で育った感覚をベースに、AI・Google・予約導線を、無理なく使える形に整えます。";
   const profileName = profile?.name || "金城 竜弥";
-  const profileTitle = profile?.title || "看護師 / AI活用アドバイザー / キャリアの相談所 / ラジオパーソナリティ";
+  const profileTitle = profile?.title || "AI活用アドバイザー / 仕組みづくり / キャリア相談";
 
   return (
     <section
       id="hero"
-      className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-white overflow-hidden"
+      className="relative overflow-hidden bg-white pt-[88px]"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 items-end">
-          {/* Left Column — Text */}
-          <div className="lg:col-span-7">
+      <div className="pencil-section pencil-container relative z-10">
+        <div className="grid items-start gap-8 lg:grid-cols-[1fr_420px]">
+          <div>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-xs text-[#64748B] mb-4 tracking-wider"
+              className="pencil-eyebrow mb-5"
             >
-              看護師15年 / AI活用アドバイザー / キャリアの相談所 / 沖縄県中城村
+              AIの使い方相談 / 仕組みづくり / 沖縄県中城村
             </motion.p>
-
-            {/* 4 Pillar Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex flex-wrap gap-2 mb-6"
-            >
-              {badges.map((badge) => (
-                <span
-                  key={badge.label}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[#0077B6]/5 text-[#0077B6] border border-[#0077B6]/20 rounded-full"
-                >
-                  <span>{badge.emoji}</span>
-                  <span>{badge.label}</span>
-                  {badge.sub && (
-                    <span className="text-[10px] opacity-60">（{badge.sub}）</span>
-                  )}
-                </span>
-              ))}
-            </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[28px] sm:text-[36px] md:text-[44px] font-bold text-[#0F172A] leading-[1.25] mb-8"
+              className="mb-5 max-w-[860px] text-[42px] font-black leading-[1.05] text-[#0F172A] sm:text-[54px]"
             >
               {tagline1}
               <br />
-              <span className="text-[#64748B]">{tagline2}</span>
+              仕事に合わせて
+              <br />
+              教えます。
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-sm sm:text-base text-[#475569] leading-[1.8] mb-10 max-w-xl"
+              className="pencil-body mb-5 max-w-[860px]"
             >
               {description}
             </motion.p>
 
             <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-5 flex flex-wrap gap-[10px]"
+            >
+              {badges.map((badge) => (
+                <span key={badge.label} className="pencil-chip">
+                  <span>{badge.label}</span>
+                  <span className="text-[11px] font-bold text-[#64748B]">{badge.meta}</span>
+                </span>
+              ))}
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-3"
+              className="mb-5 flex flex-col gap-3 sm:flex-row"
             >
               <a
                 href="https://calendar.app.google/wJsV5mJhXuLQmBnS6"
@@ -105,7 +104,7 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                     cta_target: "calendar",
                   });
                 }}
-                className="inline-block px-8 py-3.5 bg-[#0F172A] text-white text-sm font-bold hover:bg-[#1E293B] transition-colors text-center"
+                className="pencil-button justify-center"
               >
                 30分無料相談を予約する
               </a>
@@ -120,86 +119,71 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                   });
                   document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="inline-block px-8 py-3.5 border border-gray-200 text-[#0F172A] text-sm font-bold hover:bg-[#FFF8F0] transition-colors text-center"
+                className="pencil-button pencil-button-secondary justify-center"
               >
-                現場をよくしたい方、ご相談ください
+                相談内容を先に見る
               </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="grid max-w-[860px] gap-[10px] sm:grid-cols-3"
+            >
+              {stats.map((stat) => (
+                <div key={stat.label} className="border border-[#E2E8F0] bg-white p-[18px]">
+                  <p className="text-[20px] font-black text-[#0F172A]">{stat.value}</p>
+                  <p className="mt-1 text-[12px] leading-[18px] text-[#64748B]">{stat.label}</p>
+                </div>
+              ))}
             </motion.div>
           </div>
 
-          {/* Right Column — Photo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-5"
+            className="space-y-3"
           >
-            <div className="aspect-[3/4] bg-[#FFF5EB] relative overflow-hidden group">
+            <div className="border border-[#E2E8F0] bg-[#FCF9F5] p-[14px]">
+              <div className="relative h-[250px] overflow-hidden bg-[#E2E8F0]">
               {!imgError ? (
                 <img
                   src="/images/headshot.png"
                   alt="金城 竜弥"
                   onError={() => setImgError(true)}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-[#0F172A]">
-                  <span className="text-white text-4xl font-bold">RK</span>
+                  <div className="flex h-full w-full items-center justify-center bg-[#0F172A]">
+                    <span className="text-4xl font-bold text-white">RK</span>
                 </div>
               )}
-
-              {/* Profile overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white/90 to-transparent">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#0077B6] flex items-center justify-center text-white text-xs font-bold">
-                    RK
-                  </div>
-                  <div>
-                    <p className="text-[#0F172A] text-sm font-bold">{profileName}</p>
-                    <p className="text-[#64748B] text-xs">{profileTitle}</p>
-                  </div>
-                </div>
               </div>
+              <p className="mt-3 text-[12px] leading-[18px] text-[#64748B]">
+                差し替え予定: プロフィール写真 / 仕事中の自然な写真
+              </p>
+            </div>
 
-              {/* Decorative arrow */}
-              <div className="absolute top-4 left-4 text-[#D97706]/20 text-6xl font-bold leading-none pointer-events-none select-none">
-                ↗
+            <div className="grid grid-cols-3 gap-[10px]">
+              {["AI相談", "構築", "キャリア"].map((label) => (
+                <div key={label} className="border border-[#E2E8F0] bg-white p-[14px]">
+                  <p className="text-[13px] font-black text-[#0F172A]">{label}</p>
+                  <p className="mt-1 text-[11px] text-[#64748B]">対応</p>
               </div>
+              ))}
+            </div>
 
-              {/* Floating stats */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="absolute top-4 right-4 flex flex-col gap-2"
-              >
-                <div className="bg-white/90 backdrop-blur px-3 py-2 shadow-sm">
-                  <p className="text-lg font-bold text-[#D97706]">15年</p>
-                  <p className="text-[10px] text-[#64748B] leading-tight">現場経験</p>
-                </div>
-                <div className="bg-white/90 backdrop-blur px-3 py-2 shadow-sm">
-                  <p className="text-lg font-bold text-[#D97706]">50名+</p>
-                  <p className="text-[10px] text-[#64748B] leading-tight">育成実績</p>
-                </div>
-              </motion.div>
+            <div className="border border-[#E2E8F0] bg-[#0F172A] p-[18px] text-white">
+              <p className="mb-2 text-[12px] font-bold tracking-[1.2px] text-white/70">PROFILE</p>
+              <p className="text-[15px] font-black">{profileName}</p>
+              <p className="mt-1 text-[12px] leading-[19px] text-white/70">{profileTitle}</p>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Wave Divider */}
-      <div className="wave-divider absolute bottom-0 left-0 right-0 w-full leading-none pointer-events-none select-none">
-        <svg
-          viewBox="0 0 1440 48"
-          preserveAspectRatio="none"
-          className="w-full h-auto"
-        >
-          <path
-            d="M0,24 C240,48 480,0 720,24 C960,48 1200,0 1440,24 L1440,48 L0,48 Z"
-            fill="#FFF8F0"
-          />
-        </svg>
-      </div>
+      <div className="mx-auto h-px max-w-[1312px] bg-[#E2E8F0]" />
     </section>
   );
 }

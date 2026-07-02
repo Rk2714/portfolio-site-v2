@@ -1,36 +1,28 @@
 @import "tailwindcss";
 
-/* ─── Design System: "Frequency" ───
-   Okinawa × Radio × Medical × AI
-   Wave is the unifying motif.
-   ────────────────────────────── */
-
 @theme inline {
-  --color-background: #FAFAFA;
+  --color-background: #FFFFFF;
   --color-foreground: #0F172A;
-  --color-primary: #1E3A5F;
-  --color-accent: #2563EB;
-  --color-accent-light: #DBEAFE;
+  --color-primary: #0F172A;
+  --color-accent: #D78256;
+  --color-accent-light: #FFF8F0;
   --color-muted: #64748B;
-
-  /* Okinawa palette — sea & sunset */
-  --color-oki-navy: #0F172A;
-  --color-oki-blue: #0077B6;   /* deep Okinawan sea */
-  --color-oki-teal: #00B4D8;   /* shallow reef */
-  --color-oki-sunset: #F4A261; /* sunset orange */
-  --color-oki-coral: #E76F51;  /* coral accent */
-  --color-oki-sand: #FFF8F0;   /* sandy beige */
-  --color-oki-wave: #E0F7FA;   /* wave foam */
-
-  --font-sans: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --color-sand: #FFF8F0;
+  --color-soft: #FCF9F5;
+  --color-line: #E2E8F0;
+  --color-line-strong: #D7E0EA;
+  --font-sans: "Inter", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -38,6 +30,81 @@ body {
 ::selection {
   background: #0F172A;
   color: white;
+}
+
+.pencil-section {
+  padding: 56px 64px;
+}
+
+.pencil-container {
+  width: 100%;
+  max-width: 1312px;
+  margin-inline: auto;
+}
+
+.pencil-eyebrow {
+  color: #64748B;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+
+.pencil-title {
+  color: #0F172A;
+  font-size: clamp(28px, 4vw, 34px);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.pencil-body {
+  color: #475569;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.pencil-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  background: #FFF8F0;
+  padding: 10px 14px;
+  color: #0F172A;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+.pencil-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #0F172A;
+  border-radius: 4px;
+  background: #0F172A;
+  color: #FFFFFF;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 800;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.pencil-button:hover {
+  transform: translateY(-1px);
+  background: #1E293B;
+  border-color: #1E293B;
+}
+
+.pencil-button-secondary {
+  background: #FFFFFF;
+  color: #0F172A;
+  border-color: #E2E8F0;
+}
+
+.pencil-button-secondary:hover {
+  background: #FFF8F0;
+  border-color: #D7E0EA;
 }
 
 /* Fallback: ensure content visible without JS */
@@ -178,3 +245,9 @@ body {
 .stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
 .stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
 .stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+
+@media (max-width: 768px) {
+  .pencil-section {
+    padding: 40px 20px;
+  }
+}

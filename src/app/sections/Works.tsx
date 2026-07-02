@@ -13,20 +13,20 @@ interface WorkItem {
 }
 
 export default function Works({ works }: { works: WorkItem[] }) {
-  return (
-    <section id="works" className="py-20 md:py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
-          Works
-        </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
-          導入実績
-        </h2>
-        <p className="text-sm text-[#475569] mb-14 max-w-xl leading-[1.8]">
-          AI活用、システム構築、業務効率化、医療——現場と向き合いながら成果を出しています。
-        </p>
+  const imageMap = ["/images/hero-tech.jpg", "/images/profile-workspace.jpg", "/images/business.jpg", "/images/okinawa-sea.jpg"];
 
-        <div className="space-y-6">
+  return (
+    <section id="works" className="bg-white">
+      <div className="pencil-section pencil-container space-y-6">
+        <div className="space-y-[10px]">
+          <p className="pencil-eyebrow">Works</p>
+          <h2 className="pencil-title">導入実績</h2>
+          <p className="pencil-body max-w-5xl">
+            数字で盛るより、何を整えて、どこまで自走できるようにしたかを見せます。AI導入、講座、業務改善、地域活動を同じ目線で整理します。
+          </p>
+        </div>
+
+        <div className="grid gap-[18px] md:grid-cols-2">
           {works.map((work, index) => (
             <motion.article
               key={work.id}
@@ -34,30 +34,24 @@ export default function Works({ works }: { works: WorkItem[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="group grid md:grid-cols-12 gap-6 items-center border-t border-gray-100 pt-6"
+              className={`group flex flex-col items-start gap-4 rounded-[16px] border border-[#E2E8F0] p-[22px_24px_26px] transition-colors hover:border-[#D7E0EA] ${
+                index % 2 === 1 ? "bg-[#FCF9F5]" : "bg-white"
+              }`}
             >
-              <div className="md:col-span-5">
-                <span className="text-xs text-[#64748B] mb-2 block">
-                  {work.category}
-                </span>
-                <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
-                  {work.title}
-                </h3>
-              </div>
+              <span className="pencil-chip bg-[#FFF8F0]">{work.category}</span>
+              <h3 className="text-[22px] font-black leading-tight text-[#0F172A]">{work.title}</h3>
 
-              <div className="md:col-span-4">
-                <p className="text-sm text-[#475569] leading-[1.7]">
-                  {work.description}
-                </p>
-              </div>
+              <p className="text-[14px] leading-[25px] text-[#475569]">
+                {work.description}
+              </p>
 
-              <div className="md:col-span-3 flex items-center justify-end gap-3">
+              <div className="flex flex-wrap gap-3">
                 {work.link && (
                   <a
                     href={work.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-[#2563EB] font-medium hover:gap-2 transition-all"
+                    className="pencil-button pencil-button-secondary"
                   >
                     詳しく見る
                     <ExternalLink size={12} />
@@ -68,19 +62,25 @@ export default function Works({ works }: { works: WorkItem[] }) {
                     href={work.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-[#D97706] font-medium hover:gap-2 transition-all"
+                    className="pencil-button pencil-button-secondary"
                   >
                     Instagramで見る
                     <ExternalLink size={12} />
                   </a>
                 )}
-                {!work.link && !work.instagram && (
-                  <span className="text-xs text-[#64748B]">対応実績あり</span>
-                )}
+              </div>
+
+              <div className="mt-auto h-[148px] w-full overflow-hidden rounded-[14px] bg-[#E2E8F0]">
+                <img
+                  src={imageMap[index % imageMap.length]}
+                  alt=""
+                  className="h-full w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02]"
+                />
               </div>
             </motion.article>
           ))}
         </div>
+        <div className="h-px bg-[#E2E8F0]" />
       </div>
     </section>
   );

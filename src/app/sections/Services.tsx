@@ -1,79 +1,138 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Monitor, GraduationCap, Settings, Sparkles } from "lucide-react";
+import { trackEvent } from "../../lib/analytics";
 
 const services = [
   {
-    icon: Monitor,
-    title: "システム環境構築",
-    description: "出退勤・在庫・案件管理システムの選定・導入、Google環境セットアップ。現場の業務フローを分析し、無駄を削減します。",
-    features: ["出退勤・在庫・案件管理システム", "Google環境セットアップ・予約管理"],
+    chip: "無料",
+    title: "30分無料相談",
+    body: "何に困っているか、AIで何ができそうかを整理します。まだ具体的に決まっていなくても大丈夫です。",
+    features: ["AIでできそうなことを整理", "無料 / 初回の入口"],
+    cta: "無料で相談する",
+    href: "https://calendar.app.google/wJsV5mJhXuLQmBnS6",
+    dark: false,
   },
   {
-    icon: GraduationCap,
-    title: "AI活用講座",
-    description: "AIツールの使い方講座の設計・実施。現場で使えるレベルまで育成し、教育担当の負担を減らします。50名規模の実績があります。",
-    features: ["AI使い方講座設計・実施", "50名規模の育成実績"],
+    chip: "60分 ¥3,000",
+    title: "60分AI活用セッション",
+    body: "ChatGPTやAIツールを一緒に触りながら、仕事に合わせた使い方をその場で作ります。",
+    features: ["通常 ¥5,000 → キャンペーン ¥3,000", "PayPay / クレジット対応"],
+    cta: "60分で試す",
+    href: "https://calendar.app.google/pR1qA4hqeMkX8kSj7",
+    dark: true,
   },
   {
-    icon: Settings,
-    title: "業務効率化",
-    description: "15年の現場経験を活かし、業務フローを見直します。エクセルでの補完作業をシステム化し、本業に集中できる環境を作ります。",
-    features: ["業務フロー分析・改善", "契約書テンプレート化・マニュアル整備"],
+    chip: "構築",
+    title: "AI/Google/予約の仕組みづくり",
+    body: "AIを使い始めたあと、必要ならGoogle環境、予約導線、情報整理、テンプレート化まで整えます。",
+    features: ["Google環境 / 予約導線", "テンプレート化 / 運用整理"],
+    cta: "構築を相談する",
+    href: "#contact",
+    dark: false,
   },
   {
-    icon: Sparkles,
-    title: "AI活用法診断",
-    description: "AIを仕事に使っているけど「これで合ってる？」と感じている方へ。60分でAI活用を診断し、改善ステップをお伝えします。",
-    features: ["60分 ¥3,000 / 30分無料お試しあり", "AI活用の現状診断＋改善アドバイス", "次のアクションが明確になる"],
+    chip: "働き方",
+    title: "キャリア・働き方相談",
+    body: "AIや仕組み化で空いた時間を、次の働き方を考える時間にもできます。看護経験をベースに現実的に整理します。",
+    features: ["キャリアの棚卸し", "働き方や次の動きの整理"],
+    cta: "働き方も相談する",
+    href: "#contact",
+    dark: false,
+    warm: true,
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 md:py-28 bg-[#FFF8F0]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
-          Services
-        </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-16">
-          4つのサービス
-        </h2>
+    <section id="services" className="bg-[#FFF8F0]">
+      <div className="pencil-section pencil-container space-y-6">
+        <div className="space-y-[10px]">
+          <p className="pencil-eyebrow">Services</p>
+          <h2 className="pencil-title">まずAIの使い方。必要なら構築まで。</h2>
+          <p className="pencil-body max-w-5xl">
+            まずはAIの使い方を、仕事に合わせて一緒に触ります。そこで必要が見えたら、Google環境・予約導線・情報整理などの構築まで対応します。
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="rounded-[14px] border border-[#E2E8F0] bg-white p-[18px_22px]">
+          <p className="text-[12px] font-black text-[#D78256]">相談の流れ</p>
+          <p className="mt-[6px] text-[18px] font-black text-[#0F172A]">
+            30分で整理 → 60分で一緒に触る → 必要なら構築
+          </p>
+          <p className="mt-[6px] text-[14px] leading-[22px] text-[#475569]">
+            入口は軽く、中心は実務で使えるAI活用。キャリア相談は、その先の選択肢として置いています。
+          </p>
+        </div>
+
+        <div className="grid gap-[18px] lg:grid-cols-2">
           {services.map((service, index) => (
-            <motion.div
+            <motion.article
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white p-8 border border-gray-100"
+              transition={{ delay: index * 0.06 }}
+              className={`flex flex-col items-start gap-[14px] rounded-[16px] border p-6 ${
+                service.dark
+                  ? "border-[#0F172A] bg-[#0F172A]"
+                  : service.warm
+                    ? "border-[#E2E8F0] bg-[#FCF9F5]"
+                    : "border-[#D7E0EA] bg-white"
+              }`}
             >
-              <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center mb-5">
-                <service.icon className="w-5 h-5 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-[#0F172A] mb-3">
+              <span
+                className={`rounded-[4px] border px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] ${
+                  service.dark
+                    ? "border-white bg-white text-[#0F172A]"
+                    : service.warm
+                      ? "border-[#0F172A] bg-[#0F172A] text-white"
+                      : "border-[#E2E8F0] bg-white text-[#0F172A]"
+                }`}
+              >
+                {service.chip}
+              </span>
+              <h3 className={`text-[22px] font-black ${service.dark ? "text-white" : "text-[#0F172A]"}`}>
                 {service.title}
               </h3>
-              <p className="text-sm text-[#475569] leading-[1.7] mb-5">
-                {service.description}
+              <p className={`text-[14px] leading-[25px] ${service.dark ? "text-[#CBD5E1]" : "text-[#475569]"}`}>
+                {service.body}
               </p>
-              <ul className="space-y-2">
-                {service.features.map((f) => (
-                  <li
-                    key={f}
-                    className="flex items-center gap-2 text-sm text-[#334155]"
-                  >
-                    <span className="w-1 h-1 bg-[#0F172A]" />
-                    {f}
-                  </li>
+              <div className={`space-y-1 text-[13px] leading-[21px] ${service.dark ? "text-[#CBD5E1]" : "text-[#475569]"}`}>
+                {service.features.map((feature) => (
+                  <p key={feature}>・{feature}</p>
                 ))}
-              </ul>
-            </motion.div>
+              </div>
+              <a
+                href={service.href}
+                target={service.href.startsWith("http") ? "_blank" : undefined}
+                rel={service.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                onClick={(event) => {
+                  trackEvent("contact_cta_click", {
+                    page_type: "home",
+                    position: `services_${index + 1}`,
+                    cta_target: service.href.startsWith("http") ? "calendar" : "contact_section",
+                  });
+                  if (service.href.startsWith("#")) {
+                    event.preventDefault();
+                    document.querySelector(service.href)?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className={`mt-auto rounded-[10px] border px-[18px] py-[14px] text-[14px] font-black transition-colors ${
+                  service.dark
+                    ? "border-white bg-white text-[#0F172A] hover:bg-[#FFF8F0]"
+                    : service.warm
+                      ? "border-[#0F172A] bg-[#0F172A] text-white hover:bg-[#1E293B]"
+                      : "border-[#E2E8F0] bg-white text-[#0F172A] hover:bg-[#FFF8F0]"
+                }`}
+              >
+                {service.cta}
+              </a>
+            </motion.article>
           ))}
         </div>
+
+        <div className="h-px bg-[#E2E8F0]" />
       </div>
     </section>
   );

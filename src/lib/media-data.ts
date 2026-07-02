@@ -1,5 +1,5 @@
-const API_KEY = "ydaf5pN5b4BqHJrtD67NXUa19qPUybJ9GWcX";
-const SERVICE_ID = "yqj3ujq81j";
+const API_KEY = process.env.MICROCMS_API_KEY ?? "";
+const SERVICE_ID = process.env.MICROCMS_SERVICE_ID ?? "";
 
 const categoryLabelMap: Record<string, string> = {
   radio: "ラジオ",
@@ -1339,6 +1339,7 @@ export function getAllMediaPosts(): MediaPost[] {
 
 // microCMS fetch
 async function fetchFromMicroCMS<T>(endpoint: string, fallback: T): Promise<T> {
+  if (!API_KEY || !SERVICE_ID) return fallback;
   try {
     const res = await fetch(
       `https://${SERVICE_ID}.microcms.io/api/v1/${endpoint}?limit=100`,

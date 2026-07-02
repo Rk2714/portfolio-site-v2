@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mic, Radio, ExternalLink, Tag, ChevronRight, ArrowRight } from "lucide-react";
+import { Mic, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { MediaPost } from "../../lib/media-data";
 import TrackedLink from "../components/TrackedLink";
@@ -10,32 +10,29 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
   const latest = posts.slice(0, 3);
 
   return (
-    <section className="py-20 md:py-28 bg-white border-y border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section className="bg-white">
+      <div className="pencil-section pencil-container space-y-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-end justify-between mb-12"
+          className="flex items-end justify-between gap-6"
         >
-          <div>
-            <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
-              Media
+          <div className="space-y-[10px]">
+            <p className="pencil-eyebrow">Media</p>
+            <h2 className="pencil-title">最新のラジオエピソード</h2>
+            <p className="pencil-body max-w-5xl">
+              ラジオやブログは、活動の空気が伝わる場所にします。最新の話題だけでなく、なぜそれをやっているのかも残していきます。
             </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A]">
-              最新のラジオエピソード
-            </h2>
           </div>
-          <Link href="/media" className="hidden md:inline-flex items-center gap-1 text-sm text-[#2563EB] font-medium hover:gap-2 transition-all">
+          <Link href="/media" className="pencil-button pencil-button-secondary hidden shrink-0 md:inline-flex">
             すべて見る
             <ArrowRight size={14} />
           </Link>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid gap-[18px] md:grid-cols-3">
           {latest.map((post, index) => {
-            const catColor = post.category === "radio" ? "#2563EB" : post.category === "guest" ? "#059669" : post.category === "appear" ? "#D97706" : "#64748B";
-            const CatIcon = post.category === "radio" ? Radio : post.category === "guest" ? Mic : post.category === "appear" ? ExternalLink : Tag;
             return (
               <motion.div
                 key={post.id}
@@ -43,7 +40,7 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-white border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                className="group overflow-hidden rounded-[16px] border border-[#E2E8F0] bg-white p-[22px] transition-colors hover:border-[#D7E0EA]"
               >
                 <TrackedLink
                   href={`/media/${post.id}`}
@@ -55,47 +52,31 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
                     category: post.category,
                     position: "latest_media",
                   }}
-                  className="block"
+                  className="flex h-full flex-col gap-4"
                 >
-                  <div className="aspect-video bg-[#FFF5EB] overflow-hidden relative">
+                  <span className="w-fit rounded-[4px] border border-[#0F172A] bg-[#0F172A] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white">
+                    {post.categoryLabel}
+                  </span>
+                  <p className="text-[12px] font-bold tracking-[0.8px] text-[#64748B]">{post.date}</p>
+                  <h3 className="text-[20px] font-black leading-[27px] text-[#0F172A] transition-opacity group-hover:opacity-70">
+                    {post.title}
+                  </h3>
+                  <p className="line-clamp-3 text-[14px] leading-[24px] text-[#475569]">
+                    {post.excerpt || "最新更新をすぐに見つけられるよう、タイトル・日付・カテゴリの順で整理しています。"}
+                  </p>
+                  <span className="pencil-button pencil-button-secondary w-fit">聴く / 読む</span>
+                  <div className="mt-auto h-[150px] overflow-hidden rounded-[14px] bg-[#F8FAFC]">
                     {post.thumbnail ? (
                       <img
                         src={post.thumbnail}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
+                      <div className="flex h-full w-full items-center justify-center text-[#CBD5E1]">
                         <Mic size={32} />
                       </div>
                     )}
-                    <div
-                      className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 bg-white/90 backdrop-blur text-xs font-bold"
-                      style={{ color: catColor }}
-                    >
-                      <CatIcon size={11} />
-                      {post.categoryLabel}
-                    </div>
-                    <div className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 backdrop-blur text-xs text-white/80">
-                      {post.date}
-                    </div>
-                  </div>
-
-                  <div className="p-5">
-                    <div className="w-8 h-1 mb-3 rounded-full" style={{ backgroundColor: catColor }} />
-                    <h3 className="text-sm md:text-base font-bold text-[#0F172A] mb-2 group-hover:opacity-70 transition-opacity leading-snug line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs text-[#475569] leading-[1.7] mb-3 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    <span
-                      className="inline-flex items-center gap-1 text-xs font-medium transition-all group-hover:gap-2"
-                      style={{ color: catColor }}
-                    >
-                      聴く
-                      <ChevronRight size={12} />
-                    </span>
                   </div>
                 </TrackedLink>
               </motion.div>
@@ -107,13 +88,14 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-10 text-center md:hidden"
+          className="text-center md:hidden"
         >
-          <Link href="/media" className="inline-flex items-center gap-1 text-sm text-[#2563EB] font-medium">
-            すべてのエピソードを見る
+          <Link href="/media" className="pencil-button pencil-button-secondary">
+            すべての更新を見る
             <ArrowRight size={14} />
           </Link>
         </motion.div>
+        <div className="h-px bg-[#E2E8F0]" />
       </div>
     </section>
   );

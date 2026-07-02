@@ -47,6 +47,8 @@ npm run build
 ```bash
 # .env.local
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+MICROCMS_API_KEY=your_microcms_api_key
+MICROCMS_SERVICE_ID=your_microcms_service_id
 ```
 
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID` が未設定でもサイトは動作する
@@ -123,14 +125,8 @@ microCMS（優先） → media-data.ts（フォールバック）
 
 ### 3.3 microCMSのAPIキーについて
 
-⚠️ **現在コード内に直書きされています。**
-公開リポジトリのため、本番運用前に `.env.local` に移すことを推奨。
-
-```bash
-# .env.local
-MICROCMS_API_KEY=ydaf5pN5b4BqHJrtD67NXUa19qPUybJ9GWcX
-MICROCMS_SERVICE_ID=yqj3ujq81j
-```
+APIキーとサービスIDは `.env.local` に入れてください。
+公開リポジトリでも安全に扱えるよう、コード直書きはしません。
 
 ---
 

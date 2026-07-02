@@ -80,18 +80,18 @@ export default async function MediaPage({ searchParams }: Props) {
       <Navigation />
       <main>
         {/* Hero */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-white border-b border-gray-100">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <p className="text-xs text-[#64748B] mb-4 tracking-wider">
+        <section className="bg-white pt-[88px]">
+          <div className="pencil-section mx-auto max-w-[900px] border-b border-[#E2E8F0]">
+            <p className="pencil-eyebrow mb-4">
               Media & Notes
             </p>
-            <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] leading-tight mb-6">
+            <h1 className="pencil-title mb-6">
               {activeCategoryOption.heroTitle}
             </h1>
-            <p className="text-sm md:text-base text-[#475569] leading-[1.8] max-w-2xl">
+            <p className="pencil-body max-w-2xl">
               {activeCategoryOption.heroDescription}
             </p>
-            <div className="mt-6 inline-flex items-center gap-2 px-3 py-2 bg-[#FFF8F0] border border-gray-200 text-xs text-[#475569]">
+            <div className="mt-6 inline-flex items-center gap-2 rounded-[4px] border border-[#E2E8F0] bg-[#FFF8F0] px-3 py-2 text-xs text-[#475569]">
               <span className="font-bold text-[#0F172A]">{filteredPosts.length}件</span>
               <span>表示中</span>
               <span className="text-[#CBD5E1]">/</span>
@@ -101,23 +101,23 @@ export default async function MediaPage({ searchParams }: Props) {
         </section>
 
         {/* Category Filter */}
-        <section className="py-8 bg-gradient-to-r from-[#FAFAFA] to-white border-b border-gray-100">
+        <section className="bg-white py-8 border-b border-[#E2E8F0]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <MediaCategoryFilter items={filterItems} />
           </div>
         </section>
 
         {/* Blog Posts */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="bg-white py-16 md:py-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             {filteredPosts.length > 0 ? (
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-6">
                 {filteredPosts.map((post) => (
                   <MediaCard key={post.id} post={post} />
                 ))}
               </div>
             ) : (
-              <div className="border border-dashed border-gray-200 bg-[#FCFCFD] px-6 py-10 text-center">
+              <div className="rounded-[4px] border border-dashed border-[#E2E8F0] bg-[#FCF9F5] px-6 py-10 text-center">
                 <p className="text-sm font-bold text-[#0F172A] mb-2">このカテゴリの記事はまだありません。</p>
                 <p className="text-xs text-[#64748B]">別カテゴリに切り替えると、公開済みのラジオや出演回を確認できます。</p>
               </div>
@@ -139,7 +139,7 @@ export default async function MediaPage({ searchParams }: Props) {
                 position: "media_list_footer",
                 cta_target: "email",
               }}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#0F172A] text-white text-sm font-bold hover:bg-[#1E293B] transition-colors"
+              className="pencil-button"
             >
               <ExternalLink size={14} />
               メールで連絡する

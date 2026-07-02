@@ -55,12 +55,12 @@ export const careerTimeline: TimelineItem[] = [
 
 export const siteProfile = {
   name: "金城竜弥",
-  title: "看護師 / AI活用アドバイザー / キャリアの相談所 / ラジオパーソナリティ",
-  bio: "看護師15年やってきてわかったのは、現場の「これなんとかならん？」をスルーすると、あとで倍疲れるってこと。AIの使い方教えるのも、システム整えるのも、キャリアの話聞くのも、全部「困ったを減らす」ためにやってます。一緒に方法を探しましょう。",
+  title: "AI活用アドバイザー / 仕組みづくり / キャリア相談",
+  bio: "看護の現場からスタートして、AIの使い方、Googleまわりの整備、予約や導線の整理までやっています。派手なことより、ちゃんと回ること。仕事の流れを少し軽くして、考える余白をつくるのが役目です。",
   location: "沖縄県中城村",
-  heroTagline1: "「どうするとよくなるか」",
-  heroTagline2: "で立ち止まったら、相談してほしい。",
-  heroDescription: "15年看護師やってきて、AIもシステムもキャリア相談も、「現場の不便」をどうにかするためにやってます。難しい話は抜きで、まずはお茶でも飲みながら話しませんか？",
+  heroTagline1: "AIの使い方を、",
+  heroTagline2: "仕事に合わせて教えます。",
+  heroDescription: "相談だけでも、仕組みづくりでも。看護の現場で育った感覚をベースに、AI・Google・予約導線を、無理なく使える形に整えます。",
 };
 
 export const siteContacts = {
@@ -72,28 +72,27 @@ export const siteContacts = {
 export const defaultWorks = [
   {
     id: "1",
-    title: "PersonaSight",
-    category: "Webアプリケーション",
-    description: "多角的ペルソナ視点のビジネスアイデア検証アプリ。Next.js + TypeScript + Tailwind CSSで開発。1,000人の仮想ペルソナからフィードバックを収集可能。",
-    link: "https://personasight.vercel.app",
+    title: "AI活用の初回整理",
+    category: "相談設計",
+    description: "30分の無料相談で、今どこが詰まっているかを整理。AIを入れるべきか、Googleを整えるべきか、まず見極めるところから始めます。",
   },
   {
     id: "2",
-    title: "AI導入・業務効率化支援",
-    category: "テクノロジー",
-    description: "医療現場へのAI議事録サービス導入支援、契約書管理のテンプレート化、Google環境セットアップ。アナログ運用をデジタル化し、作業時間を5分の1に短縮した実績あり。",
+    title: "Google / 予約導線の整備",
+    category: "仕組みづくり",
+    description: "Googleカレンダーや予約導線、支払いリンクの整理など。リンクが増えても迷わない形に整えます。",
   },
   {
     id: "3",
-    title: "AI人材育成講座",
+    title: "AI活用講座",
     category: "AI・人材育成",
-    description: "現場で使えるAI活用の講座設計・実施。50名規模の育成実績。受講者からは「仕事に生かすAIの視野が広がった」との声をいただいている。",
+    description: "「使い方がわからない」を前提に、現場で使う順番から整理する講座設計。個人向けでもチーム向けでも対応します。",
   },
   {
     id: "4",
-    title: "子ども食堂運営",
-    category: "地域活動",
-    description: "中城村で子ども食堂を運営。地域の子どもたちに無料または低額で食事を提供し、学習支援も実施。地域コミュニティの拠点として活動中。",
+    title: "キャリア相談",
+    category: "対話",
+    description: "看護がベースで、いろいろ転々としてきた経験をもとに、働き方や次の一歩も一緒に整理します。",
     instagram: "https://www.instagram.com/p/DZG7LxMEmAi/",
   },
 ];

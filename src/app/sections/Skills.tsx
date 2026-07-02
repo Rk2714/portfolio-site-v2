@@ -77,7 +77,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
   return (
     <section id="skills" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+        <p className="text-xs text-[#64748B] tracking-wider mb-3">
           Skills
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
@@ -92,7 +92,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-8 p-8 bg-[#FFF8F0] border border-gray-100"
+          className="mb-8 p-8 bg-[#F8FAFC] border border-gray-200 rounded-[24px]"
         >
           <div className="grid md:grid-cols-12 gap-8 items-start">
             <div className="md:col-span-4">
@@ -136,7 +136,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
                 {category.skills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="px-3 py-1.5 bg-[#FFF8F0] text-xs text-[#334155]"
+                    className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-[#334155]"
                   >
                     {skill.name}
                   </span>
@@ -152,7 +152,7 @@ export default function Skills({ skills }: { skills?: SkillData[] }) {
             <span className="px-3 py-1.5 bg-[#0F172A] text-white text-xs">
               日本語（母語）
             </span>
-            <span className="px-3 py-1.5 bg-[#FFF8F0] border border-gray-200 text-xs text-[#334155]">
+            <span className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-[#334155]">
               英語（医療プロジェクト対応）
             </span>
           </div>

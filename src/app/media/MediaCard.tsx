@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronRight, Copy, ExternalLink, Mic, Radio, Tag } from "lucide-react";
+import { Check, Copy, ExternalLink, Mic } from "lucide-react";
 import type { MediaPost } from "../../lib/media-data";
 import { trackEvent } from "../../lib/analytics";
 import TrackedLink from "../components/TrackedLink";
@@ -15,17 +15,6 @@ export default function MediaCard({ post }: Props) {
   const shareUrl = `https://portfolio-site-xi-eight-33.vercel.app/media/${post.id}`;
   const encodedTitle = encodeURIComponent(post.title);
   const encodedUrl = encodeURIComponent(shareUrl);
-  const catColor =
-    post.category === "radio"
-      ? "#2563EB"
-      : post.category === "guest"
-        ? "#059669"
-        : post.category === "appear"
-          ? "#D97706"
-          : "#64748B";
-  const CatIcon =
-    post.category === "radio" ? Radio : post.category === "guest" ? Mic : post.category === "appear" ? ExternalLink : Tag;
-
   const copyShareUrl = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
@@ -52,7 +41,7 @@ export default function MediaCard({ post }: Props) {
   };
 
   return (
-    <article className="group bg-white border border-gray-100 hover:shadow-lg transition-all duration-300 overflow-hidden">
+    <article className="group overflow-hidden rounded-[16px] border border-[#E2E8F0] bg-white p-[22px] transition-colors duration-300 hover:border-[#D7E0EA]">
       <TrackedLink
         href={`/media/${post.id}`}
         eventName="media_card_click"
@@ -63,46 +52,33 @@ export default function MediaCard({ post }: Props) {
           category: post.category,
           position: "media_list_grid",
         }}
-        className="block hover:-translate-y-1 transition-transform duration-300"
+        className="flex flex-col gap-4"
       >
-        <div className="aspect-video bg-[#FFF5EB] overflow-hidden relative">
+        <span className="w-fit rounded-[4px] border border-[#0F172A] bg-[#0F172A] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white">
+          {post.categoryLabel}
+        </span>
+        <p className="text-[12px] font-bold tracking-[0.8px] text-[#64748B]">{post.date}</p>
+        <h2 className="line-clamp-2 text-[20px] font-black leading-[27px] text-[#0F172A] transition-opacity group-hover:opacity-70">
+          {post.title}
+        </h2>
+        <p className="line-clamp-3 text-[14px] leading-[24px] text-[#475569]">{post.excerpt}</p>
+        <span className="pencil-button pencil-button-secondary w-fit">聴く / 読む</span>
+        <div className="h-[150px] overflow-hidden rounded-[14px] bg-[#F8FAFC]">
           {post.thumbnail ? (
             <img
               src={post.thumbnail}
               alt={post.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
+            <div className="flex h-full w-full items-center justify-center text-[#CBD5E1]">
               <Mic size={32} />
             </div>
           )}
-          <div
-            className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 bg-white/90 backdrop-blur text-xs font-bold"
-            style={{ color: catColor }}
-          >
-            <CatIcon size={11} />
-            {post.categoryLabel}
-          </div>
-          <div className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 backdrop-blur text-xs text-white/80">
-            {post.date}
-          </div>
-        </div>
-
-        <div className="p-5">
-          <div className="w-8 h-1 mb-3 rounded-full" style={{ backgroundColor: catColor }} />
-          <h2 className="text-base md:text-lg font-bold text-[#0F172A] mb-2 group-hover:opacity-70 transition-opacity leading-snug line-clamp-2">
-            {post.title}
-          </h2>
-          <p className="text-xs text-[#475569] leading-[1.8] mb-3 line-clamp-3">{post.excerpt}</p>
-          <span className="inline-flex items-center gap-1 text-xs font-medium transition-all group-hover:gap-2" style={{ color: catColor }}>
-            続きを読む
-            <ChevronRight size={12} />
-          </span>
         </div>
       </TrackedLink>
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 py-4 border-t border-gray-100 bg-[#FCFCFD]">
+      <div className="mt-5 flex flex-col gap-3 border-t border-[#E2E8F0] pt-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-[#64748B]">この回をそのまま共有できます。</p>
         <div className="flex flex-wrap items-center gap-2">
           <a
@@ -119,7 +95,7 @@ export default function MediaCard({ post }: Props) {
                 share_type: "x",
               });
             }}
-            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-200 bg-white text-xs font-medium text-[#475569] hover:bg-[#FFF8F0] transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2 text-xs font-bold text-[#475569] transition-colors hover:bg-[#FFF8F0]"
           >
             <span className="font-bold text-[#0F172A] text-[10px]">𝕏</span>
             Xでシェア
@@ -138,7 +114,7 @@ export default function MediaCard({ post }: Props) {
                 share_type: "line",
               });
             }}
-            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-200 bg-white text-xs font-medium text-[#475569] hover:bg-[#FFF8F0] transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2 text-xs font-bold text-[#475569] transition-colors hover:bg-[#FFF8F0]"
           >
             <ExternalLink size={12} />
             LINEで送る
@@ -146,7 +122,7 @@ export default function MediaCard({ post }: Props) {
           <button
             type="button"
             onClick={copyShareUrl}
-            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-200 bg-white text-xs font-medium text-[#475569] hover:bg-[#FFF8F0] transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2 text-xs font-bold text-[#475569] transition-colors hover:bg-[#FFF8F0]"
           >
             {copied ? <Check size={12} className="text-[#059669]" /> : <Copy size={12} />}
             {copied ? "コピーしました" : "URLコピー"}

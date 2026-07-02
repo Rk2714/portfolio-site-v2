@@ -27,9 +27,9 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 md:py-28 bg-[#FFF8F0]">
+    <section className="py-20 md:py-28 bg-[#F8FAFC]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+        <p className="text-xs text-[#64748B] tracking-wider mb-3">
           Voice
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
@@ -47,7 +47,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white p-8 border border-gray-100"
+              className="bg-white p-8 border border-gray-200 rounded-[24px]"
             >
               <p className="text-sm text-[#334155] leading-[1.8] mb-8">
                 「{t.text}」

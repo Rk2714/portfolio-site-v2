@@ -15,10 +15,10 @@ interface FilterItem {
 export default function MediaCategoryFilter({ items }: { items: FilterItem[] }) {
   const colorMap: Record<MediaCategoryFilter, string> = {
     all: "bg-[#0F172A] text-white hover:bg-[#1E293B] border-[#0F172A]",
-    radio: "bg-[#2563EB]/10 text-[#2563EB] hover:bg-[#2563EB]/20 border-[#2563EB]/20",
-    guest: "bg-[#059669]/10 text-[#059669] hover:bg-[#059669]/20 border-[#059669]/20",
-    appear: "bg-[#D97706]/10 text-[#D97706] hover:bg-[#D97706]/20 border-[#D97706]/20",
-    note: "bg-[#64748B]/10 text-[#64748B] hover:bg-[#64748B]/20 border-[#64748B]/20",
+    radio: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
+    guest: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
+    appear: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
+    note: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
   };
 
   return (
@@ -35,12 +35,12 @@ export default function MediaCategoryFilter({ items }: { items: FilterItem[] }) 
                 position: "media_list_filter",
               });
             }}
-            className={`inline-flex items-center gap-2 px-4 py-2 border text-xs font-medium transition-all ${
-              item.active ? colorMap[item.key] : "bg-white text-[#475569] border-gray-200 hover:border-gray-300"
+            className={`inline-flex items-center gap-2 rounded-[4px] border px-4 py-2 text-xs font-bold transition-all ${
+              item.active ? colorMap[item.key] : "bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#FFF8F0]"
             }`}
           >
             <span>{item.label}</span>
-            <span className={`min-w-5 px-1 py-0.5 text-[10px] text-center ${item.active ? "bg-white/20" : "bg-[#F8FAFC]"}`}>
+            <span className={`min-w-5 px-1 py-0.5 text-center text-[10px] ${item.active ? "bg-white/20" : "bg-[#FFF8F0]"}`}>
               {item.count}
             </span>
           </Link>

@@ -16,35 +16,47 @@ interface Profile {
 export default function About({ profile }: { profile?: Profile | null }) {
   const bio =
     profile?.bio ||
-    "看護師15年やってきてわかったのは、現場の「これなんとかならん？」をスルーすると、あとで倍疲れるってこと。AIの使い方教えるのも、システム整えるのも、キャリアの話聞くのも、全部「困ったを減らす」ためにやってます。";
+    "看護の現場から始まって、AI、Google、予約導線、発信、地域活動まで。やってきたことは散らばって見えるけど、全部『仕事を少し楽にする』ためにつながっています。";
   const location = profile?.location || "沖縄県中城村";
 
   return (
-    <section id="about" className="py-20 md:py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Top: Photo + Bio */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start mb-20">
+    <section id="about" className="bg-white">
+      <div className="pencil-section pencil-container space-y-6">
+        <div className="space-y-[10px]">
+          <p className="pencil-eyebrow">About</p>
+          <h2 className="pencil-title max-w-6xl">
+            看護の現場がベース。いろいろ転々としてきたから、相談に乗れることがある。
+          </h2>
+          <p className="pencil-body max-w-5xl">
+            最初からAIの人だったわけではありません。看護の現場をベースに、働く場所や役割をいろいろ経験してきました。だからAIの話も、きれいな理論より「いまの仕事でどう使えるか」から考えます。
+          </p>
+        </div>
+
+        <div className="grid items-start gap-7 lg:grid-cols-[420px_1fr]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-5"
+            className="rounded-[18px] border border-[#E2E8F0] bg-[#FCF9F5] p-[18px]"
           >
-            <div className="aspect-[3/4] bg-[#E2E8F0] relative">
+            <div className="h-[380px] overflow-hidden rounded-[16px] bg-[#E2E8F0]">
               {profile?.imageUrl ? (
                 <img
                   src={profile.imageUrl}
                   alt={profile.name || "金城竜弥"}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               ) : (
                 <img
                   src="/images/business.jpg"
                   alt="金城竜弥"
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               )}
             </div>
+            <p className="mt-3 text-[12px] leading-[18px] text-[#64748B]">
+              差し替え予定: 看護ベース / 転々とした経歴が伝わる写真
+            </p>
           </motion.div>
 
           <motion.div
@@ -52,39 +64,35 @@ export default function About({ profile }: { profile?: Profile | null }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-7 lg:pt-8"
+            className="space-y-[18px]"
           >
-            <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
-              About
-            </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-6 leading-snug">
-              現場を知るからこそ、
-              <br />
-              最適な解決策を提案できる
-            </h2>
-            <p className="text-sm text-[#475569] leading-[1.9] mb-4">{bio}</p>
+            <p className="text-[16px] leading-[29px] text-[#475569]">{bio}</p>
 
-              <div className="mb-8">
-                <Link
-                  href="/media"
-                  className="inline-flex items-center gap-2 text-sm text-[#2563EB] font-medium hover:gap-3 transition-all"
-                >
-                  ラジオパーソナリティとしてのメディア活動を見る
-                  <ArrowRight size={13} />
-                </Link>
-              </div>
+            <div className="flex flex-wrap gap-3">
+              <span className="pencil-chip bg-white">看護ベース</span>
+              <span className="pencil-chip bg-white">AI活用</span>
+              <span className="pencil-chip bg-white">ラジオ / 子ども食堂</span>
+            </div>
 
-            <div className="flex items-center gap-2 text-[#475569] mb-10">
+            <Link
+              href="/media"
+              className="pencil-button pencil-button-secondary"
+            >
+              ラジオパーソナリティとしてのメディア活動を見る
+              <ArrowRight size={13} />
+            </Link>
+
+            <div className="flex items-center gap-2 text-[#475569]">
               <MapPin size={14} />
               <span className="text-sm">{location}在住</span>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="border-t-2 border-[#0F172A] pt-4">
+              <div className="border-t border-[#0F172A] pt-4">
                 <p className="text-xl font-bold text-[#0F172A]">15年</p>
                 <p className="text-xs text-[#64748B] mt-1">看護師・現場経験</p>
               </div>
-              <div className="border-t-2 border-[#0F172A] pt-4">
+              <div className="border-t border-[#0F172A] pt-4">
                 <p className="text-xl font-bold text-[#0F172A]">50名+</p>
                 <p className="text-xs text-[#64748B] mt-1">AI人材育成</p>
               </div>
@@ -92,55 +100,35 @@ export default function About({ profile }: { profile?: Profile | null }) {
           </motion.div>
         </div>
 
-        {/* Bottom: Career Timeline */}
-        <div className="max-w-3xl mx-auto">
+        <div className="pt-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="mb-6"
           >
-            <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
-              Career
-            </p>
-            <h3 className="text-xl md:text-2xl font-bold text-[#0F172A]">
-              ここに至るまでの道のり
-            </h3>
+            <p className="pencil-eyebrow">Career</p>
+            <h3 className="mt-[10px] text-[24px] font-black text-[#0F172A]">ここまでの流れ</h3>
           </motion.div>
 
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-[18px] md:left-6 top-0 bottom-0 w-0.5 bg-[#D97706]/30" />
-
-            <div className="space-y-10">
-              {careerTimeline.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative pl-14 md:pl-16"
-                >
-                  {/* Circle marker */}
-                  <div className="absolute left-[10px] md:left-[18px] top-1 w-[18px] h-[18px] rounded-full bg-[#D97706] border-4 border-white shadow z-10" />
-
-                  {/* Year badge */}
-                  <div className="inline-block px-3 py-1 bg-[#D97706]/10 text-[#D97706] text-xs font-bold rounded-full mb-2">
-                    {item.year}
-                  </div>
-
-                  <h4 className="text-base md:text-lg font-bold text-[#0F172A] mb-1">
-                    {item.title}
-                  </h4>
-                  <p className="text-sm text-[#475569] leading-relaxed">
-                    {item.subtitle}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+          <div className="space-y-0">
+            {careerTimeline.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.04 }}
+                className="grid gap-2 border-b border-[#E2E8F0] py-4 md:grid-cols-[120px_220px_1fr]"
+              >
+                <p className="text-[13px] font-bold text-[#D78256]">{item.year}</p>
+                <h4 className="text-[16px] font-black text-[#0F172A]">{item.title}</h4>
+                <p className="text-[14px] leading-[24px] text-[#475569]">{item.subtitle}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
+        <div className="h-px bg-[#E2E8F0]" />
       </div>
     </section>
   );

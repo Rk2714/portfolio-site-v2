@@ -28,7 +28,7 @@ export default function FAQ() {
   return (
     <section className="py-16 md:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+        <p className="text-xs text-[#64748B] tracking-wider mb-3">
           FAQ
         </p>
         <h2 className="text-xl md:text-2xl font-bold text-[#0F172A] mb-8">
@@ -40,7 +40,7 @@ export default function FAQ() {
             <div key={index} className="border-t border-gray-200 last:border-b">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-start justify-between py-4 text-left hover:bg-[#FFF8F0] transition-colors"
+                className="w-full flex items-start justify-between py-4 text-left hover:bg-[#F8FAFC] transition-colors"
               >
                 <span className="text-sm font-medium text-[#0F172A] pr-6">
                   {faq.q}
