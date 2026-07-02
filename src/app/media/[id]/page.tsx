@@ -290,13 +290,13 @@ export default async function MediaPostPage({ params }: Props) {
               {post.guests &&
                 post.guests.length > 0 &&
                 post.guests[0].instagramPost && (
-                  <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3">
+                  <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3 overflow-hidden">
                     <Camera size={20} className="text-[#0F172A]" />
                     <p className="text-[18px] font-black text-[#0F172A]">Instagram</p>
                     <p className="text-[14px] leading-[1.7] text-[#475569]">
                       ゲストの投稿をInstagramで見る。
                     </p>
-                    <div className="mt-auto">
+                    <div className="w-full">
                       <InstagramEmbed url={post.guests[0].instagramPost} />
                     </div>
                   </div>

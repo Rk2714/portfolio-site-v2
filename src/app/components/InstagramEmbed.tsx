@@ -5,8 +5,7 @@
  * 
  * Instagramのpublic oEmbed APIを使ってHTMLを取得し表示する。
  * 従来のblockquote + embed.js方式はInstagramが非推奨化したため、
- * 公式oEmbed API（https://instaembed.vercel.app 等）を経由して
- * iframe表示する方式に変更。
+ * 公式oEmbed APIを経由してiframe表示する方式に変更。
  * 
  * 参考: https://developers.facebook.com/docs/instagram/oembed
  */
@@ -27,6 +26,7 @@ export default function InstagramEmbed({
   const [embedHtml, setEmbedHtml] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const mounted = useRef(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!url) return;
@@ -62,7 +62,6 @@ export default function InstagramEmbed({
             }
           })
           .catch(() => {
-            // 最終手段: iframe直接埋め込み
             if (mounted.current) setError(true);
           });
       });
@@ -72,34 +71,46 @@ export default function InstagramEmbed({
     };
   }, [url, caption, maxWidth]);
 
+  // InstagramのoEmbed HTMLをパースしてwidth/heightを制限する
+  useEffect(() => {
+    if (!embedHtml || !containerRef.current) return;
+    const container = containerRef.current;
+    // oEmbedから返ってくるiframeのwidth属性を制限
+    const iframe = container.querySelector("iframe");
+    if (iframe) {
+      iframe.style.maxWidth = "100%";
+      iframe.style.width = "100%";
+      iframe.style.height = "auto";
+    }
+  }, [embedHtml]);
+
   // oEmbed APIが取得できなかった場合のフォールバック
   if (error) {
-    // URLからIDを抽出してiframeで埋め込み
     const match = url.match(/\/p\/([^/?]+)/);
     const postId = match ? match[1] : null;
     if (postId) {
       return (
-        <div className="my-4 flex justify-center">
+        <div className="flex justify-center w-full">
           <iframe
             src={`https://www.instagram.com/p/${postId}/embed/${caption ? "captioned/" : ""}`}
-            width="400"
-            height="480"
+            width="100%"
+            height="400"
             frameBorder="0"
             scrolling="no"
             allowTransparency={true}
             className="max-w-full rounded-lg shadow-sm"
-            style={{ maxWidth: maxWidth }}
+            style={{ maxWidth: "100%" }}
           />
         </div>
       );
     }
     return (
-      <div className="my-4 p-4 bg-[#FFF8F0] border border-gray-200 text-center">
+      <div className="p-3 bg-[#FFF8F0] border border-gray-200 text-center rounded">
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-[#2563EB] font-medium hover:underline"
+          className="text-xs text-[#2563EB] font-medium hover:underline"
         >
           Instagramで見る ↗
         </a>
@@ -109,8 +120,8 @@ export default function InstagramEmbed({
 
   if (!embedHtml) {
     return (
-      <div className="my-4 flex justify-center">
-        <div className="w-full max-w-[540px] h-[400px] bg-gray-50 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="flex justify-center w-full">
+        <div className="w-full h-[300px] bg-gray-50 animate-pulse rounded flex items-center justify-center">
           <span className="text-xs text-[#94A3B8]">読み込み中...</span>
         </div>
       </div>
@@ -120,7 +131,8 @@ export default function InstagramEmbed({
   // oEmbedから返ってきたHTMLをdangerouslySetInnerHTMLで挿入
   return (
     <div
-      className="my-4 flex justify-center"
+      ref={containerRef}
+      className="flex justify-center w-full overflow-hidden [&_iframe]:!max-w-full [&_iframe]:!w-full"
       dangerouslySetInnerHTML={{ __html: embedHtml }}
     />
   );
