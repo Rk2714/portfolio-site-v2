@@ -1450,7 +1450,7 @@ async function fetchFromMicroCMS<T>(endpoint: string, fallback: T): Promise<T> {
 
 export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
   const data = await fetchFromMicroCMS<MicroCMSListResponse>("media", { contents: [] });
-  if (!data.contents || data.contents.length === 0) return mediaPosts;
+  if (!data.contents || data.contents.length === 0) return sortByDateDesc(mediaPosts);
 
   const cmsIds = new Set(data.contents.map((item) => item.id));
   const posts = data.contents.map((item) => {
