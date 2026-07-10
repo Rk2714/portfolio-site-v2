@@ -34,7 +34,7 @@ export const careerTimeline: TimelineItem[] = [
   {
     year: "2024",
     title: "Yazirusi 設立",
-    subtitle: "AI×医療を軸に、コンサルタントとして独立",
+    subtitle: "医療・介護現場の業務改善とAI活用を支援するYazirusiを設立",
   },
   {
     year: "2025〜",
@@ -44,7 +44,7 @@ export const careerTimeline: TimelineItem[] = [
   {
     year: "2026〜",
     title: "ラジオパーソナリティ開始",
-    subtitle: "FM21「イエローかっし〜」で医療・DX・キャリア情報を発信",
+    subtitle: "FM21「イエローかっし〜」で医療・働き方・地域活動の話を発信",
   },
   {
     year: "2026〜",
@@ -55,16 +55,16 @@ export const careerTimeline: TimelineItem[] = [
 
 export const siteProfile = {
   name: "金城竜弥",
-  title: "AI活用アドバイザー / 仕組みづくり / キャリア相談",
-  bio: "看護の現場からスタートして、AIの使い方、Googleまわりの整備、予約や導線の整理までやっています。派手なことより、ちゃんと回ること。仕事の流れを少し軽くして、考える余白をつくるのが役目です。",
+  title: "医療・介護現場の業務改善パートナー / Yazirusi 代表",
+  bio: "看護・訪問看護・オンライン診療の現場で、記録、連絡、情報共有、データ活用にまつわるつまずきを見てきました。AIは目的ではなく、現場を少し楽にするための道具。ラジオや地域活動も含めて、人と現場に次の一歩をつくることを大切にしています。",
   location: "沖縄県中城村",
-  heroTagline1: "AIの使い方を、",
-  heroTagline2: "仕事に合わせて教えます。",
-  heroDescription: "相談だけでも、仕組みづくりでも。看護の現場で育った感覚をベースに、AI・Google・予約導線を、無理なく使える形に整えます。",
+  heroTagline1: "医療・介護の現場に、",
+  heroTagline2: "次の一歩をつくります。",
+  heroDescription: "訪問看護、病棟、オンライン診療、地域活動。いろいろな現場で見てきたつまずきをもとに、記録・連絡・情報共有・AI活用を、現場に合わせて整えます。",
 };
 
 export const siteContacts = {
-  email: "ryuyakinjo@gmail.com",
+  email: "ryuyakinjo@yazirusi.com",
   location: "沖縄県中城村",
   calendly: "https://calendar.google.com/calendar/appointments/AcZssZ1zsY3H7WMckAhw6Ddz4aqb82i9YaIRgmZGUmk=?gv=true",
 };
@@ -72,27 +72,27 @@ export const siteContacts = {
 export const defaultWorks = [
   {
     id: "1",
-    title: "AI活用の初回整理",
+    title: "現場課題の初回整理",
     category: "相談設計",
-    description: "30分の無料相談で、今どこが詰まっているかを整理。AIを入れるべきか、Googleを整えるべきか、まず見極めるところから始めます。",
+    description: "30分の無料相談で、記録・連絡・ファイル管理・AI活用のどこが詰まっているかを一緒に整理します。",
   },
   {
     id: "2",
-    title: "Google / 予約導線の整備",
+    title: "情報共有・導線の整備",
     category: "仕組みづくり",
-    description: "Googleカレンダーや予約導線、支払いリンクの整理など。リンクが増えても迷わない形に整えます。",
+    description: "Google Drive、議事録、連絡ルール、予約導線など。情報の置き場所が増えても迷わない形に整えます。",
   },
   {
     id: "3",
-    title: "AI活用講座",
+    title: "AI活用・マニュアル整備",
     category: "AI・人材育成",
-    description: "「使い方がわからない」を前提に、現場で使う順番から整理する講座設計。個人向けでもチーム向けでも対応します。",
+    description: "音声入力、記録下書き、マニュアル作成など、現場で使う順番から整理します。個人向けでもチーム向けでも対応します。",
   },
   {
     id: "4",
     title: "キャリア相談",
     category: "対話",
-    description: "看護がベースで、いろいろ転々としてきた経験をもとに、働き方や次の一歩も一緒に整理します。",
+    description: "看護・オンライン診療・地域活動で見てきた経験をもとに、働き方や次の一歩も一緒に整理します。",
     instagram: "https://www.instagram.com/p/DZG7LxMEmAi/",
   },
 ];
@@ -124,26 +124,26 @@ export const defaultSkills = [
   },
   {
     category: "医療・ヘルスケア",
-    name: "看護師業務 15年",
+    name: "看護師業務 約15年",
   },
   {
-    category: "DX・システム構築",
+    category: "業務改善・仕組みづくり",
     name: "出退勤管理",
   },
   {
-    category: "DX・システム構築",
+    category: "業務改善・仕組みづくり",
     name: "在庫管理",
   },
   {
-    category: "DX・システム構築",
+    category: "業務改善・仕組みづくり",
     name: "案件管理",
   },
   {
-    category: "DX・システム構築",
+    category: "業務改善・仕組みづくり",
     name: "Google環境構築",
   },
   {
-    category: "DX・システム構築",
+    category: "業務改善・仕組みづくり",
     name: "ツール連携",
   },
   {
@@ -196,7 +196,7 @@ export const hosts: Record<string, Host> = {
   },
   kinjo: {
     name: "金城竜弥",
-    role: "AIコンサルタント / Yazirusi 代表",
+    role: "医療・介護現場の業務改善パートナー / Yazirusi 代表",
     links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
   },
   kinchan: {

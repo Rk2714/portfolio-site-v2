@@ -90,11 +90,11 @@ export default async function MediaPostPage({ params }: Props) {
         {/* RADIO DETAIL Section (Hero)     */}
         {/* ============================== */}
         <section className="bg-white pt-[88px]">
-          <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
+          <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
             {/* Breadcrumb */}
             <Link
               href="/media"
-              className="inline-flex items-center gap-1 text-xs text-[#64748B] hover:text-[#0F172A] transition-colors mb-8"
+              className="inline-flex items-center gap-1 text-xs text-[#a0a09c] hover:text-[#111111] transition-colors mb-8"
             >
               <ChevronLeft size={14} />
               メディア一覧に戻る
@@ -107,12 +107,12 @@ export default async function MediaPostPage({ params }: Props) {
               </span>
             </div>
 
-            <h1 className="text-[30px] font-black leading-[1.12] text-[#0F172A] mb-4">
+            <h1 className="text-[30px] font-black leading-[1.12] text-[#111111] mb-4">
               {post.title}
             </h1>
 
             {post.excerpt && (
-              <p className="text-[14px] leading-[1.68] text-[#475569] max-w-2xl mb-8">
+              <p className="text-[14px] leading-[1.68] text-[#7b7b78] max-w-2xl mb-8">
                 {post.excerpt}
               </p>
             )}
@@ -122,20 +122,20 @@ export default async function MediaPostPage({ params }: Props) {
               {/* Left: Detail Copy */}
               <div className="flex-1 flex flex-col gap-4">
                 {/* Category Pill */}
-                <span className="inline-flex items-center gap-2 rounded-[4px] border border-[#0F172A] bg-white px-3 py-2 text-xs font-bold text-[#0F172A] w-fit">
+                <span className="inline-flex items-center gap-2 rounded-[4px] border border-[#3E2A1F] bg-white px-3 py-2 text-xs font-bold text-[#111111] w-fit">
                   <CategoryIcon size={12} />
                   {post.categoryLabel}
                 </span>
 
                 {/* Detail Meta */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-[4px] border border-[#E2E8F0] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#64748B]">
+                  <span className="rounded-[4px] border border-[#dedbd6] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#a0a09c]">
                     {post.date}
                   </span>
                   {post.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-[4px] border border-[#E2E8F0] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#64748B]"
+                      className="rounded-[4px] border border-[#dedbd6] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#a0a09c]"
                     >
                       #{tag}
                     </span>
@@ -144,7 +144,7 @@ export default async function MediaPostPage({ params }: Props) {
 
                 {/* Theme / Description */}
                 {post.theme && (
-                  <p className="text-[14px] leading-[1.7] text-[#475569]">
+                  <p className="text-[14px] leading-[1.7] text-[#7b7b78]">
                     {post.theme}
                   </p>
                 )}
@@ -164,7 +164,7 @@ export default async function MediaPostPage({ params }: Props) {
               {/* Right: YouTube Player */}
               {post.youtubeUrl && (
                 <div className="w-full md:w-[340px] flex-shrink-0">
-                  <div className="aspect-video md:aspect-[340/200] bg-[#F8FAFC] overflow-hidden rounded-[4px] border border-[#E2E8F0]">
+                  <div className="aspect-video md:aspect-[340/200] bg-[#faf9f6] overflow-hidden rounded-[4px] border border-[#dedbd6]">
                     <iframe
                       src={post.youtubeUrl}
                       title={post.title}
@@ -184,11 +184,11 @@ export default async function MediaPostPage({ params }: Props) {
         {/* ============================== */}
         {post.guests && post.guests.length > 0 && post.guests[0].takeaways && post.guests[0].takeaways.length > 0 && (
           <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
+            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
               {/* 要点 Header */}
               <div className="mb-6">
                 <p className="pencil-eyebrow mb-2">POINTS</p>
-                <h2 className="text-[34px] font-black leading-[1.12] text-[#0F172A]">
+                <h2 className="text-[34px] font-black leading-[1.12] text-[#111111]">
                   この回のポイント
                 </h2>
               </div>
@@ -201,10 +201,10 @@ export default async function MediaPostPage({ params }: Props) {
                   return (
                     <div
                       key={i}
-                      className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3"
+                      className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3"
                     >
-                      <Icon size={18} className="text-[#0F172A]" />
-                      <p className="text-[15px] leading-[1.7] text-[#475569]">
+                      <Icon size={18} className="text-[#111111]" />
+                      <p className="text-[15px] leading-[1.7] text-[#7b7b78]">
                         {item}
                       </p>
                     </div>
@@ -220,13 +220,13 @@ export default async function MediaPostPage({ params }: Props) {
         {/* ============================== */}
         {post.quotes.length > 0 && (
           <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
+            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
               <div className="mb-6">
                 <p className="pencil-eyebrow mb-2">GUEST VOICE</p>
-                <h2 className="text-[28px] font-black leading-[1.12] text-[#0F172A]">
+                <h2 className="text-[28px] font-black leading-[1.12] text-[#111111]">
                   ゲストの声
                 </h2>
-                <p className="text-[15px] leading-[1.7] text-[#475569] mt-2">
+                <p className="text-[15px] leading-[1.7] text-[#7b7b78] mt-2">
                   この回で印象に残る言葉を、短く引用して残しておく部分です。
                 </p>
               </div>
@@ -235,9 +235,9 @@ export default async function MediaPostPage({ params }: Props) {
                 {post.quotes.slice(0, 4).map((quote, index) => (
                   <blockquote
                     key={index}
-                    className="border-l-2 border-[#0F172A] pl-5 py-1"
+                    className="border-l-2 border-[#f4511e] pl-5 py-1"
                   >
-                    <p className="text-[15px] leading-[1.75] text-[#475569] font-medium">
+                    <p className="text-[15px] leading-[1.75] text-[#7b7b78] font-medium">
                       {quote}
                     </p>
                   </blockquote>
@@ -251,31 +251,31 @@ export default async function MediaPostPage({ params }: Props) {
         {/* 公開メモ Grid (要約 + 対象 + 外部導線) */}
         {/* ============================== */}
         <section className="bg-white">
-          <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
+          <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
             <div className="mb-6">
               <p className="pencil-eyebrow mb-2">MEMO</p>
-              <h2 className="text-[34px] font-black leading-[1.12] text-[#0F172A]">
+              <h2 className="text-[34px] font-black leading-[1.12] text-[#111111]">
                 公開メモ
               </h2>
-              <p className="text-[16px] leading-[1.7] text-[#475569] mt-2">
+              <p className="text-[16px] leading-[1.7] text-[#7b7b78] mt-2">
                 この回の要約・対象・導線をひとまとめに。
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-[18px]">
               {/* 要約 */}
-              <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3">
-                <FileText size={18} className="text-[#0F172A]" />
-                <p className="text-[18px] font-black text-[#0F172A]">要約</p>
-                <p className="text-[14px] leading-[1.7] text-[#475569]">
+              <div className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3">
+                <FileText size={18} className="text-[#111111]" />
+                <p className="text-[18px] font-black text-[#111111]">要約</p>
+                <p className="text-[14px] leading-[1.7] text-[#7b7b78]">
                   {post.excerpt || post.theme || "この回の詳細を要約しています。"}
                 </p>
               </div>
 
               {/* 対象 */}
-              <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3">
-                <Target size={18} className="text-[#0F172A]" />
-                <p className="text-[18px] font-black text-[#0F172A]">対象</p>
+              <div className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3">
+                <Target size={18} className="text-[#111111]" />
+                <p className="text-[18px] font-black text-[#111111]">対象</p>
                 <ul className="space-y-1.5">
                   {post.guests &&
                   post.guests.length > 0 &&
@@ -284,18 +284,18 @@ export default async function MediaPostPage({ params }: Props) {
                     ? post.guests[0].recommendedFor.slice(0, 5).map((item, i) => (
                         <li
                           key={i}
-                          className="flex items-start gap-2 text-[14px] leading-[1.7] text-[#475569]"
+                          className="flex items-start gap-2 text-[14px] leading-[1.7] text-[#7b7b78]"
                         >
-                          <span className="mt-1.5 h-1 w-1 rounded-full bg-[#0F172A] flex-shrink-0" />
+                          <span className="mt-1.5 h-1 w-1 rounded-full bg-[#111111] flex-shrink-0" />
                           {item}
                         </li>
                       ))
                     : post.tags.slice(0, 5).map((tag, i) => (
                         <li
                           key={i}
-                          className="flex items-start gap-2 text-[14px] leading-[1.7] text-[#475569]"
+                          className="flex items-start gap-2 text-[14px] leading-[1.7] text-[#7b7b78]"
                         >
-                          <span className="mt-1.5 h-1 w-1 rounded-full bg-[#0F172A] flex-shrink-0" />
+                          <span className="mt-1.5 h-1 w-1 rounded-full bg-[#111111] flex-shrink-0" />
                           #{tag}
                         </li>
                       ))}
@@ -303,14 +303,14 @@ export default async function MediaPostPage({ params }: Props) {
               </div>
 
               {/* 外部導線 */}
-              <div className="rounded-[4px] border border-[#E2E8F0] bg-white p-[22px] flex flex-col gap-3">
-                <Globe size={18} className="text-[#0F172A]" />
-                <p className="text-[18px] font-black text-[#0F172A]">外部導線</p>
-                <p className="text-[14px] leading-[1.7] text-[#475569] flex-1">
+              <div className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3">
+                <Globe size={18} className="text-[#111111]" />
+                <p className="text-[18px] font-black text-[#111111]">外部導線</p>
+                <p className="text-[14px] leading-[1.7] text-[#7b7b78] flex-1">
                   この回に関するお問い合わせ・ゲスト出演依頼はこちら。
                 </p>
                 <TrackedLink
-                  href="mailto:ryuyakinjo@gmail.com"
+                  href="mailto:ryuyakinjo@yazirusi.com"
                   eventName="contact_cta_click"
                   eventParams={{
                     page_type: "media_post",
@@ -320,7 +320,7 @@ export default async function MediaPostPage({ params }: Props) {
                     position: "memo_section",
                     cta_target: "email",
                   }}
-                  className="inline-flex items-center gap-2 rounded-[4px] border border-[#0F172A] bg-[#0F172A] px-3 py-2.5 text-xs font-bold text-white hover:bg-[#1E293B] transition-colors mt-auto"
+                  className="inline-flex items-center gap-2 rounded-[4px] border border-[#111111] bg-[#111111] px-3 py-2.5 text-xs font-bold text-white hover:bg-[#d43d0e] transition-colors mt-auto"
                 >
                   <Mail size={12} />
                   メールで連絡
@@ -335,10 +335,10 @@ export default async function MediaPostPage({ params }: Props) {
         {/* ============================== */}
         {post.summary.length > 0 && (
           <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
+            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
               <div className="flex items-center gap-2 mb-8">
-                <Clock size={16} className="text-[#0F172A]" />
-                <h2 className="text-lg font-bold text-[#0F172A]">
+                <Clock size={16} className="text-[#111111]" />
+                <h2 className="text-lg font-bold text-[#111111]">
                   内容要約
                 </h2>
               </div>
@@ -352,17 +352,17 @@ export default async function MediaPostPage({ params }: Props) {
                     }`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start gap-4 py-4 border-b border-[#E2E8F0] hover:bg-[#FFF8F0] transition-colors px-2 -mx-2"
+                    className="group flex items-start gap-4 py-4 border-b border-[#dedbd6] hover:bg-[#fef5f0] transition-colors px-2 -mx-2"
                   >
-                    <span className="flex-shrink-0 w-14 text-xs font-mono text-[#0F172A] bg-[#F8FAFC] border border-[#E2E8F0] px-2 py-1 text-center mt-0.5">
+                    <span className="flex-shrink-0 w-14 text-xs font-mono text-[#111111] bg-[#faf9f6] border border-[#dedbd6] px-2 py-1 text-center mt-0.5">
                       {item.time}
                     </span>
-                    <span className="text-sm text-[#475569] leading-relaxed group-hover:text-[#0F172A] transition-colors">
+                    <span className="text-sm text-[#7b7b78] leading-relaxed group-hover:text-[#111111] transition-colors">
                       {item.text}
                     </span>
                     <ExternalLink
                       size={12}
-                      className="flex-shrink-0 text-[#CBD5E1] group-hover:text-[#94A3B8] mt-1 transition-colors"
+                      className="flex-shrink-0 text-[#a0a09c] group-hover:text-[#a0a09c] mt-1 transition-colors"
                     />
                   </a>
                 ))}
@@ -388,22 +388,22 @@ export default async function MediaPostPage({ params }: Props) {
         {/* ============================== */}
         {post.guests && post.guests.length > 0 && (
           <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
+            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
               <div className="flex items-center gap-2 mb-8">
-                <User size={16} className="text-[#0F172A]" />
-                <h2 className="text-lg font-bold text-[#0F172A]">
+                <User size={16} className="text-[#111111]" />
+                <h2 className="text-lg font-bold text-[#111111]">
                   ゲスト
                 </h2>
               </div>
               <div className="space-y-8">
                 {post.guests.map((guest, index) => (
-                  <div key={index} className="flex flex-col md:flex-row gap-6 md:gap-8 p-[22px] rounded-[4px] border border-[#E2E8F0] bg-white">
+                  <div key={index} className="flex flex-col md:flex-row gap-6 md:gap-8 p-[22px] rounded-[4px] border border-[#dedbd6] bg-white">
                     {/* Guest Image */}
-                    <div className="w-20 h-20 md:w-24 md:h-24 bg-[#F8FAFC] flex-shrink-0 overflow-hidden rounded-[4px] border border-[#E2E8F0]">
+                    <div className="w-20 h-20 md:w-24 md:h-24 bg-[#faf9f6] flex-shrink-0 overflow-hidden rounded-[4px] border border-[#dedbd6]">
                       {guest.image ? (
                         <img src={guest.image} alt={guest.name} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
+                        <div className="w-full h-full flex items-center justify-center text-[#a0a09c]">
                           <User size={32} />
                         </div>
                       )}
@@ -412,12 +412,12 @@ export default async function MediaPostPage({ params }: Props) {
                     {/* Guest Info */}
                     <div className="flex-1">
                       <div className="mb-2">
-                        <h3 className="text-base font-black text-[#0F172A]">{guest.name}</h3>
-                        <p className="text-xs text-[#64748B]">{guest.role}</p>
+                        <h3 className="text-base font-black text-[#111111]">{guest.name}</h3>
+                        <p className="text-xs text-[#a0a09c]">{guest.role}</p>
                       </div>
 
                       {guest.bio && (
-                        <p className="text-sm text-[#475569] leading-[1.8] mb-4">{guest.bio}</p>
+                        <p className="text-sm text-[#7b7b78] leading-[1.8] mb-4">{guest.bio}</p>
                       )}
 
                       {guest.links && guest.links.length > 0 && (
@@ -453,10 +453,10 @@ export default async function MediaPostPage({ params }: Props) {
         {/* ============================== */}
         {post.hostIds && post.hostIds.length > 0 && (
           <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#E2E8F0]">
+            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
               <div className="flex items-center gap-2 mb-8">
-                <Mic size={16} className="text-[#0F172A]" />
-                <h2 className="text-lg font-bold text-[#0F172A]">
+                <Mic size={16} className="text-[#111111]" />
+                <h2 className="text-lg font-bold text-[#111111]">
                   パーソナリティ
                 </h2>
               </div>
@@ -467,21 +467,21 @@ export default async function MediaPostPage({ params }: Props) {
                   return (
                     <div
                       key={id}
-                      className="flex flex-col md:flex-row gap-6 md:gap-8 p-[22px] rounded-[4px] border border-[#E2E8F0] bg-white"
+                      className="flex flex-col md:flex-row gap-6 md:gap-8 p-[22px] rounded-[4px] border border-[#dedbd6] bg-white"
                     >
-                      <div className="w-20 h-20 md:w-24 md:h-24 bg-[#F8FAFC] flex-shrink-0 overflow-hidden rounded-[4px] border border-[#E2E8F0]">
+                      <div className="w-20 h-20 md:w-24 md:h-24 bg-[#faf9f6] flex-shrink-0 overflow-hidden rounded-[4px] border border-[#dedbd6]">
                         {host.image ? (
                           <img src={host.image} alt={host.name} className="w-full h-full object-cover" />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-[#CBD5E1]">
+                          <div className="w-full h-full flex items-center justify-center text-[#a0a09c]">
                             <User size={32} />
                           </div>
                         )}
                       </div>
                       <div className="flex-1">
                         <div className="mb-2">
-                          <h3 className="text-base font-black text-[#0F172A]">{host.name}</h3>
-                          <p className="text-xs text-[#64748B]">{host.role}</p>
+                          <h3 className="text-base font-black text-[#111111]">{host.name}</h3>
+                          <p className="text-xs text-[#a0a09c]">{host.role}</p>
                         </div>
                         {host.links && host.links.length > 0 && (
                           <div className="flex flex-wrap gap-3">
@@ -491,7 +491,7 @@ export default async function MediaPostPage({ params }: Props) {
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-[#0F172A] hover:opacity-70 transition-colors"
+                                className="inline-flex items-center gap-1 text-xs text-[#111111] hover:opacity-70 transition-colors"
                               >
                                 <Camera size={12} />
                                 {link.label}
@@ -512,18 +512,18 @@ export default async function MediaPostPage({ params }: Props) {
         {/* Bottom CTA                       */}
         {/* ============================== */}
         <section className="bg-white">
-          <div className="pencil-section max-w-[900px] mx-auto text-center border-b border-[#E2E8F0]">
+          <div className="pencil-section max-w-[900px] mx-auto text-center border-b border-[#dedbd6]">
             <p className="pencil-eyebrow mb-3">CONTACT</p>
-            <h2 className="text-xl md:text-2xl font-black text-[#0F172A] mb-4">
+            <h2 className="text-xl md:text-2xl font-black text-[#111111] mb-4">
               ゲスト出演・取材依頼
             </h2>
-            <p className="text-sm text-[#475569] leading-[1.8] mb-8 max-w-xl mx-auto">
+            <p className="text-sm text-[#7b7b78] leading-[1.8] mb-8 max-w-xl mx-auto">
               ラジオへのゲスト出演や、取材・対談のご依頼はメールまたはInstagramのDMで受け付けています。
               お気軽にご連絡ください。
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <TrackedLink
-                href="mailto:ryuyakinjo@gmail.com"
+                href="mailto:ryuyakinjo@yazirusi.com"
                 eventName="contact_cta_click"
                 eventParams={{
                   page_type: "media_post",

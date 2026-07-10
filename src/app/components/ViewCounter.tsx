@@ -30,7 +30,7 @@ export default function ViewCounter({ postId }: Props) {
   if (!visible || count === null) return null;
 
   return (
-    <div className="inline-flex items-center gap-1.5 text-xs text-[#64748B]">
+    <div className="inline-flex items-center gap-1.5 text-xs text-[#a0a09c]">
       <Eye size={12} />
       <span>{count.toLocaleString()} views</span>
     </div>

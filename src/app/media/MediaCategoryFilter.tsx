@@ -14,11 +14,11 @@ interface FilterItem {
 
 export default function MediaCategoryFilter({ items }: { items: FilterItem[] }) {
   const colorMap: Record<MediaCategoryFilter, string> = {
-    all: "bg-[#0F172A] text-white hover:bg-[#1E293B] border-[#0F172A]",
-    radio: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
-    guest: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
-    appear: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
-    note: "bg-[#FFF8F0] text-[#0F172A] hover:bg-white border-[#E2E8F0]",
+    all: "bg-[#3E2A1F] text-white hover:bg-[#d43d0e] border-[#3E2A1F]",
+    radio: "bg-[#fef5f0] text-[#111111] hover:bg-white border-[#dedbd6]",
+    guest: "bg-[#fef5f0] text-[#111111] hover:bg-white border-[#dedbd6]",
+    appear: "bg-[#fef5f0] text-[#111111] hover:bg-white border-[#dedbd6]",
+    note: "bg-[#fef5f0] text-[#111111] hover:bg-white border-[#dedbd6]",
   };
 
   return (
@@ -36,17 +36,17 @@ export default function MediaCategoryFilter({ items }: { items: FilterItem[] }) 
               });
             }}
             className={`inline-flex items-center gap-2 rounded-[4px] border px-4 py-2 text-xs font-bold transition-all ${
-              item.active ? colorMap[item.key] : "bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#FFF8F0]"
+              item.active ? colorMap[item.key] : "bg-white text-[#7b7b78] border-[#dedbd6] hover:bg-[#fef5f0]"
             }`}
           >
             <span>{item.label}</span>
-            <span className={`min-w-5 px-1 py-0.5 text-center text-[10px] ${item.active ? "bg-white/20" : "bg-[#FFF8F0]"}`}>
+            <span className={`min-w-5 px-1 py-0.5 text-center text-[10px] ${item.active ? "bg-white/20" : "bg-[#fef5f0]"}`}>
               {item.count}
             </span>
           </Link>
         ))}
       </div>
-      <p className="mt-3 text-xs text-[#64748B]">この絞り込みURLはそのまま共有できます。</p>
+      <p className="mt-3 text-xs text-[#a0a09c]">この絞り込みURLはそのまま共有できます。</p>
     </div>
   );
 }

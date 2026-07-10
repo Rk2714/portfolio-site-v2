@@ -16,7 +16,7 @@ interface Profile {
 export default function About({ profile }: { profile?: Profile | null }) {
   const bio =
     profile?.bio ||
-    "看護の現場から始まって、AI、Google、予約導線、発信、地域活動まで。やってきたことは散らばって見えるけど、全部『仕事を少し楽にする』ためにつながっています。";
+    "看護・訪問看護・オンライン診療の現場で、記録、連絡、情報共有、データ活用にまつわるつまずきを見てきました。ラジオや地域活動も含めて、人と現場に次の一歩をつくることを大切にしています。";
   const location = profile?.location || "沖縄県中城村";
 
   return (
@@ -25,10 +25,10 @@ export default function About({ profile }: { profile?: Profile | null }) {
         <div className="space-y-[10px]">
           <p className="pencil-eyebrow">About</p>
           <h2 className="pencil-title max-w-6xl">
-            看護の現場がベース。いろいろ転々としてきたから、相談に乗れることがある。
+            看護の現場がベース。いろいろなつまずきを見てきたから、相談に乗れることがある。
           </h2>
           <p className="pencil-body max-w-5xl">
-            最初からAIの人だったわけではありません。看護の現場をベースに、働く場所や役割をいろいろ経験してきました。だからAIの話も、きれいな理論より「いまの仕事でどう使えるか」から考えます。
+            最初からAIの人だったわけではありません。看護、訪問看護、オンライン診療、地域活動の中で、現場がつまずく場面をたくさん見てきました。だからAIの話も、きれいな理論より「いまの現場でどう使えるか」から考えます。
           </p>
         </div>
 
@@ -37,25 +37,25 @@ export default function About({ profile }: { profile?: Profile | null }) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-[18px] border border-[#E2E8F0] bg-[#FCF9F5] p-[18px]"
+            className="rounded-[18px] border border-[#dedbd6] bg-[#fef5f0] p-[18px]"
           >
-            <div className="h-[380px] overflow-hidden rounded-[16px] bg-[#E2E8F0]">
+            <div className="h-[380px] overflow-hidden rounded-[16px] bg-[#dedbd6]">
               {profile?.imageUrl ? (
                 <img
                   src={profile.imageUrl}
                   alt={profile.name || "金城竜弥"}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                 />
               ) : (
                 <img
-                  src="/images/business.jpg"
+                  src="/images/headshot.png"
                   alt="金城竜弥"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                 />
               )}
             </div>
-            <p className="mt-3 text-[12px] leading-[18px] text-[#64748B]">
-              差し替え予定: 看護ベース / 転々とした経歴が伝わる写真
+            <p className="mt-3 text-[12px] leading-[18px] text-[#a0a09c]">
+              看護・医療介護・地域活動をベースに、現場に合う形を一緒に考えます
             </p>
           </motion.div>
 
@@ -66,11 +66,11 @@ export default function About({ profile }: { profile?: Profile | null }) {
             transition={{ delay: 0.1 }}
             className="space-y-[18px]"
           >
-            <p className="text-[16px] leading-[29px] text-[#475569]">{bio}</p>
+            <p className="text-[16px] leading-[29px] text-[#7b7b78]">{bio}</p>
 
             <div className="flex flex-wrap gap-3">
               <span className="pencil-chip bg-white">看護ベース</span>
-              <span className="pencil-chip bg-white">AI活用</span>
+              <span className="pencil-chip bg-white">情報整理 / AI活用</span>
               <span className="pencil-chip bg-white">ラジオ / 子ども食堂</span>
             </div>
 
@@ -82,19 +82,19 @@ export default function About({ profile }: { profile?: Profile | null }) {
               <ArrowRight size={13} />
             </Link>
 
-            <div className="flex items-center gap-2 text-[#475569]">
+            <div className="flex items-center gap-2 text-[#7b7b78]">
               <MapPin size={14} />
-              <span className="text-sm">{location}在住</span>
+              <span className="text-sm">{location}在住。現場へも伺います。</span>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="border-t border-[#0F172A] pt-4">
-                <p className="text-xl font-bold text-[#0F172A]">15年</p>
-                <p className="text-xs text-[#64748B] mt-1">看護師・現場経験</p>
+              <div className="border-t border-[#111111] pt-4">
+                <p className="text-xl font-bold text-[#111111]">約15年</p>
+                <p className="text-xs text-[#a0a09c] mt-1">看護師・現場経験</p>
               </div>
-              <div className="border-t border-[#0F172A] pt-4">
-                <p className="text-xl font-bold text-[#0F172A]">50名+</p>
-                <p className="text-xs text-[#64748B] mt-1">AI人材育成</p>
+              <div className="border-t border-[#111111] pt-4">
+                <p className="text-xl font-bold text-[#111111]">50名+</p>
+                <p className="text-xs text-[#a0a09c] mt-1">AI人材育成</p>
               </div>
             </div>
           </motion.div>
@@ -108,7 +108,7 @@ export default function About({ profile }: { profile?: Profile | null }) {
             className="mb-6"
           >
             <p className="pencil-eyebrow">Career</p>
-            <h3 className="mt-[10px] text-[24px] font-black text-[#0F172A]">ここまでの流れ</h3>
+            <h3 className="mt-[10px] text-[24px] font-black text-[#111111]">ここまでの流れ</h3>
           </motion.div>
 
           <div className="space-y-0">
@@ -119,16 +119,16 @@ export default function About({ profile }: { profile?: Profile | null }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.04 }}
-                className="grid gap-2 border-b border-[#E2E8F0] py-4 md:grid-cols-[120px_220px_1fr]"
+                className="grid gap-2 border-b border-[#dedbd6] py-4 md:grid-cols-[120px_220px_1fr]"
               >
-                <p className="text-[13px] font-bold text-[#D78256]">{item.year}</p>
-                <h4 className="text-[16px] font-black text-[#0F172A]">{item.title}</h4>
-                <p className="text-[14px] leading-[24px] text-[#475569]">{item.subtitle}</p>
+                <p className="text-[13px] font-bold text-[#f4511e]">{item.year}</p>
+                <h4 className="text-[16px] font-black text-[#111111]">{item.title}</h4>
+                <p className="text-[14px] leading-[24px] text-[#7b7b78]">{item.subtitle}</p>
               </motion.div>
             ))}
           </div>
         </div>
-        <div className="h-px bg-[#E2E8F0]" />
+        <div className="h-px bg-[#dedbd6]" />
       </div>
     </section>
   );

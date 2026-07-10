@@ -10,8 +10,8 @@ const problems = [
   },
   {
     num: "02",
-    title: "DX導入が定着しない",
-    description: "ツールを導入しても現場が使いこなせず、従来運用へ逆戻り。IT担当と現場の認識のずれで、投資対効果が見えにくい。",
+    title: "ツール導入が定着しない",
+    description: "ツールを導入しても現場が使いこなせず、従来運用へ逆戻り。担当者と現場の認識のずれで、効果が見えにくい。",
   },
   {
     num: "03",
@@ -25,10 +25,10 @@ export default function Problem() {
     <section className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="mb-16">
-          <p className="text-xs font-bold text-[#64748B] tracking-wider uppercase mb-3">
+          <p className="text-xs font-bold text-[#a0a09c] tracking-wider uppercase mb-3">
             Problem
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] leading-snug">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#111111] leading-snug">
             こんな課題に直面していませんか
           </h2>
         </div>
@@ -45,8 +45,8 @@ export default function Problem() {
             >
               <span className="text-3xl font-bold text-gray-200 shrink-0">{item.num}</span>
               <div>
-                <h4 className="text-lg font-bold text-[#0F172A] mb-2">{item.title}</h4>
-                <p className="text-sm text-[#475569] leading-[1.8]">{item.description}</p>
+                <h4 className="text-lg font-bold text-[#111111] mb-2">{item.title}</h4>
+                <p className="text-sm text-[#7b7b78] leading-[1.8]">{item.description}</p>
               </div>
             </motion.div>
           ))}

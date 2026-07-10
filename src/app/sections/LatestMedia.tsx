@@ -40,7 +40,7 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group overflow-hidden rounded-[16px] border border-[#E2E8F0] bg-white p-[22px] transition-colors hover:border-[#D7E0EA]"
+                className="group overflow-hidden rounded-[16px] border border-[#dedbd6] bg-white p-[22px] transition-colors hover:border-[#e8e5df]"
               >
                 <TrackedLink
                   href={`/media/${post.id}`}
@@ -54,18 +54,18 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
                   }}
                   className="flex h-full flex-col gap-4"
                 >
-                  <span className="w-fit rounded-[4px] border border-[#0F172A] bg-[#0F172A] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white">
+                  <span className="w-fit rounded-[4px] border border-[#111111] bg-[#111111] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white">
                     {post.categoryLabel}
                   </span>
-                  <p className="text-[12px] font-bold tracking-[0.8px] text-[#64748B]">{post.date}</p>
-                  <h3 className="text-[20px] font-black leading-[27px] text-[#0F172A] transition-opacity group-hover:opacity-70">
+                  <p className="text-[12px] font-bold tracking-[0.8px] text-[#a0a09c]">{post.date}</p>
+                  <h3 className="text-[20px] font-black leading-[27px] text-[#111111] transition-opacity group-hover:opacity-70">
                     {post.title}
                   </h3>
-                  <p className="line-clamp-3 text-[14px] leading-[24px] text-[#475569]">
+                  <p className="line-clamp-3 text-[14px] leading-[24px] text-[#7b7b78]">
                     {post.excerpt || "最新更新をすぐに見つけられるよう、タイトル・日付・カテゴリの順で整理しています。"}
                   </p>
                   <span className="pencil-button pencil-button-secondary w-fit">聴く / 読む</span>
-                  <div className="mt-auto h-[150px] overflow-hidden rounded-[14px] bg-[#F8FAFC]">
+                  <div className="mt-auto h-[150px] overflow-hidden rounded-[14px] bg-[#faf9f6]">
                     {post.thumbnail ? (
                       <img
                         src={post.thumbnail}
@@ -73,7 +73,7 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center text-[#CBD5E1]">
+                      <div className="flex h-full w-full items-center justify-center text-[#a0a09c]">
                         <Mic size={32} />
                       </div>
                     )}
@@ -95,7 +95,7 @@ export default function LatestMedia({ posts }: { posts: MediaPost[] }) {
             <ArrowRight size={14} />
           </Link>
         </motion.div>
-        <div className="h-px bg-[#E2E8F0]" />
+        <div className="h-px bg-[#dedbd6]" />
       </div>
     </section>
   );

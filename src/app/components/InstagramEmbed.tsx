@@ -105,12 +105,12 @@ export default function InstagramEmbed({
       );
     }
     return (
-      <div className="p-3 bg-[#FFF8F0] border border-gray-200 text-center rounded">
+      <div className="p-3 bg-[#fef5f0] border border-gray-200 text-center rounded">
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#2563EB] font-medium hover:underline"
+          className="text-xs text-[#f4511e] font-medium hover:underline"
         >
           Instagramで見る ↗
         </a>
@@ -122,7 +122,7 @@ export default function InstagramEmbed({
     return (
       <div className="flex justify-center w-full">
         <div className="w-full h-[300px] bg-gray-50 animate-pulse rounded flex items-center justify-center">
-          <span className="text-xs text-[#94A3B8]">読み込み中...</span>
+          <span className="text-xs text-[#a0a09c]">読み込み中...</span>
         </div>
       </div>
     );

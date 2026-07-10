@@ -114,7 +114,7 @@ export function PodcastWaveform(props: IconProps) {
 
 export function LabelChip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-[#E2E8F0] bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-[#0F172A]">
+    <span className="inline-flex items-center rounded-full border border-[#dedbd6] bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-[#111111]">
       {children}
     </span>
   );
@@ -123,9 +123,9 @@ export function LabelChip({ children }: { children: React.ReactNode }) {
 export function SectionTitle({ eyebrow, title, body }: { eyebrow: string; title: string; body?: string }) {
   return (
     <div className="space-y-3">
-      <p className="text-xs font-semibold tracking-[0.18em] text-[#64748B] uppercase">{eyebrow}</p>
-      <h2 className="max-w-3xl text-3xl font-bold leading-[1.12] text-[#0F172A] md:text-4xl">{title}</h2>
-      {body ? <p className="max-w-3xl text-sm leading-7 text-[#475569] md:text-base">{body}</p> : null}
+      <p className="text-xs font-semibold tracking-[0.18em] text-[#a0a09c] uppercase">{eyebrow}</p>
+      <h2 className="max-w-3xl text-3xl font-bold leading-[1.12] text-[#111111] md:text-4xl">{title}</h2>
+      {body ? <p className="max-w-3xl text-sm leading-7 text-[#7b7b78] md:text-base">{body}</p> : null}
     </div>
   );
 }
@@ -133,8 +133,8 @@ export function SectionTitle({ eyebrow, title, body }: { eyebrow: string; title:
 export function ActionButton({ children, variant = "primary" }: { children: React.ReactNode; variant?: "primary" | "secondary" }) {
   const styles =
     variant === "primary"
-      ? "bg-[#0F172A] text-white border-[#0F172A]"
-      : "bg-white text-[#0F172A] border-[#E2E8F0]";
+      ? "bg-[#111111] text-white border-[#111111]"
+      : "bg-white text-[#111111] border-[#dedbd6]";
   return (
     <span className={`inline-flex items-center rounded-[4px] border px-4 py-3 text-sm font-semibold ${styles}`}>
       {children}

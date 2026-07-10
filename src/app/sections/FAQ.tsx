@@ -28,10 +28,10 @@ export default function FAQ() {
   return (
     <section className="py-16 md:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-xs text-[#64748B] tracking-wider mb-3">
+        <p className="text-xs text-[#a0a09c] tracking-wider mb-3">
           FAQ
         </p>
-        <h2 className="text-xl md:text-2xl font-bold text-[#0F172A] mb-8">
+        <h2 className="text-xl md:text-2xl font-bold text-[#111111] mb-8">
           よくある質問
         </h2>
 
@@ -40,14 +40,14 @@ export default function FAQ() {
             <div key={index} className="border-t border-gray-200 last:border-b">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-start justify-between py-4 text-left hover:bg-[#F8FAFC] transition-colors"
+                className="w-full flex items-start justify-between py-4 text-left hover:bg-[#faf9f6] transition-colors"
               >
-                <span className="text-sm font-medium text-[#0F172A] pr-6">
+                <span className="text-sm font-medium text-[#111111] pr-6">
                   {faq.q}
                 </span>
                 <ChevronDown
                   size={16}
-                  className={`text-[#64748B] shrink-0 mt-0.5 transition-transform duration-200 ${
+                  className={`text-[#a0a09c] shrink-0 mt-0.5 transition-transform duration-200 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 />
@@ -57,7 +57,7 @@ export default function FAQ() {
                   openIndex === index ? "max-h-40 pb-4" : "max-h-0"
                 }`}
               >
-                <p className="text-sm text-[#475569] leading-[1.7]">{faq.a}</p>
+                <p className="text-sm text-[#7b7b78] leading-[1.7]">{faq.a}</p>
               </div>
             </div>
           ))}

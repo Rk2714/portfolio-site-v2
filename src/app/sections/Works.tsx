@@ -34,14 +34,14 @@ export default function Works({ works }: { works: WorkItem[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className={`group flex flex-col items-start gap-4 rounded-[16px] border border-[#E2E8F0] p-[22px_24px_26px] transition-colors hover:border-[#D7E0EA] ${
-                index % 2 === 1 ? "bg-[#FCF9F5]" : "bg-white"
+              className={`group flex flex-col items-start gap-4 rounded-[16px] border border-[#dedbd6] p-[22px_24px_26px] transition-colors hover:border-[#e8e5df] ${
+                index % 2 === 1 ? "bg-[#fef5f0]" : "bg-white"
               }`}
             >
-              <span className="pencil-chip bg-[#FFF8F0]">{work.category}</span>
-              <h3 className="text-[22px] font-black leading-tight text-[#0F172A]">{work.title}</h3>
+              <span className="pencil-chip bg-[#fef5f0]">{work.category}</span>
+              <h3 className="text-[22px] font-black leading-tight text-[#111111]">{work.title}</h3>
 
-              <p className="text-[14px] leading-[25px] text-[#475569]">
+              <p className="text-[14px] leading-[25px] text-[#7b7b78]">
                 {work.description}
               </p>
 
@@ -70,7 +70,7 @@ export default function Works({ works }: { works: WorkItem[] }) {
                 )}
               </div>
 
-              <div className="mt-auto h-[148px] w-full overflow-hidden rounded-[14px] bg-[#E2E8F0]">
+              <div className="mt-auto h-[148px] w-full overflow-hidden rounded-[14px] bg-[#dedbd6]">
                 <img
                   src={imageMap[index % imageMap.length]}
                   alt=""
@@ -80,7 +80,7 @@ export default function Works({ works }: { works: WorkItem[] }) {
             </motion.article>
           ))}
         </div>
-        <div className="h-px bg-[#E2E8F0]" />
+        <div className="h-px bg-[#dedbd6]" />
       </div>
     </section>
   );

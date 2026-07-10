@@ -45,12 +45,12 @@ export default function LinkCard({ label, url, eventName, eventParams }: Props) 
         />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-bold text-[#0F172A] group-hover:text-[#D97706] transition-colors truncate">
+        <p className="text-sm font-bold text-[#111111] group-hover:text-[#D97706] transition-colors truncate">
           {label}
         </p>
-        <p className="text-xs text-[#94A3B8] truncate">{domain}</p>
+        <p className="text-xs text-[#a0a09c] truncate">{domain}</p>
       </div>
-      <ExternalLink size={14} className="text-[#CBD5E1] group-hover:text-[#D97706] transition-colors flex-shrink-0" />
+      <ExternalLink size={14} className="text-[#a0a09c] group-hover:text-[#D97706] transition-colors flex-shrink-0" />
     </a>
   );
 }

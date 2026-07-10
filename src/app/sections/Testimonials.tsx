@@ -27,15 +27,15 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 md:py-28 bg-[#F8FAFC]">
+    <section className="py-20 md:py-28 bg-[#faf9f6]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <p className="text-xs text-[#64748B] tracking-wider mb-3">
+        <p className="text-xs text-[#a0a09c] tracking-wider mb-3">
           Voice
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#111111] mb-4">
           導入先からの声
         </h2>
-        <p className="text-sm text-[#475569] mb-12 max-w-xl leading-[1.8]">
+        <p className="text-sm text-[#7b7b78] mb-12 max-w-xl leading-[1.8]">
           実際に支援させていただいた方々の声を紹介します。
         </p>
 
@@ -49,13 +49,13 @@ export default function Testimonials() {
               transition={{ delay: i * 0.1 }}
               className="bg-white p-8 border border-gray-200 rounded-[24px]"
             >
-              <p className="text-sm text-[#334155] leading-[1.8] mb-8">
+              <p className="text-sm text-[#7b7b78] leading-[1.8] mb-8">
                 「{t.text}」
               </p>
               <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-bold text-[#0F172A]">{t.name}</p>
-                  <p className="text-xs text-[#64748B] mt-1">{t.detail}</p>
+                  <p className="text-sm font-bold text-[#111111]">{t.name}</p>
+                  <p className="text-xs text-[#a0a09c] mt-1">{t.detail}</p>
                 </div>
               </div>
             </motion.div>

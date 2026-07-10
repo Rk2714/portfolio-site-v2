@@ -41,7 +41,7 @@ export default function MediaCard({ post }: Props) {
   };
 
   return (
-    <article className="group overflow-hidden rounded-[16px] border border-[#E2E8F0] bg-white p-[22px] transition-colors duration-300 hover:border-[#D7E0EA]">
+    <article className="group overflow-hidden rounded-[16px] border border-[#dedbd6] bg-white p-[22px] transition-colors duration-300 hover:border-[#e8e5df]">
       <TrackedLink
         href={`/media/${post.id}`}
         eventName="media_card_click"
@@ -54,16 +54,16 @@ export default function MediaCard({ post }: Props) {
         }}
         className="flex flex-col gap-4"
       >
-        <span className="w-fit rounded-[4px] border border-[#0F172A] bg-[#0F172A] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white">
+        <span className="w-fit rounded-[4px] border border-[#3E2A1F] bg-[#3E2A1F] px-[14px] py-[10px] text-[12px] font-bold tracking-[0.6px] text-white">
           {post.categoryLabel}
         </span>
-        <p className="text-[12px] font-bold tracking-[0.8px] text-[#64748B]">{post.date}</p>
-        <h2 className="line-clamp-2 text-[20px] font-black leading-[27px] text-[#0F172A] transition-opacity group-hover:opacity-70">
+        <p className="text-[12px] font-bold tracking-[0.8px] text-[#a0a09c]">{post.date}</p>
+        <h2 className="line-clamp-2 text-[20px] font-black leading-[27px] text-[#111111] transition-opacity group-hover:opacity-70">
           {post.title}
         </h2>
-        <p className="line-clamp-3 text-[14px] leading-[24px] text-[#475569]">{post.excerpt}</p>
+        <p className="line-clamp-3 text-[14px] leading-[24px] text-[#7b7b78]">{post.excerpt}</p>
         <span className="pencil-button pencil-button-secondary w-fit">聴く / 読む</span>
-        <div className="h-[150px] overflow-hidden rounded-[14px] bg-[#F8FAFC]">
+        <div className="h-[150px] overflow-hidden rounded-[14px] bg-[#faf9f6]">
           {post.thumbnail ? (
             <img
               src={post.thumbnail}
@@ -71,15 +71,15 @@ export default function MediaCard({ post }: Props) {
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-[#CBD5E1]">
+            <div className="flex h-full w-full items-center justify-center text-[#a0a09c]">
               <Mic size={32} />
             </div>
           )}
         </div>
       </TrackedLink>
 
-      <div className="mt-5 flex flex-col gap-3 border-t border-[#E2E8F0] pt-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-[#64748B]">この回をそのまま共有できます。</p>
+      <div className="mt-5 flex flex-col gap-3 border-t border-[#dedbd6] pt-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-[#a0a09c]">この回をそのまま共有できます。</p>
         <div className="flex flex-wrap items-center gap-2">
           <a
             href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
@@ -95,9 +95,9 @@ export default function MediaCard({ post }: Props) {
                 share_type: "x",
               });
             }}
-            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2 text-xs font-bold text-[#475569] transition-colors hover:bg-[#FFF8F0]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#dedbd6] bg-white px-3 py-2 text-xs font-bold text-[#7b7b78] transition-colors hover:bg-[#fef5f0]"
           >
-            <span className="font-bold text-[#0F172A] text-[10px]">𝕏</span>
+            <span className="font-bold text-[#111111] text-[10px]">𝕏</span>
             Xでシェア
           </a>
           <a
@@ -114,7 +114,7 @@ export default function MediaCard({ post }: Props) {
                 share_type: "line",
               });
             }}
-            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2 text-xs font-bold text-[#475569] transition-colors hover:bg-[#FFF8F0]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#dedbd6] bg-white px-3 py-2 text-xs font-bold text-[#7b7b78] transition-colors hover:bg-[#fef5f0]"
           >
             <ExternalLink size={12} />
             LINEで送る
@@ -122,7 +122,7 @@ export default function MediaCard({ post }: Props) {
           <button
             type="button"
             onClick={copyShareUrl}
-            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#E2E8F0] bg-white px-3 py-2 text-xs font-bold text-[#475569] transition-colors hover:bg-[#FFF8F0]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#dedbd6] bg-white px-3 py-2 text-xs font-bold text-[#7b7b78] transition-colors hover:bg-[#fef5f0]"
           >
             {copied ? <Check size={12} className="text-[#059669]" /> : <Copy size={12} />}
             {copied ? "コピーしました" : "URLコピー"}

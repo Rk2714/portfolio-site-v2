@@ -19,7 +19,7 @@ export default function Marquee() {
   const repeated = [...items, ...items];
 
   return (
-    <section className="py-6 bg-[#0F172A] overflow-hidden">
+    <section className="py-6 bg-[#111111] overflow-hidden">
       <div className="flex whitespace-nowrap animate-marquee">
         {repeated.map((text, i) => (
           <span

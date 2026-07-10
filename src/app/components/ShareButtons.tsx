@@ -52,12 +52,12 @@ export default function ShareButtons({ url, title, postId, category }: Props) {
 
   return (
     <div className="flex flex-wrap items-center gap-3 py-4 border-t border-gray-100 mt-6">
-      <span className="text-xs text-[#64748B] mr-1">この記事をシェア</span>
+      <span className="text-xs text-[#a0a09c] mr-1">この記事をシェア</span>
 
       {/* Copy link */}
       <button
         onClick={copyUrl}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#475569] hover:bg-[#FFF5EB] transition-colors"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#faf9f6] border border-gray-200 text-xs text-[#7b7b78] hover:bg-[#FFF5EB] transition-colors"
       >
         {copied ? <Check size={12} className="text-[#059669]" /> : <Copy size={12} />}
         {copied ? "コピーしました" : "URLをコピー"}
@@ -78,9 +78,9 @@ export default function ShareButtons({ url, title, postId, category }: Props) {
             share_type: "x",
           });
         }}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#475569] hover:bg-[#FFF5EB] transition-colors"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#faf9f6] border border-gray-200 text-xs text-[#7b7b78] hover:bg-[#FFF5EB] transition-colors"
       >
-        <span className="font-bold text-[#0F172A] text-[10px]">𝕏</span>
+        <span className="font-bold text-[#111111] text-[10px]">𝕏</span>
         Xでシェア
       </a>
 
@@ -99,7 +99,7 @@ export default function ShareButtons({ url, title, postId, category }: Props) {
             share_type: "line",
           });
         }}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] border border-gray-200 text-xs text-[#475569] hover:bg-[#FFF5EB] transition-colors"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#faf9f6] border border-gray-200 text-xs text-[#7b7b78] hover:bg-[#FFF5EB] transition-colors"
       >
         <ExternalLink size={12} />
         LINEで送る

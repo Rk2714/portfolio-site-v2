@@ -12,7 +12,7 @@ interface Props {
 
 export default function TranscriptSection({ transcript, postId, postTitle, category }: Props) {
   return (
-    <section className="py-16 md:py-20 bg-[#FFF8F0]">
+    <section className="py-16 md:py-20 bg-[#fef5f0]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <details
           className="group"
@@ -33,15 +33,15 @@ export default function TranscriptSection({ transcript, postId, postTitle, categ
         >
           <summary className="flex items-center justify-between cursor-pointer list-none py-4 border-b border-gray-200">
             <div className="flex items-center gap-2">
-              <FileText size={16} className="text-[#0F172A]" />
-              <h2 className="text-lg font-bold text-[#0F172A]">フル文字起こし</h2>
+              <FileText size={16} className="text-[#111111]" />
+              <h2 className="text-lg font-bold text-[#111111]">フル文字起こし</h2>
             </div>
-            <span className="text-xs text-[#64748B] group-open:hidden">開く</span>
-            <span className="text-xs text-[#64748B] hidden group-open:block">閉じる</span>
+            <span className="text-xs text-[#a0a09c] group-open:hidden">開く</span>
+            <span className="text-xs text-[#a0a09c] hidden group-open:block">閉じる</span>
           </summary>
           <div className="pt-6 pb-2">
             <div className="bg-white border border-gray-200 p-6 md:p-8">
-              <p className="text-sm text-[#475569] leading-[1.9] whitespace-pre-wrap">{transcript}</p>
+              <p className="text-sm text-[#7b7b78] leading-[1.9] whitespace-pre-wrap">{transcript}</p>
             </div>
           </div>
         </details>

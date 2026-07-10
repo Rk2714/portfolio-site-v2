@@ -81,7 +81,7 @@ export default async function MediaPage({ searchParams }: Props) {
       <main>
         {/* Hero */}
         <section className="bg-white pt-[88px]">
-          <div className="pencil-section mx-auto max-w-[900px] border-b border-[#E2E8F0]">
+          <div className="pencil-section mx-auto max-w-[900px] border-b border-[#dedbd6]">
             <p className="pencil-eyebrow mb-4">
               Media & Notes
             </p>
@@ -91,17 +91,17 @@ export default async function MediaPage({ searchParams }: Props) {
             <p className="pencil-body max-w-2xl">
               {activeCategoryOption.heroDescription}
             </p>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-[4px] border border-[#E2E8F0] bg-[#FFF8F0] px-3 py-2 text-xs text-[#475569]">
-              <span className="font-bold text-[#0F172A]">{filteredPosts.length}件</span>
+            <div className="mt-6 inline-flex items-center gap-2 rounded-[4px] border border-[#dedbd6] bg-[#fef5f0] px-3 py-2 text-xs text-[#7b7b78]">
+              <span className="font-bold text-[#111111]">{filteredPosts.length}件</span>
               <span>表示中</span>
-              <span className="text-[#CBD5E1]">/</span>
+              <span className="text-[#a0a09c]">/</span>
               <span>全{posts.length}件</span>
             </div>
           </div>
         </section>
 
         {/* Category Filter */}
-        <section className="bg-white py-8 border-b border-[#E2E8F0]">
+        <section className="bg-white py-8 border-b border-[#dedbd6]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <MediaCategoryFilter items={filterItems} />
           </div>
@@ -117,22 +117,22 @@ export default async function MediaPage({ searchParams }: Props) {
                 ))}
               </div>
             ) : (
-              <div className="rounded-[4px] border border-dashed border-[#E2E8F0] bg-[#FCF9F5] px-6 py-10 text-center">
-                <p className="text-sm font-bold text-[#0F172A] mb-2">このカテゴリの記事はまだありません。</p>
-                <p className="text-xs text-[#64748B]">別カテゴリに切り替えると、公開済みのラジオや出演回を確認できます。</p>
+              <div className="rounded-[4px] border border-dashed border-[#dedbd6] bg-[#fef5f0] px-6 py-10 text-center">
+                <p className="text-sm font-bold text-[#111111] mb-2">このカテゴリの記事はまだありません。</p>
+                <p className="text-xs text-[#a0a09c]">別カテゴリに切り替えると、公開済みのラジオや出演回を確認できます。</p>
               </div>
             )}
           </div>
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-[#FFF8F0]">
+        <section className="py-20 bg-[#fef5f0]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <p className="text-sm text-[#64748B] mb-4">
+            <p className="text-sm text-[#a0a09c] mb-4">
               ゲスト出演・取材依頼はこちら
             </p>
             <TrackedLink
-              href="mailto:ryuyakinjo@gmail.com"
+              href="mailto:ryuyakinjo@yazirusi.com"
               eventName="contact_cta_click"
               eventParams={{
                 page_type: "media_list",

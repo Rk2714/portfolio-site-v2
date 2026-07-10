@@ -4,27 +4,27 @@ import AnalyticsProvider from "./components/AnalyticsProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-site-xi-eight-33.vercel.app"),
-  title: "金城竜弥｜AI活用アドバイザー / 仕組みづくり / キャリア相談",
-  description: "AIの使い方、Googleや予約導線の整理、キャリア相談まで。看護の現場ベースで、使える形に整えます。",
-  keywords: ["金城竜弥", "看護師", "AIコンサルタント", "キャリアコンサルタント", "沖縄", "医療", "地方創生"],
+  title: "金城竜弥｜ラジオアーカイブ / いえろーかっし〜",
+  description: "FM21「いえろーかっし〜」のアーカイブ。医療、働き方、地域活動をテーマにしたラジオ番組です。",
+  keywords: ["金城竜弥", "いえろーかっし〜", "FM21", "ラジオ", "沖縄"],
   authors: [{ name: "金城竜弥" }],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "金城竜弥｜AI活用アドバイザー / 仕組みづくり / キャリア相談",
-    description: "AIの使い方、Googleや予約導線の整理、キャリア相談まで。看護の現場ベースで、使える形に整えます。",
+    title: "金城竜弥｜ラジオアーカイブ / いえろーかっし〜",
+    description: "FM21「いえろーかっし〜」のアーカイブ。医療、働き方、地域活動をテーマにしたラジオ番組です。",
     url: "/",
-    siteName: "金城竜弥",
+    siteName: "金城竜弥 ラジオアーカイブ",
     locale: "ja_JP",
     type: "website",
-    images: [{ url: "/images/okinawa-sea.jpg", alt: "金城竜弥 ポートフォリオサイト" }],
+    images: [{ url: "/images/headshot.png", alt: "金城竜弥" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "金城竜弥｜AI活用アドバイザー / 仕組みづくり / キャリア相談",
-    description: "AIの使い方、Googleや予約導線の整理、キャリア相談まで。看護の現場ベースで、使える形に整えます。",
-    images: ["/images/okinawa-sea.jpg"],
+    title: "金城竜弥｜ラジオアーカイブ / いえろーかっし〜",
+    description: "FM21「いえろーかっし〜」のアーカイブ。医療、働き方、地域活動をテーマにしたラジオ番組です。",
+    images: ["/images/headshot.png"],
   },
 };
 
