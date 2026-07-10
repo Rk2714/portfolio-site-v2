@@ -107,19 +107,12 @@ export default function Hero({ profile }: { profile?: Profile | null }) {
                 現場改善を相談する
               </a>
               <a
-                href="#about"
-                onClick={(e) => {
-                  e.preventDefault();
-                  trackEvent("contact_cta_click", {
-                    page_type: "home",
-                    position: "hero_secondary",
-                    cta_target: "about_section",
-                  });
-                  document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="pencil-button pencil-button-secondary justify-center"
+                href="https://yazirusi-lp.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pencil-button-secondary justify-center"
               >
-                金城竜弥について見る
+                Yazirusi サービスLPを見る
               </a>
             </motion.div>
 
