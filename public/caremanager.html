@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yazirusi - 居宅介護支援事業所 業務改善コンサル</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #d4c8b8;
+  }
+
+  .flyer {
+    width: 1080px;
+    background: #fdf8f0;
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+    color: #3d3226;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  .flyer::before {
+    content: '';
+    display: block;
+    height: 10px;
+    background: #c28550;
+    flex-shrink: 0;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 48px 80px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .target-label {
+    font-size: 21px;
+    font-weight: 700;
+    color: #b8753e;
+    letter-spacing: 0.06em;
+    background: #fef5e7;
+    padding: 6px 20px;
+    border-radius: 18px;
+  }
+
+  .catch-area {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .catch-main {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1.3;
+    color: #2b1f14;
+    letter-spacing: 0.02em;
+  }
+
+  .catch-main .hl {
+    color: #b8753e;
+  }
+
+  .catch-sub {
+    font-size: 26px;
+    font-weight: 700;
+    color: #8b6f55;
+    line-height: 1.6;
+    padding-left: 12px;
+    border-left: 5px solid #d4945c;
+  }
+
+  .problem-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 36px;
+    border: 1px solid #f0e8dd;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .problem-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #b8753e;
+    margin-bottom: 2px;
+  }
+
+  .problem-item {
+    font-size: 22px;
+    font-weight: 500;
+    color: #5a4a3a;
+    line-height: 1.7;
+  }
+
+  .problem-item .xmark {
+    color: #c0392b;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  .proposal-box {
+    background: linear-gradient(160deg, #fef5e7 0%, #fdf0df 100%);
+    border-radius: 12px;
+    padding: 22px 36px;
+    border: 2px solid #d4945c;
+    box-shadow: 0 4px 14px rgba(180, 120, 60, 0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .proposal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #b8753e;
+  }
+
+  .proposal-item {
+    font-size: 22px;
+    font-weight: 500;
+    color: #3d3226;
+    line-height: 1.7;
+  }
+
+  .proposal-item .arrow {
+    color: #d4945c;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  .proposal-item b {
+    color: #b8753e;
+  }
+
+  .step-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 36px;
+    border: 1px solid #f0e8dd;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .step-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #b8753e;
+    margin-bottom: 2px;
+  }
+
+  .step-item {
+    font-size: 21px;
+    font-weight: 500;
+    color: #5a4a3a;
+    line-height: 1.7;
+  }
+
+  .step-item .num {
+    color: #d4945c;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  .cta-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .cta-lead {
+    font-size: 24px;
+    font-weight: 700;
+    color: #b8753e;
+  }
+
+  .cta-button {
+    background: linear-gradient(180deg, #d4945c 0%, #b8753e 100%);
+    color: #fff;
+    font-size: 34px;
+    font-weight: 700;
+    padding: 22px 76px;
+    border-radius: 60px;
+    letter-spacing: 0.06em;
+    box-shadow: 0 10px 30px rgba(180, 120, 60, 0.36);
+  }
+
+  .cta-note {
+    font-size: 18px;
+    color: #a09080;
+  }
+
+  .footer {
+    padding: 24px 80px 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #f0e0cd;
+  }
+
+  .brand-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #b8753e;
+  }
+
+  .brand-tagline {
+    font-size: 16px;
+    color: #b0a090;
+  }
+
+  .contact {
+    text-align: right;
+    font-size: 19px;
+    color: #8b6f55;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+
+  <div class="main-content">
+
+    <div class="header-row">
+      <div class="target-label">居宅介護支援事業所 各位</div>
+    </div>
+
+    <div class="catch-area">
+      <div class="catch-main">
+        デスクワークの<br>
+        <span class="hl">お悩み</span>、ありませんか。
+      </div>
+      <div class="catch-sub">
+        現場に入り、業務の流れを拝見した上で<br>
+        ミニアプリ作成 × 業務改善コンサルティングをご提案します。
+      </div>
+    </div>
+
+    <div class="problem-box">
+      <div class="problem-title">このようなお悩みはございませんか</div>
+      <div class="problem-item"><span class="xmark">✕</span>ケアマネの業務負担が大きく、アセスメントの時間が確保できない</div>
+      <div class="problem-item"><span class="xmark">✕</span>書類・FAX・電話の往復に追われ、本来の業務に集中できない</div>
+      <div class="problem-item"><span class="xmark">✕</span>「業務改善したいが、手が回らない」とお考え</div>
+    </div>
+
+    <div class="proposal-box">
+      <div class="proposal-title">Yazirusi のご提案</div>
+      <div class="proposal-item"><span class="arrow">▶</span>貴事業所のデスクワークを<b>現場で拝見</b>し、課題を整理します</div>
+      <div class="proposal-item"><span class="arrow">▶</span>小さな業務の無駄から<b>スモールステップで改善</b>に導きます</div>
+      <div class="proposal-item"><span class="arrow">▶</span>必要に応じて<b>ミニアプリを作成</b>。大がかりなシステム導入は不要です</div>
+      <div class="proposal-item"><span class="arrow">▶</span>将来的なアプリ開発も視野に。<b>まずはコンサルティングから</b></div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-title">進め方（3ステップ）</div>
+      <div class="step-item"><span class="num">1.</span> デスクワークのヒアリング・観察</div>
+      <div class="step-item"><span class="num">2.</span> 改善ポイントを特定し、小さなツールで解決</div>
+      <div class="step-item"><span class="num">3.</span> 効果を確認しながら、次の改善ステップへ</div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-lead">まずは無料でヒアリングをご提案します</div>
+      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2o9U_hs3DQxwiOLUbA9LIhORY9EebqlrySv62q8P4cuJF5Nb_WFegj_YB8d2iZ_4Ca9iwOD8l3" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+        <div class="cta-button">30分無料で予約する →</div>
+      </a>
+      <div class="cta-note">オンラインでも訪問でも対応いたします</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="brand-name">Yazirusi</div>
+      <div class="brand-tagline">現場に次の一歩というやじるしを</div>
+    </div>
+    <div class="contact">
+      <a href="https://www.instagram.com/direct/t/17842764566888908/" target="_blank" rel="noopener noreferrer" style="color:#8b6f55;text-decoration:none;">Instagram DM：@yazirusi_okinawa</a><br>
+      沖縄県全域対応
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
