@@ -82,22 +82,17 @@
       overflow-x: auto;
     }
 
-    @page {
-      size: A4 portrait;
-      margin: 0;
-    }
-
     @media print {
       @page { size: A4 portrait; margin: 0; }
       html, body {
         width: 210mm; height: 297mm;
-        padding: 0; margin: 0;
+        margin: 0; padding: 0;
+        overflow: hidden;
         background: #fff;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
       .dl-bar { display: none !important; }
-      /* 1080px → 210mm (794px) = 0.735倍でA4にぴったり */
       .flyer {
         transform: scale(0.735);
         transform-origin: top left;
@@ -105,7 +100,6 @@
         box-shadow: none; border: none; border-radius: 0;
       }
     }
-    @page { margin: 0; }
 
     @media (max-width: 1100px) {
       body { transform: scale(0.7); transform-origin: top center; padding: 0; }
