@@ -77,10 +77,10 @@
 
     .inner {
       height: 100%;
-      padding: 10mm 12mm 10mm;
+      padding: 8mm 10mm 8mm;
       display: flex;
       flex-direction: column;
-      gap: 4.5mm;
+      gap: 3.5mm;
     }
 
     .header {
@@ -118,15 +118,15 @@
     .headline h1 {
       margin: 0;
       font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
-      font-size: 21pt; font-weight: 700; line-height: 1.4; letter-spacing: 0.03em;
+      font-size: 19pt; font-weight: 700; line-height: 1.4; letter-spacing: 0.03em;
     }
     .headline .lead {
-      margin-top: 3mm; font-size: 10pt; line-height: 1.7; color: #344248; max-width: 105mm;
+      margin-top: 2mm; font-size: 9pt; line-height: 1.6; color: #344248; max-width: 100mm;
     }
 
     .hero-card {
       position: relative;
-      min-height: 52mm;
+      min-height: 46mm;
       border-radius: 10px;
       background:
         radial-gradient(circle at 72% 36%, rgba(242, 248, 247, 0.92), rgba(242,248,247,0.58) 38%, transparent 60%),
@@ -139,21 +139,21 @@
     }
 
     .info-band {
-      display: grid; grid-template-columns: 42mm 1fr; gap: 5mm; align-items: stretch;
+      display: grid; grid-template-columns: 38mm 1fr; gap: 4mm; align-items: stretch;
       background: rgba(250, 252, 251, 0.88);
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 4mm 4.5mm;
+      padding: 3mm 3.5mm;
     }
     .info-band .label {
       border-right: 1px solid rgba(180, 130, 100, 0.2);
-      padding-right: 3mm;
+      padding-right: 2.5mm;
       display: flex; align-items: center; justify-content: center; text-align: center;
-      color: var(--warm-deep); font-weight: 700; font-size: 11pt; line-height: 1.5; letter-spacing: 0.04em;
+      color: var(--warm-deep); font-weight: 700; font-size: 10pt; line-height: 1.5; letter-spacing: 0.04em;
     }
     .check-list {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 4mm;
-      align-content: center; font-size: 8.5pt; line-height: 1.35; color: #37454a;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5mm 3mm;
+      align-content: center; font-size: 8pt; line-height: 1.3; color: #37454a;
     }
     .check { display: flex; gap: 2mm; align-items: flex-start; }
     .tick {
@@ -181,36 +181,35 @@
     .section-title::after { right: 0; }
 
     .services {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 3mm;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 2.5mm;
     }
     .service {
       background: rgba(255,255,255,0.78);
       border: 1px solid rgba(180, 130, 100, 0.14);
       border-radius: 8px;
-      padding: 3mm 2.5mm;
+      padding: 2.5mm 2mm;
       text-align: center;
-      min-height: 28mm;
-      display: flex; flex-direction: column; justify-content: center; gap: 2mm;
+      min-height: 24mm;
+      display: flex; flex-direction: column; justify-content: center; gap: 1.5mm;
     }
-    .service h3 { margin: 0; font-size: 9.5pt; line-height: 1.4; letter-spacing: 0.02em; font-weight: 700; }
-    .service p { margin: 0; font-size: 8pt; line-height: 1.6; color: var(--muted); }
+    .service h3 { margin: 0; font-size: 9pt; line-height: 1.4; letter-spacing: 0.02em; font-weight: 700; }
+    .service p { margin: 0; font-size: 7.5pt; line-height: 1.5; color: var(--muted); }
 
     .bottom {
-      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4mm; align-items: stretch;
-      flex: 1;
-      min-height: 0;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3mm; align-items: stretch;
+      flex: 1; min-height: 0;
     }
     .profile, .cta {
       border-radius: 10px;
       background: rgba(255,255,255,0.84);
       border: 1px solid rgba(180, 130, 100, 0.14);
-      padding: 4mm;
+      padding: 3mm;
     }
     .profile {
-      display: grid; grid-template-columns: 26mm 1fr; gap: 3mm; align-items: center;
+      display: grid; grid-template-columns: 22mm 1fr; gap: 2.5mm; align-items: center;
     }
     .portrait {
-      width: 26mm; height: 26mm; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+      width: 22mm; height: 22mm; border-radius: 50%; overflow: hidden; flex-shrink: 0;
       background:
         radial-gradient(circle at 48% 38%, #f8d6c7 0 18%, transparent 18%),
         radial-gradient(circle at 54% 46%, #18222b 0 14%, transparent 14%),
@@ -218,49 +217,49 @@
         radial-gradient(circle at 52% 82%, #dfe7e5 0 26%, transparent 26%),
         linear-gradient(180deg, #f5faf8, #e6eff0);
       border: 1px solid rgba(180, 130, 100, 0.15);
-      box-shadow: inset 0 0 0 4px rgba(255,255,255,0.7);
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,0.7);
     }
     .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; border-radius: 50%; display: block; }
-    .profile h4 { margin: 0; font-size: 9pt; color: var(--warm-deep); letter-spacing: 0.03em; }
-    .profile .name { margin-top: 1.5mm; font-size: 13pt; line-height: 1.25; font-weight: 700; letter-spacing: 0.03em; }
-    .profile .role { margin-top: 1mm; color: var(--warm); font-size: 8pt; letter-spacing: 0.08em; }
-    .profile .desc { margin-top: 2mm; font-size: 8.5pt; line-height: 1.6; color: #3e4a4e; }
+    .profile h4 { margin: 0; font-size: 8pt; color: var(--warm-deep); letter-spacing: 0.03em; }
+    .profile .name { margin-top: 1mm; font-size: 11pt; line-height: 1.25; font-weight: 700; letter-spacing: 0.03em; }
+    .profile .role { margin-top: 0.5mm; color: var(--warm); font-size: 7pt; letter-spacing: 0.06em; }
+    .profile .desc { margin-top: 1.5mm; font-size: 7.5pt; line-height: 1.5; color: #3e4a4e; }
 
     .cta {
       background: linear-gradient(180deg, rgba(196, 131, 90, 0.95), rgba(168, 104, 66, 0.98));
       color: #fdfaf7;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 2.5mm;
+      gap: 2mm;
       text-align: center;
       position: relative; overflow: hidden;
     }
-    .cta h4 { margin: 0; font-size: 11pt; letter-spacing: 0.04em; }
-    .circle-row { display: flex; gap: 3mm; justify-content: center; flex-wrap: wrap; }
+    .cta h4 { margin: 0; font-size: 10pt; letter-spacing: 0.04em; }
+    .circle-row { display: flex; gap: 2.5mm; justify-content: center; flex-wrap: wrap; }
     .pill {
-      width: 18mm; height: 18mm; border-radius: 50%;
+      width: 15mm; height: 15mm; border-radius: 50%;
       background: rgba(255,255,255,0.92); color: var(--warm-deep);
       display: grid; place-items: center;
-      font-weight: 700; font-size: 7.5pt; line-height: 1.2;
+      font-weight: 700; font-size: 7pt; line-height: 1.2;
       box-shadow: 0 3px 8px rgba(20,40,42,0.10);
       padding: 1mm;
     }
-    .cta .copy { font-size: 12pt; font-weight: 700; letter-spacing: 0.04em; }
-    .cta .subcopy { font-size: 8pt; line-height: 1.5; color: rgba(255,255,255,0.8); }
-    .qr-wrap { margin-top: 1mm; }
-    .qr-wrap img { width: 16mm; height: 16mm; border-radius: 3px; border: 2px solid rgba(255,255,255,0.5); }
-    .book-link a { color: rgba(255,255,255,0.9); font-size: 7.5pt; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); }
+    .cta .copy { font-size: 11pt; font-weight: 700; letter-spacing: 0.04em; }
+    .cta .subcopy { font-size: 7.5pt; line-height: 1.5; color: rgba(255,255,255,0.8); }
+    .qr-wrap { margin-top: 0.5mm; }
+    .qr-wrap img { width: 13mm; height: 13mm; border-radius: 3px; border: 2px solid rgba(255,255,255,0.5); }
+    .book-link a { color: rgba(255,255,255,0.9); font-size: 7pt; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); }
 
     .footer {
       display: flex; justify-content: space-between; align-items: center;
-      padding-top: 3mm; border-top: 1px solid rgba(180, 130, 100, 0.18);
+      padding-top: 2mm; border-top: 1px solid rgba(180, 130, 100, 0.18);
     }
     .contact {
-      display: flex; gap: 4mm; align-items: center; flex-wrap: wrap;
-      color: #38464b; font-size: 8.5pt;
+      display: flex; gap: 3mm; align-items: center; flex-wrap: wrap;
+      color: #38464b; font-size: 8pt;
     }
     .contact span { display: inline-flex; align-items: center; gap: 1.5mm; }
-    .tiny { color: #6e7f83; font-size: 7pt; }
+    .tiny { color: #6e7f83; font-size: 6.5pt; }
 
     /* ---- 印刷 ---- */
     @media print {
