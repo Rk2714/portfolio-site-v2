@@ -187,6 +187,7 @@ export const hosts: Record<string, Host> = {
   cassy: {
     name: "カッシー",
     role: "イエローかっし～ メインパーソナリティ / インソール工房アイマスト",
+    image: "/images/cassy-profile.jpg",
     links: [{ label: "Instagram", url: "https://www.instagram.com/imust.insole/" }],
   },
   tecchan: {
@@ -202,6 +203,7 @@ export const hosts: Record<string, Host> = {
   kinchan: {
     name: "きんちゃん (金城竜弥)",
     role: "イエローかっし～ パーソナリティ / Yazirusi 代表",
+    image: "/images/kinchan-profile.jpg",
     links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
   },
 };
