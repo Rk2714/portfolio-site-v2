@@ -2,19 +2,21 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#3E2A1F] py-10">
-      <div className="max-w-[1080px] mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-          <p className="text-sm text-white/60">
-            金城竜弥 <span className="text-white/30">/</span> ラジオアーカイブ
-          </p>
-          <div className="flex items-center gap-6 text-sm text-white/40">
-            <Link href="/" className="hover:text-white/60 transition-colors">トップ</Link>
-            <Link href="/media" className="hover:text-white/60 transition-colors">エピソード一覧</Link>
-          </div>
+    <footer className="site-footer">
+      <div className="home-shell site-footer__inner">
+        <div>
+          <strong>Yazirusi</strong>
+          <p>金城竜弥 / RYUYA KINJO</p>
+          <p>業務を整理し、今の会社に合う仕組みへ</p>
         </div>
-        <p className="text-xs text-white/30 text-center md:text-right">
-          &copy; {new Date().getFullYear()} All rights reserved.
+        <nav aria-label="フッターナビゲーション">
+          <Link href="/">ホーム</Link>
+          <Link href="/pricing">料金・支援内容</Link>
+          <Link href="/radio">ラジオ番組</Link>
+          <Link href="/#contact">お問い合わせ</Link>
+        </nav>
+        <p className="site-footer__copyright">
+          &copy; {new Date().getFullYear()} Ryuya Kinjo
         </p>
       </div>
     </footer>

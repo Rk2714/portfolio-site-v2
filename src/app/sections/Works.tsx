@@ -20,9 +20,9 @@ export default function Works({ works }: { works: WorkItem[] }) {
       <div className="pencil-section pencil-container space-y-6">
         <div className="space-y-[10px]">
           <p className="pencil-eyebrow">Works</p>
-          <h2 className="pencil-title">導入実績</h2>
+          <h2 className="pencil-title">支援内容・試作</h2>
           <p className="pencil-body max-w-5xl">
-            数字で盛るより、何を整えて、どこまで自走できるようにしたかを見せます。AI導入、講座、業務改善、地域活動を同じ目線で整理します。
+            何を整理し、どのような形を検討・試作したかを、確認できる範囲で紹介します。
           </p>
         </div>
 

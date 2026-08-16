@@ -34,7 +34,6 @@ const defaultSkillCategories = [
       { name: "AIマニュアル整備" },
       { name: "フローチャート作成" },
       { name: "マニュアル整備" },
-      { name: "50名+ 育成実績" },
     ],
   },
 ];

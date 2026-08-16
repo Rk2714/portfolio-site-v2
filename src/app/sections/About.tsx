@@ -87,16 +87,6 @@ export default function About({ profile }: { profile?: Profile | null }) {
               <span className="text-sm">{location}在住。現場へも伺います。</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="border-t border-[#111111] pt-4">
-                <p className="text-xl font-bold text-[#111111]">約15年</p>
-                <p className="text-xs text-[#a0a09c] mt-1">看護師・現場経験</p>
-              </div>
-              <div className="border-t border-[#111111] pt-4">
-                <p className="text-xl font-bold text-[#111111]">50名+</p>
-                <p className="text-xs text-[#a0a09c] mt-1">AI人材育成</p>
-              </div>
-            </div>
           </motion.div>
         </div>
 
