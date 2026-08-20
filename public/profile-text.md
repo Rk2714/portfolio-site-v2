@@ -25,4 +25,4 @@ PR文:
 
 FM21「イエローかっし～」第2木曜日16:00〜（2026年5月より）
 医療・DX・キャリアをテーマに、ゲストを招いてトーク。2026年5月より本格始動。
-聴く → https://portfolio-site-xi-eight-33.vercel.app/media
+聴く → https://yazirusi.com/media

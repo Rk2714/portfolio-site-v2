@@ -26,10 +26,7 @@ import {
   siteContacts,
   siteProfile,
 } from "../lib/site-data";
-
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://portfolio-site-xi-eight-33.vercel.app";
+import { SITE_URL } from "../lib/site-config";
 
 export const metadata: Metadata = {
   title: { absolute: "Yazirusi｜中小企業・医療介護現場の業務改善支援" },
@@ -43,7 +40,7 @@ export const metadata: Metadata = {
     url: "/",
     type: "website",
     locale: "ja_JP",
-    images: [{ url: "/images/headshot.png", width: 1086, height: 1448, alt: "Yazirusi代表 金城竜弥" }],
+    images: [{ url: "/images/og-yazirusi.jpg", width: 1200, height: 630, alt: "業務改善の相談を聞くYazirusi代表 金城竜弥" }],
   },
 };
 
@@ -124,19 +121,19 @@ const structuredData = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": `${siteUrl}/#person`,
+      "@id": `${SITE_URL}/#person`,
       name: siteProfile.name,
-      url: siteUrl,
-      image: `${siteUrl}/images/headshot.png`,
+      url: SITE_URL,
+      image: `${SITE_URL}/images/kinjo-working.webp`,
       jobTitle: siteProfile.title,
       address: { "@type": "PostalAddress", addressRegion: "沖縄県", addressCountry: "JP" },
     },
     {
       "@type": "ProfessionalService",
-      "@id": `${siteUrl}/#service`,
+      "@id": `${SITE_URL}/#service`,
       name: "Yazirusi",
-      url: siteUrl,
-      founder: { "@id": `${siteUrl}/#person` },
+      url: SITE_URL,
+      founder: { "@id": `${SITE_URL}/#person` },
       areaServed: ["沖縄県", "日本"],
       email: siteContacts.email,
       hasOfferCatalog: {
@@ -191,14 +188,14 @@ export default function Home() {
                   <span>今あるもので足りるなら、むやみに増やしません。</span>
                 </p>
                 <div className="workshop-hero__actions" data-hero-item>
-                  <a className="workshop-hero__primary" href="#consultation-flow">まずは30分、相談してみる <ArrowRight size={18} aria-hidden="true" /></a>
-                  <a className="workshop-text-link workshop-text-link--secondary" href="#business">法人向け支援を見る <ArrowRight size={18} aria-hidden="true" /></a>
+                  <a className="workshop-hero__primary" href={siteContacts.calendly} target="_blank" rel="noopener noreferrer">30分の顔合わせを予約 <ArrowRight size={18} aria-hidden="true" /></a>
+                  <a className="workshop-text-link workshop-text-link--secondary" href="#consultation-flow">相談の流れを見る <ArrowRight size={18} aria-hidden="true" /></a>
                 </div>
               </div>
               <div className="workshop-hero__visual" data-hero-item>
                 <figure>
                   <Image
-                    src="/images/kinjo-working.png"
+                    src="/images/kinjo-working.webp"
                     alt="ノートを開き、業務の相談を聞く金城竜弥"
                     fill
                     priority
@@ -334,7 +331,7 @@ export default function Home() {
                 <h2>教えるより、<br />一緒に考える。</h2>
                 <div className="workshop-profile__person">
                   <figure>
-                    <Image src="/images/headshot.png" alt="Yazirusi代表 金城竜弥" fill sizes="112px" />
+                    <Image src="/images/headshot.webp" alt="Yazirusi代表 金城竜弥" fill sizes="112px" />
                   </figure>
                   <div><strong>金城竜弥</strong><span>Yazirusi代表</span></div>
                 </div>

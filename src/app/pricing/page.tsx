@@ -9,10 +9,7 @@ import {
   personalPlans,
   siteContacts,
 } from "../../lib/site-data";
-
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://portfolio-site-xi-eight-33.vercel.app";
+import { SITE_URL } from "../../lib/site-config";
 
 export const metadata: Metadata = {
   title: "料金・支援内容",
@@ -58,7 +55,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Yazirusi",
-  url: `${siteUrl}/pricing`,
+  url: `${SITE_URL}/pricing`,
   areaServed: ["沖縄県", "日本"],
   hasOfferCatalog: {
     "@type": "OfferCatalog",

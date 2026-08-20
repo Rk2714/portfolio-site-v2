@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getMediaByIdFromCMS, getAllMediaFromCMS, getAllMediaPosts } from "../../../lib/media-data";
+import { getMediaByIdFromCMS, getAllMediaFromCMS, getAllMediaPosts, getSafeYouTubeEmbedUrl } from "../../../lib/media-data";
 import { hosts } from "../../../lib/site-data";
+import { SITE_URL } from "../../../lib/site-config";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ShareButtons from "../../components/ShareButtons";
@@ -24,7 +25,6 @@ import {
   Camera,
   FileText,
   Target,
-  ArrowRight,
 } from "lucide-react";
 
 interface Props {
@@ -77,6 +77,7 @@ export default async function MediaPostPage({ params }: Props) {
   const { id } = await params;
   const post = await getMediaByIdFromCMS(id);
   if (!post) notFound();
+  const youtubeEmbedUrl = getSafeYouTubeEmbedUrl(post.youtubeUrl);
 
   const CategoryIcon =
     post.category === "radio" ? Radio : post.category === "guest" ? Mic : post.category === "appear" ? ExternalLink : Tag;
@@ -154,7 +155,7 @@ export default async function MediaPostPage({ params }: Props) {
                   <ViewCounter postId={post.id} />
                 </div>
                 <ShareButtons
-                  url={`https://portfolio-site-xi-eight-33.vercel.app/media/${post.id}`}
+                  url={`${SITE_URL}/media/${post.id}`}
                   title={post.title}
                   postId={post.id}
                   category={post.category}
@@ -162,13 +163,15 @@ export default async function MediaPostPage({ params }: Props) {
               </div>
 
               {/* Right: YouTube Player */}
-              {post.youtubeUrl && (
+              {youtubeEmbedUrl && (
                 <div className="w-full md:w-[340px] flex-shrink-0">
                   <div className="aspect-video md:aspect-[340/200] bg-[#faf9f6] overflow-hidden rounded-[4px] border border-[#dedbd6]">
                     <iframe
-                      src={post.youtubeUrl}
+                      src={youtubeEmbedUrl}
                       title={post.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      sandbox="allow-scripts allow-same-origin allow-presentation"
+                      referrerPolicy="strict-origin-when-cross-origin"
                       allowFullScreen
                       className="w-full h-full"
                     />
@@ -346,7 +349,7 @@ export default async function MediaPostPage({ params }: Props) {
                 {post.summary.map((item, index) => (
                   <a
                     key={index}
-                    href={`${post.youtubeUrl?.replace("/embed/", "/watch?v=")}&t=${
+                    href={`${youtubeEmbedUrl?.replace("www.youtube-nocookie.com/embed/", "www.youtube.com/watch?v=")}&t=${
                       parseInt(item.time.split(":")[0]!) * 60 +
                       parseInt(item.time.split(":")[1]!)
                     }`}

@@ -2,7 +2,10 @@
 
 Next.js 16 + TypeScript + Tailwind CSS で構築した個人ポートフォリオサイト兼ラジオメディアサイト。
 
-**公開URL**: https://portfolio-site-xi-eight-33.vercel.app/
+**公開URL**: https://yazirusi.com/
+
+> 自分でサイトを確認・修正・公開するときは、最初に
+> **[非エンジニア向け更新手順](./SITE_UPDATE_GUIDE.md)** を読んでください。
 
 ---
 

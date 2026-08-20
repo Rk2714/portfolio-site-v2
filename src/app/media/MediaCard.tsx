@@ -5,6 +5,7 @@ import { Check, Copy, ExternalLink, Mic } from "lucide-react";
 import type { MediaPost } from "../../lib/media-data";
 import { trackEvent } from "../../lib/analytics";
 import TrackedLink from "../components/TrackedLink";
+import { SITE_URL } from "../../lib/site-config";
 
 interface Props {
   post: Pick<MediaPost, "id" | "title" | "excerpt" | "category" | "categoryLabel" | "date" | "thumbnail">;
@@ -12,7 +13,7 @@ interface Props {
 
 export default function MediaCard({ post }: Props) {
   const [copied, setCopied] = useState(false);
-  const shareUrl = `https://portfolio-site-xi-eight-33.vercel.app/media/${post.id}`;
+  const shareUrl = `${SITE_URL}/media/${post.id}`;
   const encodedTitle = encodeURIComponent(post.title);
   const encodedUrl = encodeURIComponent(shareUrl);
   const copyShareUrl = async () => {

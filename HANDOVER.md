@@ -2,7 +2,7 @@
 
 ## 1. プロジェクト概要
 
-**対象サイト**: `https://portfolio-site-xi-eight-33.vercel.app/`
+**対象サイト**: `https://yazirusi.com/`
 **リポジトリ**: `/Users/ryuyakinjo/Desktop/portfolio-site/`
 **フレームワーク**: Next.js (App Router) + TypeScript + Tailwind CSS
 **Vercel連携**: 既にVercelデプロイ設定済み（GitHub連携あり）

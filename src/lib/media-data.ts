@@ -1,6 +1,40 @@
 const API_KEY = process.env.MICROCMS_API_KEY ?? "";
 const SERVICE_ID = process.env.MICROCMS_SERVICE_ID ?? "";
 
+const MEDIA_ID_PATTERN = /^[A-Za-z0-9_-]{1,64}$/;
+
+export function isValidMediaId(id: string): boolean {
+  return MEDIA_ID_PATTERN.test(id);
+}
+
+export function getSafeYouTubeEmbedUrl(input: string | null | undefined): string | null {
+  if (!input) return null;
+
+  try {
+    const url = new URL(input);
+    const hostname = url.hostname.toLowerCase();
+    let videoId = "";
+
+    if (hostname === "youtu.be") {
+      videoId = url.pathname.slice(1);
+    } else if (
+      hostname === "youtube.com" ||
+      hostname === "www.youtube.com" ||
+      hostname === "youtube-nocookie.com" ||
+      hostname === "www.youtube-nocookie.com"
+    ) {
+      videoId = url.pathname.startsWith("/embed/")
+        ? url.pathname.split("/")[2] ?? ""
+        : url.searchParams.get("v") ?? "";
+    }
+
+    if (!/^[A-Za-z0-9_-]{6,20}$/.test(videoId)) return null;
+    return `https://www.youtube-nocookie.com/embed/${videoId}`;
+  } catch {
+    return null;
+  }
+}
+
 const categoryLabelMap: Record<string, string> = {
   radio: "ラジオ",
   guest: "ゲスト",
@@ -2229,6 +2263,8 @@ export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
 }
 
 export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undefined> {
+  if (!isValidMediaId(id)) return undefined;
+
   try {
     const res = await fetch(
       `https://${SERVICE_ID}.microcms.io/api/v1/media/${id}`,

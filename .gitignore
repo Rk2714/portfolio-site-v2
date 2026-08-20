@@ -39,6 +39,10 @@ yarn-error.log*
 # build output
 /dist/
 
+# private business artifacts
+/_archive/
+/docs/*編集ログ*.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
