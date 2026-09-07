@@ -1,35 +1,42 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getMediaByIdFromCMS, getAllMediaFromCMS, getAllMediaPosts, getSafeYouTubeEmbedUrl } from "../../../lib/media-data";
+import {
+  ArrowUpRight,
+  Camera,
+  ChevronLeft,
+  Clock3,
+  ExternalLink,
+  Globe,
+  Mail,
+  Mic2,
+  Play,
+  Share2,
+  UserRound,
+} from "lucide-react";
+import {
+  getMediaByIdFromCMS,
+  getAllMediaFromCMS,
+  getAllMediaPosts,
+  getSafeYouTubeEmbedUrl,
+  type MediaPost,
+} from "../../../lib/media-data";
 import { hosts } from "../../../lib/site-data";
 import { SITE_URL } from "../../../lib/site-config";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ShareButtons from "../../components/ShareButtons";
 import ViewCounter from "../../components/ViewCounter";
-import LinkCard from "../../components/LinkCard";
 import TrackedLink from "../../components/TrackedLink";
 import TranscriptSection from "../../components/TranscriptSection";
-import {
-  Radio,
-  Mic,
-  Tag,
-  ChevronLeft,
-  Clock,
-  Quote,
-  ExternalLink,
-  User,
-  Mail,
-  Globe,
-  Camera,
-  FileText,
-  Target,
-} from "lucide-react";
 
 interface Props {
   params: Promise<{ id: string }>;
 }
+
+type Guest = NonNullable<MediaPost["guests"]>[number];
+
+const GENERIC_SUMMARY_WORDS = /オープニング|パーソナリティ|ありがとうございました|前半|後半|曲「/;
 
 export async function generateStaticParams() {
   const cmsPosts = await getAllMediaFromCMS();
@@ -50,9 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${post.title}｜メディア活動・金城竜弥`,
     description: post.excerpt,
     keywords: post.tags,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -73,87 +78,86 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function getWatchUrl(embedUrl: string | null, time?: string): string | null {
+  if (!embedUrl) return null;
+  const videoId = embedUrl.match(/\/embed\/([^?]+)/)?.[1];
+  if (!videoId) return null;
+  if (!time) return `https://www.youtube.com/watch?v=${videoId}`;
+
+  const [minutes, seconds] = time.split(":").map(Number);
+  if (!Number.isFinite(minutes) || !Number.isFinite(seconds)) return null;
+  return `https://www.youtube.com/watch?v=${videoId}&t=${minutes * 60 + seconds}`;
+}
+
+function getHighlights(post: MediaPost, guest?: Guest) {
+  const preferred = guest?.highlightTimes
+    ?.map((time) => post.summary.find((item) => item.time === time))
+    .filter((item): item is MediaPost["summary"][number] => Boolean(item));
+
+  if (preferred && preferred.length > 0) return preferred.slice(0, 3);
+  return post.summary.filter((item) => !GENERIC_SUMMARY_WORDS.test(item.text)).slice(0, 3);
+}
+
+function splitHighlightText(text: string) {
+  const [titlePart, ...detailParts] = text.split("——");
+  const title = titlePart.replace(/^[^：:]+[：:]\s*/, "").trim();
+  return {
+    title: title || text,
+    detail: detailParts.join("——").trim(),
+  };
+}
+
 export default async function MediaPostPage({ params }: Props) {
   const { id } = await params;
   const post = await getMediaByIdFromCMS(id);
   if (!post) notFound();
-  const youtubeEmbedUrl = getSafeYouTubeEmbedUrl(post.youtubeUrl);
 
-  const CategoryIcon =
-    post.category === "radio" ? Radio : post.category === "guest" ? Mic : post.category === "appear" ? ExternalLink : Tag;
+  const guest = post.guests?.[0];
+  const guestName = guest?.name || (post.category === "radio" ? "FM21" : post.categoryLabel);
+  const guestRole = guest?.role || post.categoryLabel;
+  const guestQuote = guest?.quote || post.quotes[0] || "";
+  const guestImage = guest?.image || post.thumbnail;
+  const youtubeEmbedUrl = getSafeYouTubeEmbedUrl(post.youtubeUrl);
+  const watchUrl = getWatchUrl(youtubeEmbedUrl);
+  const highlights = getHighlights(post, guest);
+  const recommendedFor = guest?.recommendedFor?.slice(0, 4) || post.tags.slice(0, 4);
+  const guestLinks = guest?.links || [];
 
   return (
     <>
       <Navigation />
-      <main className="bg-white">
+      <main className="guest-feature-page">
+        <section className="guest-feature-hero">
+          <div className="guest-feature-shell guest-feature-hero__grid">
+            <div className="guest-feature-hero__copy">
+              <Link href="/media" className="guest-feature-back">
+                <ChevronLeft size={14} aria-hidden="true" />
+                メディア一覧へ
+              </Link>
 
-        {/* ============================== */}
-        {/* RADIO DETAIL Section (Hero)     */}
-        {/* ============================== */}
-        <section className="bg-white pt-[88px]">
-          <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
-            {/* Breadcrumb */}
-            <Link
-              href="/media"
-              className="inline-flex items-center gap-1 text-xs text-[#a0a09c] hover:text-[#111111] transition-colors mb-8"
-            >
-              <ChevronLeft size={14} />
-              メディア一覧に戻る
-            </Link>
+              <div className="guest-feature-meta">
+                <span>GUEST / {post.categoryLabel}</span>
+                <span>{post.date}</span>
+              </div>
 
-            {/* RADIO DETAIL Header */}
-            <div className="flex items-center gap-1 mb-2">
-              <span className="pencil-eyebrow">
-                {post.category === "radio" ? "Radio" : post.categoryLabel} / {post.date}
-              </span>
-            </div>
+              <h1>{guestName}</h1>
+              <p className="guest-feature-role">{guestRole}</p>
 
-            <h1 className="text-[30px] font-black leading-[1.12] text-[#111111] mb-4">
-              {post.title}
-            </h1>
+              {guestQuote && <blockquote className="guest-feature-hero__quote">{guestQuote}</blockquote>}
 
-            {post.excerpt && (
-              <p className="text-[14px] leading-[1.68] text-[#7b7b78] max-w-2xl mb-8">
-                {post.excerpt}
-              </p>
-            )}
-
-            {/* Detail Hero Grid */}
-            <div className="flex flex-col md:flex-row gap-7 pb-12">
-              {/* Left: Detail Copy */}
-              <div className="flex-1 flex flex-col gap-4">
-                {/* Category Pill */}
-                <span className="inline-flex items-center gap-2 rounded-[4px] border border-[#3E2A1F] bg-white px-3 py-2 text-xs font-bold text-[#111111] w-fit">
-                  <CategoryIcon size={12} />
-                  {post.categoryLabel}
-                </span>
-
-                {/* Detail Meta */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-[4px] border border-[#dedbd6] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#a0a09c]">
-                    {post.date}
-                  </span>
-                  {post.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-[4px] border border-[#dedbd6] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#a0a09c]"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Theme / Description */}
-                {post.theme && (
-                  <p className="text-[14px] leading-[1.7] text-[#7b7b78]">
-                    {post.theme}
-                  </p>
+              <div className="guest-feature-hero__actions">
+                {watchUrl && (
+                  <a href={watchUrl} target="_blank" rel="noopener noreferrer" className="guest-feature-button">
+                    <Play size={15} fill="currentColor" aria-hidden="true" />
+                    この回を聴く
+                    <ArrowUpRight size={15} aria-hidden="true" />
+                  </a>
                 )}
+                <span className="guest-feature-hero__note">FM21『いえろーかっし～』</span>
+              </div>
 
-                {/* View Counter + Share */}
-                <div className="mt-2">
-                  <ViewCounter postId={post.id} />
-                </div>
+              <div className="guest-feature-hero__share">
+                <ViewCounter postId={post.id} />
                 <ShareButtons
                   url={`${SITE_URL}/media/${post.id}`}
                   title={post.title}
@@ -161,222 +165,180 @@ export default async function MediaPostPage({ params }: Props) {
                   category={post.category}
                 />
               </div>
+            </div>
 
-              {/* Right: YouTube Player */}
-              {youtubeEmbedUrl && (
-                <div className="w-full md:w-[340px] flex-shrink-0">
-                  <div className="aspect-video md:aspect-[340/200] bg-[#faf9f6] overflow-hidden rounded-[4px] border border-[#dedbd6]">
-                    <iframe
-                      src={youtubeEmbedUrl}
-                      title={post.title}
-                      allow="autoplay; encrypted-media; picture-in-picture"
-                      sandbox="allow-scripts allow-same-origin allow-presentation"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
+            <figure className="guest-feature-hero__media">
+              {guestImage ? (
+                <img src={guestImage} alt={`${guestName}の出演写真`} />
+              ) : (
+                <div className="guest-feature-image-fallback" aria-label="写真は準備中です">
+                  <Mic2 size={42} aria-hidden="true" />
+                  <span>PHOTO / SOON</span>
                 </div>
+              )}
+              <figcaption>
+                <span>FM21 / RADIO GUEST</span>
+                <span>{post.date}</span>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section className="guest-feature-info" aria-label="この回の概要">
+          <div className="guest-feature-shell guest-feature-info__grid">
+            <div>
+              <span>EPISODE</span>
+              <strong>{post.date}</strong>
+            </div>
+            <div>
+              <span>CHAPTERS</span>
+              <strong>{highlights.length ? `${highlights.length}つ` : "動画で聴く"}</strong>
+            </div>
+            <div>
+              <span>GUEST</span>
+              <strong>{guestName}</strong>
+            </div>
+            <div>
+              <span>TOPIC</span>
+              <strong>{guestRole}</strong>
+            </div>
+          </div>
+        </section>
+
+        <section id="highlights" className="guest-feature-section guest-feature-story">
+          <div className="guest-feature-shell guest-feature-story__grid">
+            <div className="guest-feature-section-intro">
+              <p className="guest-feature-eyebrow">HIGHLIGHTS / VIDEO CHAPTERS</p>
+              <h2>
+                ゲストの話を
+                <br />
+                3つの場面で。
+              </h2>
+              <p>
+                気になる見出しを選ぶと、動画のその場面へ。まずは声を聴いて、もっと知りたくなったら活動先へ進めます。
+              </p>
+              <span className="guest-feature-marker">各項目から動画の該当箇所へ</span>
+            </div>
+
+            <div className="guest-feature-chapters">
+              {highlights.length > 0 ? (
+                highlights.map((item, index) => {
+                  const itemUrl = getWatchUrl(youtubeEmbedUrl, item.time);
+                  const copy = splitHighlightText(item.text);
+                  const content = (
+                    <>
+                      <span className="guest-feature-chapter-number">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="guest-feature-chapter-copy">
+                        <small>{item.time} / VIDEO CHAPTER</small>
+                        <strong>{copy.title}</strong>
+                        {copy.detail && <span>{copy.detail}</span>}
+                      </span>
+                      <ArrowUpRight size={18} aria-hidden="true" />
+                    </>
+                  );
+
+                  return itemUrl ? (
+                    <a key={`${item.time}-${index}`} href={itemUrl} target="_blank" rel="noopener noreferrer">
+                      {content}
+                    </a>
+                  ) : (
+                    <div key={`${item.time}-${index}`} className="guest-feature-chapter guest-feature-chapter--static">
+                      {content}
+                    </div>
+                  );
+                })
+              ) : (
+                <p className="guest-feature-empty">この回の見どころは動画でご覧いただけます。</p>
               )}
             </div>
           </div>
         </section>
 
-        {/* ============================== */}
-        {/* 要点 Section + Point Grid       */}
-        {/* ============================== */}
-        {post.guests && post.guests.length > 0 && post.guests[0].takeaways && post.guests[0].takeaways.length > 0 && (
-          <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
-              {/* 要点 Header */}
-              <div className="mb-6">
-                <p className="pencil-eyebrow mb-2">POINTS</p>
-                <h2 className="text-[34px] font-black leading-[1.12] text-[#111111]">
-                  この回のポイント
-                </h2>
+        {guestQuote && (
+          <section className="guest-feature-quote">
+            <div className="guest-feature-shell guest-feature-quote__grid">
+              <div className="guest-feature-quote__main">
+                <span className="guest-feature-quote-mark">“</span>
+                <blockquote>{guestQuote}</blockquote>
               </div>
-
-              {/* Point Grid */}
-              <div className="grid md:grid-cols-2 gap-[18px]">
-                {post.guests[0].takeaways.slice(0, 4).map((item, i) => {
-                  const icons = [User, Quote, Target, Radio];
-                  const Icon = icons[i] || FileText;
-                  return (
-                    <div
-                      key={i}
-                      className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3"
-                    >
-                      <Icon size={18} className="text-[#111111]" />
-                      <p className="text-[15px] leading-[1.7] text-[#7b7b78]">
-                        {item}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ============================== */}
-        {/* ゲストの声 Section (Quotes)     */}
-        {/* ============================== */}
-        {post.quotes.length > 0 && (
-          <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
-              <div className="mb-6">
-                <p className="pencil-eyebrow mb-2">GUEST VOICE</p>
-                <h2 className="text-[28px] font-black leading-[1.12] text-[#111111]">
-                  ゲストの声
-                </h2>
-                <p className="text-[15px] leading-[1.7] text-[#7b7b78] mt-2">
-                  この回で印象に残る言葉を、短く引用して残しておく部分です。
-                </p>
-              </div>
-
-              <div className="space-y-5">
-                {post.quotes.slice(0, 4).map((quote, index) => (
-                  <blockquote
-                    key={index}
-                    className="border-l-2 border-[#f4511e] pl-5 py-1"
-                  >
-                    <p className="text-[15px] leading-[1.75] text-[#7b7b78] font-medium">
-                      {quote}
-                    </p>
-                  </blockquote>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ============================== */}
-        {/* 公開メモ Grid (要約 + 対象 + 外部導線) */}
-        {/* ============================== */}
-        <section className="bg-white">
-          <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
-            <div className="mb-6">
-              <p className="pencil-eyebrow mb-2">MEMO</p>
-              <h2 className="text-[34px] font-black leading-[1.12] text-[#111111]">
-                公開メモ
-              </h2>
-              <p className="text-[16px] leading-[1.7] text-[#7b7b78] mt-2">
-                この回の要約・対象・導線をひとまとめに。
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-[18px]">
-              {/* 要約 */}
-              <div className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3">
-                <FileText size={18} className="text-[#111111]" />
-                <p className="text-[18px] font-black text-[#111111]">要約</p>
-                <p className="text-[14px] leading-[1.7] text-[#7b7b78]">
-                  {post.excerpt || post.theme || "この回の詳細を要約しています。"}
-                </p>
-              </div>
-
-              {/* 対象 */}
-              <div className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3">
-                <Target size={18} className="text-[#111111]" />
-                <p className="text-[18px] font-black text-[#111111]">対象</p>
-                <ul className="space-y-1.5">
-                  {post.guests &&
-                  post.guests.length > 0 &&
-                  post.guests[0].recommendedFor &&
-                  post.guests[0].recommendedFor.length > 0
-                    ? post.guests[0].recommendedFor.slice(0, 5).map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-[14px] leading-[1.7] text-[#7b7b78]"
-                        >
-                          <span className="mt-1.5 h-1 w-1 rounded-full bg-[#111111] flex-shrink-0" />
-                          {item}
-                        </li>
-                      ))
-                    : post.tags.slice(0, 5).map((tag, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-[14px] leading-[1.7] text-[#7b7b78]"
-                        >
-                          <span className="mt-1.5 h-1 w-1 rounded-full bg-[#111111] flex-shrink-0" />
-                          #{tag}
-                        </li>
-                      ))}
-                </ul>
-              </div>
-
-              {/* 外部導線 */}
-              <div className="rounded-[4px] border border-[#dedbd6] bg-white p-[22px] flex flex-col gap-3">
-                <Globe size={18} className="text-[#111111]" />
-                <p className="text-[18px] font-black text-[#111111]">外部導線</p>
-                <p className="text-[14px] leading-[1.7] text-[#7b7b78] flex-1">
-                  この回に関するお問い合わせ・ゲスト出演依頼はこちら。
-                </p>
-                <TrackedLink
-                  href="mailto:ryuyakinjo@yazirusi.com"
-                  eventName="contact_cta_click"
-                  eventParams={{
-                    page_type: "media_post",
-                    post_id: post.id,
-                    post_title: post.title,
-                    category: post.category,
-                    position: "memo_section",
-                    cta_target: "email",
-                  }}
-                  className="inline-flex items-center gap-2 rounded-[4px] border border-[#111111] bg-[#111111] px-3 py-2.5 text-xs font-bold text-white hover:bg-[#d43d0e] transition-colors mt-auto"
-                >
-                  <Mail size={12} />
-                  メールで連絡
-                </TrackedLink>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================== */}
-        {/* Summary with Timestamps          */}
-        {/* ============================== */}
-        {post.summary.length > 0 && (
-          <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
-              <div className="flex items-center gap-2 mb-8">
-                <Clock size={16} className="text-[#111111]" />
-                <h2 className="text-lg font-bold text-[#111111]">
-                  内容要約
-                </h2>
-              </div>
-              <div className="space-y-0">
-                {post.summary.map((item, index) => (
-                  <a
-                    key={index}
-                    href={`${youtubeEmbedUrl?.replace("www.youtube-nocookie.com/embed/", "www.youtube.com/watch?v=")}&t=${
-                      parseInt(item.time.split(":")[0]!) * 60 +
-                      parseInt(item.time.split(":")[1]!)
-                    }`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-start gap-4 py-4 border-b border-[#dedbd6] hover:bg-[#fef5f0] transition-colors px-2 -mx-2"
-                  >
-                    <span className="flex-shrink-0 w-14 text-xs font-mono text-[#111111] bg-[#faf9f6] border border-[#dedbd6] px-2 py-1 text-center mt-0.5">
-                      {item.time}
-                    </span>
-                    <span className="text-sm text-[#7b7b78] leading-relaxed group-hover:text-[#111111] transition-colors">
-                      {item.text}
-                    </span>
-                    <ExternalLink
-                      size={12}
-                      className="flex-shrink-0 text-[#a0a09c] group-hover:text-[#a0a09c] mt-1 transition-colors"
-                    />
+              <aside className="guest-feature-listen">
+                <p className="guest-feature-eyebrow">LISTEN TO THE EPISODE</p>
+                <p>{post.excerpt || post.theme || "ゲストの言葉を、そのままの声で。"}</p>
+                {watchUrl && (
+                  <a href={watchUrl} target="_blank" rel="noopener noreferrer" className="guest-feature-button guest-feature-button--yellow">
+                    YouTubeで聴く
+                    <ArrowUpRight size={16} aria-hidden="true" />
                   </a>
-                ))}
+                )}
+              </aside>
+            </div>
+          </section>
+        )}
+
+        {guest && (
+          <section id="guest-profile" className="guest-feature-section guest-feature-profile">
+            <div className="guest-feature-shell guest-feature-profile__grid">
+              <div className="guest-feature-profile__media">
+                {guestImage ? <img src={guestImage} alt={`${guestName}のプロフィール写真`} /> : <UserRound size={42} aria-hidden="true" />}
+              </div>
+              <div className="guest-feature-profile__copy">
+                <p className="guest-feature-eyebrow">ABOUT THE GUEST</p>
+                <h2>{guestName}</h2>
+                <p className="guest-feature-role">{guestRole}</p>
+                {guest.bio && <p className="guest-feature-profile__bio">{guest.bio}</p>}
+
+                {recommendedFor.length > 0 && (
+                  <ul className="guest-feature-profile__tags">
+                    {recommendedFor.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                )}
+
+                {guestLinks.length > 0 && (
+                  <div className="guest-feature-links">
+                    {guestLinks.map((link) => (
+                      <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
+                        {link.label.toLowerCase().includes("instagram") ? <Share2 size={16} aria-hidden="true" /> : <Globe size={16} aria-hidden="true" />}
+                        {link.label}
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </section>
         )}
 
-        {/* ============================== */}
-        {/* Full Transcript                  */}
-        {/* ============================== */}
+        {post.summary.length > 0 && (
+          <section className="guest-feature-details">
+            <div className="guest-feature-shell">
+              <details>
+                <summary>
+                  <span><Clock3 size={16} aria-hidden="true" />時間付きの内容一覧</span>
+                  <span>詳しく見る <ArrowUpRight size={14} aria-hidden="true" /></span>
+                </summary>
+                <div className="guest-feature-details__list">
+                  {post.summary.map((item) => {
+                    const itemUrl = getWatchUrl(youtubeEmbedUrl, item.time);
+                    const content = (
+                      <>
+                        <time>{item.time}</time>
+                        <span>{item.text}</span>
+                        <ExternalLink size={13} aria-hidden="true" />
+                      </>
+                    );
+                    return itemUrl ? (
+                      <a key={`${item.time}-${item.text}`} href={itemUrl} target="_blank" rel="noopener noreferrer">{content}</a>
+                    ) : (
+                      <div key={`${item.time}-${item.text}`}>{content}</div>
+                    );
+                  })}
+                </div>
+              </details>
+            </div>
+          </section>
+        )}
+
         {post.transcript && (
           <TranscriptSection
             transcript={post.transcript}
@@ -386,123 +348,24 @@ export default async function MediaPostPage({ params }: Props) {
           />
         )}
 
-        {/* ============================== */}
-        {/* Guest Section (Name / Bio)       */}
-        {/* ============================== */}
-        {post.guests && post.guests.length > 0 && (
-          <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
-              <div className="flex items-center gap-2 mb-8">
-                <User size={16} className="text-[#111111]" />
-                <h2 className="text-lg font-bold text-[#111111]">
-                  ゲスト
-                </h2>
-              </div>
-              <div className="space-y-8">
-                {post.guests.map((guest, index) => (
-                  <div key={index} className="flex flex-col md:flex-row gap-6 md:gap-8 p-[22px] rounded-[4px] border border-[#dedbd6] bg-white">
-                    {/* Guest Image */}
-                    <div className="w-20 h-20 md:w-24 md:h-24 bg-[#faf9f6] flex-shrink-0 overflow-hidden rounded-[4px] border border-[#dedbd6]">
-                      {guest.image ? (
-                        <img src={guest.image} alt={guest.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[#a0a09c]">
-                          <User size={32} />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Guest Info */}
-                    <div className="flex-1">
-                      <div className="mb-2">
-                        <h3 className="text-base font-black text-[#111111]">{guest.name}</h3>
-                        <p className="text-xs text-[#a0a09c]">{guest.role}</p>
-                      </div>
-
-                      {guest.bio && (
-                        <p className="text-sm text-[#7b7b78] leading-[1.8] mb-4">{guest.bio}</p>
-                      )}
-
-                      {guest.links && guest.links.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                          {guest.links.map((link, i) => (
-                            <LinkCard
-                              key={i}
-                              label={link.label}
-                              url={link.url}
-                              eventName="guest_link_click"
-                              eventParams={{
-                                page_type: "media_post",
-                                post_id: post.id,
-                                post_title: post.title,
-                                category: post.category,
-                                position: "guest_section",
-                                guest_name: guest.name,
-                              }}
-                            />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ============================== */}
-        {/* Hosts / Personalities            */}
-        {/* ============================== */}
         {post.hostIds && post.hostIds.length > 0 && (
-          <section className="bg-white">
-            <div className="pencil-section max-w-[900px] mx-auto border-b border-[#dedbd6]">
-              <div className="flex items-center gap-2 mb-8">
-                <Mic size={16} className="text-[#111111]" />
-                <h2 className="text-lg font-bold text-[#111111]">
-                  パーソナリティ
-                </h2>
-              </div>
-              <div className="space-y-8">
-                {post.hostIds.map((id) => {
-                  const host = hosts[id];
+          <section className="guest-feature-hosts">
+            <div className="guest-feature-shell">
+              <p className="guest-feature-eyebrow">HOSTS</p>
+              <div className="guest-feature-hosts__grid">
+                {post.hostIds.map((hostId) => {
+                  const host = hosts[hostId];
                   if (!host) return null;
                   return (
-                    <div
-                      key={id}
-                      className="flex flex-col md:flex-row gap-6 md:gap-8 p-[22px] rounded-[4px] border border-[#dedbd6] bg-white"
-                    >
-                      <div className="w-20 h-20 md:w-24 md:h-24 bg-[#faf9f6] flex-shrink-0 overflow-hidden rounded-[4px] border border-[#dedbd6]">
-                        {host.image ? (
-                          <img src={host.image} alt={host.name} className="w-full h-full object-cover" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-[#a0a09c]">
-                            <User size={32} />
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <div className="mb-2">
-                          <h3 className="text-base font-black text-[#111111]">{host.name}</h3>
-                          <p className="text-xs text-[#a0a09c]">{host.role}</p>
-                        </div>
-                        {host.links && host.links.length > 0 && (
-                          <div className="flex flex-wrap gap-3">
-                            {host.links.map((link, i) => (
-                              <a
-                                key={i}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-[#111111] hover:opacity-70 transition-colors"
-                              >
-                                <Camera size={12} />
-                                {link.label}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+                    <div key={hostId}>
+                      <Mic2 size={18} aria-hidden="true" />
+                      <strong>{host.name}</strong>
+                      <span>{host.role}</span>
+                      {host.links?.map((link) => (
+                        <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
+                          <Camera size={13} aria-hidden="true" />{link.label}
+                        </a>
+                      ))}
                     </div>
                   );
                 })}
@@ -511,53 +374,31 @@ export default async function MediaPostPage({ params }: Props) {
           </section>
         )}
 
-        {/* ============================== */}
-        {/* Bottom CTA                       */}
-        {/* ============================== */}
-        <section className="bg-white">
-          <div className="pencil-section max-w-[900px] mx-auto text-center border-b border-[#dedbd6]">
-            <p className="pencil-eyebrow mb-3">CONTACT</p>
-            <h2 className="text-xl md:text-2xl font-black text-[#111111] mb-4">
-              ゲスト出演・取材依頼
-            </h2>
-            <p className="text-sm text-[#7b7b78] leading-[1.8] mb-8 max-w-xl mx-auto">
-              ラジオへのゲスト出演や、取材・対談のご依頼はメールまたはInstagramのDMで受け付けています。
-              お気軽にご連絡ください。
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <section className="guest-feature-contact">
+          <div className="guest-feature-shell guest-feature-contact__inner">
+            <div>
+              <p className="guest-feature-eyebrow">CONTACT</p>
+              <h2>出演・取材のご相談は、まず一度。</h2>
+              <p>ラジオへのゲスト出演や取材・対談のご依頼は、メールまたはInstagramのDMで受け付けています。</p>
+            </div>
+            <div className="guest-feature-contact__actions">
               <TrackedLink
                 href="mailto:ryuyakinjo@yazirusi.com"
                 eventName="contact_cta_click"
-                eventParams={{
-                  page_type: "media_post",
-                  post_id: post.id,
-                  post_title: post.title,
-                  category: post.category,
-                  position: "media_post_footer",
-                  cta_target: "email",
-                }}
-                className="pencil-button"
+                eventParams={{ page_type: "media_post", post_id: post.id, post_title: post.title, category: post.category, position: "media_post_footer", cta_target: "email" }}
+                className="guest-feature-button"
               >
-                <Mail size={14} />
-                メールで連絡する
+                <Mail size={15} aria-hidden="true" />メールで連絡する<ArrowUpRight size={15} aria-hidden="true" />
               </TrackedLink>
               <TrackedLink
                 href="https://instagram.com/ryuyakinjo"
                 target="_blank"
                 rel="noopener noreferrer"
                 eventName="contact_cta_click"
-                eventParams={{
-                  page_type: "media_post",
-                  post_id: post.id,
-                  post_title: post.title,
-                  category: post.category,
-                  position: "media_post_footer",
-                  cta_target: "instagram",
-                }}
-                className="pencil-button pencil-button-secondary"
+                eventParams={{ page_type: "media_post", post_id: post.id, post_title: post.title, category: post.category, position: "media_post_footer", cta_target: "instagram" }}
+                className="guest-feature-text-link"
               >
-                <Globe size={14} />
-                Instagram DM
+                <Share2 size={15} aria-hidden="true" />Instagram DM<ArrowUpRight size={15} aria-hidden="true" />
               </TrackedLink>
             </div>
           </div>
