@@ -107,6 +107,36 @@ function splitHighlightText(text: string) {
   };
 }
 
+function getGuestLinkPresentation(link: { label: string; url: string }) {
+  const normalizedLabel = link.label.toLowerCase();
+  const isInstagram = normalizedLabel.includes("instagram") || link.url.includes("instagram.com");
+  const isShopOrService = /店舗|予約|サービス|booking|shop|store/i.test(`${link.label} ${link.url}`);
+
+  if (isInstagram) {
+    return {
+      label: link.label === "Instagram" ? "Instagramで活動を見る" : link.label,
+      note: "Instagram（外部サイト）",
+      icon: Share2,
+    };
+  }
+
+  if (isShopOrService) {
+    return {
+      label: link.label,
+      note: "店舗・サービス（外部サイト）",
+      icon: Globe,
+    };
+  }
+
+  return {
+    label: /公式|ホームページ|web|website|hp/i.test(link.label)
+      ? link.label
+      : `${link.label}を見る`,
+    note: "公式ホームページ（外部サイト）",
+    icon: Globe,
+  };
+}
+
 export default async function MediaPostPage({ params }: Props) {
   const { id } = await params;
   const post = await getMediaByIdFromCMS(id);
@@ -130,9 +160,12 @@ export default async function MediaPostPage({ params }: Props) {
         <section className="guest-feature-hero">
           <div className="guest-feature-shell guest-feature-hero__grid">
             <div className="guest-feature-hero__copy">
-              <Link href="/media" className="guest-feature-back">
+              <Link
+                href={post.category === "radio" || post.category === "guest" ? "/radio" : "/media"}
+                className="guest-feature-back"
+              >
                 <ChevronLeft size={14} aria-hidden="true" />
-                メディア一覧へ
+                {post.category === "radio" || post.category === "guest" ? "放送一覧へ" : "メディア一覧へ"}
               </Link>
 
               <div className="guest-feature-meta">
@@ -277,7 +310,7 @@ export default async function MediaPostPage({ params }: Props) {
 
         {guest && (
           <section id="guest-profile" className="guest-feature-section guest-feature-profile">
-            <div className="guest-feature-shell guest-feature-profile__grid">
+            <div className={`guest-feature-shell guest-feature-profile__grid${guestLinks.length > 0 ? " guest-feature-profile__grid--with-links" : ""}`}>
               <div className="guest-feature-profile__media">
                 {guestImage ? <img src={guestImage} alt={`${guestName}のプロフィール写真`} /> : <UserRound size={42} aria-hidden="true" />}
               </div>
@@ -293,18 +326,30 @@ export default async function MediaPostPage({ params }: Props) {
                   </ul>
                 )}
 
-                {guestLinks.length > 0 && (
-                  <div className="guest-feature-links">
-                    {guestLinks.map((link) => (
-                      <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
-                        {link.label.toLowerCase().includes("instagram") ? <Share2 size={16} aria-hidden="true" /> : <Globe size={16} aria-hidden="true" />}
-                        {link.label}
-                        <ArrowUpRight size={14} aria-hidden="true" />
-                      </a>
-                    ))}
-                  </div>
-                )}
               </div>
+              {guestLinks.length > 0 && (
+                <aside className="guest-feature-links" aria-label={`${guestName}の外部リンク`}>
+                  <p>EXTERNAL LINKS</p>
+                  <h3>ゲストの活動を見る</h3>
+                  <div>
+                    {guestLinks.map((link) => {
+                      const presentation = getGuestLinkPresentation(link);
+                      const Icon = presentation.icon;
+
+                      return (
+                        <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
+                          <Icon size={18} aria-hidden="true" />
+                          <span>
+                            <strong>{presentation.label}</strong>
+                            <small>{presentation.note}</small>
+                          </span>
+                          <ArrowUpRight size={15} aria-hidden="true" />
+                        </a>
+                      );
+                    })}
+                  </div>
+                </aside>
+              )}
             </div>
           </section>
         )}
