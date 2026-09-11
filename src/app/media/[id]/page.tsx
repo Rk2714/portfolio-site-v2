@@ -146,6 +146,7 @@ export default async function MediaPostPage({ params }: Props) {
   const guestName = guest?.name || (post.category === "radio" ? "FM21" : post.categoryLabel);
   const guestRole = guest?.role || post.categoryLabel;
   const guestQuote = guest?.quote || post.quotes[0] || "";
+  const guestClosingQuote = guest?.closingQuote || guestQuote;
   const guestImage = guest?.image || post.thumbnail;
   const youtubeEmbedUrl = getSafeYouTubeEmbedUrl(post.youtubeUrl);
   const watchUrl = getWatchUrl(youtubeEmbedUrl);
@@ -287,12 +288,12 @@ export default async function MediaPostPage({ params }: Props) {
           </div>
         </section>
 
-        {guestQuote && (
+        {guestClosingQuote && (
           <section className="guest-feature-quote">
             <div className="guest-feature-shell guest-feature-quote__grid">
               <div className="guest-feature-quote__main">
                 <span className="guest-feature-quote-mark">“</span>
-                <blockquote>{guestQuote}</blockquote>
+                <blockquote>{guestClosingQuote}</blockquote>
               </div>
               <aside className="guest-feature-listen">
                 <p className="guest-feature-eyebrow">LISTEN TO THE EPISODE</p>
