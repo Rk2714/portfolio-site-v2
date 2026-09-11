@@ -152,7 +152,7 @@ export default async function RadioPage() {
                   <span>{latestEpisode.categoryLabel}</span>
                   <h3>{latestEpisode.title.replace("いえろーかっし～ FM21｜", "")}</h3>
                   <p>{latestEpisode.excerpt}</p>
-                  <strong>内容とアーカイブを見る <ArrowRight aria-hidden="true" size={18} /></strong>
+                  <strong>この放送回を見る <ArrowRight aria-hidden="true" size={18} /></strong>
                 </div>
               </Link>
             </div>
@@ -186,7 +186,7 @@ export default async function RadioPage() {
                 <p className="radio-eyebrow">ARCHIVE</p>
                 <h2>これまでの放送</h2>
               </div>
-              <Link href="/media">すべての活動記録 <ArrowRight size={16} /></Link>
+              <Link href="/media">すべての投稿を見る <ArrowRight size={16} /></Link>
             </div>
             {pastEpisodes.length > 0 ? (
               <div className="radio-archive__grid">

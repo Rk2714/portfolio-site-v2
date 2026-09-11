@@ -39,7 +39,7 @@ const categoryLabelMap: Record<string, string> = {
   radio: "ラジオ",
   guest: "ゲスト",
   appear: "出演",
-  note: "雑記",
+  note: "読みもの",
 };
 
 function formatDate(dateStr: string): string {
@@ -1064,7 +1064,7 @@ MRTプレゼンツ沖縄フューチャーイノベーション。本日は観�
     ],
     guests: [
       {
-        name: "池田弥生",
+        name: "池田弥生さん",
         role: "沖縄ベビーシッターTIDA 代表",
         quote:
           "ベビーシッターで親御さんとゆっくり悩みの相談ができる。保育園ではできなかったことが、今できている",
@@ -1235,7 +1235,7 @@ MRTプレゼンツ沖縄フューチャーイノベーション。本日は観�
     ],
     guests: [
       {
-        name: "久場創（くば つくる）",
+        name: "久場創（くば つくる）さん",
         role: "理学療法士 / 体芯力®︎認定指導者 / 北中城整体 くばとれ",
         quote:
           "痛みをとることが目的ではなく、痛みが整ったその先の未来にある『やりたいこと』を一緒に叶えたい",
@@ -1330,7 +1330,7 @@ MRTプレゼンツ沖縄フューチャーイノベーション。本日は観�
     ],
     guests: [
       {
-        name: "Hokama Ryo",
+        name: "Hokama Ryoさん",
         role: "Crush&Coreインストラクター",
         quote:
           "筋力を盛るのではなく、力の出し方を整える。パワーロスをなくすことで、年齢・体格差を逆転する——43歳の今が20代より爆発力が強い、そのメソッドがCrush&Coreです",
@@ -1414,7 +1414,9 @@ MRTプレゼンツ沖縄フューチャーイノベーション。本日は観�
         name: "ゆいさん",
         role: "Salonキャラ / 陽だまりマルシェ",
         quote:
-          "めっちゃ生きやすいです。自分のテーマに合わせて変わっていくのも一つ。看護もサロンも、どっちも自分。",
+          "看護師も、サロンも、マルシェも。自分のテーマに合わせて進む、ゆいさんの働き方。",
+        closingQuote:
+          "前の仕事も好きだった。でも、次にやりたいことが見えている。進むためには、一度卒業しないといけない。",
         takeaways: [
           "ハーブテント（タイ発祥のスチーム）・脱毛・筋膜リリース・機械フェイシャル——Salonキャラの4つの柱",
           "路面に出さない玄関、1枠1組の完全個室——『隠れ家サロン』に込めたプライバシーへのこだわり",
@@ -1621,7 +1623,7 @@ ASUNiKa：「めちゃくちゃ楽しかったです！」
     ],
     guests: [
       {
-        name: "ASUNiKa",
+        name: "ASUNiKaさん",
         role: "シンガーソングライター",
         quote:
           "中学生ぐらいから歌手になりたいなと思って、オーディションとか受けたりして。でも一度諦めかけて——沖縄に来て、やっぱりまだ自分の夢を追いかけたいなと思って、再スタートしました",
@@ -2169,7 +2171,7 @@ ASUNiKa：「めちゃくちゃ楽しかったです！」
     ],
     guests: [
       {
-        name: "伊波れいり",
+        name: "伊波れいりさん",
         role: "アロマタッチングケア",
         quote:
           "私がみんなを癒すんじゃなくて、癒しを受け取った人がまた大切な人に繋いでいく。それが地球が良くなるスピードを早める",
@@ -2790,7 +2792,7 @@ export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
     return {
       id: item.id,
       category: cat as "radio" | "guest" | "appear" | "note",
-      categoryLabel: categoryLabelMap[cat] || "雑記",
+      categoryLabel: categoryLabelMap[cat] || "読みもの",
       date: item.date ? formatDate(item.date) : staticPost?.date || "",
       title: item.title || staticPost?.title || "",
       excerpt: item.excerpt || staticPost?.excerpt || "",
@@ -2831,7 +2833,7 @@ export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undef
     return {
       id: item.id,
       category: cat as "radio" | "guest" | "appear" | "note",
-      categoryLabel: categoryLabelMap[cat] || "雑記",
+      categoryLabel: categoryLabelMap[cat] || "読みもの",
       date: item.date ? formatDate(item.date) : staticPost?.date || "",
       title: item.title || staticPost?.title || "",
       excerpt: item.excerpt || staticPost?.excerpt || "",

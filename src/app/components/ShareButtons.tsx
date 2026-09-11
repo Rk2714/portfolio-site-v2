@@ -15,6 +15,14 @@ export default function ShareButtons({ url, title, postId, category }: Props) {
   const [copied, setCopied] = useState(false);
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
+  const shareLabel =
+    category === "note"
+      ? "この記事を共有"
+      : category === "appear"
+        ? "この出演情報を共有"
+        : category === "radio" || category === "guest"
+          ? "この放送回を共有"
+          : "このページを共有";
 
   const copyUrl = async () => {
     try {
@@ -52,7 +60,7 @@ export default function ShareButtons({ url, title, postId, category }: Props) {
 
   return (
     <div className="flex flex-wrap items-center gap-3 py-4 border-t border-gray-100 mt-6">
-      <span className="text-xs text-[#a0a09c] mr-1">この記事をシェア</span>
+      <span className="text-xs text-[#a0a09c] mr-1">{shareLabel}</span>
 
       {/* Copy link */}
       <button
@@ -60,7 +68,7 @@ export default function ShareButtons({ url, title, postId, category }: Props) {
         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#faf9f6] border border-gray-200 text-xs text-[#7b7b78] hover:bg-[#FFF5EB] transition-colors"
       >
         {copied ? <Check size={12} className="text-[#059669]" /> : <Copy size={12} />}
-        {copied ? "コピーしました" : "URLをコピー"}
+        {copied ? "コピーしました" : "リンクをコピー"}
       </button>
 
       {/* X (Twitter) */}

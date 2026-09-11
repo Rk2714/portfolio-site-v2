@@ -107,6 +107,17 @@ function splitHighlightText(text: string) {
   };
 }
 
+function renderGuestName(name: string) {
+  if (!name.endsWith("さん")) return name;
+
+  return (
+    <>
+      {name.slice(0, -2)}
+      <span className="guest-feature-honorific">さん</span>
+    </>
+  );
+}
+
 function getGuestLinkPresentation(link: { label: string; url: string }) {
   const normalizedLabel = link.label.toLowerCase();
   const isInstagram = normalizedLabel.includes("instagram") || link.url.includes("instagram.com");
@@ -146,7 +157,8 @@ export default async function MediaPostPage({ params }: Props) {
   const guestName = guest?.name || (post.category === "radio" ? "FM21" : post.categoryLabel);
   const guestRole = guest?.role || post.categoryLabel;
   const guestQuote = guest?.quote || post.quotes[0] || "";
-  const guestClosingQuote = guest?.closingQuote || guestQuote;
+  const guestClosingQuote =
+    guest?.closingQuote || post.quotes.find((quote) => quote !== guestQuote) || "";
   const guestImage = guest?.image || post.thumbnail;
   const youtubeEmbedUrl = getSafeYouTubeEmbedUrl(post.youtubeUrl);
   const watchUrl = getWatchUrl(youtubeEmbedUrl);
@@ -174,7 +186,7 @@ export default async function MediaPostPage({ params }: Props) {
                 <span>{post.date}</span>
               </div>
 
-              <h1>{guestName}</h1>
+              <h1>{renderGuestName(guestName)}</h1>
               <p className="guest-feature-role">{guestRole}</p>
 
               {guestQuote && <blockquote className="guest-feature-hero__quote">{guestQuote}</blockquote>}
@@ -230,7 +242,7 @@ export default async function MediaPostPage({ params }: Props) {
             </div>
             <div>
               <span>GUEST</span>
-              <strong>{guestName}</strong>
+              <strong>{renderGuestName(guestName)}</strong>
             </div>
             <div>
               <span>TOPIC</span>
@@ -317,7 +329,7 @@ export default async function MediaPostPage({ params }: Props) {
               </div>
               <div className="guest-feature-profile__copy">
                 <p className="guest-feature-eyebrow">ABOUT THE GUEST</p>
-                <h2>{guestName}</h2>
+                <h2>{renderGuestName(guestName)}</h2>
                 <p className="guest-feature-role">{guestRole}</p>
                 {guest.bio && <p className="guest-feature-profile__bio">{guest.bio}</p>}
 
@@ -424,7 +436,7 @@ export default async function MediaPostPage({ params }: Props) {
           <div className="guest-feature-shell guest-feature-contact__inner">
             <div>
               <p className="guest-feature-eyebrow">CONTACT</p>
-              <h2>出演・取材のご相談は、まず一度。</h2>
+              <h2>出演・取材のご相談はこちら。</h2>
               <p>ラジオへのゲスト出演や取材・対談のご依頼は、メールまたはInstagramのDMで受け付けています。</p>
             </div>
             <div className="guest-feature-contact__actions">

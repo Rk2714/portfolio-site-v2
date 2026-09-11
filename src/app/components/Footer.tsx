@@ -7,7 +7,7 @@ export default function Footer() {
         <div>
           <strong>Yazirusi</strong>
           <p>金城竜弥 / RYUYA KINJO</p>
-          <p>業務を整理し、今の会社に合う仕組みへ</p>
+          <p>現場にも、一人ひとりにも。続けられる変化を。</p>
         </div>
         <nav aria-label="フッターナビゲーション">
           <Link href="/">ホーム</Link>

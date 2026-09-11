@@ -2889,6 +2889,15 @@ button:focus-visible {
   line-height: 1.05;
 }
 
+.guest-feature-honorific {
+  display: inline-block;
+  margin-left: .12em;
+  font-size: .48em;
+  font-weight: 500;
+  letter-spacing: 0;
+  vertical-align: .18em;
+}
+
 .guest-feature-role {
   margin: 18px 0 0;
   color: var(--guest-coral);

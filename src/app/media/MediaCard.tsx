@@ -16,6 +16,18 @@ export default function MediaCard({ post }: Props) {
   const shareUrl = `${SITE_URL}/media/${post.id}`;
   const encodedTitle = encodeURIComponent(post.title);
   const encodedUrl = encodeURIComponent(shareUrl);
+  const detailLabel =
+    post.category === "note"
+      ? "記事を読む"
+      : post.category === "appear"
+        ? "出演内容を見る"
+        : "この放送回を見る";
+  const shareLabel =
+    post.category === "note"
+      ? "この記事を共有"
+      : post.category === "appear"
+        ? "この出演情報を共有"
+        : "この放送回を共有";
   const copyShareUrl = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
@@ -63,7 +75,7 @@ export default function MediaCard({ post }: Props) {
           {post.title}
         </h2>
         <p className="line-clamp-3 text-[14px] leading-[24px] text-[#7b7b78]">{post.excerpt}</p>
-        <span className="pencil-button pencil-button-secondary w-fit">聴く / 読む</span>
+        <span className="pencil-button pencil-button-secondary w-fit">{detailLabel}</span>
         <div className="h-[150px] overflow-hidden rounded-[14px] bg-[#faf9f6]">
           {post.thumbnail ? (
             <img
@@ -80,7 +92,7 @@ export default function MediaCard({ post }: Props) {
       </TrackedLink>
 
       <div className="mt-5 flex flex-col gap-3 border-t border-[#dedbd6] pt-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-[#a0a09c]">この回をそのまま共有できます。</p>
+        <p className="text-xs text-[#a0a09c]">{shareLabel}</p>
         <div className="flex flex-wrap items-center gap-2">
           <a
             href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
@@ -126,7 +138,7 @@ export default function MediaCard({ post }: Props) {
             className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-[#dedbd6] bg-white px-3 py-2 text-xs font-bold text-[#7b7b78] transition-colors hover:bg-[#fef5f0]"
           >
             {copied ? <Check size={12} className="text-[#059669]" /> : <Copy size={12} />}
-            {copied ? "コピーしました" : "URLコピー"}
+            {copied ? "コピーしました" : "リンクをコピー"}
           </button>
         </div>
       </div>

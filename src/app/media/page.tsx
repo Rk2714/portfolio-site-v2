@@ -32,8 +32,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
       : posts.find((post) => post.category === activeCategory)?.thumbnail || "/images/okinawa-sea.jpg";
   const title =
     activeCategory === "all"
-      ? "メディア活動・雑記｜金城竜弥"
-      : `${option.label}一覧｜メディア活動・金城竜弥`;
+      ? "活動・メディア｜金城竜弥"
+      : `${option.label}｜活動・メディア｜金城竜弥`;
   const url = getFilterHref(activeCategory);
 
   return {
@@ -83,7 +83,7 @@ export default async function MediaPage({ searchParams }: Props) {
         <section className="bg-white pt-[88px]">
           <div className="pencil-section mx-auto max-w-[900px] border-b border-[#dedbd6]">
             <p className="pencil-eyebrow mb-4">
-              Media & Notes
+              MEDIA & STORIES
             </p>
             <h1 className="pencil-title mb-6">
               {activeCategoryOption.heroTitle}
@@ -93,9 +93,7 @@ export default async function MediaPage({ searchParams }: Props) {
             </p>
             <div className="mt-6 inline-flex items-center gap-2 rounded-[4px] border border-[#dedbd6] bg-[#fef5f0] px-3 py-2 text-xs text-[#7b7b78]">
               <span className="font-bold text-[#111111]">{filteredPosts.length}件</span>
-              <span>表示中</span>
-              <span className="text-[#a0a09c]">/</span>
-              <span>全{posts.length}件</span>
+              <span>{activeCategory === "all" ? "公開中の記録" : `${activeCategoryOption.label}の記録`}</span>
             </div>
           </div>
         </section>
@@ -118,8 +116,8 @@ export default async function MediaPage({ searchParams }: Props) {
               </div>
             ) : (
               <div className="rounded-[4px] border border-dashed border-[#dedbd6] bg-[#fef5f0] px-6 py-10 text-center">
-                <p className="text-sm font-bold text-[#111111] mb-2">このカテゴリの記事はまだありません。</p>
-                <p className="text-xs text-[#a0a09c]">別カテゴリに切り替えると、公開済みのラジオや出演回を確認できます。</p>
+                <p className="text-sm font-bold text-[#111111] mb-2">このカテゴリは、まだ準備中です。</p>
+                <p className="text-xs text-[#a0a09c]">ほかのカテゴリから、公開中の記録をご覧いただけます。</p>
               </div>
             )}
           </div>
@@ -129,7 +127,7 @@ export default async function MediaPage({ searchParams }: Props) {
         <section className="py-20 bg-[#fef5f0]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <p className="text-sm text-[#a0a09c] mb-4">
-              ゲスト出演・取材依頼はこちら
+              出演・取材について
             </p>
             <TrackedLink
               href="mailto:ryuyakinjo@yazirusi.com"
@@ -142,7 +140,7 @@ export default async function MediaPage({ searchParams }: Props) {
               className="pencil-button"
             >
               <ExternalLink size={14} />
-              メールで連絡する
+              まずはメールで相談する
             </TrackedLink>
           </div>
         </section>
