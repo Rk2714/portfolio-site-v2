@@ -32,10 +32,10 @@ export const mediaCategoryOptions: Array<{
   },
   {
     key: "appear",
-    label: "出演",
-    heroTitle: "出演・取材の記録。",
+    label: "ゲスト出演",
+    heroTitle: "ゲスト出演・取材の記録。",
     heroDescription:
-      "番組出演や取材、対談の内容をまとめています。お話ししたテーマと活動の背景をご覧いただけます。",
+      "金城竜弥が番組やメディアにゲスト出演した記録です。お話ししたテーマと活動の背景をご覧いただけます。",
   },
   {
     key: "note",

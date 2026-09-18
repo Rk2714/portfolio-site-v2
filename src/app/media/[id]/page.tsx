@@ -154,8 +154,8 @@ export default async function MediaPostPage({ params }: Props) {
   if (!post) notFound();
 
   const guest = post.guests?.[0];
-  const guestName = guest?.name || (post.category === "radio" ? "FM21" : post.categoryLabel);
-  const guestRole = guest?.role || post.categoryLabel;
+  const guestName = guest?.name || (post.category === "radio" ? "FM21" : "金城竜弥");
+  const guestRole = guest?.role || (post.category === "appear" ? "ゲスト出演" : post.categoryLabel);
   const guestQuote = guest?.quote || post.quotes[0] || "";
   const guestClosingQuote =
     guest?.closingQuote || post.quotes.find((quote) => quote !== guestQuote) || "";
@@ -199,7 +199,7 @@ export default async function MediaPostPage({ params }: Props) {
                     <ArrowUpRight size={15} aria-hidden="true" />
                   </a>
                 )}
-                <span className="guest-feature-hero__note">FM21『いえろーかっし～』</span>
+                <span className="guest-feature-hero__note">{post.programLabel || "FM21『いえろーかっし～』"}</span>
               </div>
 
               <div className="guest-feature-hero__share">
@@ -223,7 +223,7 @@ export default async function MediaPostPage({ params }: Props) {
                 </div>
               )}
               <figcaption>
-                <span>FM21 / RADIO GUEST</span>
+                <span>{post.programLabel || "FM21 / RADIO GUEST"}</span>
                 <span>{post.date}</span>
               </figcaption>
             </figure>

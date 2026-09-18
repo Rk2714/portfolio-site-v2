@@ -38,7 +38,7 @@ export function getSafeYouTubeEmbedUrl(input: string | null | undefined): string
 const categoryLabelMap: Record<string, string> = {
   radio: "ラジオ",
   guest: "ゲスト",
-  appear: "出演",
+  appear: "ゲスト出演",
   note: "読みもの",
 };
 
@@ -55,6 +55,7 @@ export interface MediaPost {
   excerpt: string;
   youtubeUrl: string | null;
   thumbnail: string;
+  programLabel?: string;
   theme: string;
   summary: { time: string; text: string }[];
   quotes: string[];
@@ -602,7 +603,7 @@ export const mediaPosts: MediaPost[] = [
   {
     id: "mtotenuoa_05",
     category: "appear",
-    categoryLabel: "出演",
+    categoryLabel: "ゲスト出演",
     date: "2025-09-02",
     title:
       "MRT presents 沖縄フューチャーイノベーション｜観光医療と働き方改革——看護師の新しいキャリアの形",
@@ -682,7 +683,7 @@ MRTプレゼンツ沖縄フューチャーイノベーション。本日は観�
   {
     id: "fxq_0k5c3hnb",
     category: "appear",
-    categoryLabel: "出演",
+    categoryLabel: "ゲスト出演",
     date: "2026-02-24",
     title:
       "いえろーかっし～ FM21｜第二夜：金城竜弥を深掘り——看護師から海外、そしてAIコンサルタントへ",
@@ -767,7 +768,7 @@ MRTプレゼンツ沖縄フューチャーイノベーション。本日は観�
   {
     id: "fn9ocqfoygl",
     category: "appear",
-    categoryLabel: "出演",
+    categoryLabel: "ゲスト出演",
     date: "2026-01-13",
     title:
       "いえろーかっし～ FM21｜ゲスト出演：AIコンサルタント 金城竜弥——人が人を呼ぶ、キャリアの形",
@@ -2665,6 +2666,84 @@ ASUNiKa：「めちゃくちゃ楽しかったです！」
     hostIds: ["cassy", "kinchan"],
   },
   {
+    id: "fm21-lifefree-20260909",
+    category: "appear",
+    categoryLabel: "ゲスト出演",
+    date: "2026-09-09",
+    title:
+      "FM21｜Life Free presents サポートボイス——自分らしく生きるとは",
+    excerpt:
+      "FM21『Life Free presents サポートボイス』に、金城竜弥がゲスト出演。看護師としての原点、ラジオで人とつながる実感、矢印が進める現場密着型の業務改善について語りました。",
+    youtubeUrl: "https://www.youtube.com/embed/aIl5QUmLXqs",
+    thumbnail: "https://i.ytimg.com/vi/aIl5QUmLXqs/hqdefault.jpg",
+    programLabel: "FM21｜Life Free presents サポートボイス",
+    theme:
+      "自分らしく生きるための業務改善——AIを目的にせず、現場に入り、使いながら直していく伴走型の支援。",
+    summary: [
+      { time: "04:04", text: "ゲスト紹介：FM21パーソナリティでもあるAI看護師・金城竜弥" },
+      { time: "05:29", text: "矢印という名前に込めた想い——突き進み、結果として良い方向へ進む" },
+      { time: "09:18", text: "看護師を目指した原点——看護師だった叔父と祖母の影響" },
+      { time: "11:06", text: "ラジオに参加した理由——話す訓練から、人とつながる場へ" },
+      { time: "15:06", text: "コロナ禍の業務改善から独立へ——スタッフとケアの良い循環をつくる" },
+      { time: "23:48", text: "AIは目的ではなく道具——Excel・Google・ChatGPTなどを組み合わせる業務改善" },
+      { time: "27:08", text: "データ整理と共有環境、医療福祉向けアプリを現場で使いながら改善" },
+      { time: "38:08", text: "自分を支える言葉——後悔しない生き方を選ぶ" },
+      { time: "46:23", text: "強みは現場感と伴走——導入後も現場に寄り添い、仕組みを育てる" },
+      { time: "51:50", text: "医療・介護・福祉の環境を残すために、沖縄から支援を広げる" },
+    ],
+    quotes: [
+      "AIありきではなく、基本は本当に業務改善をさせていただいてます。",
+      "作るのに時間をかけるのではなくて、使って直す方向に時間をかける。",
+      "後悔しない生き方しなさいよっていうのを、ずっと元に僕は日々動いてます。",
+      "現場感を大事に、現場に寄り添って業務改善していく、本当に業務改善屋さんです。",
+      "すごく言語化できて、自分のことがすごくアップデートされました。",
+    ],
+    transcript: `YouTube自動字幕をもとに要点を整理しました。
+
+[04:04] FM21でパーソナリティを務め、看護師として働きながらAIを活用した事業を営むゲストとして紹介。
+[04:26] 今回のテーマは「自分らしく生きるための業務改善」。
+
+[05:29] 「矢印」という名前には、突き進んでほしいというイメージと、結果として良い方向に進めばよいという想いを込めている。
+
+[09:18] 看護師を目指したきっかけは、看護師だった叔父の話が面白かったこと。祖母も看護師だったことを知り、自分も看護師の道を選んだ。
+
+[11:06] FM21のラジオには、話す訓練になると思って参加した。続ける中で、ラジオは人とつながる場だと感じるようになった。
+
+[15:06] コロナ禍に業務改善を進め、業務が回ることでスタッフの動きとケアの質が良くなる循環を経験。その後、医療機関全体の業務改善に関わるため独立した。
+
+[23:48] AIありきではなく、業務改善が中心。Excel、Word、Googleの機能、ChatGPTやGeminiなどを、目的に合わせて道具として使う。
+
+[27:08] データを共有できる環境や変更履歴が残る仕組みを整え、書類作成やインシデントレポートなどのアプリを現場と一緒につくる。完成品を渡して終わりではなく、使って直し、バージョンアップしていく。
+
+[38:08] 看護師1年目に患者さんから聞いた「後悔しない生き方をしなさい」という言葉を、自分を支える軸にしている。
+
+[46:23] AIの導入よりも、現場で維持することが難しい。現場感を大切に、伴走しながら業務改善することが強み。
+
+[51:50] 医療・介護・福祉の環境を次の世代に残すため、沖縄を軸にオンラインも活用しながら支援を広げていきたい。
+
+[57:02] 番組に出演して、自分のことを言語化でき、考えが整理され、アップデートされたと振り返った。`,
+    tags: ["FM21", "Life Free", "出演", "ゲスト", "ラジオ", "業務改善", "AI活用", "看護師", "医療・介護・福祉", "矢印"],
+    guests: [],
+  },
+  {
+    id: "fm-yomitan-20260918",
+    category: "appear",
+    categoryLabel: "ゲスト出演",
+    date: "2026-09-18",
+    title: "FMよみたん｜2026年9月18日 ストロベリームーン",
+    excerpt:
+      "FMよみたんの番組に、金城竜弥がゲスト出演。YouTube字幕の公開後に、放送内容の要点を追記します。",
+    youtubeUrl: "https://www.youtube.com/embed/sPwWCCk8G5s",
+    thumbnail: "https://i.ytimg.com/vi/sPwWCCk8G5s/hqdefault.jpg",
+    programLabel: "FMよみたんラジオ放送",
+    theme: "ストロベリームーン——字幕公開後に内容を追記します。",
+    summary: [],
+    quotes: [],
+    transcript: "現在、YouTube字幕の公開待ちです。字幕が公開され次第、放送内容の要点を追記します。",
+    tags: ["FMよみたん", "出演", "ゲスト", "ラジオ", "ストロベリームーン", "字幕待ち"],
+    guests: [],
+  },
+  {
     id: "yuidocoro-20260910",
     category: "guest",
     categoryLabel: "ゲスト",
@@ -2798,6 +2877,7 @@ export async function getAllMediaFromCMS(): Promise<MediaPost[]> {
       excerpt: item.excerpt || staticPost?.excerpt || "",
       youtubeUrl: item.youtubeUrl || staticPost?.youtubeUrl || null,
       thumbnail: staticPost?.thumbnail || "",
+      programLabel: staticPost?.programLabel,
       theme: staticPost?.theme || "",
       summary: staticPost?.summary || [],
       quotes: staticPost?.quotes || [],
@@ -2839,6 +2919,7 @@ export async function getMediaByIdFromCMS(id: string): Promise<MediaPost | undef
       excerpt: item.excerpt || staticPost?.excerpt || "",
       youtubeUrl: item.youtubeUrl || staticPost?.youtubeUrl || null,
       thumbnail: staticPost?.thumbnail || "",
+      programLabel: staticPost?.programLabel,
       theme: staticPost?.theme || "",
       summary: staticPost?.summary || [],
       quotes: staticPost?.quotes || [],
