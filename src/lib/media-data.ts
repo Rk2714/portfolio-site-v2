@@ -3533,6 +3533,67 @@ ASUNiKa：「めちゃくちゃ楽しかったです！」
     guests: [],
   },
   {
+    id: "ikemura-sachika-20260924",
+    category: "guest",
+    categoryLabel: "ゲスト",
+    date: "2026-09-24",
+    title:
+      "いえろーかっし～ FM21｜池村紗智禾さん——吉方位で人生の次の一歩へ",
+    excerpt:
+      "FM21『いえろーかっし～』に、吉方位セルフ鑑定講師の池村紗智禾さんがゲスト出演。旅行・引越し・人生の節目に吉方位を活かす旅の考え方や、自分・家族・友人の吉方位を学ぶ方法についてお話を伺います。",
+    youtubeUrl: "https://www.youtube.com/embed/46DpEGNDZRw",
+    thumbnail: "https://i.ytimg.com/vi/46DpEGNDZRw/hqdefault.jpg",
+    programLabel: "FM21｜いえろーかっし～",
+    theme:
+      "吉方位を知り、人生の節目の次の一歩へ——沖縄からオンラインで届ける、池村紗智禾さんの吉方位セルフ鑑定と旅のプランニング。",
+    summary: [],
+    quotes: [],
+    transcript:
+      "現在、YouTube側で字幕が利用できません。字幕が公開され次第、全文文字起こしと時間付きの要点を追記します。\n\nYouTube動画：2026年9月24日 FM21『いえろーかっし～』",
+    tags: [
+      "FM21",
+      "いえろーかっし～",
+      "ラジオ",
+      "池村紗智禾",
+      "吉方位",
+      "吉方位セルフ鑑定",
+      "旅プランニング",
+      "沖縄",
+    ],
+    guests: [
+      {
+        name: "池村紗智禾さん",
+        role: "吉方位セルフ鑑定講師／吉方位旅プランニング",
+        quote: "自分の吉方位を見つけて、次の一歩へ。",
+        closingQuote: "旅行・引越し・人生の節目に、吉方位を活かして次の一歩へ。",
+        bio:
+          "沖縄を拠点に、吉方位セルフ鑑定講師として活動している。旅行・引越し・人生の節目に吉方位を活かした旅のプランニングや、自分・家族・友人の吉方位を学べる講座を案内。鑑定・講座はオンラインにも対応している。",
+        takeaways: [
+          "沖縄を拠点に活動する吉方位セルフ鑑定講師",
+          "旅行・引越し・人生の節目に吉方位を活かした旅をプランニング",
+          "自分・家族・友人の吉方位を学べる鑑定・講座を案内",
+          "沖縄からオンラインでも相談・講座に対応",
+        ],
+        recommendedFor: [
+          "旅行や引越しなど、人生の節目を迎えている方",
+          "自分や家族の吉方位を知りたい方",
+          "吉方位を活かした旅の計画に関心がある方",
+          "沖縄からオンラインで相談できる講師を探している方",
+        ],
+        highlightTimes: [],
+        shareMessage:
+          "FM21『いえろーかっし～』に、吉方位セルフ鑑定講師の池村紗智禾さんが出演。旅行・引越し・人生の節目に吉方位を活かす旅の考え方や、自分・家族・友人の吉方位を学ぶ方法について伺います。YouTube字幕公開後に、放送内容の要点と全文文字起こしを追記します。",
+        links: [
+          {
+            label: "Instagram",
+            url: "https://www.instagram.com/suzunone_kichihoidori/",
+          },
+        ],
+        instagramPost: "https://www.instagram.com/suzunone_kichihoidori/reel/DWQJhpQEgyB/",
+      },
+    ],
+  },
+  {
     id: "yuidocoro-20260910",
     category: "guest",
     categoryLabel: "ゲスト",
