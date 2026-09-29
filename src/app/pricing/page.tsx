@@ -6,7 +6,6 @@ import HomeMotion from "../components/HomeMotion";
 import Navigation from "../components/Navigation";
 import {
   businessPlans,
-  personalPlans,
   siteContacts,
 } from "../../lib/site-data";
 import { SITE_URL } from "../../lib/site-config";
@@ -14,14 +13,14 @@ import { SITE_URL } from "../../lib/site-config";
 export const metadata: Metadata = {
   title: "料金・支援内容",
   description:
-    "Yazirusiの法人・事業所向け業務整理・改善伴走・業務システム構築と、個人向けAI活用セッションの料金目安。最初の30分は無料の顔合わせです。",
+    "Yazirusiの法人・事業所向け支援内容と、個人向けAI活用セッションのご案内。お申し込みの前に30分無料相談を行います。",
   alternates: {
     canonical: "/pricing",
   },
   openGraph: {
     title: "料金・支援内容｜Yazirusi",
     description:
-      "法人・事業所向けの業務改善支援と、個人向けAI活用セッションの料金目安をご案内します。",
+      "法人・事業所向けの業務改善支援と、個人向けAI活用セッションをご案内します。まずは30分無料相談から。",
     url: "/pricing",
     type: "website",
     locale: "ja_JP",
@@ -32,7 +31,7 @@ const questions = [
   {
     question: "相談したら、必ず依頼する必要がありますか？",
     answer:
-      "いいえ。最初の30分は顔合わせとして、困りごとの概要を伺い、Yazirusiでできることをご説明します。必要な場合のみ、次回の詳しいヒアリングへ進みます。",
+      "いいえ。最初の30分は無料相談として、困りごとの概要を伺い、Yazirusiでできることをご説明します。必要な場合のみ、相談後にLINEで支援内容をご案内します。",
   },
   {
     question: "表示料金より高くなることはありますか？",
@@ -75,20 +74,6 @@ const structuredData = {
           },
         })),
       },
-      {
-        "@type": "OfferCatalog",
-        name: "個人向けAIセッション",
-        itemListElement: personalPlans.map((plan) => ({
-          "@type": "Offer",
-          priceCurrency: "JPY",
-          price: plan.priceAmount,
-          itemOffered: {
-            "@type": "Service",
-            name: plan.name,
-            description: `${plan.detail}の個人向けAI活用セッション`,
-          },
-        })),
-      },
     ],
   },
 };
@@ -113,7 +98,7 @@ export default function PricingPage() {
                 <p className="pricing-hero__summary">
                   <span>必要な範囲を、一緒に整理してから始めます。</span>
                   <span>法人向けは、内容に合わせて組み立てます。</span>
-                  <span>見積もりは、初回相談後にご案内します。</span>
+                  <span>お申し込みの前に、30分無料相談を行います。</span>
                 </p>
                 <div className="pricing-jump-links">
                   <a href="#business">
@@ -181,12 +166,12 @@ export default function PricingPage() {
                 <span>分割払いにも対応しています。外部サービスの利用料や機器代が必要な場合は、別途事前にご案内します。</span>
               </div>
               <a
-                href={siteContacts.calendly}
+                href={siteContacts.lineOfficial}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="home-button home-button--light pricing-section__cta"
               >
-                法人・事業所の相談を予約
+                LINEで30分無料相談を予約
                 <ArrowUpRight aria-hidden="true" size={17} />
               </a>
             </div>
@@ -197,39 +182,23 @@ export default function PricingPage() {
               <div className="pricing-section__heading" data-reveal>
                 <p className="home-kicker">For individuals</p>
                 <div>
-                  <h2>個人向けAIセッション</h2>
+                  <h2>個人向けAIサポート</h2>
                   <p>
                     あなたの仕事や生活に合わせて、実際に使えるAIの取り入れ方を一対一で整理します。
                   </p>
                 </div>
               </div>
 
-              <div className="pricing-personal__table" data-reveal>
-                <div className="pricing-table__head" aria-hidden="true">
-                  <span>プラン</span>
-                  <span>時間・回数</span>
-                  <span>料金</span>
-                  <span>備考</span>
-                </div>
-                {personalPlans.map((plan) => (
-                  <article key={plan.name}>
-                    <h3>{plan.name}</h3>
-                    <p>{plan.detail}</p>
-                    <strong>{plan.price}</strong>
-                    <span>{plan.note || "—"}</span>
-                  </article>
-                ))}
-              </div>
               <p className="pricing-personal__note" data-reveal>
-                セッションでは、AIの一般的な説明だけでなく、実際の仕事や困りごとをもとに使い方を一緒につくります。4回・8回プランは分割払いも可能です。
+                最初に30分無料相談で、今の仕事や困りごとを伺います。単発・4回・8回のサポートは、相談を終えてから公式LINEで個別にご案内します。
               </p>
               <a
-                href={siteContacts.calendly}
+                href={siteContacts.lineOfficial}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="home-button home-button--green pricing-section__cta"
               >
-                個人AIセッションを予約
+                LINEで30分無料相談を予約
                 <ArrowUpRight aria-hidden="true" size={17} />
               </a>
             </div>
@@ -258,16 +227,16 @@ export default function PricingPage() {
                 <p className="home-kicker">Free consultation</p>
                 <h2>まずは、状況を聞かせてください。</h2>
                 <p>
-                  最初の30分は無料の顔合わせです。困りごとの概要を伺い、Yazirusiでできることをお伝えします。必要な場合のみ、次のヒアリングへ進みます。
+                  公式LINEで「予約」と送ると、30分無料相談の日程をご案内します。困りごとの概要を伺い、必要な支援は相談後に個別にご案内します。
                 </p>
               </div>
               <a
-                href={siteContacts.calendly}
+                href={siteContacts.lineOfficial}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="home-button home-button--green"
               >
-                30分の顔合わせを予約
+                LINEで30分無料相談を予約
                 <ArrowUpRight aria-hidden="true" size={17} />
               </a>
               <Link href="/" className="pricing-back-link">

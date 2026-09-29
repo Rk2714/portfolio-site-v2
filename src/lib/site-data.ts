@@ -63,7 +63,7 @@ export const siteProfile = {
 export const siteContacts = {
   email: "ryuyakinjo@yazirusi.com",
   location: "沖縄県中城村",
-  calendly: "https://calendar.google.com/calendar/appointments/AcZssZ1zsY3H7WMckAhw6Ddz4aqb82i9YaIRgmZGUmk=?gv=true",
+  lineOfficial: "https://lin.ee/8WhWEGP",
 };
 
 export interface AudienceOffer {
