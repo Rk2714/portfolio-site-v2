@@ -81,9 +81,9 @@ const improvementOptions = [
 ];
 
 const consultationSteps = [
-  ["01", "LINEで日程を確認", "公式LINEを友だち追加し、「予約」と送ってください。無料相談の日程をご案内します。"],
-  ["02", "30分で一緒に整理", "今の困りごと、取り組む優先順位、Yazirusiで支援できる範囲を確認します。"],
-  ["03", "必要な方へ個別にご提案", "相談後にLINEで支援内容と料金をご案内します。内容を確認してから、お申し込みを決められます。"],
+  { number: "01", title: "LINEで日程を確認", description: "公式LINEを友だち追加し、「予約」と送ってください。無料相談の日程をご案内します。", icon: MessageCircle },
+  { number: "02", title: "30分で一緒に整理", description: "今の困りごと、取り組む優先順位、Yazirusiで支援できる範囲を確認します。", icon: MessagesSquare },
+  { number: "03", title: "必要な方へ個別にご提案", description: "相談後にLINEで支援内容と料金をご案内します。内容を確認してから、お申し込みを決められます。", icon: ClipboardCheck },
 ];
 
 const consultationQuestions = [
@@ -356,10 +356,25 @@ export default function Home() {
 
           <section id="consultation-flow" className="workshop-consultation" aria-labelledby="consultation-title">
             <div className="home-shell">
-              <div className="workshop-consultation__heading" data-reveal><p className="workshop-eyebrow">Before we start</p><h2 id="consultation-title">30分で、困りごとと<br />次の一歩を整理。</h2><p>「どこから手をつけるか」「どこまで頼めるか」を一緒に確認する無料相談です。必要な支援や回数は、話してから考えましょう。</p></div>
-              <ol className="workshop-consultation__steps">
-                {consultationSteps.map(([number, title, description]) => <li key={number} data-reveal><span>{number}</span><h3>{title}</h3><p>{description}</p></li>)}
+              <div className="workshop-consultation__heading"><p className="workshop-eyebrow">Before we start</p><h2 id="consultation-title">30分で、困りごとと<br />次の一歩を整理。</h2><p>「どこから手をつけるか」「どこまで頼めるか」を一緒に確認する無料相談です。必要な支援や回数は、話してから考えましょう。</p></div>
+              <ul className="workshop-consultation__reassurance" aria-label="無料相談について">
+                <li><Check size={18} aria-hidden="true" />オンライン・30分</li>
+                <li><Check size={18} aria-hidden="true" />相談料 0円</li>
+                <li><Check size={18} aria-hidden="true" />自動で料金は発生しません</li>
+              </ul>
+              <ol className="workshop-consultation__steps" role="list">
+                {consultationSteps.map(({ number, title, description, icon: Icon }) => (
+                  <li key={number}>
+                    <div className="workshop-consultation__step-marker"><span>STEP {number}</span><Icon size={26} aria-hidden="true" /></div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </li>
+                ))}
               </ol>
+              <div className="workshop-consultation__action">
+                <p>相談だけでも大丈夫です。<br />まずはLINEで「予約」とお送りください。</p>
+                <TrackedLink className="workshop-consultation__cta" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_consultation_flow", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約 <ArrowRight size={18} aria-hidden="true" /></TrackedLink>
+              </div>
             </div>
           </section>
 

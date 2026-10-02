@@ -85,9 +85,8 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
         revealElements.forEach((element) => {
           gsap.fromTo(
             element,
-            { autoAlpha: 0, y: 14 },
+            { y: 14 },
             {
-              autoAlpha: 1,
               y: 0,
               duration: isMobile ? 0.32 : 0.42,
               ease: "power1.out",

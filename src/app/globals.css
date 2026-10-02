@@ -511,15 +511,27 @@ body {
 .workshop-community__links a { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.22); padding: 22px 0; color: white; font-size: 1rem; font-weight: 600; text-decoration: none; }
 .workshop-community__links a:last-child { border-bottom: 1px solid rgba(255,255,255,.22); }
 
-.workshop-consultation { padding-block: clamp(82px, 9vw, 126px); background: var(--home-ivory); }
-.workshop-consultation > .home-shell { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(56px, 9vw, 130px); }
+.workshop-consultation { padding-block: clamp(82px, 9vw, 126px); background: var(--home-ivory); scroll-margin-top: 88px; }
+.workshop-consultation > .home-shell { display: grid; gap: 32px; }
+.workshop-consultation__heading { max-width: 700px; }
 .workshop-consultation__heading h2 { margin: 0; color: var(--home-forest-deep); font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1.42; letter-spacing: -.04em; }
 .workshop-consultation__heading > p:last-child { margin: 22px 0 0; color: var(--home-muted); font-size: 1rem; line-height: 1.9; }
-.workshop-consultation__steps { margin: 0; border-top: 1px solid var(--home-forest); padding: 0; list-style: none; }
-.workshop-consultation__steps li { display: grid; border-bottom: 1px solid var(--home-line); padding: 24px 0; grid-template-columns: 54px minmax(170px, .7fr) 1fr; gap: 22px; }
-.workshop-consultation__steps span { color: var(--home-clay); font-family: var(--font-serif-jp), serif; font-size: .86rem; }
-.workshop-consultation__steps h3 { margin: 0; color: var(--home-forest); font-size: 1.05rem; line-height: 1.7; }
-.workshop-consultation__steps p { margin: 0; color: var(--home-muted); font-size: .9rem; line-height: 1.8; }
+.workshop-consultation__reassurance { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 0; padding: 0; list-style: none; }
+.workshop-consultation__reassurance li { display: flex; align-items: center; gap: 8px; color: var(--home-forest); font-size: .9rem; font-weight: 600; line-height: 1.7; }
+.workshop-consultation__reassurance svg { flex-shrink: 0; }
+.workshop-consultation__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.workshop-consultation__steps li { position: relative; min-width: 0; border: 1px solid var(--home-line); border-top: 3px solid var(--home-clay); border-radius: 8px; padding: 26px; background: var(--home-paper); }
+.workshop-consultation__steps li:not(:last-child)::after { position: absolute; top: 43px; right: -18px; z-index: 1; width: 10px; height: 10px; border-top: 2px solid var(--home-clay); border-right: 2px solid var(--home-clay); content: ""; transform: rotate(45deg); }
+.workshop-consultation__step-marker { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; color: var(--home-forest); }
+.workshop-consultation__step-marker span { color: var(--home-forest); font-size: .78rem; font-weight: 700; letter-spacing: .08em; }
+.workshop-consultation__steps h3 { margin: 0 0 12px; color: var(--home-forest); font-size: 1.1rem; line-height: 1.7; }
+.workshop-consultation__steps p { margin: 0; color: var(--home-muted); font-size: 1rem; line-height: 1.85; }
+.workshop-consultation__action { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--home-line); padding-top: 28px; }
+.workshop-consultation__action p { margin: 0; color: var(--home-muted); font-size: .95rem; line-height: 1.85; }
+.workshop-consultation__cta { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 14px; border-radius: 4px; padding: 16px 22px; background: var(--home-clay); color: var(--home-forest-deep); font-size: 1rem; font-weight: 700; line-height: 1.7; text-decoration: none; }
+.workshop-consultation__cta svg { flex-shrink: 0; }
+.workshop-consultation__cta:hover { background: var(--home-yellow-pale); }
+.workshop-consultation__cta:focus-visible { outline: 3px solid var(--home-forest); outline-offset: 4px; }
 
 .workshop-contact { padding-block: clamp(80px, 9vw, 124px); background: #f5f1e7; }
 .workshop-contact__inner { display: grid; align-items: center; grid-template-columns: 60px 1fr .78fr; gap: 38px; }
@@ -536,7 +548,9 @@ body {
   .workshop-hero__vertical { right: 12px; }
   .workshop-process__grid, .workshop-profile__grid { grid-template-columns: 1fr; }
   .workshop-practice__grid { grid-template-columns: 1fr; }
-  .workshop-consultation > .home-shell { grid-template-columns: 1fr; gap: 42px; }
+  .workshop-consultation > .home-shell { grid-template-columns: 1fr; gap: 32px; }
+  .workshop-consultation__steps { grid-template-columns: 1fr; gap: 24px; }
+  .workshop-consultation__steps li:not(:last-child)::after { top: auto; right: auto; bottom: -18px; left: 36px; transform: rotate(135deg); }
   .workshop-process__intro { max-width: 620px; }
   .workshop-trust__grid, .workshop-deliverables { grid-template-columns: 1fr; gap: 34px; }
   .workshop-options header { grid-template-columns: 1fr; gap: 24px; }
@@ -608,9 +622,10 @@ body {
   .workshop-profile li p { font-size: 1rem; }
   .workshop-profile__timeline-link { font-size: .9rem; }
   .workshop-community > .home-shell { grid-template-columns: 1fr; gap: 44px; }
-  .workshop-consultation__steps li { grid-template-columns: 42px 1fr; gap: 6px 16px; }
-  .workshop-consultation__steps h3 { font-size: 1rem; }
-  .workshop-consultation__steps p { grid-column: 2; font-size: 1rem; }
+  .workshop-consultation__steps li { padding: 24px; }
+  .workshop-consultation__step-marker { margin-bottom: 16px; }
+  .workshop-consultation__action { align-items: stretch; flex-direction: column; }
+  .workshop-consultation__cta { width: 100%; }
   .workshop-contact__inner { grid-template-columns: 1fr; gap: 24px; }
   .workshop-contact__inner > div:last-child { grid-column: auto; }
   .mobile-only { display: block; }
@@ -2053,7 +2068,7 @@ body {
   max-width: 680px;
   margin: -2px 0 26px;
   color: var(--home-muted);
-  font-size: 0.78rem;
+  font-size: 1rem;
   line-height: 1.9;
 }
 
@@ -2093,7 +2108,8 @@ body {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+summary:focus-visible {
   outline: 3px solid #d88a65;
   outline-offset: 4px;
 }
@@ -2757,7 +2773,7 @@ button:focus-visible {
   .pricing-faq summary {
     min-height: 68px;
     padding: 21px 30px 18px 0;
-    font-size: 0.92rem;
+    font-size: 1rem;
   }
 
   .pricing-faq details p {

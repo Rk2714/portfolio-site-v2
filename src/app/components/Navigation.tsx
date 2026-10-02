@@ -35,7 +35,7 @@ export default function Navigation() {
       const links = Array.from(
         mobileNavRef.current.querySelectorAll<HTMLAnchorElement>("a"),
       );
-      const first = links[0];
+      const first = menuButtonRef.current;
       const last = links.at(-1);
       if (!first || !last) return;
       if (event.shiftKey && document.activeElement === first) {
@@ -47,10 +47,17 @@ export default function Navigation() {
       }
     };
 
+    const desktopQuery = window.matchMedia("(min-width: 761px)");
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsOpen(false);
+    };
+
     window.addEventListener("keydown", handleKeyboard);
+    desktopQuery.addEventListener("change", closeOnDesktop);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyboard);
+      desktopQuery.removeEventListener("change", closeOnDesktop);
     };
   }, [isOpen]);
 
