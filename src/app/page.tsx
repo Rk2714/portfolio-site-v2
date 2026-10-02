@@ -356,7 +356,7 @@ export default function Home() {
 
           <section id="consultation-flow" className="workshop-consultation" aria-labelledby="consultation-title">
             <div className="home-shell">
-              <div className="workshop-consultation__heading" data-reveal><p className="workshop-eyebrow">Before we start</p><h2 id="consultation-title">30分で、困りごとと<br />次の一歩を整理します。</h2><p>「どこから手をつけるか」「どこまで頼めるか」を一緒に確認する無料相談です。必要な支援や回数は、話してから考えましょう。</p></div>
+              <div className="workshop-consultation__heading" data-reveal><p className="workshop-eyebrow">Before we start</p><h2 id="consultation-title">30分で、困りごとと<br />次の一歩を整理。</h2><p>「どこから手をつけるか」「どこまで頼めるか」を一緒に確認する無料相談です。必要な支援や回数は、話してから考えましょう。</p></div>
               <ol className="workshop-consultation__steps">
                 {consultationSteps.map(([number, title, description]) => <li key={number} data-reveal><span>{number}</span><h3>{title}</h3><p>{description}</p></li>)}
               </ol>
