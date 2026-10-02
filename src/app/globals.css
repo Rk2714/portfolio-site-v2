@@ -2002,7 +2002,7 @@ body {
 }
 
 .pricing-personal__table strong {
-  color: var(--home-clay);
+  color: var(--home-forest);
   font-family: var(--font-serif-jp), serif;
   font-size: 1.08rem;
   font-weight: 700;
