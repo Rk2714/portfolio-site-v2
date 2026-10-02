@@ -4,8 +4,10 @@ import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
 import Footer from "../components/Footer";
 import HomeMotion from "../components/HomeMotion";
 import Navigation from "../components/Navigation";
+import TrackedLink from "../components/TrackedLink";
 import {
   businessPlans,
+  personalPlans,
   siteContacts,
 } from "../../lib/site-data";
 import { SITE_URL } from "../../lib/site-config";
@@ -13,7 +15,7 @@ import { SITE_URL } from "../../lib/site-config";
 export const metadata: Metadata = {
   title: "料金・支援内容",
   description:
-    "Yazirusiの法人・事業所向け支援内容と、個人向けAI活用セッションのご案内。お申し込みの前に30分無料相談を行います。",
+    "Yazirusiの業務改善支援と個人向けAIサポート。1回60分、単発10,000円・4回36,000円・8回68,000円（税込）。お申し込みの前に30分無料相談で、合う進め方を整理します。",
   alternates: {
     canonical: "/pricing",
   },
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
     url: "/pricing",
     type: "website",
     locale: "ja_JP",
+    images: [{ url: "/images/og-yazirusi.jpg", width: 1200, height: 630, alt: "Yazirusiの料金・支援内容" }],
   },
 };
 
@@ -31,7 +34,17 @@ const questions = [
   {
     question: "相談したら、必ず依頼する必要がありますか？",
     answer:
-      "いいえ。最初の30分は無料相談として、困りごとの概要を伺い、Yazirusiでできることをご説明します。必要な場合のみ、相談後にLINEで支援内容をご案内します。",
+      "いいえ。最初の30分は無料で、困りごとと支援できる範囲を一緒に確認します。相談だけでも大丈夫です。LINEの友だち追加や無料相談だけで、料金が発生することはありません。有料サポートは、内容と料金をご確認いただいてからのお申し込みです。",
+  },
+  {
+    question: "単発・4回・8回は、どう選べばよいですか？",
+    answer:
+      "一つのテーマを試すなら単発、実践と振り返りを重ねるなら4回、いくつかのテーマを段階的に進めるなら8回が目安です。最初から決める必要はありません。無料相談で、取り組みたいことと無理のないペースを伺います。",
+  },
+  {
+    question: "利用期限はいつからですか？ 8回を超える相談もできますか？",
+    answer:
+      "個人向けの単発・4回パックは購入日から2か月、8回パックは購入日から4か月です。8回を超える支援、長期の伴走、法人でのご利用は、内容に合わせて公式LINEで個別にご提案します。",
   },
   {
     question: "表示料金より高くなることはありますか？",
@@ -39,9 +52,9 @@ const questions = [
       "法人向け支援は、対象業務、連携するサービス、利用人数などによって変わります。作業を始める前に対応範囲と料金をご提示します。",
   },
   {
-    question: "分割払いはできますか？",
+    question: "支払い方法や時期は、いつ確認できますか？",
     answer:
-      "はい。複数回のAI伴走プランや法人向け支援は、分割払いにも対応しています。支払回数や時期は、お申し込み前にご相談ください。",
+      "30分無料相談の後、支援内容とあわせて、お申し込み前に支払い方法と時期をご案内します。",
   },
   {
     question: "有料のAIや外部サービスが必要ですか？",
@@ -60,6 +73,20 @@ const structuredData = {
     "@type": "OfferCatalog",
     name: "料金・支援内容",
     itemListElement: [
+      {
+        "@type": "OfferCatalog",
+        name: "個人向けAIサポート",
+        itemListElement: personalPlans.map((plan) => ({
+          "@type": "Offer",
+          priceCurrency: "JPY",
+          price: plan.priceAmount,
+          itemOffered: {
+            "@type": "Service",
+            name: plan.name,
+            description: `${plan.detail}・税込${plan.price}。利用期限は${plan.note}。${plan.fit}お申し込み前に30分無料相談を行います。`,
+          },
+        })),
+      },
       {
         "@type": "OfferCatalog",
         name: "法人・事業所向け",
@@ -163,17 +190,19 @@ export default function PricingPage() {
                 <p>
                   「対応例」は固定の商品名ではありません。現在の業務と課題を確認し、必要な支援範囲を組み立てます。
                 </p>
-                <span>分割払いにも対応しています。外部サービスの利用料や機器代が必要な場合は、別途事前にご案内します。</span>
+                <span>支払い方法と時期は、お申し込み前にご案内します。外部サービスの利用料や機器代が必要な場合は、別途事前にご案内します。</span>
               </div>
-              <a
+              <TrackedLink
                 href={siteContacts.lineOfficial}
+                eventName="contact_cta_click"
+                eventParams={{ page_type: "pricing", position: "pricing_business", cta_target: "line_free_consultation" }}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="home-button home-button--light pricing-section__cta"
               >
                 LINEで30分無料相談を予約
                 <ArrowUpRight aria-hidden="true" size={17} />
-              </a>
+              </TrackedLink>
             </div>
           </section>
 
@@ -189,18 +218,34 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              <p className="pricing-personal__note" data-reveal>
-                最初に30分無料相談で、今の仕事や困りごとを伺います。単発・4回・8回のサポートは、相談を終えてから公式LINEで個別にご案内します。
+              <p className="pricing-personal__intro" data-reveal>
+                すべて1回60分・税込です。利用期限は購入日から数えます。どの回数が合うかも、最初の30分無料相談で一緒に考えます。
               </p>
-              <a
+              <div className="pricing-personal__table" data-reveal>
+                <div className="pricing-table__head" aria-hidden="true"><span>プラン・選び方</span><span>時間・回数</span><span>料金（税込）</span><span>利用期限</span></div>
+                {personalPlans.map((plan) => (
+                  <article key={plan.name}>
+                    <h3>{plan.name}<span className="pricing-personal__fit">{plan.fit}</span></h3>
+                    <p>{plan.detail}</p>
+                    <strong>{plan.price}</strong>
+                    <span>利用期限：{plan.note}</span>
+                  </article>
+                ))}
+              </div>
+              <p className="pricing-personal__note" data-reveal>
+                お申し込みは、無料相談を終えてから公式LINEで個別にご案内します。8回を超える支援・長期の伴走・法人でのご利用は、内容に合わせて個別にご提案します。
+              </p>
+              <TrackedLink
                 href={siteContacts.lineOfficial}
+                eventName="contact_cta_click"
+                eventParams={{ page_type: "pricing", position: "pricing_personal", cta_target: "line_free_consultation" }}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="home-button home-button--green pricing-section__cta"
               >
                 LINEで30分無料相談を予約
                 <ArrowUpRight aria-hidden="true" size={17} />
-              </a>
+              </TrackedLink>
             </div>
           </section>
 
@@ -227,18 +272,20 @@ export default function PricingPage() {
                 <p className="home-kicker">Free consultation</p>
                 <h2>まずは、状況を聞かせてください。</h2>
                 <p>
-                  公式LINEで「予約」と送ると、30分無料相談の日程をご案内します。困りごとの概要を伺い、必要な支援は相談後に個別にご案内します。
+                  公式LINEを友だち追加し、「予約」と送ると、30分無料相談の日程をご案内します。相談だけでも大丈夫です。今の困りごとと、次にできることを一緒に整理しましょう。
                 </p>
               </div>
-              <a
+              <TrackedLink
                 href={siteContacts.lineOfficial}
+                eventName="contact_cta_click"
+                eventParams={{ page_type: "pricing", position: "pricing_footer", cta_target: "line_free_consultation" }}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="home-button home-button--green"
               >
                 LINEで30分無料相談を予約
                 <ArrowUpRight aria-hidden="true" size={17} />
-              </a>
+              </TrackedLink>
               <Link href="/" className="pricing-back-link">
                 ホームへ戻る
               </Link>

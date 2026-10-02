@@ -334,6 +334,7 @@ body {
 }
 .workshop-hero__note strong { color: var(--home-forest); font-family: var(--font-serif-jp), serif; font-size: 1rem; }
 .workshop-hero__note span { color: var(--home-muted); font-size: .86rem; }
+.workshop-hero__reassurance { max-width: 440px; margin: 16px 0 0; color: var(--home-muted); font-size: .84rem; line-height: 1.8; }
 
 .workshop-hero__aside {
   align-self: end;
@@ -1938,11 +1939,29 @@ body {
   border-top: 2px solid var(--home-forest);
 }
 
+.pricing-personal__intro {
+  max-width: 760px;
+  margin: 0 0 26px;
+  color: var(--home-muted);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.pricing-personal__fit {
+  display: block;
+  margin-top: 8px;
+  color: var(--home-muted);
+  font-family: var(--font-sans-jp), sans-serif;
+  font-size: .88rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
 .pricing-table__head,
 .pricing-personal__table article {
   display: grid;
   align-items: center;
-  grid-template-columns: 1.3fr 0.8fr 0.8fr 1.2fr;
+  grid-template-columns: 1.6fr 0.8fr 0.8fr 1.2fr;
   gap: 24px;
 }
 
@@ -1957,6 +1976,7 @@ body {
 
 .pricing-personal__table article {
   min-height: 96px;
+  padding-block: 24px;
   border-bottom: 1px solid var(--home-line);
 }
 
@@ -1977,7 +1997,7 @@ body {
 .pricing-personal__table p,
 .pricing-personal__table article > span {
   color: var(--home-muted);
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   line-height: 1.6;
 }
 

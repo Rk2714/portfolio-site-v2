@@ -69,7 +69,7 @@ export default function Navigation() {
             </Link>
           ))}
           <Link href="/#contact" className="site-nav__cta">
-            まず話してみる
+            30分無料相談
           </Link>
         </nav>
 
@@ -107,7 +107,7 @@ export default function Navigation() {
             className="site-mobile-nav__cta"
             onClick={() => setIsOpen(false)}
           >
-            まず話してみる
+            30分無料相談
           </Link>
         </nav>
       )}

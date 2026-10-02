@@ -15,7 +15,7 @@ export type AnalyticsEventName =
   | "filter_change"
   | "transcript_open";
 
-export type AnalyticsPageType = "home" | "media_list" | "media_post" | "other";
+export type AnalyticsPageType = "home" | "pricing" | "media_list" | "media_post" | "other";
 
 type AnalyticsValue = string | number | boolean | null | undefined;
 
@@ -46,6 +46,10 @@ export function getPageType(pathname: string): AnalyticsPageType {
 
   if (pathname === "/media") {
     return "media_list";
+  }
+
+  if (pathname === "/pricing") {
+    return "pricing";
   }
 
   if (pathname.startsWith("/media/")) {

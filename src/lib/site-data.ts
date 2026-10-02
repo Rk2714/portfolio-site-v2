@@ -113,12 +113,12 @@ export const audienceOffers: AudienceOffer[] = [
       "仕事への落とし込み",
       "一対一の実践サポート",
     ],
-    priceLabel: "初回AIセッション 60分",
-    price: "5,000円",
-    priceNote: "2026年8月31日まで。通常セッションは10,000円。",
+    priceLabel: "はじめの相談 30分",
+    price: "無料",
+    priceNote: "有料サポートは無料相談後に個別にご案内します。",
     pricingHref: "/pricing#personal",
     pricingCta: "個人向け料金を見る",
-    consultationCta: "個人AIセッションを予約",
+    consultationCta: "LINEで30分無料相談を予約",
   },
 ];
 
@@ -217,36 +217,33 @@ export interface PersonalPlan {
   price: string;
   priceAmount: number;
   note: string;
+  fit: string;
 }
 
 export const personalPlans: PersonalPlan[] = [
   {
-    name: "初回AIセッション",
-    detail: "60分",
-    price: "5,000円",
-    priceAmount: 5000,
-    note: "2026年8月31日まで",
-  },
-  {
-    name: "通常セッション",
+    name: "単発セッション",
     detail: "60分",
     price: "10,000円",
     priceAmount: 10000,
-    note: "",
+    note: "購入日から2か月",
+    fit: "一つのテーマを、一緒に試してみたい方へ。",
   },
   {
     name: "4回パック",
     detail: "60分 × 4回",
     price: "36,000円",
     priceAmount: 36000,
-    note: "通常料金から10% OFF",
+    note: "購入日から2か月",
+    fit: "試して振り返り、自分の仕事に取り入れたい方へ。",
   },
   {
     name: "8回パック",
     detail: "60分 × 8回",
     price: "68,000円",
     priceAmount: 68000,
-    note: "通常料金から15% OFF",
+    note: "購入日から4か月",
+    fit: "いくつかのテーマを、段階的に整えていきたい方へ。",
   },
 ];
 

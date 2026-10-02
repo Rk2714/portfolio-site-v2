@@ -6,6 +6,7 @@ import MediaCategoryFilter from "./MediaCategoryFilter";
 import MediaCard from "./MediaCard";
 import { ExternalLink } from "lucide-react";
 import { getAllMediaFromCMS } from "../../lib/media-data";
+import { siteContacts } from "../../lib/site-data";
 import {
   getMediaCategoryOption,
   mediaCategoryOptions,
@@ -46,7 +47,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
       title,
       description: option.heroDescription,
       url,
-      siteName: "金城竜弥",
+      siteName: "Yazirusi",
       locale: "ja_JP",
       type: "website",
       images: [{ url: socialImage, alt: option.heroTitle }],
@@ -126,21 +127,35 @@ export default async function MediaPage({ searchParams }: Props) {
         {/* CTA */}
         <section className="py-20 bg-[#fef5f0]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <p className="text-sm text-[#a0a09c] mb-4">
-              出演・取材について
+            <h2 className="pencil-title mb-4">あなたの仕事のことも、<br />聞かせてください。</h2>
+            <p className="pencil-body mx-auto mb-6 max-w-2xl">
+              業務の困りごとや、AIをどう使うか。まずは30分無料相談で、今の状況と次の一歩を一緒に整理します。公式LINEを友だち追加し、「予約」と送ってください。
             </p>
             <TrackedLink
-              href="mailto:ryuyakinjo@yazirusi.com"
+              href={siteContacts.lineOfficial}
+              target="_blank"
+              rel="noopener noreferrer"
+              eventName="contact_cta_click"
+              eventParams={{ page_type: "media_list", position: "media_list_footer", cta_target: "line_free_consultation" }}
+              className="pencil-button"
+            >
+              LINEで30分無料相談を予約
+              <ExternalLink size={14} aria-hidden="true" />
+            </TrackedLink>
+            <p className="pencil-body mt-4">相談だけでも大丈夫です。</p>
+            <p className="text-sm text-[#666660] mt-10 mb-3">出演・取材のご依頼はこちら</p>
+            <TrackedLink
+              href={`mailto:${siteContacts.email}`}
               eventName="contact_cta_click"
               eventParams={{
                 page_type: "media_list",
                 position: "media_list_footer",
                 cta_target: "email",
               }}
-              className="pencil-button"
+              className="inline-flex items-center gap-2 text-sm text-[#365343] underline underline-offset-4"
             >
               <ExternalLink size={14} />
-              まずはメールで相談する
+              出演・取材をメールで相談する
             </TrackedLink>
           </div>
         </section>

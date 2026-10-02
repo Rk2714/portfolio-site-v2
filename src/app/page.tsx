@@ -21,6 +21,7 @@ import {
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import HomeMotion from "./components/HomeMotion";
+import TrackedLink from "./components/TrackedLink";
 import {
   careerTimeline,
   siteContacts,
@@ -31,12 +32,12 @@ import { SITE_URL } from "../lib/site-config";
 export const metadata: Metadata = {
   title: { absolute: "Yazirusi｜中小企業・医療介護現場の業務改善支援" },
   description:
-    "紙・Excel・LINEに分かれた業務を整理し、必要に応じて連携、自動化、小さな業務システムまで支援するYazirusi。何を変えるべきか決まっていない段階から相談できます。",
+    "紙・Excel・LINEに分かれた業務の整理と、個人に合うAI活用を支援するYazirusi。何から始めるか決まっていなくても大丈夫です。まずは公式LINEから30分無料相談へ。",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Yazirusi｜その手作業を、今の会社に合う仕組みへ。",
     description:
-      "まずは今の仕事を聞かせてください。業務整理から構築、運用定着まで、合う方法を一緒に考えます。",
+      "今の仕事やAIの困りごとを、30分無料相談で一緒に整理します。相談だけでも大丈夫です。公式LINEから日程をご案内します。",
     url: "/",
     type: "website",
     locale: "ja_JP",
@@ -80,9 +81,28 @@ const improvementOptions = [
 ];
 
 const consultationSteps = [
-  ["01", "30分無料相談", "公式LINEから日程を確認し、困りごとの概要を伺います。"],
-  ["02", "必要な支援を整理", "相談内容をもとに、合う進め方を一緒に考えます。"],
-  ["03", "相談後にLINEで個別案内", "単発・4回・8回の中から合う形を、必要な方にご案内します。"],
+  ["01", "LINEで日程を確認", "公式LINEを友だち追加し、「予約」と送ってください。無料相談の日程をご案内します。"],
+  ["02", "30分で一緒に整理", "今の困りごと、取り組む優先順位、Yazirusiで支援できる範囲を確認します。"],
+  ["03", "必要な方へ個別にご提案", "相談後にLINEで支援内容と料金をご案内します。内容を確認してから、お申し込みを決められます。"],
+];
+
+const consultationQuestions = [
+  {
+    question: "何を相談するか、まだまとまっていません。",
+    answer: "「同じ入力が多い」「AIを仕事に使ってみたい」など、今気になっていることからで大丈夫です。30分で状況を伺い、次に取り組めそうなことを一緒に整理します。依頼書や資料を作る必要はありません。",
+  },
+  {
+    question: "AIをほとんど使ったことがなくても大丈夫ですか？",
+    answer: "大丈夫です。今使っている道具や、やってみたいことを伺うところから始めます。相談のために有料のAIを契約する必要はありません。",
+  },
+  {
+    question: "無料相談の後、必ず申し込む必要がありますか？",
+    answer: "いいえ。相談だけでも大丈夫です。LINEの友だち追加や無料相談だけで、料金が発生することはありません。有料の支援が必要な場合は、内容と料金を確認してからお申し込みいただきます。",
+  },
+  {
+    question: "無料相談と有料サポートは、何が違いますか？",
+    answer: "無料相談は、困りごとと支援できる範囲を確認する時間です。実際にAIを使いながら取り組む個人向けサポートは1回60分。法人の業務改善や仕組みづくりは、必要な範囲を相談後に個別にご提案します。",
+  },
 ];
 
 const practiceResults = [
@@ -138,25 +158,13 @@ const structuredData = {
       email: siteContacts.email,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Yazirusi 支援内容",
+        name: "はじめの相談",
         itemListElement: [
           {
             "@type": "Offer",
             priceCurrency: "JPY",
-            price: 68000,
-            itemOffered: { "@type": "Service", name: "業務整理・改善伴走" },
-          },
-          {
-            "@type": "Offer",
-            priceCurrency: "JPY",
-            price: 100000,
-            itemOffered: { "@type": "Service", name: "業務システム構築・外部連携" },
-          },
-          {
-            "@type": "Offer",
-            priceCurrency: "JPY",
-            price: 10000,
-            itemOffered: { "@type": "Service", name: "個人向けAIセッション" },
+            price: 0,
+            itemOffered: { "@type": "Service", name: "初回30分無料相談", description: "困りごとと支援できる範囲を確認し、必要な場合に相談後に個別提案します。" },
           },
         ],
       },
@@ -188,9 +196,10 @@ export default function Home() {
                   <span>今あるもので足りるなら、むやみに増やしません。</span>
                 </p>
                 <div className="workshop-hero__actions" data-hero-item>
-                  <a className="workshop-hero__primary" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer">LINEで30分無料相談を予約 <ArrowRight size={18} aria-hidden="true" /></a>
+                  <TrackedLink className="workshop-hero__primary" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_hero", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約 <ArrowRight size={18} aria-hidden="true" /></TrackedLink>
                   <a className="workshop-text-link workshop-text-link--secondary" href="#consultation-flow">相談の流れを見る <ArrowRight size={18} aria-hidden="true" /></a>
                 </div>
+                <p className="workshop-hero__reassurance" data-hero-item>相談だけでも大丈夫です。友だち追加や無料相談で、料金は発生しません。</p>
               </div>
               <div className="workshop-hero__visual" data-hero-item>
                 <figure>
@@ -228,13 +237,13 @@ export default function Home() {
               <p>法人・事業所の方</p>
               <h2>忙しい現場でも続けられる、<br />業務の仕組みを。</h2>
               <ul><li>業務と情報の流れを整理する</li><li>今ある道具をつなぎ、手作業を減らす</li><li>必要に応じて小さな仕組みをつくる</li></ul>
-              <div><Link href="/pricing#business">法人向け支援を見る <ArrowRight size={18} /></Link><a href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer">LINEで30分無料相談を予約</a></div>
+              <div><Link href="/pricing#business">法人向け支援を見る <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_business", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
             </article>
             <article id="personal" className="workshop-audience__item workshop-audience__item--personal" data-reveal>
               <p>個人の方</p>
               <h2>自分の仕事に合うAIを、<br />一緒に使える形へ。</h2>
               <ul><li>実際の仕事や生活で一緒に試す</li><li>迷ったところをその場で整理</li><li>繰り返し使える自分用の型へ</li></ul>
-              <div><Link href="/pricing#personal">個人向け支援を見る <ArrowRight size={18} /></Link><a href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer">LINEで30分無料相談を予約</a></div>
+              <div><Link href="/pricing#personal">個人向け支援を見る <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_personal", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
             </article>
           </section>
 
@@ -347,18 +356,27 @@ export default function Home() {
 
           <section id="consultation-flow" className="workshop-consultation" aria-labelledby="consultation-title">
             <div className="home-shell">
-              <div className="workshop-consultation__heading" data-reveal><p className="workshop-eyebrow">Before we start</p><h2 id="consultation-title">まずは30分無料相談から。<br />すぐに契約には進みません。</h2><p>公式LINEで「予約」と送ると、無料相談の日程をご案内します。</p></div>
+              <div className="workshop-consultation__heading" data-reveal><p className="workshop-eyebrow">Before we start</p><h2 id="consultation-title">30分で、困りごとと<br />次の一歩を整理します。</h2><p>「どこから手をつけるか」「どこまで頼めるか」を一緒に確認する無料相談です。必要な支援や回数は、話してから考えましょう。</p></div>
               <ol className="workshop-consultation__steps">
                 {consultationSteps.map(([number, title, description]) => <li key={number} data-reveal><span>{number}</span><h3>{title}</h3><p>{description}</p></li>)}
               </ol>
             </div>
           </section>
 
+          <section className="pricing-section pricing-faq" aria-labelledby="consultation-faq-title">
+            <div className="home-shell pricing-faq__grid">
+              <div data-reveal><p className="workshop-eyebrow">Before you book</p><h2 id="consultation-faq-title">相談前に、<br />よくある質問。</h2></div>
+              <div className="pricing-faq__list" data-reveal>
+                {consultationQuestions.map(({ question, answer }) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
+              </div>
+            </div>
+          </section>
+
           <section id="contact" className="workshop-contact">
             <div className="home-shell workshop-contact__inner" data-reveal>
               <MessagesSquare aria-hidden="true" />
-              <div><p className="workshop-eyebrow">Contact</p><h2>まずは、30分の<br />無料相談から。</h2><p>公式LINEで「予約」と送って、無料相談の日程をご確認ください。有料の支援は、相談後にこのLINEで個別にご案内します。</p></div>
-              <div><a className="workshop-contact__cta" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer">LINEで30分無料相談を予約 <ArrowRight size={18} /></a><a href={`mailto:${siteContacts.email}`}><Mail size={17} />{siteContacts.email}</a><span><MapPin size={17} />{siteContacts.location}</span></div>
+              <div><p className="workshop-eyebrow">Contact</p><h2>まずは、30分の<br />無料相談から。</h2><p>公式LINEを友だち追加し、「予約」と送ってください。無料相談の日程をご案内します。相談だけでも大丈夫です。有料の支援は、内容と料金を確認してからお申し込みいただけます。</p></div>
+              <div><TrackedLink className="workshop-contact__cta" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_footer", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約 <ArrowRight size={18} /></TrackedLink><a href={`mailto:${siteContacts.email}`}><Mail size={17} />{siteContacts.email}</a><span><MapPin size={17} />{siteContacts.location}</span></div>
             </div>
           </section>
         </main>
