@@ -22,7 +22,7 @@ import {
   type MediaPost,
 } from "../../../lib/media-data";
 import { hosts } from "../../../lib/site-data";
-import { SITE_URL } from "../../../lib/site-config";
+import { SHARE_SITE_URL } from "../../../lib/site-config";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ShareButtons from "../../components/ShareButtons";
@@ -205,7 +205,7 @@ export default async function MediaPostPage({ params }: Props) {
               <div className="guest-feature-hero__share">
                 <ViewCounter postId={post.id} />
                 <ShareButtons
-                  url={`${SITE_URL}/media/${post.id}`}
+                  url={`${SHARE_SITE_URL}/media/${post.id}`}
                   title={post.title}
                   postId={post.id}
                   category={post.category}
