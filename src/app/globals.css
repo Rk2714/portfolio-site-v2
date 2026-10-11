@@ -2934,6 +2934,35 @@ summary:focus-visible {
   vertical-align: .18em;
 }
 
+.guest-feature-hero h1.guest-feature-episode-title {
+  font-size: clamp(2.2rem, 4vw, 3.7rem);
+  letter-spacing: -.04em;
+  line-height: 1.35;
+  white-space: pre-line;
+}
+
+.guest-feature-episode-lead {
+  margin: 26px 0 0;
+  color: var(--guest-muted);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.guest-feature-episode-summary {
+  border-bottom: 1px solid var(--guest-line);
+}
+
+.guest-feature-episode-summary__body p {
+  margin: 0 0 24px;
+  color: var(--guest-muted);
+  font-size: 1rem;
+  line-height: 2;
+}
+
+.guest-feature-episode-summary__body p:last-child {
+  margin-bottom: 0;
+}
+
 .guest-feature-role {
   margin: 18px 0 0;
   color: var(--guest-coral);

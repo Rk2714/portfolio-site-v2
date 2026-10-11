@@ -160,6 +160,7 @@ export default async function MediaPostPage({ params }: Props) {
   const guestClosingQuote =
     guest?.closingQuote || post.quotes.find((quote) => quote !== guestQuote) || "";
   const guestImage = guest?.image || post.thumbnail;
+  const heroImage = post.episodeTitle ? post.thumbnail : guestImage;
   const youtubeEmbedUrl = getSafeYouTubeEmbedUrl(post.youtubeUrl);
   const watchUrl = getWatchUrl(youtubeEmbedUrl);
   const highlights = getHighlights(post, guest);
@@ -182,14 +183,16 @@ export default async function MediaPostPage({ params }: Props) {
               </Link>
 
               <div className="guest-feature-meta">
-                <span>GUEST / {post.categoryLabel}</span>
+                <span>{post.episodeTitle ? "RADIO / 放送アーカイブ" : `GUEST / ${post.categoryLabel}`}</span>
                 <span>{post.date}</span>
               </div>
 
-              <h1>{renderGuestName(guestName)}</h1>
-              <p className="guest-feature-role">{guestRole}</p>
+              <h1 className={post.episodeTitle ? "guest-feature-episode-title" : undefined}>{post.episodeTitle || renderGuestName(guestName)}</h1>
+              <p className="guest-feature-role">{post.episodeTitle ? `${post.programLabel}｜ゲスト：${guestName}` : guestRole}</p>
 
-              {guestQuote && <blockquote className="guest-feature-hero__quote">{guestQuote}</blockquote>}
+              {post.episodeTitle ? (
+                <p className="guest-feature-episode-lead">{post.theme}</p>
+              ) : guestQuote && <blockquote className="guest-feature-hero__quote">{guestQuote}</blockquote>}
 
               <div className="guest-feature-hero__actions">
                 {watchUrl && (
@@ -214,8 +217,8 @@ export default async function MediaPostPage({ params }: Props) {
             </div>
 
             <figure className="guest-feature-hero__media">
-              {guestImage ? (
-                <img src={guestImage} alt={`${guestName}の出演写真`} />
+              {heroImage ? (
+                <img src={heroImage} alt={post.episodeTitle ? `${post.programLabel}・${post.date}放送の動画サムネイル` : `${guestName}の出演写真`} />
               ) : (
                 <div className="guest-feature-image-fallback" aria-label="写真は準備中です">
                   <Mic2 size={42} aria-hidden="true" />
@@ -251,12 +254,27 @@ export default async function MediaPostPage({ params }: Props) {
           </div>
         </section>
 
+        {post.episodeSummary && post.episodeSummary.length > 0 && (
+          <section className="guest-feature-section guest-feature-episode-summary" aria-label="放送内容の紹介">
+            <div className="guest-feature-shell guest-feature-story__grid">
+              <div className="guest-feature-section-intro">
+                <p className="guest-feature-eyebrow">EPISODE STORY</p>
+                <h2>この放送で<br />話したこと。</h2>
+                <p>2026年10月8日放送。番組の字幕をもとに、トークの内容をまとめました。</p>
+              </div>
+              <div className="guest-feature-episode-summary__body">
+                {post.episodeSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section id="highlights" className="guest-feature-section guest-feature-story">
           <div className="guest-feature-shell guest-feature-story__grid">
             <div className="guest-feature-section-intro">
               <p className="guest-feature-eyebrow">HIGHLIGHTS / VIDEO CHAPTERS</p>
               <h2>
-                ゲストの話を
+                {post.episodeTitle ? "この放送の" : "ゲストの話を"}
                 <br />
                 3つの場面で。
               </h2>
