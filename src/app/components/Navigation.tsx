@@ -9,7 +9,7 @@ const navItems = [
   { label: "個人向け", href: "/#personal" },
   { label: "相談できること", href: "/#support-options" },
   { label: "支援例", href: "/#case-study" },
-  { label: "料金", href: "/pricing" },
+  { label: "料金・購入", href: "/pricing#personal" },
 ];
 
 export default function Navigation() {

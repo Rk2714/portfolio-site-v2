@@ -115,7 +115,7 @@ export const audienceOffers: AudienceOffer[] = [
     ],
     priceLabel: "はじめの相談 30分",
     price: "無料",
-    priceNote: "有料サポートは無料相談後に個別にご案内します。",
+    priceNote: "相談60分5,000円／実践・開発90分10,000円（税込）。",
     pricingHref: "/pricing#personal",
     pricingCta: "個人向け料金を見る",
     consultationCta: "LINEで30分無料相談を予約",
@@ -212,38 +212,43 @@ export const businessPlans: BusinessPlan[] = [
 ];
 
 export interface PersonalPlan {
+  id: "consultation" | "practice";
   name: string;
   detail: string;
   price: string;
   priceAmount: number;
   note: string;
   fit: string;
+  includes: string[];
+  boundary: string;
+  paymentUrl: string;
 }
 
+// 新商品専用の決済リンク。既存60分・回数券のリンクを流用しない。
 export const personalPlans: PersonalPlan[] = [
   {
-    name: "単発セッション",
-    detail: "60分",
+    id: "consultation",
+    name: "AI活用相談",
+    detail: "60分・1回",
+    price: "5,000円",
+    priceAmount: 5000,
+    note: "購入日から2か月",
+    fit: "まず方針を決めたい方へ。",
+    includes: ["業務や困りごとを整理", "使うAI・構成・進める順番を相談", "次の一歩と短い方針メモ"],
+    boundary: "1回1テーマ。制作・時間外の調査・開発代行は含みません。",
+    paymentUrl: "https://buy.stripe.com/9B6dR860g9tW27F4hF67S0i",
+  },
+  {
+    id: "practice",
+    name: "AI実践・開発サポート",
+    detail: "90分・1回",
     price: "10,000円",
     priceAmount: 10000,
     note: "購入日から2か月",
-    fit: "一つのテーマを、一緒に試してみたい方へ。",
-  },
-  {
-    name: "4回パック",
-    detail: "60分 × 4回",
-    price: "36,000円",
-    priceAmount: 36000,
-    note: "購入日から2か月",
-    fit: "試して振り返り、自分の仕事に取り入れたい方へ。",
-  },
-  {
-    name: "8回パック",
-    detail: "60分 × 8回",
-    price: "68,000円",
-    priceAmount: 68000,
-    note: "購入日から4か月",
-    fit: "いくつかのテーマを、段階的に整えていきたい方へ。",
+    fit: "一緒に手を動かして進めたい方へ。",
+    includes: ["画面を共有して操作・設定", "プロンプト・GPT・小さなアプリ等を試作", "到達点と残作業・次の手順を整理"],
+    boundary: "時間内に一緒に作り進める支援です。完成までの開発代行・時間外の制作は別見積です。",
+    paymentUrl: "https://buy.stripe.com/eVqdR8bkAdKceUrbK767S0j",
   },
 ];
 

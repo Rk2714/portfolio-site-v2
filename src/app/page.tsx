@@ -101,7 +101,7 @@ const consultationQuestions = [
   },
   {
     question: "無料相談と有料サポートは、何が違いますか？",
-    answer: "無料相談は、困りごとと支援できる範囲を確認する時間です。実際にAIを使いながら取り組む個人向けサポートは1回60分。法人の業務改善や仕組みづくりは、必要な範囲を相談後に個別にご提案します。",
+    answer: "無料相談は、困りごとと支援できる範囲を確認する時間です。有料のAI活用相談は60分5,000円、操作・設定・試作を一緒に進める実践・開発サポートは90分10,000円（税込）です。法人の業務改善や仕組みづくりは、必要な範囲を相談後に個別にご提案します。",
   },
 ];
 
@@ -197,7 +197,7 @@ export default function Home() {
                 </p>
                 <div className="workshop-hero__actions" data-hero-item>
                   <TrackedLink className="workshop-hero__primary" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_hero", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約 <ArrowRight size={18} aria-hidden="true" /></TrackedLink>
-                  <a className="workshop-text-link workshop-text-link--secondary" href="#consultation-flow">相談の流れを見る <ArrowRight size={18} aria-hidden="true" /></a>
+                  <a className="workshop-text-link workshop-text-link--secondary" href="/pricing#personal">相談済みの方：料金・購入へ <ArrowRight size={18} aria-hidden="true" /></a>
                 </div>
                 <p className="workshop-hero__reassurance" data-hero-item>相談だけでも大丈夫です。友だち追加や無料相談で、料金は発生しません。</p>
               </div>
@@ -242,8 +242,8 @@ export default function Home() {
             <article id="personal" className="workshop-audience__item workshop-audience__item--personal" data-reveal>
               <p>個人の方</p>
               <h2>自分の仕事に合うAIを、<br />一緒に使える形へ。</h2>
-              <ul><li>実際の仕事や生活で一緒に試す</li><li>迷ったところをその場で整理</li><li>繰り返し使える自分用の型へ</li></ul>
-              <div><Link href="/pricing#personal">個人向け支援を見る <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_personal", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
+              <ul><li>AI活用相談：60分・5,000円（税込）</li><li>実践・開発サポート：90分・10,000円（税込）</li><li>方針を決める相談も、一緒に作る支援も</li></ul>
+              <div><Link href="/pricing#personal">料金・購入へ進む <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_personal", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
             </article>
           </section>
 

@@ -3885,3 +3885,23 @@ summary:focus-visible {
     transition: none;
   }
 }
+
+/* AI単発プランの選択・購入導線 */
+.support-plans { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.support-plan { background:var(--home-ivory); border:1px solid var(--home-line); padding:32px; display:flex; flex-direction:column; }
+.support-plan h3 { font-size:1.35rem; color:var(--home-forest-deep); margin:8px 0 16px; }
+.support-plan__fit { color:var(--home-muted); margin:0; }
+.support-plan__price { display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; }
+.support-plan__price strong { font-size:2rem; color:var(--home-forest); }
+.support-plan ul { list-style:none; padding:0; margin:24px 0; }
+.support-plan li { display:flex; align-items:flex-start; gap:10px; margin:12px 0; line-height:1.8; }
+.support-plan li svg { flex-shrink:0; margin-top:5px; }
+.support-plan__boundary { line-height:1.9; color:var(--home-muted); }
+.support-plan__expiry { color:var(--home-muted); font-size:.9rem; margin-bottom:24px; }
+.support-plan > .home-button { margin-top:auto; }
+.support-purchase-flow { margin:36px 0; padding:28px; border:1px solid var(--home-line); scroll-margin-top:110px; }
+.support-purchase-flow h3 { margin-top:0; font-size:1.2rem; }
+.support-purchase-flow ol { padding-left:24px; line-height:2; }
+.support-purchase-flow p { line-height:1.9; }
+.support-plan { scroll-margin-top:110px; }
+@media(max-width:760px) { .support-plans { grid-template-columns:1fr; } .support-plan { padding:24px; } .support-purchase-flow { padding:22px; } .support-plan .home-button { width:100%; white-space:normal; text-align:center; } }
