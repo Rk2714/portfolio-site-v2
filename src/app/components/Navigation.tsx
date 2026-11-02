@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
@@ -9,10 +10,11 @@ const navItems = [
   { label: "個人向け", href: "/#personal" },
   { label: "相談できること", href: "/#support-options" },
   { label: "支援例", href: "/#case-study" },
-  { label: "料金・購入", href: "/pricing#personal" },
+  { label: "料金・支援内容", href: "/pricing" },
 ];
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLElement>(null);
@@ -47,7 +49,7 @@ export default function Navigation() {
       }
     };
 
-    const desktopQuery = window.matchMedia("(min-width: 761px)");
+    const desktopQuery = window.matchMedia("(min-width: 1001px)");
     const closeOnDesktop = (event: MediaQueryListEvent) => {
       if (event.matches) setIsOpen(false);
     };
@@ -71,7 +73,7 @@ export default function Navigation() {
 
         <nav className="site-nav" aria-label="メインナビゲーション">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href}>
+            <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined}>
               {item.label}
             </Link>
           ))}
@@ -104,6 +106,7 @@ export default function Navigation() {
             <Link
               key={item.href}
               href={item.href}
+              aria-current={pathname === item.href ? "page" : undefined}
               onClick={() => setIsOpen(false)}
             >
               {item.label}

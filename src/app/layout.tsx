@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/noto-sans-jp";
 import "@fontsource-variable/noto-serif-jp";
 import "./globals.css";
+import "./site-refresh.css";
 import AnalyticsProvider from "./components/AnalyticsProvider";
 import { SITE_URL } from "../lib/site-config";
 

@@ -1,0 +1,75 @@
+/* November 2026: shared navigation and home service overview. */
+:root { --site-focus: #795b00; }
+a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible { outline: 3px solid var(--site-focus); outline-offset: 5px; }
+.site-nav a[aria-current="page"] { border-bottom-color: var(--home-forest); }
+.site-brand strong { font-size: 1.2rem; }
+.site-brand span { font-size: .68rem; }
+.site-footer nav { flex-wrap: wrap; }
+.workshop-home { overflow-x: clip; }
+.workshop-home h2 { text-wrap: balance; }
+.workshop-home .workshop-hero { padding-top: clamp(40px, 5vw, 72px); }
+.workshop-home .workshop-hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(32px, 5vw, 72px); padding-bottom: 48px; }
+.workshop-home .workshop-hero__copy { min-width: 0; padding-bottom: 0; }
+.workshop-home .workshop-hero h1 { font-size: clamp(42px, 4.8vw, 68px); line-height: 1.24; letter-spacing: -.045em; }
+.workshop-home .workshop-hero__line { white-space: normal; }
+.workshop-home .workshop-hero__visual { width: 100%; margin: 0; }
+.workshop-home .workshop-hero__visual figure { aspect-ratio: 1.06; border-radius: 2px; }
+.workshop-home .workshop-hero__visual img { object-position: 60% center; }
+.workshop-home .workshop-hero__vertical, .workshop-home .workshop-hero__index { display: none; }
+.workshop-home .workshop-hero__caption { flex-direction: column; gap: 4px; font-size: .8rem; }
+.workshop-home .workshop-hero__caption strong { font-size: .95rem; }
+.workshop-home .workshop-hero__statement { font-size: clamp(20px, 2vw, 26px); margin-top: 22px; }
+.workshop-home .workshop-hero__lead { max-width: 34em; font-size: .95rem; line-height: 1.85; }
+.workshop-home .workshop-hero__actions { align-items: flex-start; gap: 4px 24px; }
+.workshop-home .workshop-hero__primary { background: var(--home-forest); color: #fff; min-height: 52px; }
+.workshop-home .workshop-hero__reassurance { font-size: .8rem; }
+.support-overview { padding-block: 80px; }
+.support-overview header { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 32px; }
+.support-overview h2 { margin: 0; color: var(--home-forest); font-size: clamp(28px, 3vw, 40px); line-height: 1.45; }
+.support-overview header > p { color: var(--home-muted); font-size: .95rem; line-height: 1.9; }
+.support-overview__grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; }
+.support-overview__grid article { padding: 32px; border: 1px solid var(--home-line); background: #fffdf7; display: flex; flex-direction: column; }
+.support-overview__label { display: flex; justify-content: space-between; color: var(--home-forest); font-size: .8rem; }
+.support-overview__label span { background: var(--home-clay); padding: 4px 10px; }
+.support-overview__purpose { margin: 24px 0 8px; color: var(--home-muted); font-size: .9rem; }
+.support-overview h3 { margin: 0; font-size: clamp(20px,2vw,26px); color: var(--home-forest); }
+.support-overview__price { display: flex; align-items: baseline; gap: 16px; margin: 18px 0; }
+.support-overview__price strong { font-size: 38px; letter-spacing: -.035em; color: var(--home-forest); }
+.support-overview__price small { font-size: 18px; padding-left: 5px; }
+.support-overview__price > span { font-size: .85rem; color: var(--home-muted); }
+.support-overview__grid article > p:not([class]) { line-height: 1.9; font-size: .96rem; margin: 0 0 16px; }
+.support-overview__deliverable { font-size: .85rem; line-height: 1.7; padding: 12px 0 18px; border-top: 1px solid var(--home-line); color: var(--home-muted); }
+.support-overview__grid a { margin-top: auto; display: flex; align-items: center; justify-content: space-between; min-height: 48px; font-weight: 700; color: var(--home-forest); text-decoration: none; }
+.support-overview__grid a:hover { text-decoration: underline; }
+.support-overview__note { margin-top: 20px; color: var(--home-muted); font-size: .85rem; line-height: 1.8; }
+.support-overview__note p { margin: 4px 0; }
+.workshop-home .workshop-audience { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.workshop-home .workshop-audience__item { padding: clamp(28px, 3.5vw, 48px); min-width: 0; }
+.workshop-home .workshop-audience__item > div { align-items: flex-start; flex-direction: column; gap: 16px; }
+.workshop-home .workshop-audience__item li { font-size: .95rem; }
+.workshop-home .workshop-audience__item a { font-size: .9rem; line-height: 1.6; }
+.workshop-home .workshop-profile__person span { line-height: 1.7; }
+@media (max-width:1000px) {
+ .site-nav { display: none; }
+ .site-menu-button { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; border: 1px solid var(--home-line); background: transparent; color: var(--home-forest); cursor: pointer; }
+ .site-mobile-nav { display: grid; border-top: 1px solid var(--home-line); background: var(--home-ivory); padding: 8px 24px 20px; box-shadow: 0 18px 32px #20304012; max-height: calc(100dvh - 78px); overflow-y: auto; }
+ .site-mobile-nav a { display: flex; align-items: center; min-height: 52px; border-bottom: 1px solid var(--home-line); padding: 14px 6px; color: var(--home-ink); font-size: .95rem; font-weight: 600; text-decoration: none; }
+ .site-mobile-nav .site-mobile-nav__cta { justify-content: center; margin-top: 14px; background: var(--home-forest); color: #fff; }
+}
+@media (min-width:1001px) { .site-menu-button, .site-mobile-nav { display: none; } }
+@media (max-width:760px) {
+ .workshop-home .workshop-hero__grid { grid-template-columns: minmax(0,1fr); gap: 32px; padding-bottom: 32px; }
+ .workshop-home .workshop-hero h1 { font-size: clamp(39px, 10.8vw, 58px); }
+ .workshop-home .workshop-hero__visual figure { aspect-ratio: 1.4; }
+ .workshop-home .workshop-hero__visual { max-width: none; }
+ .workshop-home .workshop-hero__primary { margin-top: 18px; font-size: .88rem; padding: 16px 18px; }
+ .workshop-home .workshop-hero__note { align-items: start; flex-direction: column; gap: 8px; }
+ .support-overview { padding-block: 52px; }
+ .support-overview header { align-items: start; flex-direction: column; gap: 14px; }
+ .support-overview header > p { margin: 0; }
+ .support-overview__grid { grid-template-columns: minmax(0,1fr); gap: 16px; }
+ .support-overview__grid article { padding: 24px; }
+ .workshop-home .workshop-audience { grid-template-columns: minmax(0,1fr); }
+ .site-header__inner { min-height: 68px; }
+}
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } }

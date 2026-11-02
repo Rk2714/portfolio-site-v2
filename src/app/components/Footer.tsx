@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteContacts } from "../../lib/site-data";
 
 export default function Footer() {
   return (
@@ -13,7 +14,8 @@ export default function Footer() {
           <Link href="/">ホーム</Link>
           <Link href="/pricing">料金・支援内容</Link>
           <Link href="/radio">ラジオ番組</Link>
-          <Link href="/#contact">お問い合わせ</Link>
+          <Link href="/#contact">初めての方：無料相談</Link>
+          <a href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer">購入済みの方：LINEで日程を相談</a>
         </nav>
         <p className="site-footer__copyright">
           &copy; {new Date().getFullYear()} Ryuya Kinjo

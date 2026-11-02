@@ -28,6 +28,7 @@ import {
   siteProfile,
 } from "../lib/site-data";
 import { SITE_URL } from "../lib/site-config";
+import { SUPPORT_SERVICES, supportProduct } from "../lib/support-catalog";
 
 export const metadata: Metadata = {
   title: { absolute: "Yazirusi｜中小企業・医療介護現場の業務改善支援" },
@@ -101,7 +102,7 @@ const consultationQuestions = [
   },
   {
     question: "無料相談と有料サポートは、何が違いますか？",
-    answer: "無料相談は、困りごとと支援できる範囲を確認する時間です。有料のAI活用相談は60分5,000円、操作・設定・試作を一緒に進める実践・開発サポートは90分10,000円（税込）です。法人の業務改善や仕組みづくりは、必要な範囲を相談後に個別にご提案します。",
+    answer: "無料相談は、困りごとと支援できる範囲を確認する時間です。有料のAI活用相談は60分5,000円、実践・開発サポートは90分10,000円（税込）です。個人・法人で料金は共通。4回は10％引き、8回は15％引きです。時間外制作や組織全体への導入は別見積です。",
   },
 ];
 
@@ -185,19 +186,19 @@ export default function Home() {
                 <h1 id="home-title">
                   <span className="workshop-hero__line" data-hero-line>業務の</span>
                   <span className="workshop-hero__line" data-hero-line><em>「困った」</em>を、</span>
-                  <span className="workshop-hero__line workshop-hero__line--last" data-hero-line>まず話せる人。</span>
+                  <span className="workshop-hero__line workshop-hero__line--last" data-hero-line>一緒に整える。</span>
                 </h1>
                 <p className="workshop-hero__statement" data-hero-item>
                   何を変えればいいか分からない。<br />その段階から、一緒に整理します。
                 </p>
                 <p className="workshop-hero__lead" data-hero-item>
-                  <span>紙、Excel、請求、売上管理。今ある仕事を伺います。</span>
-                  <span>無理なく続く方法を考え、必要なら仕組みをつくります。</span>
-                  <span>今あるもので足りるなら、むやみに増やしません。</span>
+                  <span>仕事の流れを整理し、AI活用や小さな仕組みづくりを支援します。</span>
+                  <span>相談から、画面を共有して一緒に進める実践まで。</span>
+                  <span>個人の方も、法人・事業所の方もご相談いただけます。</span>
                 </p>
                 <div className="workshop-hero__actions" data-hero-item>
                   <TrackedLink className="workshop-hero__primary" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_hero", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約 <ArrowRight size={18} aria-hidden="true" /></TrackedLink>
-                  <a className="workshop-text-link workshop-text-link--secondary" href="/pricing#personal">相談済みの方：料金・購入へ <ArrowRight size={18} aria-hidden="true" /></a>
+                  <a className="workshop-text-link workshop-text-link--secondary" href="/pricing">料金・支援内容を見る <ArrowRight size={18} aria-hidden="true" /></a>
                 </div>
                 <p className="workshop-hero__reassurance" data-hero-item>相談だけでも大丈夫です。友だち追加や無料相談で、料金は発生しません。</p>
               </div>
@@ -225,6 +226,26 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="support-overview home-shell" aria-labelledby="support-overview-title">
+            <header><div><p className="workshop-eyebrow">相談から、実践まで</p><h2 id="support-overview-title">今、必要な支援を<br />選べるように。</h2></div><p>初めての方は30分の無料相談から。<br />有料の支援は、内容を確認してから選べます。</p></header>
+            <div className="support-overview__grid">
+              {(["consultation", "practice"] as const).map((key, index) => {
+                const service = SUPPORT_SERVICES[key];
+                const product = supportProduct(key, 1);
+                return <article key={key}>
+                  <div className="support-overview__label"><span>0{index + 1}</span>{key === "consultation" ? <MessagesSquare aria-hidden="true" /> : <Wrench aria-hidden="true" />}</div>
+                  <p className="support-overview__purpose">{key === "consultation" ? "まず、進め方を整理したい" : "一緒に手を動かして進めたい"}</p>
+                  <h3>{service.name}</h3>
+                  <p className="support-overview__price"><strong>{product.price.toLocaleString("ja-JP")}<small>円</small></strong><span>税込 / {service.minutes}分・1回</span></p>
+                  <p>{key === "consultation" ? "今の課題と優先順位を整理し、使うAIや次の一歩を決めます。" : "画面を共有し、操作・設定・試作を一緒に進めます。"}</p>
+                  <p className="support-overview__deliverable">{service.deliverable}</p>
+                  <Link href={`/pricing?service=${key}`}>内容と回数パックを見る <ArrowRight size={17} aria-hidden="true" /></Link>
+                </article>;
+              })}
+            </div>
+            <div className="support-overview__note"><p>個人・法人共通の料金。継続して取り組む方には4回・8回パックもあります。</p><p>時間外制作や完成までの開発代行、複数人への研修は、範囲を確認して別途お見積もりします。</p></div>
+          </section>
+
           <section className="workshop-trust" aria-labelledby="trust-title">
             <div className="home-shell workshop-trust__grid">
               <div data-reveal><p className="workshop-eyebrow">Why Yazirusi</p><h2 id="trust-title">現場と運営、<br />両方の事情を踏まえて考えます。</h2></div>
@@ -236,14 +257,14 @@ export default function Home() {
             <article id="business" className="workshop-audience__item workshop-audience__item--business" data-reveal>
               <p>法人・事業所の方</p>
               <h2>忙しい現場でも続けられる、<br />業務の仕組みを。</h2>
-              <ul><li>業務と情報の流れを整理する</li><li>今ある道具をつなぎ、手作業を減らす</li><li>必要に応じて小さな仕組みをつくる</li></ul>
+              <ul><li>現場の課題と、取り組む優先順位を整理</li><li>回数パックは登録担当者で共有、各回1名</li><li>まとまった制作・研修・導入は個別にご提案</li></ul>
               <div><Link href="/pricing#business">法人向け支援を見る <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_business", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
             </article>
             <article id="personal" className="workshop-audience__item workshop-audience__item--personal" data-reveal>
               <p>個人の方</p>
               <h2>自分の仕事に合うAIを、<br />一緒に使える形へ。</h2>
-              <ul><li>AI活用相談：60分・5,000円（税込）</li><li>実践・開発サポート：90分・10,000円（税込）</li><li>方針を決める相談も、一緒に作る支援も</li></ul>
-              <div><Link href="/pricing#personal">料金・購入へ進む <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_personal", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
+              <ul><li>自分の仕事に合うAIと進め方を相談</li><li>画面を共有して、操作・設定・試作を実践</li><li>1回から、必要に応じて継続して利用</li></ul>
+              <div><Link href="/pricing#personal">個人向けの支援を見る <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_personal", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
             </article>
           </section>
 
@@ -342,7 +363,7 @@ export default function Home() {
                   <figure>
                     <Image src="/images/headshot.webp" alt="Yazirusi代表 金城竜弥" fill sizes="112px" />
                   </figure>
-                  <div><strong>金城竜弥</strong><span>Yazirusi代表</span></div>
+                  <div><strong>金城竜弥</strong><span>医療・介護現場の業務改善パートナー<br />Yazirusi代表</span></div>
                 </div>
                 <p>看護の現場だけでなく、オンライン診療の運営にも携わった経験から、現場の困りごとと、運営側が考える継続性の両方を見ながら整理します。</p>
               </div>

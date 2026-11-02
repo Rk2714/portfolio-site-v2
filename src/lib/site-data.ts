@@ -1,3 +1,5 @@
+import { supportProduct } from "./support-catalog";
+
 export interface TimelineItem {
   year: string;
   title: string;
@@ -94,9 +96,9 @@ export const audienceOffers: AudienceOffer[] = [
       "今あるツールの活用と連携",
       "必要に応じた業務システム構築",
     ],
-    priceLabel: "業務整理・改善伴走",
-    price: "68,000円〜",
-    priceNote: "業務改善スポット支援（60分）は10,000円〜。",
+    priceLabel: "個人・法人共通のセッション",
+    price: `${supportProduct("consultation", 1).price.toLocaleString("ja-JP")}円〜`,
+    priceNote: `相談60分${supportProduct("consultation", 1).price.toLocaleString("ja-JP")}円、実践90分${supportProduct("practice", 1).price.toLocaleString("ja-JP")}円（税込）。4回・8回パックあり。`,
     pricingHref: "/pricing#business",
     pricingCta: "法人向け料金を見る",
     consultationCta: "法人・事業所の相談を予約",
@@ -157,100 +159,7 @@ export const featuredCaseStudy: CaseStudy = {
   ],
 };
 
-export interface BusinessPlan {
-  name: string;
-  price: string;
-  priceAmount: number;
-  description: string;
-  items: string[];
-  examples?: string[];
-}
-
-export const businessPlans: BusinessPlan[] = [
-  {
-    name: "業務整理・改善伴走",
-    price: "68,000円〜",
-    priceAmount: 68000,
-    description:
-      "実際の業務を題材に、情報と作業の流れを整理します。社内で作れるよう方法をお伝えすることも、必要な仕組みを私が構築することもできます。",
-    items: [
-      "8回×60分の個別伴走（オンライン）",
-      "業務の見える化と優先順位付け",
-      "今あるツールで減らせる手間を確認",
-      "改善案の設計・小さな試作をサポート",
-      "試作品と操作メモを共有",
-    ],
-    examples: ["情報整理", "帳票・書類の効率化", "作り方の支援または構築"],
-  },
-  {
-    name: "業務システム構築・外部連携",
-    price: "100,000円〜",
-    priceAmount: 100000,
-    description:
-      "業務の流れを確認し、必要な仕組みの設計から運用開始まで支援します。",
-    items: [
-      "業務フローと要件の整理",
-      "初期構築・動作確認",
-      "運用ルールの作成",
-      "現場での運用調整",
-    ],
-    examples: ["顧客・案件管理", "在庫・受付管理", "売上・請求データの整理"],
-  },
-  {
-    name: "業務改善スポット支援",
-    price: "10,000円〜",
-    priceAmount: 10000,
-    description:
-      "困りごとを60分で整理し、優先順位と次の一歩を明確にします。",
-    items: [
-      "60分のオンライン相談",
-      "現在の課題と背景を整理",
-      "取り組む順番を提案",
-      "相談後に整理メモを共有",
-    ],
-  },
-];
-
-export interface PersonalPlan {
-  id: "consultation" | "practice";
-  name: string;
-  detail: string;
-  price: string;
-  priceAmount: number;
-  note: string;
-  fit: string;
-  includes: string[];
-  boundary: string;
-  paymentUrl: string;
-}
-
-// 新商品専用の決済リンク。既存60分・回数券のリンクを流用しない。
-export const personalPlans: PersonalPlan[] = [
-  {
-    id: "consultation",
-    name: "AI活用相談",
-    detail: "60分・1回",
-    price: "5,000円",
-    priceAmount: 5000,
-    note: "購入日から2か月",
-    fit: "まず方針を決めたい方へ。",
-    includes: ["業務や困りごとを整理", "使うAI・構成・進める順番を相談", "次の一歩と短い方針メモ"],
-    boundary: "1回1テーマ。制作・時間外の調査・開発代行は含みません。",
-    paymentUrl: "https://buy.stripe.com/9B6dR860g9tW27F4hF67S0i",
-  },
-  {
-    id: "practice",
-    name: "AI実践・開発サポート",
-    detail: "90分・1回",
-    price: "10,000円",
-    priceAmount: 10000,
-    note: "購入日から2か月",
-    fit: "一緒に手を動かして進めたい方へ。",
-    includes: ["画面を共有して操作・設定", "プロンプト・GPT・小さなアプリ等を試作", "到達点と残作業・次の手順を整理"],
-    boundary: "時間内に一緒に作り進める支援です。完成までの開発代行・時間外の制作は別見積です。",
-    paymentUrl: "https://buy.stripe.com/eVqdR8bkAdKceUrbK767S0j",
-  },
-];
+// Current purchase terms live in services/support/catalog.json.
 
 export const defaultWorks = [
   {

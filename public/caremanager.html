@@ -208,8 +208,12 @@
 
   .cta-note {
     font-size: 18px;
-    color: #a09080;
+    color: #75675a;
   }
+
+  .cta-line-row { display: flex; align-items: center; justify-content: center; gap: 24px; }
+  .cta-line-qr { display: inline-flex; padding: 4px; background: #fff; border-radius: 6px; }
+  .cta-line-qr img { display: block; width: 104px; height: 104px; }
 
   .footer {
     padding: 24px 80px 34px;
@@ -236,6 +240,28 @@
     color: #8b6f55;
     line-height: 1.8;
   }
+
+  @media screen and (max-width: 900px) {
+    body { display: block; padding: 12px; }
+    .flyer { width: 100%; }
+    .main-content { padding: 24px 20px; gap: 20px; }
+    .target-label { font-size: 14px; padding: 6px 12px; }
+    .catch-main { font-size: clamp(26px, 7vw, 42px); }
+    .catch-sub { font-size: 17px; padding-left: 10px; }
+    .catch-sub br { display: none; }
+    .problem-box, .proposal-box, .step-box { padding: 18px 16px; }
+    .problem-title, .proposal-title, .step-title { font-size: 17px; }
+    .problem-item, .proposal-item, .step-item { font-size: 16px; }
+    .cta-section { gap: 12px; text-align: center; }
+    .cta-lead { font-size: 19px; text-wrap: balance; }
+    .cta-line-row { flex-direction: column; gap: 16px; width: 100%; }
+    .cta-button { font-size: 19px; padding: 16px 22px; letter-spacing: 0; }
+    .cta-note { font-size: 14px; line-height: 1.7; }
+    .footer { padding: 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .brand-name { font-size: 22px; }
+    .brand-tagline { font-size: 14px; }
+    .contact { text-align: left; font-size: 15px; overflow-wrap: anywhere; }
+  }
 </style>
 </head>
 <body>
@@ -254,8 +280,8 @@
         <span class="hl">お悩み</span>、ありませんか。
       </div>
       <div class="catch-sub">
-        現場に入り、業務の流れを拝見した上で<br>
-        アプリ作成 × 業務改善コンサルティングをご提案します。
+        業務の流れを伺い、課題を整理。<br>
+        必要な改善やツールづくりをご提案します。
       </div>
     </div>
 
@@ -268,9 +294,9 @@
 
     <div class="proposal-box">
       <div class="proposal-title">Yazirusi のご提案</div>
-      <div class="proposal-item"><span class="arrow">▶</span>貴事業所のデスクワークを<b>現場で拝見</b>し、課題を整理します</div>
+      <div class="proposal-item"><span class="arrow">▶</span><b>オンラインで現状を伺い</b>、デスクワークの課題を整理します</div>
       <div class="proposal-item"><span class="arrow">▶</span>小さな業務の無駄から<b>スモールステップで改善</b>に導きます</div>
-      <div class="proposal-item"><span class="arrow">▶</span>必要に応じて<b>アプリを作成</b>。大がかりなシステム導入は不要です</div>
+      <div class="proposal-item"><span class="arrow">▶</span>必要に応じて<b>ツール作成を個別にご提案</b>。範囲・費用は事前に確認します</div>
       <div class="proposal-item"><span class="arrow">▶</span>将来的なアプリ開発も視野に。<b>まずはコンサルティングから</b></div>
     </div>
 
@@ -282,11 +308,15 @@
     </div>
 
     <div class="cta-section">
-      <div class="cta-lead">まずは無料でヒアリングをご提案します</div>
-      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2o9U_hs3DQxwiOLUbA9LIhORY9EebqlrySv62q8P4cuJF5Nb_WFegj_YB8d2iZ_4Ca9iwOD8l3" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-        <div class="cta-button">30分無料で予約する →</div>
-      </a>
-      <div class="cta-note">オンラインでも訪問でも対応いたします</div>
+      <div class="cta-lead">初回30分・オンライン相談は無料です</div>
+      <div class="cta-line-row">
+        <a class="cta-line-qr" href="https://lin.ee/8WhWEGP" target="_blank" rel="noopener noreferrer"><img src="/images/line-official-qr-20261102.svg" alt="Yazirusi公式LINEの友だち追加QRコード" width="104" height="104"></a>
+        <a href="https://lin.ee/8WhWEGP" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+          <div class="cta-button">公式LINEで相談する →</div>
+        </a>
+      </div>
+      <div class="cta-note">公式LINEへ「予約」とお送りください。日程をご案内します。</div>
+      <div class="cta-note">訪問支援は、内容・範囲を確認して個別にご相談いただけます。</div>
     </div>
 
   </div>

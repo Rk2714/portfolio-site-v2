@@ -247,7 +247,8 @@
     .cta .copy { font-size: 11pt; font-weight: 700; letter-spacing: 0.04em; }
     .cta .subcopy { font-size: 7.5pt; line-height: 1.5; color: rgba(255,255,255,0.8); }
     .qr-wrap { margin-top: 0.5mm; }
-    .qr-wrap img { width: 13mm; height: 13mm; border-radius: 3px; border: 2px solid rgba(255,255,255,0.5); }
+    .qr-wrap a { display: inline-flex; padding: 1mm; border-radius: 3px; background: #fff; }
+    .qr-wrap img { display: block; width: 20mm; height: 20mm; }
     .book-link a { color: rgba(255,255,255,0.9); font-size: 7pt; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); }
 
     .footer {
@@ -281,7 +282,35 @@
     }
 
     @media screen and (max-width: 900px) {
-      body { transform: scale(0.55); transform-origin: top center; }
+      body { display: block; padding: 20px 12px; }
+      body.screen-mode { padding-top: 84px; }
+      .dl-bar { gap: 8px; flex-wrap: wrap; padding: 10px 12px; }
+      .dl-bar .hint { font-size: 12px; }
+      .dl-btn { padding: 8px 14px; }
+      .flyer { width: 100%; max-width: 210mm; height: auto; margin: 0 auto; }
+      .inner { height: auto; padding: 24px; gap: 20px; }
+      .hero { grid-template-columns: 1fr; gap: 20px; }
+      .hero-card { min-height: 180px; }
+      .headline h1 { font-size: 26px; text-wrap: balance; }
+      .headline .lead { font-size: 14px; }
+      .info-band { grid-template-columns: 1fr; gap: 14px; padding: 16px; }
+      .info-band .label { border-right: 0; padding-right: 0; font-size: 15px; }
+      .check-list { grid-template-columns: 1fr; gap: 10px; font-size: 13px; line-height: 1.6; }
+      .services { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .service { padding: 16px 10px; }
+      .service h3 { font-size: 14px; }
+      .service p { font-size: 12px; }
+      .bottom { grid-template-columns: 1fr; gap: 16px; }
+      .profile { grid-template-columns: 64px minmax(0, 1fr); padding: 16px; gap: 12px; }
+      .portrait { width: 64px; height: 64px; }
+      .profile .name { font-size: 15px; }
+      .profile .role, .profile .desc { font-size: 12px; }
+      .profile .desc br { display: none; }
+      .cta { padding: 24px 16px; gap: 12px; }
+      .cta .copy { font-size: 17px; }
+      .cta .subcopy, .book-link a { font-size: 13px; }
+      .qr-wrap img { width: 112px; height: 112px; }
+      .contact { gap: 8px; font-size: 12px; overflow-wrap: anywhere; }
     }
   </style>
 </head>
@@ -384,10 +413,10 @@
             <div class="pill">オンライン<br>対応可</div>
             <div class="pill">全国<br>対応</div>
           </div>
-          <div class="copy">初回相談は無料です</div>
-          <div class="subcopy">オンラインでも、現場でも。まずは30分。<br>話してみませんか。</div>
-          <div class="qr-wrap"><a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2o9U_hs3DQxwiOLUbA9LIhORY9EebqlrySv62q8P4cuJF5Nb_WFegj_YB8d2iZ_4Ca9iwOD8l3" target="_blank" rel="noopener"><img src="/qr.png" alt="予約QRコード" /></a></div>
-          <div class="book-link"><a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2o9U_hs3DQxwiOLUbA9LIhORY9EebqlrySv62q8P4cuJF5Nb_WFegj_YB8d2iZ_4Ca9iwOD8l3" target="_blank" rel="noopener">クリックして予約する ≫</a></div>
+          <div class="copy">初回30分・オンライン相談無料</div>
+          <div class="subcopy">公式LINEへ「予約」とお送りください。<br>訪問支援は内容・範囲を確認して個別にご相談。</div>
+          <div class="qr-wrap"><a href="https://lin.ee/8WhWEGP" target="_blank" rel="noopener noreferrer"><img src="/images/line-official-qr-20261102.svg" alt="Yazirusi公式LINEの友だち追加QRコード" width="200" height="200" /></a></div>
+          <div class="book-link"><a href="https://lin.ee/8WhWEGP" target="_blank" rel="noopener noreferrer">公式LINEで30分無料相談へ ≫</a></div>
         </section>
       </div>
 
