@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore, type KeyboardEvent } from "react";
 import { ArrowRight, Check, Compass, Wrench } from "lucide-react";
 import { SUPPORT_PACKS, SUPPORT_SERVICES, parseSupportSelection, supportProduct, type SupportAudience, type SupportService, type SupportPack } from "../../lib/support-catalog";
@@ -77,7 +78,7 @@ export default function PricingViewer() {
           </article>;
         })}
       </div>
-      {audience === "business" && <aside className="pr-business-note"><strong>法人パックは、登録した担当者で共有できます。</strong><p>各回の参加者は1名。購入責任者からお知らせいただき、金城が初回確認した担当者が交代して利用できます。複数人で学ぶ場合は、<a href="/training">2名からのAI・PC研修</a>をご覧ください。組織全体への導入は別見積です。</p></aside>}
+      {audience === "business" && <aside className="pr-business-note"><strong>法人パックは、登録した担当者で共有できます。</strong><p>各回の参加者は1名。購入責任者からお知らせいただき、金城が初回確認した担当者が交代して利用できます。複数人で学ぶ場合は、<Link href="/training">2名からのAI・PC研修</Link>をご覧ください。組織全体への導入は別見積です。</p></aside>}
       <div className="pr-selection"><div aria-live="polite" aria-atomic="true"><p className="pr-selection__label">選択中のプラン</p><h3>{SUPPORT_SERVICES[service].name}</h3><p>{selected.minutes}分 × {pack}回 <span>／</span> <strong>{yen(selected.price)}円（税込）</strong></p><small>購入から{selected.expiryMonths}か月。相談と実践の回数は交換できません。</small></div><div className="pr-selection__action"><a className="pr-button pr-button--dark" href={inquiryUrl} target="_blank" rel="noopener noreferrer">LINEでこのプランを相談 <ArrowRight size={17} aria-hidden="true" /></a><button type="button" className="pr-copy-inquiry" onClick={copyInquiry}>相談文をコピー</button><p>{lineAppSupported ? "選んだプランを相談文に入れてLINEを開きます。内容を確認して送信してください。" : "相談文をコピーして、LINEへ貼り付けてお送りください。"}<br />内容・日程を確認してからお申し込みいただけます。</p><p className="pr-copy-status" role="status">{copyStatus}</p></div></div>
     </div>
   </section>;
