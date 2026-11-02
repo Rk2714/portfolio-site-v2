@@ -180,3 +180,7 @@
 @media (prefers-reduced-motion: reduce) {
   .pricing-refresh *, .pricing-refresh *::before, .pricing-refresh *::after { transition: none; scroll-behavior: auto; }
 }
+
+.pricing-refresh .pr-copy-inquiry { display: block; margin: 10px auto 0; min-height: 44px; padding: 8px 16px; border: 0; background: transparent; color: var(--pr-ink); font-size: .84rem; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.pricing-refresh .pr-copy-status { margin-top: 8px; color: var(--pr-ink); font-weight: 600; }
+.pricing-refresh .pr-copy-status:empty { display: none; }

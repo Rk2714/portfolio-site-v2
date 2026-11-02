@@ -3,17 +3,20 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
+  BookOpen,
   HeartPulse,
   MapPin,
   Mic2,
+  Play,
   Radio,
   UsersRound,
 } from "lucide-react";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import TrackedLink from "../components/TrackedLink";
-import MediaCard from "../media/MediaCard";
-import { getAllMediaFromCMS } from "../../lib/media-data";
+import { getAllMediaFromCMS, getSafeYouTubeEmbedUrl, type MediaPost } from "../../lib/media-data";
+import "./radio-refresh.css";
 
 export const metadata: Metadata = {
   title: "FM21 いえろーかっし〜｜ラジオ番組",
@@ -48,6 +51,44 @@ const themes = [
   },
 ];
 
+function EpisodeActions({ post }: { post: MediaPost }) {
+  const embedUrl = getSafeYouTubeEmbedUrl(post.youtubeUrl);
+  const watchUrl = embedUrl
+    ? `https://www.youtube.com/watch?v=${new URL(embedUrl).pathname.split("/").pop()}`
+    : null;
+
+  return (
+    <div className="radio-episode-actions">
+      {watchUrl && (
+        <TrackedLink
+          href={watchUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${post.title}をYouTubeで聴く（新しいタブ）`}
+          eventName="media_card_click"
+          eventParams={{ page_type: "media_list", post_id: post.id, category: post.category, position: "radio_listen" }}
+          className="radio-button radio-button--primary"
+        >
+          <Play size={15} aria-hidden="true" />
+          YouTubeで聴く
+          <ArrowUpRight size={16} aria-hidden="true" />
+        </TrackedLink>
+      )}
+      <TrackedLink
+        href={`/media/${post.id}`}
+        aria-label={`${post.title}の放送内容を読む`}
+        eventName="media_card_click"
+        eventParams={{ page_type: "media_list", post_id: post.id, category: post.category, position: "radio_read" }}
+        className="radio-read-link"
+      >
+        <BookOpen size={16} aria-hidden="true" />
+        放送内容を読む
+        <ArrowRight size={16} aria-hidden="true" />
+      </TrackedLink>
+    </div>
+  );
+}
+
 export default async function RadioPage() {
   const posts = await getAllMediaFromCMS();
   const episodes = posts.filter(
@@ -60,7 +101,7 @@ export default async function RadioPage() {
   return (
     <>
       <Navigation />
-      <main className="radio-page">
+      <main className="radio-page radio-refresh">
         <section className="radio-hero">
           <div className="home-shell radio-hero__grid">
             <div className="radio-hero__copy">
@@ -82,12 +123,15 @@ export default async function RadioPage() {
                 <br />
                 現場で挑戦するゲストを迎え、経験や想いを一緒に掘り下げます。
               </p>
-              <a href="#episodes" className="radio-button radio-button--primary">
-                放送回を見る <ArrowRight aria-hidden="true" size={18} />
-              </a>
+              <div className="radio-hero__actions">
+                <a href={latestEpisode ? "#episodes" : "#archive"} className="radio-button radio-button--primary">
+                  {latestEpisode ? "最新の放送回へ" : "放送一覧へ"} <ArrowRight aria-hidden="true" size={18} />
+                </a>
+                {pastEpisodes.length > 0 && <a href="#archive" className="radio-text-link">過去の放送から選ぶ</a>}
+              </div>
             </div>
 
-            <div className="radio-hero__visual" aria-label="番組イメージ">
+            <div className="radio-hero__visual" aria-label="番組の放送アーカイブ">
               {latestEpisode ? (
                 <Image
                   src={latestEpisode.thumbnail}
@@ -95,7 +139,7 @@ export default async function RadioPage() {
                   fill
                   priority
                   unoptimized
-                  sizes="(max-width: 760px) 92vw, 48vw"
+                  sizes="(max-width: 900px) 92vw, 48vw"
                 />
               ) : (
                 <div className="radio-hero__fallback">
@@ -104,12 +148,44 @@ export default async function RadioPage() {
                 </div>
               )}
               <div className="radio-hero__onair">
-                <span>ON AIR</span>
+                <span>放送アーカイブ</span>
                 <strong>FM21</strong>
+                {latestEpisode && <time dateTime={latestEpisode.date}>{latestEpisode.date}</time>}
               </div>
             </div>
           </div>
         </section>
+
+        {latestEpisode && (
+          <section id="episodes" className="radio-latest">
+            <div className="home-shell">
+              <div className="radio-section-heading">
+                <div>
+                  <p className="radio-eyebrow">LATEST EPISODE</p>
+                  <h2>最新の放送回</h2>
+                </div>
+                <time dateTime={latestEpisode.date}>{latestEpisode.date}</time>
+              </div>
+              <article className="radio-featured" aria-labelledby="latest-episode-title">
+                <Link href={`/media/${latestEpisode.id}`} className="radio-featured__image" aria-label={`${latestEpisode.title}の放送内容を読む`}>
+                  <Image
+                    src={latestEpisode.thumbnail}
+                    alt=""
+                    fill
+                    unoptimized
+                    sizes="(max-width: 900px) 92vw, 54vw"
+                  />
+                </Link>
+                <div className="radio-featured__copy">
+                  <span>{latestEpisode.categoryLabel}</span>
+                  <h3 id="latest-episode-title"><Link href={`/media/${latestEpisode.id}`}>{latestEpisode.title.replace("いえろーかっし～ FM21｜", "")}</Link></h3>
+                  <p>{latestEpisode.excerpt}</p>
+                  <EpisodeActions post={latestEpisode} />
+                </div>
+              </article>
+            </div>
+          </section>
+        )}
 
         <section className="radio-intro">
           <div className="home-shell radio-intro__grid">
@@ -127,37 +203,6 @@ export default async function RadioPage() {
             </div>
           </div>
         </section>
-
-        {latestEpisode && (
-          <section id="episodes" className="radio-latest">
-            <div className="home-shell">
-              <div className="radio-section-heading">
-                <div>
-                  <p className="radio-eyebrow">LATEST EPISODE</p>
-                  <h2>最新の放送回</h2>
-                </div>
-                <span>{latestEpisode.date}</span>
-              </div>
-              <Link href={`/media/${latestEpisode.id}`} className="radio-featured">
-                <div className="radio-featured__image">
-                  <Image
-                    src={latestEpisode.thumbnail}
-                    alt=""
-                    fill
-                    unoptimized
-                    sizes="(max-width: 760px) 92vw, 54vw"
-                  />
-                </div>
-                <div className="radio-featured__copy">
-                  <span>{latestEpisode.categoryLabel}</span>
-                  <h3>{latestEpisode.title.replace("いえろーかっし～ FM21｜", "")}</h3>
-                  <p>{latestEpisode.excerpt}</p>
-                  <strong>この放送回を見る <ArrowRight aria-hidden="true" size={18} /></strong>
-                </div>
-              </Link>
-            </div>
-          </section>
-        )}
 
         <section className="radio-themes">
           <div className="home-shell">
@@ -179,19 +224,30 @@ export default async function RadioPage() {
           </div>
         </section>
 
-        <section className="radio-archive">
+        <section id="archive" className="radio-archive">
           <div className="home-shell">
             <div className="radio-section-heading">
               <div>
                 <p className="radio-eyebrow">ARCHIVE</p>
                 <h2>これまでの放送</h2>
+                  <p className="radio-archive__note">気になるテーマから、聴く・読む。</p>
               </div>
-              <Link href="/media">すべての投稿を見る <ArrowRight size={16} /></Link>
+              <Link href="/media">読みもの・出演情報も見る <ArrowRight size={16} aria-hidden="true" /></Link>
             </div>
             {pastEpisodes.length > 0 ? (
               <div className="radio-archive__grid">
                 {pastEpisodes.map((post) => (
-                  <MediaCard key={post.id} post={post} />
+                  <article key={post.id} className="radio-archive-card" aria-labelledby={`episode-${post.id}`}>
+                    <Link className="radio-archive-card__image" href={`/media/${post.id}`} aria-label={`${post.title}の放送内容を読む`}>
+                      <Image src={post.thumbnail} alt="" fill unoptimized sizes="(max-width: 600px) 90vw, (max-width: 1050px) 45vw, 30vw" />
+                    </Link>
+                    <div className="radio-archive-card__body">
+                      <div className="radio-archive-card__meta"><time dateTime={post.date}>{post.date}</time><span>{post.categoryLabel}</span></div>
+                      <h3 id={`episode-${post.id}`}><Link href={`/media/${post.id}`}>{post.title.replace("いえろーかっし～ FM21｜", "")}</Link></h3>
+                      <p>{post.excerpt}</p>
+                      <EpisodeActions post={post} />
+                    </div>
+                  </article>
                 ))}
               </div>
             ) : (
@@ -221,7 +277,7 @@ export default async function RadioPage() {
               className="radio-button radio-button--light"
             >
               出演・取材について連絡する
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden="true" />
             </TrackedLink>
           </div>
         </section>
