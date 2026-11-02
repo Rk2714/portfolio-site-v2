@@ -231,3 +231,13 @@ npm run dev:local
 - 商品説明・決済リンクは `src/lib/site-data.ts` の `personalPlans`、購入画面は `src/app/pricing/page.tsx`。ホームの購入入口は `src/app/page.tsx`、ヘッダーは `src/app/components/Navigation.tsx`。
 - 購入後は公式LINEで氏名・希望日時を受け、支払を照合して手動で日程とMeetを案内します。無料30分予約リンクを有料予約に流用しません。
 - 検査でアーカイブ内の生成ファイルまで対象になった場合、今回の変更ファイルを指定して検査します。アーカイブを削除・修正しないでください。
+
+## 2026年11月3日 AI・PC研修と検索向け情報
+
+- 研修ページは `/training`。料金・テーマ・FAQの正本は `src/lib/training-data.ts`、本文と検索情報は `src/app/training/page.tsx`、デザインは `src/app/training/training.css`。
+- 2名から受付、5名まで同一料金。90分27,500円・120分44,000円（税込・1組）のスタート記念価格。6名以上・クリエイティブ分野は個別見積。オンライン・訪問対応、交通費などは別途案内。
+- 研修のLINE相談文は `TrainingInquiry.tsx`。相談文を準備するだけで、自動送信・予約・課金は行わない。
+- ホームと料金の案内は `TrainingOverview.tsx` を共有。個別支援6商品の金額・期限は既存catalogを維持し、料金ページへ常時表示の一覧表を追加。
+- ラジオ一覧はCollectionPageとItemList、記事はArticleの構造化データを表示する。放送日を記事公開日や更新日として推測しない。見える本文と異なる著者・日付・実績は追加しない。
+- 作業フォルダのsymlink制約でローカル実行できない場合、同じ失敗を繰り返さない。既存GitHub/Vercel接続で公開mainと同じコミットから差分を準備し、確認用ビルドを検証してからmainへ反映する。ローカルの未公開変更を混ぜない。
+- 公開は既存のproduction workflowがmainへの反映で起動します。保存・確認用ビルド・本番反映は別の工程として確認します。

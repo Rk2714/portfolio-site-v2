@@ -17,6 +17,7 @@ import Footer from "../components/Footer";
 import TrackedLink from "../components/TrackedLink";
 import { getAllMediaFromCMS, getSafeYouTubeEmbedUrl, type MediaPost } from "../../lib/media-data";
 import "./radio-refresh.css";
+import { SITE_URL } from "../../lib/site-config";
 
 export const metadata: Metadata = {
   title: "FM21 いえろーかっし〜｜ラジオ番組",
@@ -97,6 +98,19 @@ export default async function RadioPage() {
       (post.category === "guest" && post.title.includes("いえろーかっし")),
   );
   const [latestEpisode, ...pastEpisodes] = episodes;
+  const structuredData = {
+    "@context": "https://schema.org", "@type": "CollectionPage",
+    "@id": `${SITE_URL}/radio#webpage`,
+    url: `${SITE_URL}/radio`, name: "FM21 いえろーかっし〜｜ラジオ番組",
+    description: metadata.description, inLanguage: "ja",
+    mainEntity: {
+      "@type": "ItemList", numberOfItems: episodes.length,
+      itemListElement: episodes.map((post, index) => ({
+        "@type": "ListItem", position: index + 1,
+        item: { "@type": "WebPage", url: `${SITE_URL}/media/${post.id}`, name: post.title, description: post.excerpt },
+      })),
+    },
+  };
 
   return (
     <>
@@ -200,6 +214,7 @@ export default async function RadioPage() {
               <p>
                 聞いた人が「こんな働き方もある」「自分も一歩動いてみよう」と思える、近い距離の対話を大切にしています。
               </p>
+              <p>金城竜弥の仕事については、<Link href="/training" className="radio-text-link">2名からのAI・PC研修</Link>と<Link href="/pricing" className="radio-text-link">個別の業務改善支援</Link>をご覧ください。</p>
             </div>
           </div>
         </section>
@@ -282,6 +297,7 @@ export default async function RadioPage() {
           </div>
         </section>
       </main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <Footer />
     </>
   );

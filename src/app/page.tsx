@@ -21,6 +21,7 @@ import {
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import HomeMotion from "./components/HomeMotion";
+import TrainingOverview from "./components/TrainingOverview";
 import TrackedLink from "./components/TrackedLink";
 import {
   careerTimeline,
@@ -31,9 +32,9 @@ import { SITE_URL } from "../lib/site-config";
 import { SUPPORT_SERVICES, supportProduct } from "../lib/support-catalog";
 
 export const metadata: Metadata = {
-  title: { absolute: "Yazirusi｜中小企業・医療介護現場の業務改善支援" },
+  title: { absolute: "Yazirusi｜沖縄の業務改善・AI・PC研修" },
   description:
-    "紙・Excel・LINEに分かれた業務の整理と、個人に合うAI活用を支援するYazirusi。何から始めるか決まっていなくても大丈夫です。まずは公式LINEから30分無料相談へ。",
+    "沖縄を拠点に、業務改善とAI活用を支援するYazirusi。個別相談から2名で受けられるAI・PC研修まで、仕事に合わせて進めます。オンライン・訪問に対応。まずは公式LINEへ。",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Yazirusi｜その手作業を、今の会社に合う仕組みへ。",
@@ -243,8 +244,10 @@ export default function Home() {
                 </article>;
               })}
             </div>
-            <div className="support-overview__note"><p>個人・法人共通の料金。継続して取り組む方には4回・8回パックもあります。</p><p>時間外制作や完成までの開発代行、複数人への研修は、範囲を確認して別途お見積もりします。</p></div>
+            <div className="support-overview__note"><p>個人・法人共通の料金。継続して取り組む方には4回・8回パックもあります。</p><p>複数人で学ぶ方には、2名からのAI・PC研修をご用意しています。時間外制作や完成までの開発代行は別途お見積もりします。</p></div>
           </section>
+
+          <TrainingOverview />
 
           <section className="workshop-trust" aria-labelledby="trust-title">
             <div className="home-shell workshop-trust__grid">
@@ -257,7 +260,7 @@ export default function Home() {
             <article id="business" className="workshop-audience__item workshop-audience__item--business" data-reveal>
               <p>法人・事業所の方</p>
               <h2>忙しい現場でも続けられる、<br />業務の仕組みを。</h2>
-              <ul><li>現場の課題と、取り組む優先順位を整理</li><li>回数パックは登録担当者で共有、各回1名</li><li>まとまった制作・研修・導入は個別にご提案</li></ul>
+              <ul><li>現場の課題と、取り組む優先順位を整理</li><li>回数パックは登録担当者で共有、各回1名</li><li>2名からのAI・PC研修、まとまった制作・導入にも対応</li></ul>
               <div><Link href="/pricing#business">法人向け支援を見る <ArrowRight size={18} /></Link><TrackedLink href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer" eventName="contact_cta_click" eventParams={{ page_type: "home", position: "home_business", cta_target: "line_free_consultation" }}>LINEで30分無料相談を予約</TrackedLink></div>
             </article>
             <article id="personal" className="workshop-audience__item workshop-audience__item--personal" data-reveal>

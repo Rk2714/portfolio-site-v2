@@ -4,6 +4,7 @@ import { ArrowDown, ArrowRight, Check, MessageCircle, PencilRuler } from "lucide
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import PricingViewer from "../components/PricingViewer";
+import TrainingOverview from "../components/TrainingOverview";
 import { SUPPORT_PRODUCTS, SUPPORT_SERVICES } from "../../lib/support-catalog";
 import { siteContacts } from "../../lib/site-data";
 import { SITE_URL } from "../../lib/site-config";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 const questions = [
   ["初めてですが、どちらのプランを選べばよいですか？", "まずは30分無料相談で、困りごとと支援の相性を確認します。方針を整理したい方には60分の相談、操作・設定・試作を一緒に進めたい方には90分の実践をご案内します。無料相談だけのご利用でも構いません。"],
   ["実践・開発では、完成したものを受け取れますか？", "今回のゴールを事前に決め、90分の中で制作を進めます。時間内に仕上がったプロンプト・設定・小さなプログラムなどはお渡しできます。完成の保証や時間外制作、完成までの開発代行は別見積です。"],
-  ["法人の担当者は交代できますか？", "購入責任者からお知らせいただき、金城が初回確認した登録メンバーでパックを共有できます。各回の参加者は1名です。個人の購入分は共有できません。複数人への研修や組織全体への導入は別途ご相談ください。"],
+  ["法人の担当者は交代できますか？", "購入責任者からお知らせいただき、金城が初回確認した登録メンバーでパックを共有できます。各回の参加者は1名です。個人の購入分は共有できません。複数人で学ぶ場合は2名からのAI・PC研修をご利用いただけます。組織全体への導入は別途ご相談ください。"],
   ["以前購入したセッションや回数券はどうなりますか？", "購入済みのセッション・回数券・継続契約は、購入時の時間・料金・期限を維持します。新しい条件への一括変更は行いません。残回数や日程は公式LINEからお問い合わせください。"],
   ["回数パックの途中解約はできますか？", "未利用分をパックの1回単価で返金し、解約手数料はかかりません。金城が利用状況を確認して返金手続きを行います。相談用と実践用の回数は交換できません。"],
   ["外部サービスの費用は含まれますか？", "今お使いの環境を優先します。有料AI、外部サービス、機器などが必要な場合は、その費用と理由を事前にご案内します。"],
@@ -50,8 +51,9 @@ export default function PricingPage() {
             <p className="pr-eyebrow">料金・支援内容</p>
             <h1>必要な支援を、<br /><span>必要な回数から。</span></h1>
             <p className="pr-hero__copy">方針を整理する60分。<br />一緒に手を動かす90分。<br className="pr-mobile-break" />今の課題に合わせて選べます。</p>
-            <div className="pr-hero__tags"><span>個人・法人共通</span><span>オンライン</span><span>すべて税込</span></div>
-            <a href="#plans" className="pr-text-link">料金と内容を比べる <ArrowDown size={17} aria-hidden="true" /></a>
+            <div className="pr-hero__tags"><span>個人・法人共通</span><span>個別セッションはオンライン</span><span>すべて税込</span></div>
+            <a href="#price-overview" className="pr-text-link">個別セッションの料金一覧 <ArrowDown size={17} aria-hidden="true" /></a>
+            <Link className="pr-training-link" href="/training">2名からのAI・PC研修を見る →</Link>
           </div>
           <aside className="pr-first-step" aria-label="初めての方へのご案内">
             <span className="pr-first-step__label">初めての方へ</span>
@@ -64,10 +66,22 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <section id="price-overview" className="pr-overview home-shell" aria-labelledby="price-overview-title">
+        <div className="pr-section-heading"><p className="pr-eyebrow">個別セッション</p><h2 id="price-overview-title">すべての回数・料金を一覧で。</h2><p>個人・法人共通、すべて税込です。各回の参加者は1名。購入済みの条件は変わりません。</p></div>
+        <div className="pr-overview__tables">
+          {(["consultation", "practice"] as const).map(service => <table key={service}>
+            <caption>{SUPPORT_SERVICES[service].name}（各回{SUPPORT_SERVICES[service].minutes}分）</caption>
+            <thead><tr><th scope="col">回数</th><th scope="col">税込総額</th><th scope="col">購入からの期限</th></tr></thead>
+            <tbody>{SUPPORT_PRODUCTS.filter(p => p.service === service).map(p => <tr key={p.id}><th scope="row">{p.pack}回</th><td>{p.price.toLocaleString("ja-JP")}円</td><td>{p.expiryMonths}か月</td></tr>)}</tbody>
+          </table>)}
+        </div>
+        <a className="pr-text-link" href="#plans">内容を比べてプランを選ぶ <ArrowDown size={17} aria-hidden="true" /></a>
+      </section>
+
       <PricingViewer />
 
       <section className="pr-start home-shell" aria-labelledby="start-title">
-        <div className="pr-section-heading"><p className="pr-eyebrow">ご利用の流れ</p><h2 id="start-title">内容を確かめてから、<br className="pr-mobile-break" />お申し込み。</h2><p>相談から当日のご案内まで、公式LINEでやり取りします。</p></div>
+        <div className="pr-section-heading"><p className="pr-eyebrow">個別セッションのご利用の流れ</p><h2 id="start-title">内容を確かめてから、<br className="pr-mobile-break" />お申し込み。</h2><p>相談から当日のご案内まで、公式LINEでやり取りします。</p></div>
         <ol className="pr-steps">
           {[
             ["01", "まずは無料相談", "初めての方は30分で、課題と支援の相性を確認します。"],
@@ -79,9 +93,11 @@ export default function PricingPage() {
         <div className="pr-existing"><div><strong>すでにご購入いただいている方へ</strong><p>購入時の条件はそのままです。日程・残回数は公式LINEへお問い合わせください。</p></div><a href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer">LINEで日程を相談 <ArrowRight size={17} aria-hidden="true" /></a></div>
       </section>
 
+      <TrainingOverview />
+
       <section className="pr-custom home-shell" aria-labelledby="custom-title">
         <div className="pr-custom__icon"><PencilRuler size={36} strokeWidth={1.4} aria-hidden="true" /></div>
-        <div><p className="pr-eyebrow">制作・研修・組織への導入</p><h2 id="custom-title">まとまったご依頼は、<br />対応範囲から一緒に。</h2><p>完成までのシステム制作、外部サービスとの連携、複数人への研修は、業務と対応範囲を確認してお見積もりします。</p><ul><li><Check size={16} aria-hidden="true" />業務の整理と要件確認</li><li><Check size={16} aria-hidden="true" />制作・導入する範囲の合意</li><li><Check size={16} aria-hidden="true" />料金と進め方の事前提示</li></ul></div>
+        <div><p className="pr-eyebrow">制作・組織への導入</p><h2 id="custom-title">まとまったご依頼は、<br />対応範囲から一緒に。</h2><p>完成までのシステム制作、外部サービスとの連携、組織全体への導入は、業務と対応範囲を確認してお見積もりします。</p><ul><li><Check size={16} aria-hidden="true" />業務の整理と要件確認</li><li><Check size={16} aria-hidden="true" />制作・導入する範囲の合意</li><li><Check size={16} aria-hidden="true" />料金と進め方の事前提示</li></ul></div>
         <a className="pr-button pr-button--outline" href={siteContacts.lineOfficial} target="_blank" rel="noopener noreferrer">LINEで支援範囲を相談 <ArrowRight size={17} aria-hidden="true" /></a>
       </section>
 

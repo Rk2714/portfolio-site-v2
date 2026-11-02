@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { label: "法人向け", href: "/#business" },
   { label: "個人向け", href: "/#personal" },
-  { label: "相談できること", href: "/#support-options" },
+  { label: "AI・PC研修", href: "/training" },
   { label: "支援例", href: "/#case-study" },
   { label: "料金・支援内容", href: "/pricing" },
 ];

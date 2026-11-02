@@ -22,7 +22,7 @@ import {
   type MediaPost,
 } from "../../../lib/media-data";
 import { hosts } from "../../../lib/site-data";
-import { SHARE_SITE_URL } from "../../../lib/site-config";
+import { SHARE_SITE_URL, SITE_URL } from "../../../lib/site-config";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import ShareButtons from "../../components/ShareButtons";
@@ -65,7 +65,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "金城竜弥",
       locale: "ja_JP",
       type: "article",
-      publishedTime: `${post.date}T00:00:00+09:00`,
       authors: ["金城竜弥"],
       images: [{ url: socialImage, alt: post.title }],
     },
@@ -166,6 +165,17 @@ export default async function MediaPostPage({ params }: Props) {
   const highlights = getHighlights(post, guest);
   const recommendedFor = guest?.recommendedFor?.slice(0, 4) || post.tags.slice(0, 4);
   const guestLinks = guest?.links || [];
+  const isRadioEpisode = post.category === "radio" || (post.category === "guest" && post.title.includes("いえろーかっし"));
+  const structuredData = {
+    "@context": "https://schema.org", "@type": "Article",
+    "@id": `${SITE_URL}/media/${post.id}#article`,
+    url: `${SITE_URL}/media/${post.id}`,
+    mainEntityOfPage: `${SITE_URL}/media/${post.id}`,
+    headline: post.title, description: post.excerpt,
+    image: heroImage ? new URL(heroImage, SITE_URL).href : undefined,
+    inLanguage: "ja",
+    isPartOf: { "@type": "WebSite", name: "Yazirusi", url: SITE_URL },
+  };
 
   return (
     <>
@@ -260,7 +270,7 @@ export default async function MediaPostPage({ params }: Props) {
               <div className="guest-feature-section-intro">
                 <p className="guest-feature-eyebrow">EPISODE STORY</p>
                 <h2>この放送で<br />話したこと。</h2>
-                <p>2026年10月8日放送。番組の字幕をもとに、トークの内容をまとめました。</p>
+                <p><time dateTime={post.date}>{post.date}</time>放送。番組の字幕をもとに、トークの内容をまとめました。</p>
               </div>
               <div className="guest-feature-episode-summary__body">
                 {post.episodeSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -456,6 +466,7 @@ export default async function MediaPostPage({ params }: Props) {
               <p className="guest-feature-eyebrow">CONTACT</p>
               <h2>出演・取材のご相談はこちら。</h2>
               <p>ラジオへのゲスト出演や取材・対談のご依頼は、メールまたはInstagramのDMで受け付けています。</p>
+              {isRadioEpisode && <p>金城竜弥への仕事のご相談：<Link href="/training" className="guest-feature-text-link">AI・PC研修</Link> / <Link href="/pricing" className="guest-feature-text-link">個別支援の内容と料金</Link></p>}
             </div>
             <div className="guest-feature-contact__actions">
               <TrackedLink
@@ -480,6 +491,7 @@ export default async function MediaPostPage({ params }: Props) {
           </div>
         </section>
       </main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <Footer />
     </>
   );
