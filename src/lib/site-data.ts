@@ -66,6 +66,7 @@ export const siteContacts = {
   email: "ryuyakinjo@yazirusi.com",
   location: "沖縄県中城村",
   lineOfficial: "https://lin.ee/8WhWEGP",
+  instagram: "https://www.instagram.com/yazirusi_kinjo/",
 };
 
 export interface AudienceOffer {
@@ -279,12 +280,12 @@ export const hosts: Record<string, Host> = {
   kinjo: {
     name: "金城竜弥",
     role: "医療・介護現場の業務改善パートナー / Yazirusi 代表",
-    links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
+    links: [{ label: "Instagram", url: siteContacts.instagram }],
   },
   kinchan: {
     name: "きんちゃん (金城竜弥)",
     role: "イエローかっし～ パーソナリティ / Yazirusi 代表",
     image: "/images/kinchan-profile.jpg",
-    links: [{ label: "Instagram", url: "https://www.instagram.com/yazirusi_kinjo/" }],
+    links: [{ label: "Instagram", url: siteContacts.instagram }],
   },
 };

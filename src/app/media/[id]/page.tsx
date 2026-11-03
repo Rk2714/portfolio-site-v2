@@ -21,7 +21,7 @@ import {
   getSafeYouTubeEmbedUrl,
   type MediaPost,
 } from "../../../lib/media-data";
-import { hosts } from "../../../lib/site-data";
+import { hosts, siteContacts } from "../../../lib/site-data";
 import { SHARE_SITE_URL, SITE_URL } from "../../../lib/site-config";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
@@ -478,7 +478,8 @@ export default async function MediaPostPage({ params }: Props) {
                 <Mail size={15} aria-hidden="true" />メールで連絡する<ArrowUpRight size={15} aria-hidden="true" />
               </TrackedLink>
               <TrackedLink
-                href="https://instagram.com/ryuyakinjo"
+                href={siteContacts.instagram}
+                aria-label="YazirusiのInstagram（@yazirusi_kinjo）で連絡"
                 target="_blank"
                 rel="noopener noreferrer"
                 eventName="contact_cta_click"
