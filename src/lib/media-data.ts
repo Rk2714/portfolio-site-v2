@@ -105,7 +105,7 @@ export const mediaPosts: MediaPost[] = [
     "title": "FM21｜いえろーかっし～｜同じ二択でも、こんなに違う。かっしーときんちゃんの素顔が見えたラジオ収録",
     "excerpt": "1週間の自由時間、仕事の安定、挑戦への準備、初対面の会話。4つの二択から、かっしーときんちゃんの価値観を掘り下げた2人回です。11月5日収録・11月12日放送分。",
     "youtubeUrl": "https://www.youtube.com/embed/ipiNkzLAxm4",
-    "thumbnail": "https://i.ytimg.com/vi/ipiNkzLAxm4/hqdefault.jpg",
+    "thumbnail": "/images/radio/kyukyoku-nitaku-20261112.jpg",
     "programLabel": "FM21｜いえろーかっし～",
     "episodeTitle": "同じ二択でも、こんなに違う。\nかっしーときんちゃんの素顔",
     "episodeSummary": [
