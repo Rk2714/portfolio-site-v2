@@ -1,3 +1,5 @@
+import { radioGuestIntroductions } from "./radio-guest-introductions";
+
 const API_KEY = process.env.MICROCMS_API_KEY ?? "";
 const SERVICE_ID = process.env.MICROCMS_SERVICE_ID ?? "";
 
@@ -4173,6 +4175,31 @@ YouTube自動字幕をもとに、時間表示と固有名詞を整理した文�
     ]
   },
 ];
+
+// Keep the original episode data and links while applying the edited introductions.
+for (const post of mediaPosts) {
+  const introduction = radioGuestIntroductions[post.id];
+  if (!introduction) continue;
+  post.episodeSummary = introduction.episodeSummary;
+  // The previous Miyagi timeline and attributed text do not match the episode captions.
+  // Keep the original source in this file, but do not present it as a transcript or quote.
+  if (post.id === "49s43zcmzif8") {
+    post.quotes = [];
+    post.transcript = "";
+    post.summary = [];
+    if (post.guests?.[0]) {
+      post.guests[0].quote = "";
+      post.guests[0].closingQuote = "";
+    }
+  }
+  if (introduction.bio && post.guests?.[0]) post.guests[0].bio = introduction.bio;
+  if (introduction.highlights && post.guests?.[0]) {
+    const revisedTimes = new Set(introduction.highlights.map((item) => item.time));
+    post.summary = [...post.summary.filter((item) => !revisedTimes.has(item.time)), ...introduction.highlights]
+      .sort((a, b) => a.time.localeCompare(b.time));
+    post.guests[0].highlightTimes = introduction.highlights.map((item) => item.time);
+  }
+}
 
 export function getMediaPostById(id: string): MediaPost | undefined {
   return mediaPosts.find((post) => post.id === id);

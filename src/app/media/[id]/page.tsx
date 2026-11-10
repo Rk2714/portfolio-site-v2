@@ -272,10 +272,16 @@ export default async function MediaPostPage({ params }: Props) {
               <div className="guest-feature-section-intro">
                 <p className="guest-feature-eyebrow">EPISODE STORY</p>
                 <h2>この放送で<br />話したこと。</h2>
-                <p><time dateTime={post.date}>{post.date}</time>放送分。番組の字幕をもとに、トークの内容をまとめました。</p>
+                <p><time dateTime={post.date}>{post.date}</time>放送分。ゲストのお話と放送の見どころをご紹介します。</p>
               </div>
               <div className="guest-feature-episode-summary__body">
                 {post.episodeSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {post.id === "q-mndi4y_99" && (
+                  <p>
+                    やよいさんの2回目の出演では、ウォークキャンプと子どもたちの挑戦について伺いました。<br />
+                    <Link href="/media/ikeda-yayoi-walk-camp-20261022" className="guest-feature-text-link">2回目のゲスト紹介を見る ↗</Link>
+                  </p>
+                )}
                 {post.id === "ikeda-yayoi-walk-camp-20261022" && (
                   <>
                     <p>
@@ -441,7 +447,7 @@ export default async function MediaPostPage({ params }: Props) {
           </section>
         )}
 
-        {post.transcript && (
+        {post.transcript && post.id !== "49s43zcmzif8" && (
           <TranscriptSection
             transcript={post.transcript}
             postId={post.id}
