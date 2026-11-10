@@ -276,6 +276,12 @@ export default async function MediaPostPage({ params }: Props) {
               </div>
               <div className="guest-feature-episode-summary__body">
                 {post.episodeSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {post.id === "ikeda-yayoi-walk-camp-20261022" && (
+                  <p>
+                    やよいさんの活動は、Instagramでもご覧いただけます。<br />
+                    <a href="https://www.instagram.com/ikeda841841/" target="_blank" rel="noopener noreferrer" className="guest-feature-text-link">やよいさんのInstagramを見る ↗</a>
+                  </p>
+                )}
               </div>
             </div>
           </section>
