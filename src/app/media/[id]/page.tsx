@@ -277,10 +277,18 @@ export default async function MediaPostPage({ params }: Props) {
               <div className="guest-feature-episode-summary__body">
                 {post.episodeSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 {post.id === "ikeda-yayoi-walk-camp-20261022" && (
-                  <p>
-                    やよいさんの活動は、Instagramでもご覧いただけます。<br />
-                    <a href="https://www.instagram.com/ikeda841841/" target="_blank" rel="noopener noreferrer" className="guest-feature-text-link">やよいさんのInstagramを見る ↗</a>
-                  </p>
+                  <>
+                    <p>
+                      <strong>やよいさんの前回の出演も、あわせてどうぞ。</strong><br />
+                      2026年5月14日の放送では、ベビーシッターのお仕事や、子どもたちに伝える「いのちのおはなし」について伺いました。<br />
+                      <Link href="/media/q-mndi4y_99" className="guest-feature-text-link">前回のゲスト紹介を見る ↗</Link><br />
+                      <a href="https://www.youtube.com/watch?v=A-P9Zx0D2Vo" target="_blank" rel="noopener noreferrer" className="guest-feature-text-link">前回のラジオをYouTubeで聴く ↗</a>
+                    </p>
+                    <p>
+                      やよいさんの活動は、Instagramでもご覧いただけます。<br />
+                      <a href="https://www.instagram.com/ikeda841841/" target="_blank" rel="noopener noreferrer" className="guest-feature-text-link">やよいさんのInstagramを見る ↗</a>
+                    </p>
+                  </>
                 )}
               </div>
             </div>
