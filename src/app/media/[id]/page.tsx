@@ -153,7 +153,9 @@ export default async function MediaPostPage({ params }: Props) {
   if (!post) notFound();
 
   const guest = post.guests?.[0];
-  const guestName = guest?.name || (post.category === "radio" ? "FM21" : "金城竜弥");
+  const isHostsOnly = post.category === "radio" && !guest && Boolean(post.hostIds?.length);
+  const hostNames = post.hostIds?.map((hostId) => hosts[hostId]?.name).filter(Boolean).join("・") || "";
+  const guestName = (isHostsOnly ? hostNames : guest?.name) || (post.category === "radio" ? "FM21" : "金城竜弥");
   const guestRole = guest?.role || (post.category === "appear" ? "ゲスト出演" : post.categoryLabel);
   const guestQuote = guest?.quote || post.quotes[0] || "";
   const guestClosingQuote =
@@ -198,7 +200,7 @@ export default async function MediaPostPage({ params }: Props) {
               </div>
 
               <h1 className={post.episodeTitle ? "guest-feature-episode-title" : undefined}>{post.episodeTitle || renderGuestName(guestName)}</h1>
-              <p className="guest-feature-role">{post.episodeTitle ? `${post.programLabel}｜ゲスト：${guestName}` : guestRole}</p>
+              <p className="guest-feature-role">{post.episodeTitle ? `${post.programLabel}｜${isHostsOnly ? "パーソナリティ" : "ゲスト"}：${guestName}` : guestRole}</p>
 
               {post.episodeTitle ? (
                 <p className="guest-feature-episode-lead">{post.theme}</p>
@@ -254,7 +256,7 @@ export default async function MediaPostPage({ params }: Props) {
               <strong>{highlights.length ? `${highlights.length}つ` : "動画で聴く"}</strong>
             </div>
             <div>
-              <span>GUEST</span>
+              <span>{isHostsOnly ? "HOSTS" : "GUEST"}</span>
               <strong>{renderGuestName(guestName)}</strong>
             </div>
             <div>
@@ -270,7 +272,7 @@ export default async function MediaPostPage({ params }: Props) {
               <div className="guest-feature-section-intro">
                 <p className="guest-feature-eyebrow">EPISODE STORY</p>
                 <h2>この放送で<br />話したこと。</h2>
-                <p><time dateTime={post.date}>{post.date}</time>放送。番組の字幕をもとに、トークの内容をまとめました。</p>
+                <p><time dateTime={post.date}>{post.date}</time>放送分。番組の字幕をもとに、トークの内容をまとめました。</p>
               </div>
               <div className="guest-feature-episode-summary__body">
                 {post.episodeSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
